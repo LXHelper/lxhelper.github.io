@@ -1,433 +1,283 @@
 <!DOCTYPE html>
 <html lang="ro">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LuxTech Innovation</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LuxTech Innovation</title>
 
-  <!-- TAILWIND CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- GOOGLE FONT -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    /* Icon bullets */
-    .icon-list li {
-      position: relative;
-      padding-left: 2rem;
-    }
-    .icon-list li svg {
-      position: absolute;
-      left: 0;
-      top: 0.3rem;
-      width: 1.25rem;
-      height: 1.25rem;
-      stroke: #3b82f6; /* blue-500 */
-      stroke-width: 2;
-      fill: none;
-    }
-    /* CTA animations */
-    .cta-button {
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .cta-button:hover,
-    .cta-button:focus {
-      background-color: #2563eb; /* blue-600 */
-      box-shadow: 0 0 8px 2px rgba(37, 99, 235, 0.7);
-      outline: none;
-    }
-  </style>
-</head>
-<body class="bg-gray-950 text-white text-base md:text-lg leading-relaxed">
+    <!-- GOOGLE FONT -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- NAVBAR -->
-  <header class="sticky top-0 bg-gray-900 shadow z-50">
-    <div
-      class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
-    >
-      <h1 class="text-xl font-bold text-white tracking-wide">
-        LUXTECH INNOVATION
-      </h1>
-      <div class="flex items-center space-x-6">
-        <nav class="space-x-4 hidden md:block">
-          <a href="#home" data-i18n="nav_home" class="hover:text-blue-400 transition"
-            >Home</a
-          >
-          <a
-            href="#solutions"
-            data-i18n="nav_solutions"
-            class="hover:text-blue-400 transition"
-            >Solutions</a
-          >
-          <a href="#about" data-i18n="nav_about" class="hover:text-blue-400 transition"
-            >About</a
-         >
-          <a href="#contact" data-i18n="nav_contact" class="hover:text-blue-400 transition"
-            >Contact</a
-          >
-        </nav>
-        <select
-          id="languageSwitcher"
-          class="text-black rounded px-2 py-1 text-sm"
-          aria-label="Selectează limba"
-        >
-          <option value="ro">RO</option>
-          <option value="en">EN</option>
-        </select>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section
-    id="home"
-    class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 bg-no-repeat bg-cover bg-center bg-fixed"
-    style="background-image: url('https://lxhelper.github.io/images/background.jpg');"
-  >
-    <!-- DARK OVERLAY -->
-    <div class="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
-
-    <!-- HERO CONTENT -->
-    <div class="relative z-10 max-w-4xl px-6">
-      <h2
-        class="text-4xl md:text-5xl font-bold mb-6 text-blue-400"
-        data-i18n="hero_title"
-      >
-        Revoluția AI a început – alătură-te și tu transformării digitale!
-      </h2>
-      <p class="text-lg text-gray-300 mb-8 leading-relaxed" data-i18n="hero_sub">
-        Punem la dispoziție atât aplicații software și soluții AI personalizate,
-        precum și servicii profesionale de management de proiect, disponibile
-        atât separat, cât și integrate, în funcție de cerințele tale.
-      </p>
-      <a
-        href="#contact"
-        class="inline-block px-8 py-4 bg-blue-500 rounded-full text-white font-semibold cta-button"
-        data-i18n="hero_cta"
-        >Află mai mult</a
-      >
-    </div>
-  </section>
-
-  <!-- SOLUTIONS -->
-  <section id="solutions" class="py-20 bg-gray-900">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h3 class="text-3xl font-semibold mb-12" data-i18n="solutions_title">
-        Soluțiile Noastre
-      </h3>
-      <div class="grid md:grid-cols-3 gap-10">
-        <div
-          class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition"
-          role="region"
-          aria-labelledby="sol-mobile-title"
-        >
-          <h4
-            id="sol-mobile-title"
-            class="text-xl font-semibold mb-4 text-blue-400"
-            data-i18n="sol_mobile_title"
-          >
-            Aplicații Mobile și Desktop
-          </h4>
-          <p class="text-gray-400 text-base" data-i18n="sol_mobile_desc">
-            Dezvoltăm soluții software dedicate pe platformele Windows și
-            Android, special create pentru a răspunde nevoilor specifice ale
-            afacerii tale. Aplicațiile noastre sunt intuitive, scalabile și
-            integrate eficient în fluxurile tale de lucru, susținând creșterea
-            și eficiența operațională.
-          </p>
-        </div>
-
-        <div
-          class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition"
-          role="region"
-          aria-labelledby="sol-ai-title"
-        >
-          <h4
-            id="sol-ai-title"
-            class="text-xl font-semibold mb-4 text-blue-400"
-            data-i18n="sol_ai_title"
-          >
-            Soluții AI
-          </h4>
-          <p class="text-gray-400 text-base" data-i18n="sol_ai_desc">
-            Implementăm inteligență artificială și automatizări care optimizează
-            procesele, reduc erorile și cresc productivitatea. Soluțiile noastre
-            personalizate te ajută să iei decizii rapide și să crești
-            competitivitatea.
-          </p>
-        </div>
-
-        <div
-          class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition"
-          role="region"
-          aria-labelledby="sol-custom-title"
-        >
-          <h4
-            id="sol-custom-title"
-            class="text-xl font-semibold mb-4 text-blue-400"
-            data-i18n="sol_custom_title"
-          >
-            Servicii de management de proiect, adaptate nevoilor tale
-          </h4>
-          <p class="text-gray-400 text-base" data-i18n="sol_custom_desc">
-            Oferim soluții eficiente atât în cadrul metodologiilor Agile (Scrum,
-            Kanban, SAFe), cât și în cele clasice de tip Waterfall (PM²,
-            PRINCE2, PMP), asigurând livrarea cu succes a proiectelor,
-            indiferent de complexitate.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section
-    id="about"
-    class="py-20 bg-gray-950"
-    aria-labelledby="about-title"
-    role="region"
-  >
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h3
-        id="about-title"
-        class="text-3xl font-semibold mb-8 tracking-wide"
-        tabindex="0"
-      >
-        Despre Noi
-      </h3>
-
-      <!-- Misiunea noastră -->
-      <div class="mb-12 text-left">
-        <h4 class="text-2xl font-semibold mb-3 text-blue-400 border-b border-blue-400 inline-block pb-1">
-          Misiunea noastră
-        </h4>
-        <p
-          class="text-gray-400 mb-6 font-semibold text-lg leading-relaxed"
-          id="mission-paragraph"
-        >
-          LuxTech Innovation e o companie românească, înființată în 2024, cu
-          misiunea de a poziționa România în topul digitalizării europene și
-          globale.
-        </p>
-        <!-- Expand/collapse text -->
-        <button
-          id="expandMissionBtn"
-          aria-expanded="false"
-          aria-controls="extraMissionContent"
-          class="mb-6 px-5 py-3 bg-blue-500 hover:bg-blue-600 rounded-full text-white font-semibold transition cta-button"
-        >
-          Citește mai mult
-        </button>
-        <div id="extraMissionContent" class="hidden text-gray-400 text-base">
-          <p class="mb-4">
-            Indiferent de domeniul tău, transformăm ideile în aplicații funcționale și eficiente,
-            pentru a susține creșterea și succesul pe termen lung.
-          </p>
-          <p class="font-semibold">
-            Contactează-ne și află cum putem digitaliza afacerea ta!
-          </p>
-        </div>
-      </div>
-
-      <!-- Ce oferim -->
-      <div class="mb-12 text-left">
-        <h4 class="text-2xl font-semibold mb-5 text-blue-400 border-b border-blue-400 inline-block pb-1">
-          Ce oferim
-        </h4>
-        <ul class="icon-list max-w-lg mx-auto space-y-5 text-gray-400">
-          <li>
-            <!-- Icon: check-circle -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 12l2 2l4 -4"
-              />
-            </svg>
-            Soluții scalabile, sigure și integrate în fluxurile tale de lucru
-          </li>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 12l2 2l4 -4"
-              />
-            </svg>
-            Interfețe intuitive, pentru o experiență ușoară a utilizatorilor
-          </li>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 12l2 2l4 -4"
-              />
-            </svg>
-            Suport tehnic continuu și integrare facilă cu sistemele existente
-          </li>
-          <li>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 12l2 2l4 -4"
-              />
-            </svg>
-            Livrare rapidă, agilă și cu feedback constant
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="py-20 bg-gray-900">
-    <div class="max-w-2xl mx-auto px-4 text-center">
-      <h3
-        class="text-3xl font-semibold mb-8 tracking-wide"
-        data-i18n="contact_title"
-      >
-        Contact
-      </h3>
-      <p class="text-gray-400 mb-6 text-lg" data-i18n="contact_sub">
-        Trimite-ne un email pentru a discuta mai multe.
-      </p>
-      <a
-        href="mailto:contact@lxtech.ro"
-        class="inline-block px-8 py-4 bg-blue-500 rounded-full font-semibold text-white cta-button"
-        data-i18n="contact_button"
-        >Contactează-ne</a
-      >
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer
-    class="bg-gray-800 py-6 text-center text-sm text-gray-400 select-none"
-    aria-label="Footer"
-  >
-    © 2025 LuxTech Innovation. All rights reserved.
-  </footer>
-
-  <!-- LANG SCRIPT -->
-  <script>
- const translations = {
-  en: {
-    nav_home: 'Home',
-    nav_solutions: 'Solutions',
-    nav_about: 'About',
-    nav_contact: 'Contact',
-    hero_title: 'The AI Revolution Has Begun – Join the Digital Transformation!',
-    hero_sub: 'We provide personalized software and AI solutions, and professional project management – separate or integrated – based on your needs.',
-    hero_cta: 'Learn More',
-    solutions_title: 'Our Solutions',
-    sol_mobile_title: 'Mobile and Desktop Applications',
-    sol_mobile_desc: 'We develop intuitive, scalable and efficient applications designed for your business, integrated into your workflow.',
-    sol_ai_title: 'AI Solutions',
-    sol_ai_desc: 'We implement AI and automation to reduce errors, increase efficiency and improve decision-making.',
-    sol_custom_title: 'Project Management Services Tailored to Your Needs',
-    sol_custom_desc: 'Whether Agile or Waterfall, we ensure successful project delivery aligned with your business goals.',
-    about_title: 'About Us',
-    contact_title: 'Contact',
-    contact_sub: 'Send us an email to discuss.',
-    contact_button: 'Contact Us',
-    download_title: 'Download App',
-    download_desc: 'Get the latest versions of our Windows and Android apps.',
-    download_button: 'Download Now'
-  },
-  ro: {
-    nav_home: 'Acasă',
-    nav_solutions: 'Soluții',
-    nav_contact: 'Contact',
-    hero_title: 'Revoluția AI a început – alătură-te și tu transformării digitale!',
-    hero_sub: 'Punem la dispoziție aplicații software și soluții AI personalizate, dar și servicii profesionale de management de proiect, în funcție de cerințele tale.',
-    hero_cta: 'Află mai mult',
-    solutions_title: 'Soluțiile Noastre',
-    sol_mobile_title: 'Aplicații Mobile și Desktop',
-    sol_mobile_desc: 'Dezvoltăm aplicații intuitive, scalabile și eficiente, proiectate special pentru afacerea ta și integrate perfect în procesele tale.',
-    sol_ai_title: 'Soluții AI',
-    sol_ai_desc: 'Implementăm automatizări și inteligență artificială pentru a reduce erorile, a crește productivitatea și eficiența decizională.',
-    sol_custom_title: 'Servicii de Management de Proiect, Adaptate Nevoilor Tale',
-    sol_custom_desc: 'Asigurăm livrarea eficientă a proiectelor, indiferent de gradul de complexitate, folosind metodologii Agile sau Waterfall.',
-    about_title: 'Despre Noi',
-    contact_title: 'Contact',
-    contact_sub: 'Trimite-ne un email pentru a discuta mai multe.',
-    contact_button: 'Contactează-ne',
-    download_title: 'Descarcă aplicația',
-    download_desc: 'Accesează cele mai recente versiuni ale aplicațiilor noastre pentru Windows și Android.',
-    download_button: 'Descarcă acum'
-  }
-};
-      ro: {} // Romanian default
-    };
-
-    const switcher = document.getElementById('languageSwitcher');
-
-    switcher.addEventListener('change', () => {
-      const lang = switcher.value;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
-      });
-    });
-
-    // Expand/Collapse for "Misiunea noastră"
-    const expandBtn = document.getElementById('expandMissionBtn');
-    const extraContent = document.getElementById('extraMissionContent');
-
-    expandBtn.addEventListener('click', () => {
-      const isExpanded = expandBtn.getAttribute('aria-expanded') === 'true';
-      if (isExpanded) {
-        extraContent.classList.add('hidden');
-        expandBtn.setAttribute('aria-expanded', 'false');
-        expandBtn.textContent = 'Citește mai mult';
-      } else {
-        extraContent.classList.remove('hidden');
-        expandBtn.setAttribute('aria-expanded', 'true');
-        expandBtn.textContent = 'Închide';
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
       }
-    });
-  </script>
-</body>
+
+      .icon-list li {
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      .icon-list li svg {
+        position: absolute;
+        left: 0;
+        top: 0.3rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        stroke: #3b82f6;
+        stroke-width: 2;
+        fill: none;
+      }
+
+      .cta-button {
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .cta-button:hover,
+      .cta-button:focus {
+        background-color: #2563eb;
+        box-shadow: 0 0 8px 2px rgba(37, 99, 235, 0.7);
+        outline: none;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-950 text-white text-base md:text-lg leading-relaxed">
+    <!-- LANGUAGE HANDLER -->
+    <script>
+      const translations = {
+        en: {
+          nav_home: 'Home',
+          nav_solutions: 'Solutions',
+          nav_about: 'About',
+          nav_contact: 'Contact',
+          hero_title: 'The AI Revolution Has Begun – Join the Digital Transformation!',
+          hero_sub:
+            'We provide personalized software and AI solutions, and project management – separately or integrated – based on your needs.',
+          hero_cta: 'Learn More',
+          solutions_title: 'Our Solutions',
+          sol_mobile_title: 'Mobile and Desktop Applications',
+          sol_mobile_desc:
+            'We develop intuitive, scalable and efficient apps designed for your workflows.',
+          sol_mobile_extra:
+            'They offer performance, security, and a seamless experience tailored to your internal and external processes.',
+          sol_ai_title: 'AI Solutions',
+          sol_ai_desc:
+            'We implement AI and automation to increase productivity and reduce errors.',
+          sol_ai_extra:
+            'Harness data and intelligent algorithms to make reliable business decisions at scale.',
+          sol_custom_title: 'Project Management Services',
+          sol_custom_desc:
+            'We ensure project delivery using Agile or Waterfall methodologies based on your context.',
+          sol_custom_extra:
+            'From idea to implementation, we support execution and progress with transparency and efficiency.',
+          about_title: 'About Us',
+          about_extra1:
+            'No matter your field, we turn ideas into efficient digital products built for long-term success.',
+          about_extra2: 'Get in touch and let’s digitize your business!',
+          contact_title: 'Contact',
+          contact_sub: 'Send us an email to discuss.',
+          contact_button: 'Contact Us',
+          more_button: 'Read More',
+          less_button: 'Show Less'
+        },
+        ro: {
+          nav_home: 'Acasă',
+          nav_solutions: 'Soluții',
+          nav_about: 'Despre Noi',
+          nav_contact: 'Contact',
+          hero_title: 'Revoluția AI a început – alătură-te și tu transformării digitale!',
+          hero_sub:
+            'Punem la dispoziție aplicații software și soluții AI personalizate, dar și servicii profesionale de management de proiect.',
+          hero_cta: 'Află mai mult',
+          solutions_title: 'Serviciile Noastre',
+          sol_mobile_title: 'Aplicații Mobile și Desktop',
+          sol_mobile_desc:
+            'Soluții software dedicate pentru Windows și Android, adaptate nevoilor tale.',
+          sol_mobile_extra:
+            'Aplicațiile noastre sunt intuitive, scalabile și integrate eficient în procesele interne, susținând productivitatea și inovația.',
+          sol_ai_title: 'Soluții AI',
+          sol_ai_desc:
+            'Implementăm inteligență artificială și automatizări care optimizează fluxurile.',
+          sol_ai_extra:
+            'Reducem erorile, creștem productivitatea și oferim suport decizional prin algoritmi de învățare automată și analize inteligente.',
+          sol_custom_title: 'Management de Proiect',
+          sol_custom_desc:
+            'Asigurăm livrarea eficientă a proiectelor, indiferent de complexitate.',
+          sol_custom_extra:
+            'Folosim metodologia potrivită – Agile (Scrum, SAFe) sau Waterfall (PM², PRINCE2) – și oferim control total asupra termenele și bugetelor.',
+          about_title: 'Despre Noi',
+         about_extra1: `<strong>Povestea Noastră</strong>\n\nTotul a pornit dintr-o curiozitate arzătoare: „Cum putem face tehnologia să lucreze mai bine pentru oameni?”\n\nApoi, din observație în observație, a apărut o convingere clară — prea multe procese, idei și oameni sunt limitați de lipsa unor instrumente potrivite.\n\nNu promisiunea unui vis, ci nevoia de a înțelege, de a investiga și de a construi soluții concrete a fost motorul din spatele LuxTech Innovation. Fiecare proiect e răspunsul la o problemă reală, fiecare aplicație – o punte între complexitate și claritate.\n\nPasiunea pentru simplitate funcțională, eficiență și progres ne ghidează în tot ce dezvoltăm. Iar tehnologia devine, în mâinile noastre, un instrument de accelerare – nu doar un sistem.`,
+          about_extra2: '\n\nPasiunea pentru simplitate funcțională, eficiență și progres ne ghidează în tot ce dezvoltăm. Iar tehnologia devine, în mâinile noastre, un instrument de accelerare – nu doar un sistem. Contactează-ne și află cum putem digitaliza afacerea ta!',
+          contact_title: 'Contact',
+          contact_sub: 'Trimite-ne un email pentru a discuta mai multe.',
+          contact_button: 'Contactează-ne',
+          more_button: 'Citește mai mult',
+          less_button: 'Închide'
+        }
+      };
+    </script>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 bg-gray-900 shadow z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-white tracking-wide">LUXTECH INNOVATION</h1>
+        <div class="flex items-center space-x-6">
+          <nav class="space-x-4 hidden md:block">
+            <a href="#home" data-i18n="nav_home" class="hover:text-blue-400 transition">Acasă</a>
+            <a href="#solutions" data-i18n="nav_solutions" class="hover:text-blue-400 transition">Soluții</a>
+            <a href="#about" data-i18n="nav_about" class="hover:text-blue-400 transition">Despre Noi</a>
+            <a href="#contact" data-i18n="nav_contact" class="hover:text-blue-400 transition">Contact</a>
+          </nav>
+          <select
+            id="languageSwitcher"
+            class="text-black rounded px-2 py-1 text-sm"
+            aria-label="Selectează limba">
+            <option value="ro">RO</option>
+            <option value="en">EN</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section
+      id="home"
+      class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 bg-no-repeat bg-cover bg-center bg-fixed"
+      style="background-image: url('https://lxhelper.github.io/images/background.jpg');">
+      <div class="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
+      <div class="relative z-10 max-w-4xl px-6">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-blue-400" data-i18n="hero_title"></h2>
+        <p class="text-lg text-gray-300 mb-8 leading-relaxed" data-i18n="hero_sub"></p>
+        <a href="#contact" class="inline-block px-8 py-4 bg-blue-500 rounded-full text-white font-semibold cta-button" data-i18n="hero_cta"></a>
+      </div>
+    </section>
+
+    <!-- SOLUTIONS -->
+    <section id="solutions" class="py-20 bg-gray-900">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h3 class="text-3xl font-semibold mb-12" data-i18n="solutions_title"></h3>
+        <div class="grid md:grid-cols-3 gap-10">
+          <!-- Mobile -->
+          <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition">
+            <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_mobile_title"></h4>
+            <p class="text-gray-400" data-i18n="sol_mobile_desc"></p>
+            <div id="mobileMore" class="hidden mt-2 text-gray-400">
+              <p data-i18n="sol_mobile_extra"></p>
+            </div>
+            <button id="expandMobileBtn" data-i18n-more class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button" aria-expanded="false" aria-controls="mobileMore"></button>
+          </div>
+
+          <!-- AI -->
+          <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition">
+            <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_ai_title"></h4>
+            <p class="text-gray-400" data-i18n="sol_ai_desc"></p>
+            <div id="aiMore" class="hidden mt-2 text-gray-400">
+              <p data-i18n="sol_ai_extra"></p>
+            </div>
+            <button id="expandAiBtn" data-i18n-more class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button" aria-expanded="false" aria-controls="aiMore"></button>
+          </div>
+
+          <!-- Project -->
+          <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition">
+            <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_custom_title"></h4>
+            <p class="text-gray-400" data-i18n="sol_custom_desc"></p>
+            <div id="projectMore" class="hidden mt-2 text-gray-400">
+              <p data-i18n="sol_custom_extra"></p>
+            </div>
+            <button id="expandProjectBtn" data-i18n-more class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button" aria-expanded="false" aria-controls="projectMore"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+<section id="about" class="py-20 bg-gray-950">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h3 class="text-3xl font-semibold mb-8 tracking-wide" data-i18n="about_title"></h3>
+    <p class="text-gray-400 mb-6 font-semibold text-lg leading-relaxed">
+      LuxTech Innovation este o companie românească înființată în 2024. Misiunea noastră este să transformăm observațiile curioase în soluții digitale clare și eficiente. Investigăm, decodăm și dezvoltăm tehnologii care simplifică, automatizează și amplifică potențialul real al afacerilor.
+    </p>
+    <div id="extraMissionContent" class="hidden text-gray-400 text-base">
+      <div id="aboutStory" class="space-y-4"></div>
+      <p data-i18n="about_extra2" class="font-semibold mt-4"></p>
+    </div>
+    <button id="expandMissionBtn" data-i18n-more class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition" aria-expanded="false" aria-controls="extraMissionContent"></button>
+  </div>
+</section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-20 bg-gray-900">
+      <div class="max-w-2xl mx-auto px-4 text-center">
+        <h3 class="text-3xl font-semibold mb-6" data-i18n="contact_title"></h3>
+        <p class="text-gray-400 mb-4" data-i18n="contact_sub"></p>
+        <a href="mailto:contact@lxtech.ro" class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition" data-i18n="contact_button"></a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-800 py-6 text-center text-sm text-gray-400">
+      © 2025 LuxTech Innovation. All rights reserved.
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+      const switcher = document.getElementById("languageSwitcher");
+      const langState = { lang: "ro" }; // Default
+
+      function updateTranslations() {
+        const lang = langState.lang;
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (translations[lang][key]) el.textContent = translations[lang][key];
+        });
+
+        document.querySelectorAll("[data-i18n-more]").forEach((btn) => {
+          const expanded = btn.getAttribute("aria-expanded") === "true";
+          btn.textContent = translations[lang][expanded ? "less_button" : "more_button"];
+        });
+      }
+
+function setAboutExtraParagraphs(lang) {
+  const container = document.getElementById("aboutStory");
+  if (!container) return;
+
+  const raw = translations[lang]?.about_extra1 || '';
+  container.innerHTML = raw
+    .split('\n\n')
+    .map(par => `<p class="mb-4">${par}</p>`)
+    .join('');
+}
+
+      switcher.addEventListener("change", () => {
+        langState.lang = switcher.value;
+        updateTranslations();
+setAboutExtraParagraphs(langState.lang); 
+      });
+
+      function setupToggle(id, contentId) {
+        const btn = document.getElementById(id);
+        const content = document.getElementById(contentId);
+        btn.addEventListener("click", () => {
+          const expanded = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", String(!expanded));
+          content.classList.toggle("hidden");
+          btn.textContent = translations[langState.lang][expanded ? "more_button" : "less_button"];
+        });
+      }
+
+      setupToggle("expandMobileBtn", "mobileMore");
+      setupToggle("expandAiBtn", "aiMore");
+      setupToggle("expandProjectBtn", "projectMore");
+      setupToggle("expandMissionBtn", "extraMissionContent");
+
+      updateTranslations(); // initial
+    </script>
+  </body>
 </html>
