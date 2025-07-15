@@ -1,10 +1,349 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My GitHub Website</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <p>My site, hosted with GitHub Pages.</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LUXTECH INNOVATION</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Romanian startup: AI-driven mobile applications & custom solutions with multilingual support.">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #361fff;
+      --accent: #0bc9a5;
+      --background: #f8fafc;
+      --text: #232323;
+      --light: #fff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 64px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 4vw;
+      background: var(--light);
+      box-shadow: 0 2px 6px 0 rgba(20,40,120,0.02);
+      position: sticky; top: 0; z-index: 2;
+    }
+    .logo {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    nav ul {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    nav ul li {
+      cursor: pointer;
+      opacity: 0.88;
+      font-size: 1rem;
+      transition: color 0.16s;
+    }
+    nav ul li:hover { color: var(--primary); }
+    .language-toggle {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.97rem;
+    }
+    .lang-btn {
+      border: none;
+      background: none;
+      color: var(--primary);
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0.2em 0.7em;
+      font-size: 1rem;
+      border-radius: 2px;
+      opacity: 0.85;
+      transition: background .13s;
+    }
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--accent);
+      color: var(--light);
+      outline: none;
+      opacity: 1;
+    }
+    main {
+      max-width: 980px;
+      margin: 2.4rem auto 0;
+      padding: 1.5rem 5vw;
+      background: transparent;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 2rem 1rem 2.5rem;
+      background: linear-gradient(90deg, var(--primary) 20%, var(--accent) 80%);
+      color: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 24px rgba(30,40,120,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero h1 { font-size: 2.7rem; font-weight: 700; margin-bottom: 0.7rem; }
+    .hero p { font-size: 1.3rem; margin-bottom: 1.5rem; opacity: 0.97; }
+    .hero .cta {
+      background: var(--light);
+      color: var(--primary);
+      border: none;
+      font-weight: 700;
+      padding: 0.9em 2em;
+      font-size: 1.1rem;
+      border-radius: 2em;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+    .hero .cta:hover { background: var(--accent); color: white; }
+    .solutions {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2.4rem 0 2rem;
+      flex-wrap: wrap;
+    }
+    .solution-card {
+      background: var(--light);
+      box-shadow: 0 2px 12px rgba(40,100,190,0.05);
+      padding: 2rem 1.4rem 1.4rem;
+      border-radius: 1rem;
+      flex: 1 1 270px;
+      min-width: 230px;
+      max-width: 340px;
+      text-align: center;
+    }
+    .solution-card h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: .5rem;
+    }
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.6rem;
+      display: inline-block;
+      color: var(--accent);
+    }
+    .solution-card p { font-size: 1rem; margin: 0.4rem 0 1rem; }
+    .solution-card .card-btn {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 0.55em 1.3em;
+      border-radius: 2em;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.13s;
+    }
+    .solution-card .card-btn:hover { background: var(--accent); }
+    .about, .languages, .contact {
+      background: var(--light);
+      border-radius: 0.8rem;
+      box-shadow: 0 2px 12px rgba(40,100,190,0.04);
+      margin: 2rem 0 1.4rem;
+      padding: 2rem 1.5rem 1.5rem;
+    }
+    .about h2, .languages h2, .contact h2 {
+      color: var(--primary);
+      margin-bottom: .7rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .about p, .contact p, .languages p { font-size: 1.05rem; }
+    .footer {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 1rem 0;
+      background: var(--light);
+      text-align: center;
+      border-top: 1px solid #eef0f6;
+      font-size: 1rem;
+      color: #666;
+      z-index: 1;
+    }
+    @media (max-width: 700px) {
+      .solutions { flex-direction: column; gap: 1.4rem; align-items: stretch; }
+      .hero h1 { font-size: 2rem; }
+      main { padding: 1rem 0.8rem; }
+      header { flex-direction: column; gap: 1.1rem; }
+      .footer { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">LUXTECH INNOVATION</div>
+    <nav>
+      <ul id="nav">
+        <li data-key="home">Home</li>
+        <li data-key="solutions">Solutions</li>
+        <li data-key="about">About</li>
+        <li data-key="applications">Applications</li>
+        <li data-key="careers">Careers</li>
+        <li data-key="contact">Contact</li>
+      </ul>
+    </nav>
+    <div class="language-toggle">
+      <button class="lang-btn active" id="ro-btn">RO</button>
+      <span>/</span>
+      <button class="lang-btn" id="en-btn">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <h1>Inovație AI din România pentru lumea digitală</h1>
+      <p>Aplicații mobile și soluții personalizate de inteligență artificială pentru afacerea ta.</p>
+      <button class="cta" id="hero-cta">Află mai mult</button>
+    </section>
+
+    <div class="solutions" id="solutions">
+      <div class="solution-card">
+        <span class="card-icon">📱</span>
+        <h2>Aplicații Mobile</h2>
+        <p>[Descriere placeholder aplicații mobile, gata să impulsioneze afaceri moderne.]</p>
+        <button class="card-btn" data-key="contact-btn1">Contactează-ne</button>
+      </div>
+      <div class="solution-card">
+        <span class="card-icon">🤖</span>
+        <h2>Soluții AI Personalizate</h2>
+        <p>[Placeholder AI solutions tailored to your business goals.]</p>
+        <button class="card-btn" data-key="contact-btn2">Contactează-ne</button>
+      </div>
+    </div>
+
+    <section class="about" id="about">
+      <h2>Despre Noi</h2>
+      <p>[Compania LUXTECH INNOVATION transformă ideile tehnologice în realitate digitală. Placeholder despre experiența, echipa și valorile companiei.]</p>
+    </section>
+
+    <section class="languages" id="languages">
+      <h2>Suport Multi-Limbă / Multi-Language Support</h2>
+      <p>Site-ul nostru este disponibil atât în română, cât și în engleză.<br>Our website is available in both Romanian and English.</p>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:contact@luxtech-innovation.com">contact@luxtech-innovation.com</a></p>
+    </section>
+  </main>
+  <div class="footer">
+    &copy; 2025 LUXTECH INNOVATION. All rights reserved.
+  </div>
+  <script>
+    // Basic bilingual text content. Real-world usage: extract to JSON or use i18n frameworks.
+    const TRANSLATE = {
+      'ro': {
+        nav: ['Acasă','Soluții','Despre','Aplicații','Cariere','Contact'],
+        hero: {
+          h1: 'Inovație AI din România pentru lumea digitală',
+          p: 'Aplicații mobile și soluții personalizate de inteligență artificială pentru afacerea ta.',
+          cta: 'Află mai mult'
+        },
+        solutions: [
+          {
+            h2: 'Aplicații Mobile',
+            p: '[Descriere placeholder aplicații mobile, gata să impulsioneze afaceri moderne.]',
+            btn: 'Contactează-ne'
+          },
+          {
+            h2: 'Soluții AI Personalizate',
+            p: '[Placeholder soluții AI personalizate pentru obiectivele afacerii tale.]',
+            btn: 'Contactează-ne'
+          }
+        ],
+        about: {
+          h2: 'Despre Noi',
+          p: '[Compania LUXTECH INNOVATION transformă ideile tehnologice în realitate digitală. Placeholder despre experiența, echipa și valorile companiei.]'
+        },
+        languages: {
+          h2: 'Suport Multi-Limbă / Multi-Language Support',
+          p: 'Site-ul nostru este disponibil atât în română, cât și în engleză.<br>Our website is available in both Romanian and English.'
+        },
+        contact: {
+          h2: 'Contact',
+          p: 'Email: <a href="mailto:contact@luxtech-innovation.com">contact@luxtech-innovation.com</a>'
+        }
+      },
+      'en': {
+        nav: ['Home','Solutions','About','Applications','Careers','Contact'],
+        hero: {
+          h1: 'AI-Driven Innovation from Romania for the Digital World',
+          p: 'Mobile apps and custom artificial intelligence solutions for your business.',
+          cta: 'Learn More'
+        },
+        solutions: [
+          {
+            h2: 'Mobile Applications',
+            p: '[Placeholder description for mobile apps, ready to boost modern businesses.]',
+            btn: 'Contact Us'
+          },
+          {
+            h2: 'Custom AI Solutions',
+            p: '[Placeholder customer-tailored AI solutions for your business goals.]',
+            btn: 'Contact Us'
+          }
+        ],
+        about: {
+          h2: 'About Us',
+          p: '[LUXTECH INNOVATION transforms tech ideas into digital reality. Placeholder about experience, team, and company values.]'
+        },
+        languages: {
+          h2: 'Multi-Language Support / Suport Multi-Limbă',
+          p: 'Our website is available in both Romanian and English.<br>Site-ul nostru este disponibil atât în română, cât și în engleză.'
+        },
+        contact: {
+          h2: 'Contact',
+          p: 'Email: <a href="mailto:contact@luxtech-innovation.com">contact@luxtech-innovation.com</a>'
+        }
+      }
+    };
+    function setLang(lang) {
+      const nav = document.querySelectorAll('nav ul li');
+      TRANSLATE[lang].nav.forEach((txt, i) => nav[i].innerText = txt);
+      // Hero
+      document.querySelector('#hero h1').innerText = TRANSLATE[lang].hero.h1;
+      document.querySelector('#hero p').innerText = TRANSLATE[lang].hero.p;
+      document.getElementById('hero-cta').innerText = TRANSLATE[lang].hero.cta;
+      // Solutions
+      document.querySelectorAll('.solution-card').forEach((card, i) => {
+        card.querySelector('h2').innerText = TRANSLATE[lang].solutions[i].h2;
+        card.querySelector('p').innerText = TRANSLATE[lang].solutions[i].p;
+        card.querySelector('.card-btn').innerText = TRANSLATE[lang].solutions[i].btn;
+      });
+      // About
+      document.querySelector('#about h2').innerText = TRANSLATE[lang].about.h2;
+      document.querySelector('#about p').innerText = TRANSLATE[lang].about.p;
+      // Languages
+      document.querySelector('#languages h2').innerText = TRANSLATE[lang].languages.h2;
+      document.querySelector('#languages p').innerHTML = TRANSLATE[lang].languages.p;
+      // Contact
+      document.querySelector('#contact h2').innerText = TRANSLATE[lang].contact.h2;
+      document.querySelector('#contact p').innerHTML = TRANSLATE[lang].contact.p;
+      // Language button active state
+      document.getElementById('ro-btn').classList.toggle('active', lang==='ro');
+      document.getElementById('en-btn').classList.toggle('active', lang==='en');
+    }
+    document.getElementById('ro-btn').onclick = () => setLang('ro');
+    document.getElementById('en-btn').onclick = () => setLang('en');
+    // Enable navigation anchor jump (basic scroll)
+    document.querySelectorAll('nav ul li').forEach((li, i) => {
+      li.onclick = () => {
+        let anchorIds = ['hero','solutions','about','solutions','about','contact'];
+        document.getElementById(anchorIds[i]).scrollIntoView({behavior:'smooth'});
+      }
+    });
+    // Set default lang to Romanian (RO)
+    setLang('ro');
+  </script>
+</body>
 </html>
