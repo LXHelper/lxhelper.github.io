@@ -16,7 +16,7 @@
     }
   </style>
 </head>
-<body class="bg-gray-950 text-white bg-no-repeat bg-cover bg-center" style="background-image: url('https://lxhelper.github.io/images/background.jpg');">
+<body class="bg-gray-950 text-white">
 
   <!-- NAVBAR -->
   <header class="sticky top-0 bg-gray-900 shadow z-50">
@@ -39,10 +39,25 @@
   </header>
 
   <!-- HERO -->
-  <section id="home" class="text-center py-24 px-4 bg-gradient-to-b from-gray-950 to-gray-900">
-    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-400" data-i18n="hero_title">Inovație AI din România pentru lumea digitală</h2>
-    <p class="text-lg text-gray-300 mb-6" data-i18n="hero_sub">Aplicații mobile și soluții AI personalizate pentru afacerea ta.</p>
-    <a href="#contact" class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition" data-i18n="hero_cta">Află mai mult</a>
+  <section id="home"
+    class="relative text-center py-24 px-4 bg-no-repeat bg-cover bg-center"
+    style="background-image: url('https://lxhelper.github.io/images/background.jpg');">
+    
+    <!-- DARK OVERLAY -->
+    <div class="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
+
+    <!-- HERO CONTENT -->
+    <div class="relative z-10">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-blue-400" data-i18n="hero_title">
+        Inovație AI din România pentru lumea digitală
+      </h2>
+      <p class="text-lg text-gray-300 mb-6" data-i18n="hero_sub">
+        Aplicații mobile și soluții AI personalizate pentru afacerea ta.
+      </p>
+      <a href="#contact"
+        class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition"
+        data-i18n="hero_cta">Află mai mult</a>
+    </div>
   </section>
 
   <!-- SOLUTIONS -->
@@ -79,7 +94,9 @@
     <div class="max-w-2xl mx-auto px-4 text-center">
       <h3 class="text-3xl font-semibold mb-6" data-i18n="contact_title">Contact</h3>
       <p class="text-gray-400 mb-4" data-i18n="contact_sub">Trimite-ne un email pentru a discuta mai multe.</p>
-      <a href="mailto:contact@luxtech-innovation.com" class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition" data-i18n="contact_button">Contactează-ne</a>
+      <a href="mailto:contact@luxtech-innovation.com"
+         class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition"
+         data-i18n="contact_button">Contactează-ne</a>
     </div>
   </section>
 
@@ -113,7 +130,7 @@
         contact_sub: "Send us an email to learn more.",
         contact_button: "Contact Us"
       },
-      ro: {} // Romanian is already default text content in HTML
+      ro: {} // Romanian is default
     };
 
     const switcher = document.getElementById("languageSwitcher");
