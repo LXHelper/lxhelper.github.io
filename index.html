@@ -1,283 +1,265 @@
 <!DOCTYPE html>
 <html lang="ro">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LuxTech Innovation</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LuxTech Innovation</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .icon-list li { position: relative; padding-left: 2rem; }
+    .icon-list li svg {
+      position: absolute; left: 0; top: 0.3rem;
+      width: 1.25rem; height: 1.25rem;
+      stroke: #3b82f6; stroke-width: 2; fill: none;
+    }
+    .cta-button {
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    .cta-button:hover, .cta-button:focus {
+      background-color: #2563eb;
+      box-shadow: 0 0 8px 2px rgba(37,99,235,0.7);
+      outline: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-950 text-white text-base md:text-lg leading-relaxed">
 
-    <!-- TAILWIND CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- GOOGLE FONT -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-      }
-
-      .icon-list li {
-        position: relative;
-        padding-left: 2rem;
-      }
-
-      .icon-list li svg {
-        position: absolute;
-        left: 0;
-        top: 0.3rem;
-        width: 1.25rem;
-        height: 1.25rem;
-        stroke: #3b82f6;
-        stroke-width: 2;
-        fill: none;
-      }
-
-      .cta-button {
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .cta-button:hover,
-      .cta-button:focus {
-        background-color: #2563eb;
-        box-shadow: 0 0 8px 2px rgba(37, 99, 235, 0.7);
-        outline: none;
-      }
-    </style>
-  </head>
-
-  <body class="bg-gray-950 text-white text-base md:text-lg leading-relaxed">
-    <!-- LANGUAGE HANDLER -->
-    <script>
-      const translations = {
-        en: {
-          nav_home: 'Home',
-          nav_solutions: 'Solutions',
-          nav_about: 'About',
-          nav_contact: 'Contact',
-          hero_title: 'The AI Revolution Has Begun – Join the Digital Transformation!',
-          hero_sub:
-            'We provide personalized software and AI solutions, and project management – separately or integrated – based on your needs.',
-          hero_cta: 'Learn More',
-          solutions_title: 'Our Solutions',
-          sol_mobile_title: 'Mobile and Desktop Applications',
-          sol_mobile_desc:
-            'We develop intuitive, scalable and efficient apps designed for your workflows.',
-          sol_mobile_extra:
-            'They offer performance, security, and a seamless experience tailored to your internal and external processes.',
-          sol_ai_title: 'AI Solutions',
-          sol_ai_desc:
-            'We implement AI and automation to increase productivity and reduce errors.',
-          sol_ai_extra:
-            'Harness data and intelligent algorithms to make reliable business decisions at scale.',
-          sol_custom_title: 'Project Management Services',
-          sol_custom_desc:
-            'We ensure project delivery using Agile or Waterfall methodologies based on your context.',
-          sol_custom_extra:
-            'From idea to implementation, we support execution and progress with transparency and efficiency.',
-          about_title: 'About Us',
-          about_extra1:
-            'No matter your field, we turn ideas into efficient digital products built for long-term success.',
-          about_extra2: 'Get in touch and let’s digitize your business!',
-          contact_title: 'Contact',
-          contact_sub: 'Send us an email to discuss.',
-          contact_button: 'Contact Us',
-          more_button: 'Read More',
-          less_button: 'Show Less'
-        },
-        ro: {
-          nav_home: 'Acasă',
-          nav_solutions: 'Soluții',
-          nav_about: 'Despre Noi',
-          nav_contact: 'Contact',
-          hero_title: 'Revoluția AI a început – alătură-te și tu transformării digitale!',
-          hero_sub:
-            'Punem la dispoziție aplicații software și soluții AI personalizate, dar și servicii profesionale de management de proiect.',
-          hero_cta: 'Află mai mult',
-          solutions_title: 'Serviciile Noastre',
-          sol_mobile_title: 'Aplicații Mobile și Desktop',
-          sol_mobile_desc:
-            'Soluții software dedicate pentru Windows și Android, adaptate nevoilor tale.',
-          sol_mobile_extra:
-            'Aplicațiile noastre sunt intuitive, scalabile și integrate eficient în procesele interne, susținând productivitatea și inovația.',
-          sol_ai_title: 'Soluții AI',
-          sol_ai_desc:
-            'Implementăm inteligență artificială și automatizări care optimizează fluxurile.',
-          sol_ai_extra:
-            'Reducem erorile, creștem productivitatea și oferim suport decizional prin algoritmi de învățare automată și analize inteligente.',
-          sol_custom_title: 'Management de Proiect',
-          sol_custom_desc:
-            'Asigurăm livrarea eficientă a proiectelor, indiferent de complexitate.',
-          sol_custom_extra:
-            'Folosim metodologia potrivită – Agile (Scrum, SAFe) sau Waterfall (PM², PRINCE2) – și oferim control total asupra termenele și bugetelor.',
-          about_title: 'Despre Noi',
-         about_extra1: `<strong>Povestea Noastră</strong>\n\nTotul a pornit dintr-o curiozitate arzătoare: „Cum putem face tehnologia să lucreze mai bine pentru oameni?”\n\nApoi, din observație în observație, a apărut o convingere clară — prea multe procese, idei și oameni sunt limitați de lipsa unor instrumente potrivite.\n\nNu promisiunea unui vis, ci nevoia de a înțelege, de a investiga și de a construi soluții concrete a fost motorul din spatele LuxTech Innovation. Fiecare proiect e răspunsul la o problemă reală, fiecare aplicație – o punte între complexitate și claritate.\n\nPasiunea pentru simplitate funcțională, eficiență și progres ne ghidează în tot ce dezvoltăm. Iar tehnologia devine, în mâinile noastre, un instrument de accelerare – nu doar un sistem.`,
-          about_extra2: '\n\nPasiunea pentru simplitate funcțională, eficiență și progres ne ghidează în tot ce dezvoltăm. Iar tehnologia devine, în mâinile noastre, un instrument de accelerare – nu doar un sistem. Contactează-ne și află cum putem digitaliza afacerea ta!',
-          contact_title: 'Contact',
-          contact_sub: 'Trimite-ne un email pentru a discuta mai multe.',
-          contact_button: 'Contactează-ne',
-          more_button: 'Citește mai mult',
-          less_button: 'Închide'
-        }
-      };
-    </script>
-
-    <!-- HEADER -->
-    <header class="sticky top-0 bg-gray-900 shadow z-50">
-      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-xl font-bold text-white tracking-wide">LUXTECH INNOVATION</h1>
-        <div class="flex items-center space-x-6">
-          <nav class="space-x-4 hidden md:block">
-            <a href="#home" data-i18n="nav_home" class="hover:text-blue-400 transition">Acasă</a>
-            <a href="#solutions" data-i18n="nav_solutions" class="hover:text-blue-400 transition">Soluții</a>
-            <a href="#about" data-i18n="nav_about" class="hover:text-blue-400 transition">Despre Noi</a>
-            <a href="#contact" data-i18n="nav_contact" class="hover:text-blue-400 transition">Contact</a>
-          </nav>
-          <select
-            id="languageSwitcher"
-            class="text-black rounded px-2 py-1 text-sm"
-            aria-label="Selectează limba">
-            <option value="ro">RO</option>
-            <option value="en">EN</option>
-          </select>
-        </div>
+  <!-- NAVBAR -->
+  <header class="sticky top-0 bg-gray-900 shadow z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-white tracking-wide">LUXTECH INNOVATION</h1>
+      <div class="flex items-center space-x-6">
+        <nav class="space-x-4 hidden md:block">
+          <a href="#home" data-i18n="nav_home" class="hover:text-blue-400 transition">Acasă</a>
+          <a href="#solutions" data-i18n="nav_solutions" class="hover:text-blue-400 transition">Soluții</a>
+          <a href="#about" data-i18n="nav_about" class="hover:text-blue-400 transition">Despre</a>
+          <a href="#contact" data-i18n="nav_contact" class="hover:text-blue-400 transition">Contact</a>
+        </nav>
+        <select id="languageSwitcher" class="text-black rounded px-2 py-1 text-sm" aria-label="Select language">
+          <option value="ro" selected>RO</option>
+          <option value="en">EN</option>
+        </select>
       </div>
-    </header>
-
-    <!-- HERO -->
-    <section
-      id="home"
-      class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 bg-no-repeat bg-cover bg-center bg-fixed"
-      style="background-image: url('https://lxhelper.github.io/images/background.jpg');">
-      <div class="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
-      <div class="relative z-10 max-w-4xl px-6">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-blue-400" data-i18n="hero_title"></h2>
-        <p class="text-lg text-gray-300 mb-8 leading-relaxed" data-i18n="hero_sub"></p>
-        <a href="#contact" class="inline-block px-8 py-4 bg-blue-500 rounded-full text-white font-semibold cta-button" data-i18n="hero_cta"></a>
-      </div>
-    </section>
-
-    <!-- SOLUTIONS -->
-    <section id="solutions" class="py-20 bg-gray-900">
-      <div class="max-w-6xl mx-auto px-4 text-center">
-        <h3 class="text-3xl font-semibold mb-12" data-i18n="solutions_title"></h3>
-        <div class="grid md:grid-cols-3 gap-10">
-          <!-- Mobile -->
-          <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition">
-            <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_mobile_title"></h4>
-            <p class="text-gray-400" data-i18n="sol_mobile_desc"></p>
-            <div id="mobileMore" class="hidden mt-2 text-gray-400">
-              <p data-i18n="sol_mobile_extra"></p>
-            </div>
-            <button id="expandMobileBtn" data-i18n-more class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button" aria-expanded="false" aria-controls="mobileMore"></button>
-          </div>
-
-          <!-- AI -->
-          <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition">
-            <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_ai_title"></h4>
-            <p class="text-gray-400" data-i18n="sol_ai_desc"></p>
-            <div id="aiMore" class="hidden mt-2 text-gray-400">
-              <p data-i18n="sol_ai_extra"></p>
-            </div>
-            <button id="expandAiBtn" data-i18n-more class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button" aria-expanded="false" aria-controls="aiMore"></button>
-          </div>
-
-          <!-- Project -->
-          <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition">
-            <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_custom_title"></h4>
-            <p class="text-gray-400" data-i18n="sol_custom_desc"></p>
-            <div id="projectMore" class="hidden mt-2 text-gray-400">
-              <p data-i18n="sol_custom_extra"></p>
-            </div>
-            <button id="expandProjectBtn" data-i18n-more class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button" aria-expanded="false" aria-controls="projectMore"></button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-<section id="about" class="py-20 bg-gray-950">
-  <div class="max-w-3xl mx-auto px-4 text-center">
-    <h3 class="text-3xl font-semibold mb-8 tracking-wide" data-i18n="about_title"></h3>
-    <p class="text-gray-400 mb-6 font-semibold text-lg leading-relaxed">
-      LuxTech Innovation este o companie românească înființată în 2024. Misiunea noastră este să transformăm observațiile curioase în soluții digitale clare și eficiente. Investigăm, decodăm și dezvoltăm tehnologii care simplifică, automatizează și amplifică potențialul real al afacerilor.
-    </p>
-    <div id="extraMissionContent" class="hidden text-gray-400 text-base">
-      <div id="aboutStory" class="space-y-4"></div>
-      <p data-i18n="about_extra2" class="font-semibold mt-4"></p>
     </div>
-    <button id="expandMissionBtn" data-i18n-more class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition" aria-expanded="false" aria-controls="extraMissionContent"></button>
-  </div>
-</section>
+  </header>
 
-    <!-- CONTACT -->
-    <section id="contact" class="py-20 bg-gray-900">
-      <div class="max-w-2xl mx-auto px-4 text-center">
-        <h3 class="text-3xl font-semibold mb-6" data-i18n="contact_title"></h3>
-        <p class="text-gray-400 mb-4" data-i18n="contact_sub"></p>
-        <a href="mailto:contact@lxtech.ro" class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition" data-i18n="contact_button"></a>
+  <!-- HERO -->
+  <section id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 bg-no-repeat bg-cover bg-center bg-fixed"
+    style="background-image: url('https://lxhelper.github.io/images/background.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
+    <div class="relative z-10 max-w-4xl px-6">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-blue-400" data-i18n="hero_title"></h2>
+      <p class="text-lg text-gray-300 mb-8 leading-relaxed" data-i18n="hero_sub"></p>
+      <a href="#contact" class="inline-block px-8 py-4 bg-blue-500 rounded-full text-white font-semibold cta-button" data-i18n="hero_cta"></a>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section id="solutions" class="py-20 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h3 class="text-3xl font-semibold mb-12" data-i18n="solutions_title"></h3>
+      <div class="grid md:grid-cols-3 gap-10">
+        <!-- Mobile and Desktop -->
+        <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center">
+          <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_mobile_title"></h4>
+          <p class="text-gray-400 text-base mb-2" data-i18n="sol_mobile_desc"></p>
+          <div id="mobileMore" class="hidden text-gray-400 text-base mb-2">
+            <p data-i18n="sol_mobile_more"></p>
+          </div>
+          <button id="expandMobileBtn" type="button" class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button"></button>
+        </div>
+        <!-- AI -->
+        <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center">
+          <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_ai_title"></h4>
+          <p class="text-gray-400 text-base mb-2" data-i18n="sol_ai_desc"></p>
+          <div id="aiMore" class="hidden text-gray-400 text-base mb-2">
+            <p data-i18n="sol_ai_more"></p>
+          </div>
+          <button id="expandAiBtn" type="button" class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button"></button>
+        </div>
+        <!-- Management -->
+        <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center">
+          <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_custom_title"></h4>
+          <p class="text-gray-400 text-base mb-2" data-i18n="sol_custom_desc"></p>
+          <div id="customMore" class="hidden text-gray-400 text-base mb-2">
+            <p data-i18n="sol_custom_more"></p>
+          </div>
+          <button id="expandCustomBtn" type="button" class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button"></button>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-gray-800 py-6 text-center text-sm text-gray-400">
-      © 2025 LuxTech Innovation. All rights reserved.
-    </footer>
+  <!-- ABOUT SECTION -->
+  <section id="about" class="py-20 bg-gray-950">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h3 class="text-3xl font-semibold mb-8 tracking-wide" data-i18n="about_title"></h3>
+      <p class="text-gray-400 mb-6 font-semibold text-lg leading-relaxed" data-i18n="about_desc"></p>
+      <button id="expandMissionBtn" type="button" aria-expanded="false" aria-controls="extraMissionContent"
+        class="mb-6 px-5 py-3 bg-blue-500 hover:bg-blue-600 rounded-full text-white font-semibold transition cta-button">
+      </button>
+      <div id="extraMissionContent" class="hidden text-gray-400 text-base">
+        <p class="mb-4" data-i18n="about_extra_1"></p>
+        <p class="font-semibold" data-i18n="about_extra_2"></p>
+      </div>
+    </div>
+  </section>
 
-    <!-- JAVASCRIPT -->
-    <script>
-      const switcher = document.getElementById("languageSwitcher");
-      const langState = { lang: "ro" }; // Default
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="py-20 bg-gray-900">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h3 class="text-3xl font-semibold mb-8 tracking-wide" data-i18n="contact_title"></h3>
+      <p class="text-gray-400 mb-6 text-lg" data-i18n="contact_sub"></p>
+      <a href="mailto:contact@lxtech.ro" class="inline-block px-8 py-4 bg-blue-500 rounded-full font-semibold text-white cta-button" data-i18n="contact_button"></a>
+    </div>
+  </section>
 
-      function updateTranslations() {
-        const lang = langState.lang;
-        document.querySelectorAll("[data-i18n]").forEach((el) => {
-          const key = el.getAttribute("data-i18n");
-          if (translations[lang][key]) el.textContent = translations[lang][key];
-        });
+  <!-- FOOTER -->
+  <footer class="bg-gray-800 py-6 text-center text-sm text-gray-400 select-none">
+    © 2025 LuxTech Innovation S.R.L. All rights reserved.
+  </footer>
 
-        document.querySelectorAll("[data-i18n-more]").forEach((btn) => {
-          const expanded = btn.getAttribute("aria-expanded") === "true";
-          btn.textContent = translations[lang][expanded ? "less_button" : "more_button"];
-        });
+  <!-- JAVASCRIPT -->
+  <script>
+    const translations = {
+      en: {
+        nav_home: 'Home',
+        nav_solutions: 'Solutions',
+        nav_about: 'About',
+        nav_contact: 'Contact',
+        hero_title: 'The AI Revolution Has Begun – Join the Digital Transformation!',
+        hero_sub: 'We provide both personalized software applications and AI solutions, as well as professional project management services, either separately or fully integrated according to your needs.',
+        hero_cta: 'Learn More',
+        solutions_title: 'Our Solutions',
+        sol_mobile_title: 'Mobile and Desktop Applications',
+        sol_mobile_desc: 'We develop intuitive, scalable and efficient apps designed for your workflows.',
+        sol_mobile_more: 'They offer performance, security, and a seamless experience tailored to your internal and external processes.',
+        sol_ai_title: 'AI Solutions',
+        sol_ai_desc: 'We implement artificial intelligence and automation that optimize processes, reduce errors, and increase productivity. ',
+        sol_ai_more: 'Our custom solutions help you make fast decisions and stay competitive. Harness data and intelligent algorithms to make reliable business decisions at scale.',
+        sol_custom_title: 'Project Management',
+        sol_custom_desc: 'We guarantee efficient project delivery, no matter how complex the task.',
+        sol_custom_more: 'By applying the most suitable methodology—whether through the Agile mindset (Scrum, Kanban, SAFe) or classic Waterfall (PM², PRINCE2, PMP)—we ensure full control over timelines and budgets.',
+        about_title: 'About Us',
+        about_desc: 'LuxTech Innovation is a Romanian company founded in 2024. Our mission is to turn curious observations into clear and efficient digital solutions. We explore, decode, and develop technologies that simplify, automate, and amplify the real potential of businesses.',
+        about_extra_1: 'No matter your field, we turn your ideas into functional and efficient applications to support long-term growth and success.',
+        about_extra_2: 'Contact us to find out how we can digitize your business.',
+        contact_title: 'Contact',
+        contact_sub: 'Send us an email to discuss more.',
+        contact_button: 'Contact Us',
+        expand_more: 'Read More',
+        expand_less: 'Close'
+      },
+      ro: {
+        nav_home: 'Acasă',
+        nav_solutions: 'Soluții',
+        nav_about: 'Despre',
+        nav_contact: 'Contact',
+        hero_title: 'Revoluția AI a început – alătură-te și tu transformării digitale!',
+        hero_sub: 'Punem la dispoziție atât aplicații software și soluții AI personalizate, precum și servicii profesionale de management de proiect, disponibile atât separat, cât și integrate, în funcție de cerințele tale.',
+        hero_cta: 'Află mai mult',
+        solutions_title: 'Soluțiile Noastre',
+        sol_mobile_title: 'Aplicații Mobile și Desktop',
+        sol_mobile_desc: 'Soluții software dedicate pentru Windows și Android, adaptate nevoilor tale.',
+        sol_mobile_more: 'Aplicațiile noastre sunt intuitive, scalabile și integrate eficient în procesele interne, susținând productivitatea și inovația.',
+        sol_ai_title: 'Soluții AI',
+        sol_ai_desc: 'Implementăm inteligență artificială și automatizări care optimizează procesele.',
+        sol_ai_more: 'Reducem erorile, creștem productivitatea și oferim suport decizional prin algoritmi de învățare automată și analize inteligente.',
+        sol_custom_title: 'Management de Proiect',
+        sol_custom_desc: 'Asigurăm livrarea eficientă a proiectelor, indiferent de complexitate.',
+        sol_custom_more: 'Folosim metodologia potrivită – Agile (Scrum, SAFe) sau Waterfall (PM², PRINCE2) – și oferim control total asupra termenele și bugetelor.',
+        about_title: 'Despre Noi',
+        about_desc: 'LuxTech Innovation este o companie românească înființată în 2024. Misiunea noastră este să transformăm observațiile curioase în soluții digitale clare și eficiente. Investigăm, decodăm și dezvoltăm tehnologii care simplifică, automatizează și amplifică potențialul real al afacerilor.',
+        about_extra_1: 'Indiferent de domeniul tău, transformăm ideile în aplicații funcționale și eficiente, pentru a susține creșterea și succesul pe termen lung.',
+        about_extra_2: 'Contactează-ne și află cum putem digitaliza afacerea ta.',
+        contact_title: 'Contact',
+        contact_sub: 'Trimite-ne un email pentru a discuta mai multe.',
+        contact_button: 'Contactează-ne',
+        expand_more: 'Citește mai mult',
+        expand_less: 'Închide'
       }
+    };
 
-function setAboutExtraParagraphs(lang) {
-  const container = document.getElementById("aboutStory");
-  if (!container) return;
-
-  const raw = translations[lang]?.about_extra1 || '';
-  container.innerHTML = raw
-    .split('\n\n')
-    .map(par => `<p class="mb-4">${par}</p>`)
-    .join('');
-}
-
-      switcher.addEventListener("change", () => {
-        langState.lang = switcher.value;
-        updateTranslations();
-setAboutExtraParagraphs(langState.lang); 
+    // Language/UI initialization
+    function setLanguageContent(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
       });
 
-      function setupToggle(id, contentId) {
-        const btn = document.getElementById(id);
-        const content = document.getElementById(contentId);
-        btn.addEventListener("click", () => {
-          const expanded = btn.getAttribute("aria-expanded") === "true";
-          btn.setAttribute("aria-expanded", String(!expanded));
-          content.classList.toggle("hidden");
-          btn.textContent = translations[langState.lang][expanded ? "more_button" : "less_button"];
-        });
+      // Each expand/collapse button text
+      buttons.forEach(({btn, expanded, key}) => {
+        btn.textContent = translations[lang][expanded ? "expand_less" : "expand_more"];
+      });
+
+      // About section
+      if (aboutBtn) aboutBtn.textContent = translations[lang][aboutExpanded ? "expand_less" : "expand_more"];
+    }
+
+    // --- SOLUTIONS BUTTONS ---
+
+    const buttons = [
+      {
+        btn: document.getElementById('expandMobileBtn'),
+        content: document.getElementById('mobileMore'),
+        key: 'sol_mobile_more',
+        expanded: false
+      },
+      {
+        btn: document.getElementById('expandAiBtn'),
+        content: document.getElementById('aiMore'),
+        key: 'sol_ai_more',
+        expanded: false
+      },
+      {
+        btn: document.getElementById('expandCustomBtn'),
+        content: document.getElementById('customMore'),
+        key: 'sol_custom_more',
+        expanded: false
       }
+    ];
 
-      setupToggle("expandMobileBtn", "mobileMore");
-      setupToggle("expandAiBtn", "aiMore");
-      setupToggle("expandProjectBtn", "projectMore");
-      setupToggle("expandMissionBtn", "extraMissionContent");
+    buttons.forEach((b, idx) => {
+      b.btn.addEventListener('click', function(){
+        b.expanded = !b.expanded;
+        b.content.classList.toggle('hidden', !b.expanded);
+        b.btn.textContent = translations[languageSwitcher.value][b.expanded ? "expand_less" : "expand_more"];
+      });
+    });
 
-      updateTranslations(); // initial
-    </script>
-  </body>
+    // --- ABOUT BUTTON ---
+    const aboutBtn = document.getElementById('expandMissionBtn');
+    const aboutContent = document.getElementById('extraMissionContent');
+    let aboutExpanded = false;
+
+    if (aboutBtn && aboutContent) {
+      aboutBtn.addEventListener('click', function(){
+        aboutExpanded = !aboutExpanded;
+        aboutContent.classList.toggle('hidden', !aboutExpanded);
+        aboutBtn.textContent = translations[languageSwitcher.value][aboutExpanded ? "expand_less" : "expand_more"];
+      });
+    }
+
+    // --- LANGUAGE SWITCHER ---
+    const languageSwitcher = document.getElementById('languageSwitcher');
+    languageSwitcher.addEventListener('change', function(){
+      setLanguageContent(languageSwitcher.value);
+    });
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', function(){
+      setLanguageContent(languageSwitcher.value);
+      // Hide extra content initially
+      buttons.forEach(b => b.content.classList.add('hidden'));
+      if (aboutContent) aboutContent.classList.add('hidden');
+    });
+
+  </script>
+</body>
 </html>
