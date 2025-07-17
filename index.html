@@ -39,10 +39,12 @@
           <a href="#about" data-i18n="nav_about" class="hover:text-blue-400 transition">Despre</a>
           <a href="#contact" data-i18n="nav_contact" class="hover:text-blue-400 transition">Contact</a>
         </nav>
-        <select id="languageSwitcher" class="text-black rounded px-2 py-1 text-sm" aria-label="Select language">
-          <option value="ro" selected>RO</option>
-          <option value="en">EN</option>
-        </select>
+   <select id="languageSwitcher" class="text-black rounded px-2 py-1 text-sm" aria-label="Select language">
+  <option value="ro">RO</option>
+  <option value="en">EN</option>
+  <option value="fr">FR</option>
+  <option value="sk">SK</option>
+</select>
       </div>
     </div>
   </header>
@@ -119,11 +121,9 @@
   </section>
 
   <!-- FOOTER -->
-<footer class="bg-gray-800 py-6 text-center text-sm text-gray-400">
-  © 2025 LuxTech Innovation. All rights reserved.<br>
-<img src="https://hitscounter.dev/api/hit?url=lxhelper.github.io&label=&icon=github&color=%233d8bfd&message=&style=flat&tz=UTC">
-</footer>
-
+  <footer class="bg-gray-800 py-6 text-center text-sm text-gray-400 select-none">
+    © 2025 LuxTech Innovation S.R.L. All rights reserved.
+  </footer>
 
   <!-- JAVASCRIPT -->
   <script>
@@ -183,7 +183,65 @@
         contact_button: 'Contactează-ne',
         expand_more: 'Citește mai mult',
         expand_less: 'Închide'
-      }
+      },
+	  
+	  fr: {
+  nav_home: 'Accueil',
+  nav_solutions: 'Solutions',
+  nav_about: 'À propos',
+  nav_contact: 'Contact',
+  hero_title: 'La révolution de l’IA a commencé – Rejoignez la transformation numérique !',
+  hero_sub: 'Nous fournissons des applications logicielles personnalisées, des solutions d’IA et des services de gestion de projet professionnels, de manière autonome ou intégrée selon vos besoins.',
+  hero_cta: 'En savoir plus',
+  solutions_title: 'Nos Solutions',
+  sol_mobile_title: 'Applications Mobiles et Bureautiques',
+  sol_mobile_desc: 'Nous développons des applications intuitives, évolutives et efficaces adaptées à vos flux de travail.',
+  sol_mobile_more: 'Elles offrent performance, sécurité et expérience fluide, adaptée à vos processus internes et externes.',
+  sol_ai_title: 'Solutions d’IA',
+  sol_ai_desc: 'Nous intégrons l’intelligence artificielle et l’automatisation pour optimiser les processus, réduire les erreurs et augmenter la productivité.',
+  sol_ai_more: 'Nos solutions personnalisées vous aident à prendre des décisions rapides et fiables à grande échelle grâce aux données et aux algorithmes intelligents.',
+  sol_custom_title: 'Gestion de Projet',
+  sol_custom_desc: 'Nous garantissons la livraison efficace des projets, quelle que soit leur complexité.',
+  sol_custom_more: 'Nous utilisons la méthodologie la plus adaptée – Agile (Scrum, Kanban, SAFe) ou Waterfall (PM², PRINCE2) – pour un contrôle total des délais et des budgets.',
+  about_title: 'À propos de nous',
+  about_desc: 'LuxTech Innovation est une entreprise roumaine fondée en 2024. Notre mission est de transformer les idées curieuses en solutions numériques claires et efficaces.',
+  about_extra_1: 'Quel que soit votre domaine, nous transformons vos idées en applications fonctionnelles et efficaces pour soutenir votre croissance à long terme.',
+  about_extra_2: 'Contactez-nous pour découvrir comment nous pouvons numériser votre entreprise.',
+  contact_title: 'Contact',
+  contact_sub: 'Envoyez-nous un e-mail pour en discuter davantage.',
+  contact_button: 'Nous contacter',
+  expand_more: 'Lire la suite',
+  expand_less: 'Fermer'
+},
+sk: {
+  nav_home: 'Domov',
+  nav_solutions: 'Riešenia',
+  nav_about: 'O nás',
+  nav_contact: 'Kontakt',
+  hero_title: 'Revolúcia umelej inteligencie začala – Pridajte sa k digitálnej transformácii!',
+  hero_sub: 'Poskytujeme prispôsobené softvérové aplikácie, riešenia umelej inteligencie a profesionálne projektové riadenie – samostatne alebo ako integrovaný balík podľa vašich potrieb.',
+  hero_cta: 'Zistiť viac',
+  solutions_title: 'Naše Riešenia',
+  sol_mobile_title: 'Mobilné a Desktopové Aplikácie',
+  sol_mobile_desc: 'Vyvíjame intuitívne, škálovateľné a efektívne aplikácie navrhnuté pre vaše pracovné toky.',
+  sol_mobile_more: 'Ponúkajú výkon, bezpečnosť a plynulé používanie prispôsobené vašim procesom.',
+  sol_ai_title: 'Riešenia s Umelou Inteligenciou',
+  sol_ai_desc: 'Implementujeme umelú inteligenciu a automatizáciu, ktorá optimalizuje procesy, znižuje chyby a zvyšuje produktivitu.',
+  sol_ai_more: 'Naše riešenia pomáhajú robiť rýchle a spoľahlivé rozhodnutia na základe dát a inteligentných algoritmov.',
+  sol_custom_title: 'Projektový Manažment',
+  sol_custom_desc: 'Zabezpečujeme efektívne dodanie projektov bez ohľadu na ich zložitosť.',
+  sol_custom_more: 'Používame vhodnú metodológiu – Agile (Scrum, Kanban, SAFe) alebo Waterfall (PM², PRINCE2) – pre úplnú kontrolu nad časom a rozpočtom.',
+  about_title: 'O nás',
+  about_desc: 'LuxTech Innovation je rumunská spoločnosť založená v roku 2024. Našou misiou je pretaviť zvedavé pozorovania na jasné a efektívne digitálne riešenia.',
+  about_extra_1: 'Bez ohľadu na váš odbor premieňame nápady na funkčné aplikácie pre dlhodobý rast a úspech.',
+  about_extra_2: 'Kontaktujte nás a zistite, ako môžeme digitalizovať vaše podnikanie.',
+  contact_title: 'Kontakt',
+  contact_sub: 'Pošlite nám e-mail a dohodnime si stretnutie.',
+  contact_button: 'Kontaktujte nás',
+  expand_more: 'Zobraziť viac',
+  expand_less: 'Zavrieť'
+}
+
     };
 
     // Language/UI initialization
