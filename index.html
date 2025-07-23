@@ -31,38 +31,43 @@
   <!-- NAVBAR -->
 <header class="sticky top-0 bg-gray-900 shadow z-50">
   <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-   <div class="flex items-center space-x-3">
-
-  <span class="text-xl font-bold text-white tracking-wide">LUXTECH INNOVATION</span>
-    <img
-    src="https://lxhelper.github.io/images/LX_logo.png"
-    alt="LX Logo"
-    class="h-8 w-8 object-contain"
-    loading="lazy"
-  />
-
-</div>
-    <div class="flex items-center space-x-6">
-        <nav class="space-x-4 hidden md:block">
-          <a href="#home" data-i18n="nav_home" class="hover:text-blue-400 transition">Acasă</a>
-          <a href="#solutions" data-i18n="nav_solutions" class="hover:text-blue-400 transition">Soluții</a>
-          <a href="#about" data-i18n="nav_about" class="hover:text-blue-400 transition">Despre</a>
-          <a href="#contact" data-i18n="nav_contact" class="hover:text-blue-400 transition">Contact</a>
-        </nav>
-   <select id="languageSwitcher" class="text-black rounded px-2 py-1 text-sm" aria-label="Select language">
-  <option value="ro">RO</option>
-  <option value="en">EN</option>
-  <option value="fr">FR</option>
-  <option value="de">DE</option>
-  <option value="sk">SK</option>
-</select>
-      </div>
+    <div class="flex items-center space-x-3">
+        <span class="text-xl font-bold text-white tracking-wide">LUXTECH INNOVATION</span>
+        <img src="https://lxhelper.github.io/images/LX_logo.png" alt="LX Logo" class="h-8 w-8 object-contain" loading="lazy" />
     </div>
-  </header>
+    <div class="flex items-center space-x-6">
+        <!-- CORRECTED NAV TAG: Added 'flex' and 'items-center' for proper alignment -->
+        <nav class="hidden md:flex items-center space-x-4">
+            <a href="#home" data-i18n="nav_home" class="hover:text-blue-400 transition">Acasă</a>
+            <a href="#solutions" data-i18n="nav_solutions" class="hover:text-blue-400 transition">Soluții</a>
+            <a href="#about" data-i18n="nav_about" class="hover:text-blue-400 transition">Despre</a>
+            <a href="#contact" data-i18n="nav_contact" class="hover:text-blue-400 transition">Contact</a>
+
+            <!-- Dropdown Menu for Apps -->
+            <div class="relative">
+                <button id="appsButton" type="button" class="flex items-center space-x-1 hover:text-blue-400 transition">
+                    <span data-i18n="nav_apps">Our Apps</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="appsDropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-50">
+                    <a href="https://lxtech.ro/metroubucuresti/" target="_blank" class="block px-4 py-2 text-sm text-white hover:bg-gray-700" data-i18n="app_metro">Metrou Bucuresti</a>
+                </div>
+            </div>
+        </nav>
+        <select id="languageSwitcher" class="text-black rounded px-2 py-1 text-sm" aria-label="Select language">
+            <option value="ro">RO</option>
+            <option value="en">EN</option>
+			<option value="lb">LB</option>
+            <option value="fr">FR</option>
+            <option value="de">DE</option>
+            <option value="sk">SK</option>
+        </select>
+    </div>
+  </div>
+</header>
 
   <!-- HERO -->
-  <section id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 bg-no-repeat bg-cover bg-center bg-fixed"
-    style="background-image: url('https://lxhelper.github.io/images/background.jpg');">
+  <section id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 bg-no-repeat bg-cover bg-center bg-fixed" style="background-image: url('https://lxhelper.github.io/images/background.jpg');">
     <div class="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
     <div class="relative z-10 max-w-4xl px-6">
       <h2 class="text-4xl md:text-5xl font-bold mb-6 text-blue-400" data-i18n="hero_title"></h2>
@@ -76,31 +81,22 @@
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h3 class="text-3xl font-semibold mb-12" data-i18n="solutions_title"></h3>
       <div class="grid md:grid-cols-3 gap-10">
-        <!-- Mobile and Desktop -->
         <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center">
           <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_mobile_title"></h4>
           <p class="text-gray-400 text-base mb-2" data-i18n="sol_mobile_desc"></p>
-          <div id="mobileMore" class="hidden text-gray-400 text-base mb-2">
-            <p data-i18n="sol_mobile_more"></p>
-          </div>
+          <div id="mobileMore" class="hidden text-gray-400 text-base mb-2"><p data-i18n="sol_mobile_more"></p></div>
           <button id="expandMobileBtn" type="button" class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button"></button>
         </div>
-        <!-- AI -->
         <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center">
           <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_ai_title"></h4>
           <p class="text-gray-400 text-base mb-2" data-i18n="sol_ai_desc"></p>
-          <div id="aiMore" class="hidden text-gray-400 text-base mb-2">
-            <p data-i18n="sol_ai_more"></p>
-          </div>
+          <div id="aiMore" class="hidden text-gray-400 text-base mb-2"><p data-i18n="sol_ai_more"></p></div>
           <button id="expandAiBtn" type="button" class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button"></button>
         </div>
-        <!-- Management -->
         <div class="bg-gray-800 p-8 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center">
           <h4 class="text-xl font-semibold mb-4 text-blue-400" data-i18n="sol_custom_title"></h4>
           <p class="text-gray-400 text-base mb-2" data-i18n="sol_custom_desc"></p>
-          <div id="customMore" class="hidden text-gray-400 text-base mb-2">
-            <p data-i18n="sol_custom_more"></p>
-          </div>
+          <div id="customMore" class="hidden text-gray-400 text-base mb-2"><p data-i18n="sol_custom_more"></p></div>
           <button id="expandCustomBtn" type="button" class="mt-4 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-semibold transition cta-button"></button>
         </div>
       </div>
@@ -112,9 +108,7 @@
     <div class="max-w-3xl mx-auto px-4 text-center">
       <h3 class="text-3xl font-semibold mb-8 tracking-wide" data-i18n="about_title"></h3>
       <p class="text-gray-400 mb-6 font-semibold text-lg leading-relaxed" data-i18n="about_desc"></p>
-      <button id="expandMissionBtn" type="button" aria-expanded="false" aria-controls="extraMissionContent"
-        class="mb-6 px-5 py-3 bg-blue-500 hover:bg-blue-600 rounded-full text-white font-semibold transition cta-button">
-      </button>
+      <button id="expandMissionBtn" type="button" aria-expanded="false" aria-controls="extraMissionContent" class="mb-6 px-5 py-3 bg-blue-500 hover:bg-blue-600 rounded-full text-white font-semibold transition cta-button"></button>
       <div id="extraMissionContent" class="hidden text-gray-400 text-base">
         <p class="mb-4" data-i18n="about_extra_1"></p>
         <p class="font-semibold" data-i18n="about_extra_2"></p>
@@ -132,10 +126,10 @@
   </section>
 
   <!-- FOOTER -->
-<footer class="bg-gray-800 py-6 text-center text-sm text-gray-400">
-  © 2025 LuXTech Innovation. All rights reserved.<br>
-<img src="https://hitscounter.dev/api/hit?url=lxhelper.github.io&label=&icon=github&color=%236ea8fe&message=&style=flat&tz=UTC">
-</footer>
+  <footer class="bg-gray-800 py-6 text-center text-sm text-gray-400">
+    © 2025 LuXTech Innovation. All rights reserved.<br>
+    <img src="https://hitscounter.dev/api/hit?url=lxhelper.github.io&label=&icon=github&color=%236ea8fe&message=&style=flat&tz=UTC">
+  </footer>
 
   <!-- JAVASCRIPT -->
   <script>
@@ -166,7 +160,9 @@
         contact_sub: 'Send us an email to discuss more.',
         contact_button: 'Contact Us',
         expand_more: 'Read More',
-        expand_less: 'Close'
+        expand_less: 'Close', // CORRECTED: Added comma
+        nav_apps: 'Our Apps',
+        app_metro: 'Metro Bucharest'
       },
       ro: {
         nav_home: 'Acasă',
@@ -194,99 +190,135 @@
         contact_sub: 'Trimite-ne un email pentru a discuta mai multe.',
         contact_button: 'Contactează-ne',
         expand_more: 'Citește mai mult',
-        expand_less: 'Închide'
+        expand_less: 'Închide', // CORRECTED: Added comma
+        nav_apps: 'Aplicații',
+        app_metro: 'Metrou Bucuresti'
+      },
+      fr: {
+        nav_home: 'Accueil',
+        nav_solutions: 'Solutions',
+        nav_about: 'À propos',
+        nav_contact: 'Contact',
+        hero_title: 'La révolution de l’IA a commencé – Rejoignez la transformation numérique !',
+        hero_sub: 'Nous fournissons des applications logicielles personnalisées, des solutions d’IA et des services de gestion de projet professionnels, de manière autonome ou intégrée selon vos besoins.',
+        hero_cta: 'En savoir plus',
+        solutions_title: 'Nos Solutions',
+        sol_mobile_title: 'Applications Mobiles et Bureautiques',
+        sol_mobile_desc: 'Nous développons des applications intuitives, évolutives et efficaces adaptées à vos flux de travail.',
+        sol_mobile_more: 'Elles offrent performance, sécurité et expérience fluide, adaptée à vos processus internes et externes.',
+        sol_ai_title: 'Solutions d’IA',
+        sol_ai_desc: 'Nous intégrons l’intelligence artificielle et l’automatisation pour optimiser les processus, réduire les erreurs et augmenter la productivité.',
+        sol_ai_more: 'Nos solutions personnalisées vous aident à prendre des décisions rapides et fiables à grande échelle grâce aux données et aux algorithmes intelligents.',
+        sol_custom_title: 'Gestion de Projet',
+        sol_custom_desc: 'Nous garantissons la livraison efficace des projets, quelle que soit leur complexité.',
+        sol_custom_more: 'Nous utilisons la méthodologie la plus adaptée – Agile (Scrum, Kanban, SAFe) ou Waterfall (PM², PRINCE2) – pour un contrôle total des délais et des budgets.',
+        about_title: 'À propos de nous',
+        about_desc: 'LuXTech Innovation est une entreprise roumaine fondée en 2024. Notre mission est de transformer les idées curieuses en solutions numériques claires et efficaces.',
+        about_extra_1: 'Quel que soit votre domaine, nous transformons vos idées en applications fonctionnelles et efficaces pour soutenir votre croissance à long terme.',
+        about_extra_2: 'Contactez-nous pour découvrir comment nous pouvons numériser votre entreprise.',
+        contact_title: 'Contact',
+        contact_sub: 'Envoyez-nous un e-mail pour en discuter davantage.',
+        contact_button: 'Nous contacter',
+        expand_more: 'Lire la suite',
+        expand_less: 'Fermer', // CORRECTED: Added comma
+        nav_apps: 'Nos Applications', // CORRECTED: Added comma
+        app_metro: 'Métro Bucarest'
+      },
+      de: {
+        nav_home: 'Startseite',
+        nav_solutions: 'Lösungen',
+        nav_about: 'Über uns',
+        nav_contact: 'Kontakt',
+        hero_title: 'Die KI-Revolution hat begonnen – Werden Sie Teil der digitalen Transformation!',
+        hero_sub: 'Wir bieten maßgeschneiderte Softwarelösungen, KI-Anwendungen und professionelles Projektmanagement – einzeln oder als integrierte Lösung nach Ihrem Bedarf.',
+        hero_cta: 'Mehr erfahren',
+        solutions_title: 'Unsere Lösungen',
+        sol_mobile_title: 'Mobile und Desktop-Anwendungen',
+        sol_mobile_desc: 'Wir entwickeln intuitive, skalierbare und effiziente Anwendungen für Ihre Arbeitsprozesse.',
+        sol_mobile_more: 'Unsere Lösungen bieten Leistung, Sicherheit und ein nahtloses Erlebnis – abgestimmt auf Ihre internen und externen Abläufe.',
+        sol_ai_title: 'KI-Lösungen',
+        sol_ai_desc: 'Wir integrieren Künstliche Intelligenz und Automatisierung zur Optimierung von Prozessen, Minimierung von Fehlern und Steigerung der Produktivität.',
+        sol_ai_more: 'Unsere maßgeschneiderten Lösungen helfen Ihnen, fundierte Entscheidungen schnell und effizient zu treffen – mit Hilfe von Daten und intelligenten Algorithmen.',
+        sol_custom_title: 'Projektmanagement',
+        sol_custom_desc: 'Wir sorgen für eine effiziente Projektabwicklung – unabhängig von der Komplexität.',
+        sol_custom_more: 'Wir setzen die passende Methodik ein – Agile (Scrum, Kanban, SAFe) oder klassisch (PM², PRINCE2) – und gewährleisten volle Kontrolle über Zeitpläne und Budgets.',
+        about_title: 'Über uns',
+        about_desc: 'LuXTech Innovation ist ein rumänisches Unternehmen, gegründet im Jahr 2024. Unsere Mission ist es, neugierige Beobachtungen in klare und effiziente digitale Lösungen zu verwandeln.',
+        about_extra_1: 'Unabhängig von Ihrer Branche verwandeln wir Ideen in funktionale Anwendungen zur langfristigen Unterstützung von Wachstum und Erfolg.',
+        about_extra_2: 'Kontaktieren Sie uns, um zu erfahren, wie wir Ihr Unternehmen digital transformieren können.',
+        contact_title: 'Kontakt',
+        contact_sub: 'Schreiben Sie uns eine E-Mail, um mehr zu erfahren.',
+        contact_button: 'Jetzt kontaktieren',
+        expand_more: 'Mehr anzeigen',
+        expand_less: 'Weniger anzeigen', // CORRECTED: Added comma
+        nav_apps: 'Unsere Apps', // CORRECTED: Added comma
+        app_metro: 'Metro Bukarest'
       },
 	  
-	  fr: {
-  nav_home: 'Accueil',
-  nav_solutions: 'Solutions',
-  nav_about: 'À propos',
-  nav_contact: 'Contact',
-  hero_title: 'La révolution de l’IA a commencé – Rejoignez la transformation numérique !',
-  hero_sub: 'Nous fournissons des applications logicielles personnalisées, des solutions d’IA et des services de gestion de projet professionnels, de manière autonome ou intégrée selon vos besoins.',
-  hero_cta: 'En savoir plus',
-  solutions_title: 'Nos Solutions',
-  sol_mobile_title: 'Applications Mobiles et Bureautiques',
-  sol_mobile_desc: 'Nous développons des applications intuitives, évolutives et efficaces adaptées à vos flux de travail.',
-  sol_mobile_more: 'Elles offrent performance, sécurité et expérience fluide, adaptée à vos processus internes et externes.',
-  sol_ai_title: 'Solutions d’IA',
-  sol_ai_desc: 'Nous intégrons l’intelligence artificielle et l’automatisation pour optimiser les processus, réduire les erreurs et augmenter la productivité.',
-  sol_ai_more: 'Nos solutions personnalisées vous aident à prendre des décisions rapides et fiables à grande échelle grâce aux données et aux algorithmes intelligents.',
-  sol_custom_title: 'Gestion de Projet',
-  sol_custom_desc: 'Nous garantissons la livraison efficace des projets, quelle que soit leur complexité.',
-  sol_custom_more: 'Nous utilisons la méthodologie la plus adaptée – Agile (Scrum, Kanban, SAFe) ou Waterfall (PM², PRINCE2) – pour un contrôle total des délais et des budgets.',
-  about_title: 'À propos de nous',
-  about_desc: 'LuXTech Innovation est une entreprise roumaine fondée en 2024. Notre mission est de transformer les idées curieuses en solutions numériques claires et efficaces.',
-  about_extra_1: 'Quel que soit votre domaine, nous transformons vos idées en applications fonctionnelles et efficaces pour soutenir votre croissance à long terme.',
-  about_extra_2: 'Contactez-nous pour découvrir comment nous pouvons numériser votre entreprise.',
-  contact_title: 'Contact',
-  contact_sub: 'Envoyez-nous un e-mail pour en discuter davantage.',
-  contact_button: 'Nous contacter',
-  expand_more: 'Lire la suite',
-  expand_less: 'Fermer'
-},
-
-de: {
-  nav_home: 'Startseite',
-  nav_solutions: 'Lösungen',
-  nav_about: 'Über uns',
+	  lb: {
+  nav_home: 'Doheem',
+  nav_solutions: 'Léisungen',
+  nav_about: 'Iwwer eis',
   nav_contact: 'Kontakt',
-  hero_title: 'Die KI-Revolution hat begonnen – Werden Sie Teil der digitalen Transformation!',
-  hero_sub: 'Wir bieten maßgeschneiderte Softwarelösungen, KI-Anwendungen und professionelles Projektmanagement – einzeln oder als integrierte Lösung nach Ihrem Bedarf.',
-  hero_cta: 'Mehr erfahren',
-  solutions_title: 'Unsere Lösungen',
-  sol_mobile_title: 'Mobile und Desktop-Anwendungen',
-  sol_mobile_desc: 'Wir entwickeln intuitive, skalierbare und effiziente Anwendungen für Ihre Arbeitsprozesse.',
-  sol_mobile_more: 'Unsere Lösungen bieten Leistung, Sicherheit und ein nahtloses Erlebnis – abgestimmt auf Ihre internen und externen Abläufe.',
-  sol_ai_title: 'KI-Lösungen',
-  sol_ai_desc: 'Wir integrieren Künstliche Intelligenz und Automatisierung zur Optimierung von Prozessen, Minimierung von Fehlern und Steigerung der Produktivität.',
-  sol_ai_more: 'Unsere maßgeschneiderten Lösungen helfen Ihnen, fundierte Entscheidungen schnell und effizient zu treffen – mit Hilfe von Daten und intelligenten Algorithmen.',
-  sol_custom_title: 'Projektmanagement',
-  sol_custom_desc: 'Wir sorgen für eine effiziente Projektabwicklung – unabhängig von der Komplexität.',
-  sol_custom_more: 'Wir setzen die passende Methodik ein – Agile (Scrum, Kanban, SAFe) oder klassisch (PM², PRINCE2) – und gewährleisten volle Kontrolle über Zeitpläne und Budgets.',
-  about_title: 'Über uns',
-  about_desc: 'LuXTech Innovation ist ein rumänisches Unternehmen, gegründet im Jahr 2024. Unsere Mission ist es, neugierige Beobachtungen in klare und effiziente digitale Lösungen zu verwandeln.',
-  about_extra_1: 'Unabhängig von Ihrer Branche verwandeln wir Ideen in funktionale Anwendungen zur langfristigen Unterstützung von Wachstum und Erfolg.',
-  about_extra_2: 'Kontaktieren Sie uns, um zu erfahren, wie wir Ihr Unternehmen digital transformieren können.',
+  hero_title: 'D’KI-Revolutioun huet ugefaang – Maach mat bei der digitaler Transformatioun!',
+  hero_sub: 'Mir bidden personaliséiert Software-Applikatiounen, KI-Léisungen a professionellt Projetmanagement – separat oder integréiert no Äre Besoinen.',
+  hero_cta: 'Méi gewuer ginn',
+  solutions_title: 'Eis Léisungen',
+  sol_mobile_title: 'Mobil- an Desktop-Applikatiounen',
+  sol_mobile_desc: 'Mir entwéckelen intuitiv, skaleierbar a performant Apps fir Är Aarbechtsprozesser.',
+  sol_mobile_more: 'Eis Léisunge bidden héich Leeschtung, Sécherheet a fléissend Benotzererfarung, ugepasst un Är intern an extern Prozesser.',
+  sol_ai_title: 'KI-Léisungen',
+  sol_ai_desc: 'Mir implementéieren kënschtlech Intelligenz a Prozessautomatisatioun fir Effizienz a Produktivitéit ze steigeren.',
+  sol_ai_more: 'Mat eisen intelligente Léisungen kënnt Dir séier a sécher Entscheedunge treffen – mat Donnéeën an Algorithmen als Grondlag.',
+  sol_custom_title: 'Projetmanagement',
+  sol_custom_desc: 'Mir garantéieren eng effizient Projet-Duerchféierung – egal wéi komplex.',
+  sol_custom_more: 'Mat der richteger Method (Agil oder klassesch) kritt Dir voll Kontroll iwwer Zäitpläng a Budgeten.',
+  about_title: 'Iwwer eis',
+  about_desc: 'LuXTech Innovation ass eng rumänesch Firma, gegrënnt am Joer 2024. Eis Missioun ass et, neugiereg Iddien a kloer digital Léisungen ëmzesetzen.',
+  about_extra_1: 'Onofhängeg vum Secteur hëllefe mir Iech, Är Iddien an effikass digital Tools ëmzesetzen.',
+  about_extra_2: 'Kommt op eis duerfir ze entdecken, wéi mir Är Affär digitaliséiere kënnen.',
   contact_title: 'Kontakt',
-  contact_sub: 'Schreiben Sie uns eine E-Mail, um mehr zu erfahren.',
-  contact_button: 'Jetzt kontaktieren',
-  expand_more: 'Mehr anzeigen',
-  expand_less: 'Weniger anzeigen'
-},
+  contact_sub: 'Schéckt eis eng E-Mail fir méi Informatiounen.',
+  contact_button: 'Kontaktéiert eis',
+  expand_more: 'Méi weisen',
+  expand_less: 'Zoumaachen',
+  nav_apps: 'Eis Apps',
+  app_metro: 'Metro Bukarest'
+  },
 
-sk: {
-  nav_home: 'Domov',
-  nav_solutions: 'Riešenia',
-  nav_about: 'O nás',
-  nav_contact: 'Kontakt',
-  hero_title: 'Revolúcia umelej inteligencie začala – Pridajte sa k digitálnej transformácii!',
-  hero_sub: 'Poskytujeme prispôsobené softvérové aplikácie, riešenia umelej inteligencie a profesionálne projektové riadenie – samostatne alebo ako integrovaný balík podľa vašich potrieb.',
-  hero_cta: 'Zistiť viac',
-  solutions_title: 'Naše Riešenia',
-  sol_mobile_title: 'Mobilné a Desktopové Aplikácie',
-  sol_mobile_desc: 'Vyvíjame intuitívne, škálovateľné a efektívne aplikácie navrhnuté pre vaše pracovné toky.',
-  sol_mobile_more: 'Ponúkajú výkon, bezpečnosť a plynulé používanie prispôsobené vašim procesom.',
-  sol_ai_title: 'Riešenia s Umelou Inteligenciou',
-  sol_ai_desc: 'Implementujeme umelú inteligenciu a automatizáciu, ktorá optimalizuje procesy, znižuje chyby a zvyšuje produktivitu.',
-  sol_ai_more: 'Naše riešenia pomáhajú robiť rýchle a spoľahlivé rozhodnutia na základe dát a inteligentných algoritmov.',
-  sol_custom_title: 'Projektový Manažment',
-  sol_custom_desc: 'Zabezpečujeme efektívne dodanie projektov bez ohľadu na ich zložitosť.',
-  sol_custom_more: 'Používame vhodnú metodológiu – Agile (Scrum, Kanban, SAFe) alebo Waterfall (PM², PRINCE2) – pre úplnú kontrolu nad časom a rozpočtom.',
-  about_title: 'O nás',
-  about_desc: 'LuXTech Innovation je rumunská spoločnosť založená v roku 2024. Našou misiou je pretaviť zvedavé pozorovania na jasné a efektívne digitálne riešenia.',
-  about_extra_1: 'Bez ohľadu na váš odbor premieňame nápady na funkčné aplikácie pre dlhodobý rast a úspech.',
-  about_extra_2: 'Kontaktujte nás a zistite, ako môžeme digitalizovať vaše podnikanie.',
-  contact_title: 'Kontakt',
-  contact_sub: 'Pošlite nám e-mail a dohodnime si stretnutie.',
-  contact_button: 'Kontaktujte nás',
-  expand_more: 'Zobraziť viac',
-  expand_less: 'Zavrieť'
-}
-
+	  
+      sk: {
+        nav_home: 'Domov',
+        nav_solutions: 'Riešenia',
+        nav_about: 'O nás',
+        nav_contact: 'Kontakt',
+        hero_title: 'Revolúcia umelej inteligencie začala – Pridajte sa k digitálnej transformácii!',
+        hero_sub: 'Poskytujeme prispôsobené softvérové aplikácie, riešenia umelej inteligencie a profesionálne projektové riadenie – samostatne alebo ako integrovaný balík podľa vašich potrieb.',
+        hero_cta: 'Zistiť viac',
+        solutions_title: 'Naše Riešenia',
+        sol_mobile_title: 'Mobilné a Desktopové Aplikácie',
+        sol_mobile_desc: 'Vyvíjame intuitívne, škálovateľné a efektívne aplikácie navrhnuté pre vaše pracovné toky.',
+        sol_mobile_more: 'Ponúkajú výkon, bezpečnosť a plynulé používanie prispôsobené vašim procesom.',
+        sol_ai_title: 'Riešenia s Umelou Inteligenciou',
+        sol_ai_desc: 'Implementujeme umelú inteligenciu a automatizáciu, ktorá optimalizuje procesy, znižuje chyby a zvyšuje produktivitu.',
+        sol_ai_more: 'Naše riešenia pomáhajú robiť rýchle a spoľahlivé rozhodnutia na základe dát a inteligentných algoritmov.',
+        sol_custom_title: 'Projektový Manažment',
+        sol_custom_desc: 'Zabezpečujeme efektívne dodanie projektov bez ohľadu na ich zložitosť.',
+        sol_custom_more: 'Používame vhodnú metodológiu – Agile (Scrum, Kanban, SAFe) alebo Waterfall (PM², PRINCE2) – pre úplnú kontrolu nad časom a rozpočtom.',
+        about_title: 'O nás',
+        about_desc: 'LuXTech Innovation je rumunská spoločnosť založená v roku 2024. Našou misiou je pretaviť zvedavé pozorovania na jasné a efektívne digitálne riešenia.',
+        about_extra_1: 'Bez ohľadu na váš odbor premieňame nápady na funkčné aplikácie pre dlhodobý rast a úspech.',
+        about_extra_2: 'Kontaktujte nás a zistite, ako môžeme digitalizovať vaše podnikanie.',
+        contact_title: 'Kontakt',
+        contact_sub: 'Pošlite nám e-mail a dohodnime si stretnutie.',
+        contact_button: 'Kontaktujte nás',
+        expand_more: 'Zobraziť viac',
+        expand_less: 'Zavrieť', // CORRECTED: Added comma
+        nav_apps: 'Naše Aplikácie', // CORRECTED: Added comma
+        app_metro: 'Bukurešť Metro'
+      }
     };
 
-    // Language/UI initialization
     function setLanguageContent(lang) {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -294,40 +326,18 @@ sk: {
           el.textContent = translations[lang][key];
         }
       });
-
-      // Each expand/collapse button text
-      buttons.forEach(({btn, expanded, key}) => {
+      buttons.forEach(({btn, expanded}) => {
         btn.textContent = translations[lang][expanded ? "expand_less" : "expand_more"];
       });
-
-      // About section
       if (aboutBtn) aboutBtn.textContent = translations[lang][aboutExpanded ? "expand_less" : "expand_more"];
     }
 
-    // --- SOLUTIONS BUTTONS ---
-
     const buttons = [
-      {
-        btn: document.getElementById('expandMobileBtn'),
-        content: document.getElementById('mobileMore'),
-        key: 'sol_mobile_more',
-        expanded: false
-      },
-      {
-        btn: document.getElementById('expandAiBtn'),
-        content: document.getElementById('aiMore'),
-        key: 'sol_ai_more',
-        expanded: false
-      },
-      {
-        btn: document.getElementById('expandCustomBtn'),
-        content: document.getElementById('customMore'),
-        key: 'sol_custom_more',
-        expanded: false
-      }
+      { btn: document.getElementById('expandMobileBtn'), content: document.getElementById('mobileMore'), expanded: false },
+      { btn: document.getElementById('expandAiBtn'), content: document.getElementById('aiMore'), expanded: false },
+      { btn: document.getElementById('expandCustomBtn'), content: document.getElementById('customMore'), expanded: false }
     ];
-
-    buttons.forEach((b, idx) => {
+    buttons.forEach(b => {
       b.btn.addEventListener('click', function(){
         b.expanded = !b.expanded;
         b.content.classList.toggle('hidden', !b.expanded);
@@ -335,11 +345,9 @@ sk: {
       });
     });
 
-    // --- ABOUT BUTTON ---
     const aboutBtn = document.getElementById('expandMissionBtn');
     const aboutContent = document.getElementById('extraMissionContent');
     let aboutExpanded = false;
-
     if (aboutBtn && aboutContent) {
       aboutBtn.addEventListener('click', function(){
         aboutExpanded = !aboutExpanded;
@@ -348,20 +356,46 @@ sk: {
       });
     }
 
-    // --- LANGUAGE SWITCHER ---
     const languageSwitcher = document.getElementById('languageSwitcher');
     languageSwitcher.addEventListener('change', function(){
+	document.documentElement.lang = languageSwitcher.value;
       setLanguageContent(languageSwitcher.value);
     });
+    
+    // --- APPS DROPDOWN LOGIC ---
+    const appsButton = document.getElementById('appsButton');
+    const appsDropdown = document.getElementById('appsDropdown');
+    if (appsButton && appsDropdown) {
+        appsButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            appsDropdown.classList.toggle('hidden');
+        });
+        window.addEventListener('click', () => {
+            if (!appsDropdown.classList.contains('hidden')) {
+                appsDropdown.classList.add('hidden');
+            }
+        });
+    }
 
-    // Initialize on load
-    window.addEventListener('DOMContentLoaded', function(){
-      setLanguageContent(languageSwitcher.value);
-      // Hide extra content initially
-      buttons.forEach(b => b.content.classList.add('hidden'));
-      if (aboutContent) aboutContent.classList.add('hidden');
-    });
+  window.addEventListener('DOMContentLoaded', function(){
+  // Detectează limba din browser
+  const userLang = navigator.language || navigator.userLanguage;
 
+  // Alege limba suportată sau folosește 'ro' ca fallback
+  const supportedLangs = ['ro', 'en', 'fr', 'de', 'sk', 'lb'];
+  let defaultLang = supportedLangs.find(l => userLang.startsWith(l)) || 'ro';
+
+  // Setează selectorul și atributul lang corect
+  languageSwitcher.value = defaultLang;
+  document.documentElement.lang = defaultLang;
+
+  // Afișează conținutul în limba corectă
+  setLanguageContent(defaultLang);
+
+  // Ascunde secțiunile extinse
+  buttons.forEach(b => b.content.classList.add('hidden'));
+  if (aboutContent) aboutContent.classList.add('hidden');
+});
   </script>
 </body>
 </html>
