@@ -1,0 +1,998 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Restaurant Finder - Mobile</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #f8f9fa;
+      overflow-x: hidden;
+    }
+
+    .mobile-container {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Mobile Header */
+    .mobile-header {
+      background: #fff;
+      padding: 12px 16px;
+      border-bottom: 1px solid #e9ecef;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+      position: relative;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    /* Collapsible Controls Panel */
+    .controls-toggle {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      min-height: 44px;
+    }
+
+    .controls-toggle:active {
+      transform: scale(0.98);
+      background: #0056b3;
+    }
+
+    .controls-panel {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-bottom: 1px solid #e9ecef;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 999;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .controls-panel.expanded {
+      max-height: 80vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .controls-content {
+      padding: 16px;
+    }
+
+    /* Form Groups */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      font-size: 16px;
+      background: #fff;
+      transition: border-color 0.2s ease;
+      min-height: 48px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+    .coords-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .btn-primary:active {
+      background: #0056b3;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:active {
+      background: #545b62;
+    }
+
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-success:active {
+      background: #1e7e34;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:active {
+      background: #c82333;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+
+    .btn-row .btn {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    /* Toggle Switches */
+    .toggle-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+
+    .toggle-item label {
+      font-size: 15px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      background: #ccc;
+      border-radius: 14px;
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;
+      background: white;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .toggle-switch.active {
+      background: #007bff;
+    }
+
+    .toggle-switch.active::before {
+      transform: translateX(20px);
+    }
+
+    /* Map Container */
+    .map-container {
+      flex: 1;
+      position: relative;
+      min-height: 300px;
+    }
+
+    #map { 
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+    }
+
+    /* Bottom Sheet for Results */
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+      z-index: 1000;
+      max-height: 50vh;
+      transform: translateY(calc(100% - 60px));
+      transition: transform 0.3s ease;
+    }
+
+    .bottom-sheet.expanded {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin: 12px auto 8px;
+    }
+
+    .sheet-header {
+      padding: 8px 20px 16px;
+      border-bottom: 1px solid #e9ecef;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .sheet-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sheet-content {
+      padding: 16px 20px;
+      overflow-y: auto;
+      max-height: calc(50vh - 100px);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Progress and Status */
+    .progress-section {
+      margin-bottom: 16px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #e9ecef;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #007bff, #00d4ff);
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .status {
+      padding: 12px 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #6c757d;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    /* Statistics Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #007bff, #00d4ff);
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      opacity: 0.9;
+      margin: 4px 0 0 0;
+      font-weight: 500;
+    }
+
+    /* Results List */
+    .results-container {
+      margin-top: 16px;
+    }
+
+    .results-header {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    #results {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #results li {
+      background: #f8f9fa;
+      margin: 8px 0;
+      padding: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    #results li:active {
+      transform: scale(0.98);
+      background: #e9ecef;
+    }
+
+    #results li.selected {
+      background: #e8f5e8;
+      border-color: #28a745;
+    }
+
+    #results li.new-result {
+      background: linear-gradient(135deg, #90ee90, #e8f5e8);
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin: 0 0 4px 0;
+    }
+
+    .result-rating {
+      font-size: 14px;
+      color: #666;
+      margin: 0 0 4px 0;
+    }
+
+    .result-hint {
+      font-size: 12px;
+      color: #999;
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      .mobile-container {
+        flex-direction: row;
+      }
+
+      .mobile-header {
+        width: 350px;
+        height: 100vh;
+        border-right: 1px solid #e9ecef;
+        border-bottom: none;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .controls-toggle {
+        display: none;
+      }
+
+      .controls-panel {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        box-shadow: none;
+        border-bottom: none;
+      }
+
+      .controls-panel.expanded {
+        max-height: none;
+      }
+
+      .map-container {
+        flex: 1;
+      }
+
+      .bottom-sheet {
+        position: static;
+        transform: none;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+      }
+
+      .bottom-sheet.expanded {
+        transform: none;
+      }
+
+      .sheet-handle {
+        display: none;
+      }
+
+      .sheet-header {
+        cursor: default;
+        border-bottom: none;
+      }
+
+      .sheet-content {
+        max-height: none;
+        padding: 0;
+      }
+    }
+
+    /* Loading States */
+    .btn.loading {
+      pointer-events: none;
+      position: relative;
+      color: transparent;
+    }
+
+    .btn.loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+
+    @keyframes spin {
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+        color: #ffffff;
+      }
+
+      .mobile-header,
+      .controls-panel,
+      .bottom-sheet {
+        background: #1e1e1e;
+        border-color: #333;
+      }
+
+      .form-group input,
+      .form-group select {
+        background: #2d2d2d;
+        border-color: #444;
+        color: #ffffff;
+      }
+
+      #results li {
+        background: #2d2d2d;
+        color: #ffffff;
+      }
+
+      #results li:active {
+        background: #3d3d3d;
+      }
+
+      .status {
+        background: #2d2d2d;
+        color: #cccccc;
+      }
+
+      .result-name {
+        color: #ffffff;
+      }
+
+      .result-rating {
+        color: #cccccc;
+      }
+
+      .result-hint {
+        color: #999;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-container">
+    <!-- Mobile Header with Controls -->
+    <div class="mobile-header">
+      <h1 class="header-title">
+        <span>🍽️</span>
+        Restaurant Finder
+      </h1>
+      
+      <div class="header-controls">
+        <button class="controls-toggle" id="controlsToggle">
+          <span>⚙️</span>
+          <span id="toggleText">Settings</span>
+        </button>
+      </div>
+
+      <!-- Collapsible Controls Panel -->
+      <div class="controls-panel" id="controlsPanel">
+        <div class="controls-content">
+          <!-- Location Controls -->
+          <div class="form-group">
+            <label>📍 Search Center</label>
+            <div class="coords-row">
+              <input type="number" id="centerLat" step="0.001" placeholder="Latitude" value="44.437">
+              <input type="number" id="centerLng" step="0.001" placeholder="Longitude" value="26.097">
+            </div>
+            <button type="button" class="btn btn-secondary" id="getCurrentLocation" style="margin-top: 8px; width: 100%;">
+              <span>📍</span>
+              Use My Location
+            </button>
+          </div>
+
+          <!-- Search Parameters -->
+          <div class="form-group">
+            <label>🔍 Search Radius (km)</label>
+            <input type="range" id="radiusSlider" min="1" max="20" value="5" style="width: 100%; margin: 8px 0;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
+              <span>1km</span>
+              <span id="radiusValue">5km</span>
+              <span>20km</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>📏 Cell Size (meters)</label>
+            <input type="range" id="cellSlider" min="500" max="3000" step="100" value="1000" style="width: 100%; margin: 8px 0;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
+              <span>500m</span>
+              <span id="cellValue">1000m</span>
+              <span>3000m</span>
+            </div>
+          </div>
+
+          <!-- Quality Filters -->
+          <div class="form-group">
+            <label>⭐ Minimum Rating</label>
+            <select id="minRating">
+              <option value="4.0">4.0+ Stars</option>
+              <option value="4.2">4.2+ Stars</option>
+              <option value="4.5">4.5+ Stars</option>
+              <option value="4.7">4.7+ Stars</option>
+              <option value="4.8" selected>4.8+ Stars</option>
+              <option value="4.9">4.9+ Stars</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>💬 Minimum Reviews</label>
+            <select id="minReviews">
+              <option value="50">50+ Reviews</option>
+              <option value="100">100+ Reviews</option>
+              <option value="500">500+ Reviews</option>
+              <option value="1000" selected>1000+ Reviews</option>
+              <option value="2000">2000+ Reviews</option>
+            </select>
+          </div>
+
+          <!-- Visual Options -->
+          <div class="toggle-group">
+            <div class="toggle-item">
+              <label>Show scan cells</label>
+              <div class="toggle-switch" id="showCellsToggle"></div>
+            </div>
+            <div class="toggle-item">
+              <label>Live results</label>
+              <div class="toggle-switch active" id="showProgressToggle"></div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" id="startSearch">
+              <span>🔍</span>
+              Start Search
+            </button>
+            <button type="button" class="btn btn-danger" id="cancelSearch" disabled>
+              <span>⏹️</span>
+              Cancel
+            </button>
+          </div>
+          
+          <button type="button" class="btn btn-secondary" id="clearResults" style="width: 100%;">
+            <span>🗑️</span>
+            Clear Results
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Container -->
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+
+    <!-- Bottom Sheet for Results (Mobile) -->
+    <div class="bottom-sheet" id="bottomSheet">
+      <div class="sheet-handle"></div>
+      
+      <div class="sheet-header" id="sheetHeader">
+        <h3 class="sheet-title">
+          <span>📊 Results</span>
+          <span id="sheetToggleIcon">▲</span>
+        </h3>
+      </div>
+
+      <div class="sheet-content">
+        <!-- Progress Section -->
+        <div class="progress-section">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="status" id="status">Ready to search...</div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <p class="stat-number" id="totalCount">0</p>
+            <p class="stat-label">Found</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number" id="filteredCount">0</p>
+            <p class="stat-label">Filtered</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-number" id="cellsScanned">0</p>
+            <p class="stat-label">Cells</p>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="results-container">
+          <div class="results-header">🍽️ Restaurants</div>
+          <ul id="results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuration
+    const CONFIG = {
+      API_KEY: 'AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg'
+    };
+
+    // Global variables
+    let map, info, svc;
+    let searchCancelled = false;
+    let currentMarkers = [];
+    let cellOverlays = [];
+    let currentCellOverlay = null;
+    let searchResults = new Map();
+    let currentCellIndex = -1;
+    let selectedMarker = null;
+    let lastClickedPlace = null;
+    let lastClickTime = 0;
+    let isSearching = false;
+
+    // Mobile UI state
+    let controlsPanelExpanded = false;
+    let bottomSheetExpanded = false;
+
+    // Utility functions
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const toRad = (x) => x * Math.PI / 180;
+
+    function haversine(a, b) {
+      const R = 6371000;
+      const dLat = toRad(b.lat - a.lat);
+      const dLng = toRad(b.lng - a.lng);
+      const s1 = toRad(a.lat);
+      const s2 = toRad(b.lat);
+      const A = Math.sin(dLat / 2) ** 2 + Math.cos(s1) * Math.cos(s2) * Math.sin(dLng / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(A));
+    }
+
+    // Mobile UI Functions
+    function toggleControlsPanel() {
+      const panel = document.getElementById('controlsPanel');
+      const toggle = document.getElementById('controlsToggle');
+      const toggleText = document.getElementById('toggleText');
+      
+      controlsPanelExpanded = !controlsPanelExpanded;
+      
+      if (controlsPanelExpanded) {
+        panel.classList.add('expanded');
+        toggleText.textContent = 'Close';
+        toggle.innerHTML = '<span>✖️</span><span>Close</span>';
+      } else {
+        panel.classList.remove('expanded');
+        toggleText.textContent = 'Settings';
+        toggle.innerHTML = '<span>⚙️</span><span>Settings</span>';
+      }
+    }
+
+    function toggleBottomSheet() {
+      const sheet = document.getElementById('bottomSheet');
+      const icon = document.getElementById('sheetToggleIcon');
+      
+      bottomSheetExpanded = !bottomSheetExpanded;
+      
+      if (bottomSheetExpanded) {
+        sheet.classList.add('expanded');
+        icon.textContent = '▼';
+      } else {
+        sheet.classList.remove('expanded');
+        icon.textContent = '▲';
+      }
+    }
+
+    function setupToggleSwitches() {
+      const showCellsToggle = document.getElementById('showCellsToggle');
+      const showProgressToggle = document.getElementById('showProgressToggle');
+
+      showCellsToggle.addEventListener('click', () => {
+        showCellsToggle.classList.toggle('active');
+        toggleCellVisibility();
+      });
+
+      showProgressToggle.addEventListener('click', () => {
+        showProgressToggle.classList.toggle('active');
+      });
+    }
+
+    function updateSliderValues() {
+      const radiusSlider = document.getElementById('radiusSlider');
+      const cellSlider = document.getElementById('cellSlider');
+      const radiusValue = document.getElementById('radiusValue');
+      const cellValue = document.getElementById('cellValue');
+
+      radiusSlider.addEventListener('input', (e) => {
+        radiusValue.textContent = e.target.value + 'km';
+      });
+
+      cellSlider.addEventListener('input', (e) => {
+        cellValue.textContent = e.target.value + 'm';
+      });
+    }
+
+    // Marker and selection functions
+    function createMarkerIcon(isSelected = false) {
+      return {
+        url: `https://maps.google.com/mapfiles/ms/icons/${isSelected ? 'green' : 'red'}-dot.png`,
+        scaledSize: new google.maps.Size(32, 32),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(16, 32)
+      };
+    }
+
+    function selectMarker(marker, place) {
+      if (selectedMarker && selectedMarker !== marker) {
+        selectedMarker.setIcon(createMarkerIcon(false));
+      }
+
+      selectedMarker = marker;
+      marker.setIcon(createMarkerIcon(true));
+
+      info.setContent(`
+        <div style="max-width: 250px;">
+          <h4 style="margin: 0 0 8px 0; font-size: 16px;">${place.name}</h4>
+          <p style="margin: 0 0 4px 0; font-size: 14px;">⭐ ${place.rating} (${place.user_ratings_total} reviews)</p>
+          <p style="margin: 0; font-size: 12px; color: #666;">Tap again to open in Google Maps</p>
+        </div>
+      `);
+      info.open(map, marker);
+    }
+
+    function generateGoogleMapsUrl(place) {
+      if (place.place_id) {
+        return `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
+      }
+
+      const lat = place.geometry.location.lat();
+      const lng = place.geometry.location.lng();
+      const name = encodeURIComponent(place.name);
+      return `https://www.google.com/maps/search/${name}/@${lat},${lng},17z`;
+    }
+
+    function handlePlaceClick(place) {
+      const currentTime = Date.now();
+      const isDoubleClick = (lastClickedPlace === place.place_id && currentTime - lastClickTime < 500);
+
+      if (isDoubleClick) {
+        const url = generateGoogleMapsUrl(place);
+        window.open(url, '_blank');
+        lastClickedPlace = null;
+      } else {
+        const marker = currentMarkers.find(m => m.getTitle() === place.name);
+        if (marker) {
+          selectMarker(marker, place);
+        }
+
+        const listItems = document.querySelectorAll('#results li');
+        listItems.forEach(li => li.classList.remove('selected'));
+
+        const targetItem = [...listItems].find(li =>
+          li.innerHTML.includes(place.name)
+        );
+        if (targetItem) {
+          targetItem.classList.add('selected');
+          targetItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        lastClickedPlace = place.place_id;
+      }
+
+      lastClickTime = currentTime;
+    }
+
+    // Visual cell functions
+    function createCellOverlay(center, radius, isActive = false) {
+      const circle = new google.maps.Circle({
+        center: center,
+        radius: radius,
+        strokeColor: isActive ? '#ff4444' : '#4444ff',
+        strokeOpacity: isActive ? 0.8 : 0.4,
+        strokeWeight: isActive ? 3 : 1,
+        fillColor: isActive ? '#ff4444' : '#4444ff',
+        fillOpacity: isActive ? 0.15 : 0.05,
+        map: document.getElementById('showCellsToggle').classList.contains('active') ? map : null
+      });
+      return circle;
+    }
+
+    function updateCurrentCell(center, radius) {
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(null);
+      }
+      if (document.getElementById('showCellsToggle').classList.contains('active')) {
+        currentCellOverlay = createCellOverlay(center, radius, true);
+      }
+    }
+
+    function clearVisualElements() {
+      for (const overlay of cellOverlays) {
+        overlay.setMap(null);
+      }
+      cellOverlays = [];
+
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(null);
+        currentCellOverlay = null;
+      }
+
+      for (const marker of currentMarkers) {
+        marker.setMap(null);
+      }
+      currentMarkers = [];
+
+      selectedMarker = null;
+      lastClickedPlace = null;
+      lastClickTime = 0;
+
+      searchResults.clear();
+      currentCellIndex = -1;
+      updateResultsList();
+      updateStats();
+    }
+
+    function toggleCellVisibility() {
+      const showCells = document.getElementById('showCellsToggle').classList.contains('active');
+      for (const overlay of cellOverlays) {
+        overlay.setMap(showCells ? map : null);
+      }
+      if (current
