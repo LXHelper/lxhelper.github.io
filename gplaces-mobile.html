@@ -1,28 +1,30 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Restaurant Finder - Mobile</title>
   <style>
-    /* General resets and body */
+    /* General resets */
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
-    body { 
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-      margin: 0; 
-      padding: 0; 
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #f9fafc;
       color: #333;
       overflow-x: hidden;
     }
+    /* Container fills viewport with flex column */
     .mobile-container {
-      position: relative;
-      height: 100vh;
       display: flex;
       flex-direction: column;
+      height: 100vh;
     }
     /* Mobile Header */
     .mobile-header {
@@ -47,7 +49,6 @@
       display: flex;
       gap: 8px;
     }
-    /* Controls toggle button */
     .controls-toggle {
       background: linear-gradient(135deg,#0d6efd,#4dabf7);
       color: white;
@@ -123,7 +124,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    /* Range sliders (styled inline) */
     input[type="range"] {
       width: 100%;
       margin: 8px 0;
@@ -229,18 +229,18 @@
     .toggle-switch.active::before {
       transform: translateX(22px);
     }
-    /* Map container */
+    /* Map container: fills remaining height in flex */
     .map-container {
-      flex: 1;
-      position: relative;
+      flex: 1 1 auto;
       min-height: 300px;
+      position: relative;
     }
-    #map { 
+    #map {
       width: 100%;
       height: 100%;
       min-height: 300px;
     }
-    /* Bottom Sheet */
+    /* Bottom sheet fixed footer */
     .bottom-sheet {
       position: fixed;
       bottom: 0;
@@ -287,7 +287,6 @@
       display: flex;
       flex-direction: column;
     }
-    /* Progress Section */
     .progress-bar {
       width: 100%;
       height: 8px;
@@ -310,7 +309,6 @@
       color: #495057;
       text-align: center;
     }
-    /* Stats grid */
     .stats-grid {
       display: flex;
       gap: 12px;
@@ -337,7 +335,6 @@
       margin-top: 4px;
       user-select: none;
     }
-    /* Results */
     .results-header {
       font-weight: 600;
       margin-bottom: 10px;
@@ -389,7 +386,6 @@
       font-style: italic;
       margin: 0;
     }
-    /* Responsive Design */
     @media (min-width: 768px) {
       .mobile-container {
         flex-direction: row;
@@ -449,7 +445,6 @@
         display: block;
       }
     }
-    /* Loading states */
     .btn.loading {
       pointer-events: none;
       position: relative;
@@ -472,14 +467,6 @@
     @keyframes spin {
       to {
         transform: translate(-50%, -50%) rotate(360deg);
-      }
-    }
-    /* Accessibility */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -506,8 +493,8 @@
           <div class="form-group">
             <label>📍 Search Center</label>
             <div class="coords-row">
-              <input type="number" id="centerLat" step="0.001" placeholder="Latitude" value="44.437">
-              <input type="number" id="centerLng" step="0.001" placeholder="Longitude" value="26.097">
+              <input type="number" id="centerLat" step="0.001" placeholder="Latitude" value="44.437" />
+              <input type="number" id="centerLng" step="0.001" placeholder="Longitude" value="26.097" />
             </div>
             <button type="button" class="btn btn-secondary" id="getCurrentLocation" style="margin-top: 8px; width: 100%;">
               <span>📍</span>
@@ -517,7 +504,7 @@
           <!-- Search Parameters -->
           <div class="form-group">
             <label>🔍 Search Radius (km)</label>
-            <input type="range" id="radiusSlider" min="1" max="20" value="5">
+            <input type="range" id="radiusSlider" min="1" max="20" value="5" />
             <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
               <span>1km</span>
               <span id="radiusValue">5km</span>
@@ -526,7 +513,7 @@
           </div>
           <div class="form-group">
             <label>📏 Cell Size (meters)</label>
-            <input type="range" id="cellSlider" min="500" max="3000" step="100" value="1000">
+            <input type="range" id="cellSlider" min="500" max="3000" step="100" value="1000" />
             <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
               <span>500m</span>
               <span id="cellValue">1000m</span>
@@ -644,12 +631,10 @@
     let lastClickedPlace = null;
     let lastClickTime = 0;
     let isSearching = false;
-
     // UI state
     let controlsPanelExpanded = false;
     let bottomSheetExpanded = false;
-
-    // Utility functions
+    // Utility functions (same as your original code)
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     const toRad = (x) => x * Math.PI / 180;
     function haversine(a, b) {
@@ -665,7 +650,6 @@
     // handlePlaceClick, createCellOverlay, updateCurrentCell, clearVisualElements, toggleCellVisibility, nearbyAll, textAll, processPartialResults,
     // addResultsToMap, updateResultsList, updateStats, buildGridCenters, scanArea, updateStatus, updateProgress, getCurrentLocation, initMap)
     // remain unchanged from your original code, except toggleBottomSheet no longer toggles class instantly due to swipe gestures now.
-
     // Modified toggleBottomSheet to sync with swipe gestures:
     function toggleBottomSheet() {
       const sheet = document.getElementById('bottomSheet');
@@ -685,7 +669,6 @@
         currentY = window.innerHeight - 70;
       }
     }
-
     // Other initialization...
     function toggleControlsPanel() {
       const panel = document.getElementById('controlsPanel');
@@ -704,7 +687,6 @@
         toggle.innerHTML = '<span>⚙️</span><span>Settings</span>';
       }
     }
-
     // Setup event listeners for UI controls
     function setupUIEventListeners() {
       document.getElementById('controlsToggle').addEventListener('click', toggleControlsPanel);
@@ -719,7 +701,6 @@
       setupToggleSwitches();
       updateSliderValues();
     }
-
     // Swipe gesture code for bottom sheet
     (function() {
       const sheet = document.getElementById('bottomSheet');
@@ -730,7 +711,6 @@
       const windowHeight = window.innerHeight;
       const collapsedHeight = windowHeight - 70;
       const expandedHeight = windowHeight * 0.35; // 65% expanded means 35% from top
-      
       function setTranslateY(y) {
         if (y < expandedHeight) y = expandedHeight;
         if (y > collapsedHeight) y = collapsedHeight;
@@ -758,7 +738,6 @@
         const endY = evt.changedTouches ? evt.changedTouches[0].clientY : evt.clientY;
         const diff = endY - startY;
         sheet.style.transition = 'transform 0.3s ease';
-
         const midway = (collapsedHeight + expandedHeight) / 2;
         if (currentY + diff > midway) {
           // Collapse
@@ -775,25 +754,19 @@
         }
         currentY = parseFloat(sheet.style.transform.replace(/[^0-9.-]/g, '')) || collapsedHeight;
       }
-
       window.addEventListener('load', () => {
         currentY = collapsedHeight;
         sheet.style.transform = `translateY(${currentY}px)`;
       });
-
       handle.addEventListener('touchstart', onStart);
       handle.addEventListener('touchmove', onMove);
       handle.addEventListener('touchend', onEnd);
       handle.addEventListener('mousedown', onStart);
       window.addEventListener('mousemove', onMove);
       window.addEventListener('mouseup', onEnd);
-
       // Prevent scrolling page when dragging handle on touch devices
       handle.addEventListener('touchmove', evt => evt.preventDefault(), { passive: false });
     })();
-
-    // Your remaining search/map related functions unchanged...
-
     // Initialize map and UI
     function initMap() {
       const center = { lat: 44.437, lng: 26.097 };
@@ -811,9 +784,7 @@
       });
       info = new google.maps.InfoWindow();
       svc = new google.maps.places.PlacesService(map);
-
       setupUIEventListeners();
-
       // Handle window resize
       let resizeTimeout;
       window.addEventListener('resize', () => {
@@ -832,7 +803,6 @@
           }
         }, 250);
       });
-
       updateStatus('🎯 Ready to search. Configure parameters and tap Start Search.');
       updateStats();
     }
