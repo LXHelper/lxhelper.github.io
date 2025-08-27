@@ -1,100 +1,107 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow">
   <title>Restaurant Finder - Mobile</title>
   <style>
-    /* General resets */
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f9fafc;
-      color: #333;
+
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #f8f9fa;
       overflow-x: hidden;
     }
-    /* Container fills viewport with flex column */
+
     .mobile-container {
+      position: relative;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      height: 100vh;
     }
+
     /* Mobile Header */
     .mobile-header {
-      background: #ffffff;
-      padding: 14px 18px;
-      border-bottom: 1px solid #e5e7eb;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      background: #fff;
+      padding: 12px 16px;
+      border-bottom: 1px solid #e9ecef;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       z-index: 1000;
       position: relative;
     }
+
     .header-title {
       font-size: 18px;
       font-weight: 600;
       margin: 0;
-      color: #212529;
+      color: #333;
       display: flex;
       align-items: center;
-      gap: 6px;
-    }
-    .header-controls {
-      margin-top: 8px;
-      display: flex;
       gap: 8px;
     }
+
+    .header-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    /* Collapsible Controls Panel */
     .controls-toggle {
-      background: linear-gradient(135deg,#0d6efd,#4dabf7);
+      background: #007bff;
       color: white;
       border: none;
-      padding: 12px 16px;
-      border-radius: 24px;
-      font-size: 15px;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-size: 14px;
       font-weight: 500;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
+      transition: all 0.2s ease;
       min-height: 44px;
-      transition: background 0.2s ease;
     }
+
     .controls-toggle:active {
-      background: #0b5ed7;
       transform: scale(0.98);
+      background: #0056b3;
     }
-    /* Controls panel */
+
     .controls-panel {
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-      border-radius: 0 0 16px 16px;
+      background: #fff;
+      border-bottom: 1px solid #e9ecef;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       z-index: 999;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
+
     .controls-panel.expanded {
       max-height: 80vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
+
     .controls-content {
-      padding: 18px;
+      padding: 16px;
     }
-    /* Form groups */
+
+    /* Form Groups */
     .form-group {
       margin-bottom: 16px;
     }
+
     .form-group label {
       display: block;
       font-weight: 500;
@@ -102,115 +109,140 @@
       font-size: 14px;
       color: #333;
     }
+
     .form-group input,
     .form-group select {
       width: 100%;
-      border: 1px solid #dcdfe3;
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 15px;
+      padding: 12px 16px;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      font-size: 16px;
       background: #fff;
       transition: border-color 0.2s ease;
       min-height: 48px;
     }
+
     .form-group input:focus,
     .form-group select:focus {
       outline: none;
-      border-color: #0d6efd;
-      box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.1);
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
     }
+
     .coords-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    input[type="range"] {
-      width: 100%;
-      margin: 8px 0;
-    }
+
     /* Buttons */
     .btn {
-      border-radius: 10px;
-      font-size: 15px;
-      padding: 14px 18px;
+      padding: 12px 20px;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
+      font-size: 15px;
       font-weight: 500;
+      transition: all 0.2s ease;
+      min-height: 48px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      text-decoration: none;
       user-select: none;
       -webkit-user-select: none;
-      transition: all 0.2s ease;
-      min-height: 48px;
     }
-    .btn:active:not(:disabled) {
+
+    .btn:active {
       transform: scale(0.98);
     }
+
     .btn-primary {
-      background: linear-gradient(135deg,#0d6efd,#4dabf7);
+      background: #007bff;
       color: white;
     }
+
     .btn-primary:active {
-      background: #0b5ed7;
+      background: #0056b3;
     }
+
     .btn-secondary {
-      background: #adb5bd;
-      color: #212529;
+      background: #6c757d;
+      color: white;
     }
+
     .btn-secondary:active {
-      background: #868e96;
+      background: #545b62;
     }
+
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-success:active {
+      background: #1e7e34;
+    }
+
     .btn-danger {
       background: #dc3545;
       color: white;
     }
+
     .btn-danger:active {
-      background: #bb2d3b;
+      background: #c82333;
     }
+
     .btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none !important;
     }
+
     .btn-row {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       margin: 16px 0;
     }
+
     .btn-row .btn {
       flex: 1;
       min-width: 120px;
     }
-    /* Toggle switches */
+
+    /* Toggle Switches */
     .toggle-group {
       display: flex;
       flex-direction: column;
       gap: 12px;
       margin: 16px 0;
     }
+
     .toggle-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 12px 0;
     }
+
     .toggle-item label {
       font-size: 15px;
       font-weight: 500;
       margin: 0;
     }
+
     .toggle-switch {
       position: relative;
-      width: 50px;
+      width: 48px;
       height: 28px;
-      background: #d1d5db;
+      background: #ccc;
       border-radius: 14px;
       transition: background 0.2s ease;
       cursor: pointer;
     }
+
     .toggle-switch::before {
       content: '';
       position: absolute;
@@ -223,198 +255,258 @@
       transition: transform 0.2s ease;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
+
     .toggle-switch.active {
-      background: #0d6efd;
+      background: #007bff;
     }
+
     .toggle-switch.active::before {
-      transform: translateX(22px);
+      transform: translateX(20px);
     }
-    /* Map container: fills remaining height in flex */
+
+    /* Map Container */
     .map-container {
-      flex: 1 1 auto;
-      min-height: 300px;
+      flex: 1;
       position: relative;
+      min-height: 300px;
     }
-    #map {
+
+    #map { 
       width: 100%;
       height: 100%;
       min-height: 300px;
     }
-    /* Bottom sheet fixed footer */
+
+    /* Bottom Sheet for Results */
     .bottom-sheet {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: #ffffff;
-      border-radius: 20px 20px 0 0;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-      transform: translateY(calc(100% - 70px));
-      transition: transform 0.3s ease-in-out;
-      max-height: 65vh;
-      display: flex;
-      flex-direction: column;
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
       z-index: 1000;
+      max-height: 50vh;
+      transform: translateY(calc(100% - 60px));
+      transition: transform 0.3s ease;
+      /* added for smoother animation when we manipulate transform via JS */
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform: translateZ(0);
+      transform-origin: 50% 100%;
     }
+
     .bottom-sheet.expanded {
       transform: translateY(0);
     }
+
     .sheet-handle {
-      width: 60px;
-      height: 6px;
-      background: #d1d5db;
-      border-radius: 3px;
-      margin: 10px auto;
+      width: 40px;
+      height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin: 12px auto 8px;
+      /* allow touch-driven dragging on the handle */
+      touch-action: none;
+      -ms-touch-action: none;
       cursor: grab;
     }
+
     .sheet-header {
-      padding: 10px 20px;
-      border-bottom: 1px solid #f1f3f6;
+      padding: 8px 20px 16px;
+      border-bottom: 1px solid #e9ecef;
+      cursor: pointer;
       user-select: none;
     }
+
     .sheet-title {
       font-size: 16px;
       font-weight: 600;
+      margin: 0;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
+
     .sheet-content {
-      padding: 14px 20px;
+      padding: 16px 20px;
       overflow-y: auto;
+      max-height: calc(50vh - 100px);
       -webkit-overflow-scrolling: touch;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
     }
+
+    /* Progress and Status */
+    .progress-section {
+      margin-bottom: 16px;
+    }
+
     .progress-bar {
       width: 100%;
-      height: 8px;
-      border-radius: 4px;
-      overflow: hidden;
+      height: 6px;
       background: #e9ecef;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 8px 0;
     }
+
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #0d6efd, #00b4d8);
+      background: linear-gradient(90deg, #007bff, #00d4ff);
       transition: width 0.3s ease;
       width: 0%;
     }
+
     .status {
-      margin-top: 6px;
-      font-size: 13px;
-      padding: 8px 10px;
-      border-radius: 8px;
+      padding: 12px 16px;
       background: #f8f9fa;
-      color: #495057;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #6c757d;
       text-align: center;
+      margin-bottom: 16px;
     }
+
+    /* Statistics Cards */
     .stats-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 12px;
-      margin: 16px 0;
+      margin-bottom: 16px;
     }
+
     .stat-card {
-      flex: 1;
-      background: #ffffff;
+      background: linear-gradient(135deg, #007bff, #00d4ff);
+      color: white;
+      padding: 16px;
       border-radius: 12px;
-      padding: 14px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      user-select: none;
     }
+
     .stat-number {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
-      color: #212529;
       margin: 0;
     }
+
     .stat-label {
       font-size: 12px;
-      color: #6c757d;
-      margin-top: 4px;
-      user-select: none;
+      opacity: 0.9;
+      margin: 4px 0 0 0;
+      font-weight: 500;
     }
+
+    /* Results List */
+    .results-container {
+      margin-top: 16px;
+    }
+
     .results-header {
+      font-size: 16px;
       font-weight: 600;
-      margin-bottom: 10px;
-      font-size: 15px;
-      color: #212529;
-      user-select: none;
+      margin-bottom: 12px;
+      color: #333;
     }
+
     #results {
       list-style: none;
-      padding-left: 0;
+      padding: 0;
       margin: 0;
-      flex: 1;
-      overflow-y: auto;
     }
+
     #results li {
-      background: #fff;
-      border-radius: 10px;
-      border: 1px solid #f1f3f6;
-      margin-bottom: 10px;
-      padding: 12px 14px;
+      background: #f8f9fa;
+      margin: 8px 0;
+      padding: 16px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: box-shadow 0.2s ease, transform 0.1s ease;
-      user-select: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+      position: relative;
     }
-    #results li:hover {
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+    #results li:active {
+      transform: scale(0.98);
+      background: #e9ecef;
     }
+
     #results li.selected {
-      border-color: #0d6efd;
-      background: #e7f1ff;
+      background: #e8f5e8;
+      border-color: #28a745;
     }
+
+    #results li.new-result {
+      background: linear-gradient(135deg, #90ee90, #e8f5e8);
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .result-name {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
-      color: #212529;
-      margin: 0;
+      color: #333;
+      margin: 0 0 4px 0;
     }
+
     .result-rating {
-      font-size: 13px;
-      color: #495057;
-      margin: 0;
+      font-size: 14px;
+      color: #666;
+      margin: 0 0 4px 0;
     }
+
     .result-hint {
-      font-size: 11px;
-      color: #868e96;
+      font-size: 12px;
+      color: #999;
       font-style: italic;
       margin: 0;
     }
+
+    /* Responsive Design */
     @media (min-width: 768px) {
       .mobile-container {
         flex-direction: row;
       }
+
       .mobile-header {
         width: 350px;
         height: 100vh;
-        border-right: 1px solid #e5e7eb;
+        border-right: 1px solid #e9ecef;
         border-bottom: none;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }
+
       .controls-toggle {
         display: none;
       }
+
       .controls-panel {
         position: static;
         max-height: none;
         overflow: visible;
         box-shadow: none;
         border-bottom: none;
-        border-radius: 0;
       }
+
       .controls-panel.expanded {
         max-height: none;
       }
+
       .map-container {
         flex: 1;
       }
+
       .bottom-sheet {
         position: static;
         transform: none;
@@ -422,34 +514,34 @@
         border-radius: 0;
         box-shadow: none;
         background: transparent;
-        flex-direction: row;
-        padding: 0;
       }
+
       .bottom-sheet.expanded {
         transform: none;
       }
+
       .sheet-handle {
         display: none;
       }
+
       .sheet-header {
         cursor: default;
         border-bottom: none;
-        padding: 12px 20px;
-        flex: 0 0 auto;
       }
+
       .sheet-content {
         max-height: none;
-        padding: 0 20px 20px 20px;
-        flex: 1 1 auto;
-        overflow: auto;
-        display: block;
+        padding: 0;
       }
     }
+
+    /* Loading States */
     .btn.loading {
       pointer-events: none;
       position: relative;
       color: transparent;
     }
+
     .btn.loading::after {
       content: '';
       position: absolute;
@@ -464,9 +556,67 @@
       transform: translate(-50%, -50%);
       color: white;
     }
+
     @keyframes spin {
       to {
         transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+        color: #ffffff;
+      }
+
+      .mobile-header,
+      .controls-panel,
+      .bottom-sheet {
+        background: #1e1e1e;
+        border-color: #333;
+      }
+
+      .form-group input,
+      .form-group select {
+        background: #2d2d2d;
+        border-color: #444;
+        color: #ffffff;
+      }
+
+      #results li {
+        background: #2d2d2d;
+        color: #ffffff;
+      }
+
+      #results li:active {
+        background: #3d3d3d;
+      }
+
+      .status {
+        background: #2d2d2d;
+        color: #cccccc;
+      }
+
+      .result-name {
+        color: #ffffff;
+      }
+
+      .result-rating {
+        color: #cccccc;
+      }
+
+      .result-hint {
+        color: #999;
       }
     }
   </style>
@@ -486,6 +636,7 @@
           <span id="toggleText">Settings</span>
         </button>
       </div>
+
       <!-- Collapsible Controls Panel -->
       <div class="controls-panel" id="controlsPanel">
         <div class="controls-content">
@@ -493,33 +644,36 @@
           <div class="form-group">
             <label>📍 Search Center</label>
             <div class="coords-row">
-              <input type="number" id="centerLat" step="0.001" placeholder="Latitude" value="44.437" />
-              <input type="number" id="centerLng" step="0.001" placeholder="Longitude" value="26.097" />
+              <input type="number" id="centerLat" step="0.001" placeholder="Latitude" value="44.437">
+              <input type="number" id="centerLng" step="0.001" placeholder="Longitude" value="26.097">
             </div>
             <button type="button" class="btn btn-secondary" id="getCurrentLocation" style="margin-top: 8px; width: 100%;">
               <span>📍</span>
               Use My Location
             </button>
           </div>
+
           <!-- Search Parameters -->
           <div class="form-group">
             <label>🔍 Search Radius (km)</label>
-            <input type="range" id="radiusSlider" min="1" max="20" value="5" />
+            <input type="range" id="radiusSlider" min="1" max="20" value="5" style="width: 100%; margin: 8px 0;">
             <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
               <span>1km</span>
               <span id="radiusValue">5km</span>
               <span>20km</span>
             </div>
           </div>
+
           <div class="form-group">
             <label>📏 Cell Size (meters)</label>
-            <input type="range" id="cellSlider" min="500" max="3000" step="100" value="1000" />
+            <input type="range" id="cellSlider" min="500" max="3000" step="100" value="1000" style="width: 100%; margin: 8px 0;">
             <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
               <span>500m</span>
               <span id="cellValue">1000m</span>
               <span>3000m</span>
             </div>
           </div>
+
           <!-- Quality Filters -->
           <div class="form-group">
             <label>⭐ Minimum Rating</label>
@@ -532,6 +686,7 @@
               <option value="4.9">4.9+ Stars</option>
             </select>
           </div>
+
           <div class="form-group">
             <label>💬 Minimum Reviews</label>
             <select id="minReviews">
@@ -542,6 +697,7 @@
               <option value="2000">2000+ Reviews</option>
             </select>
           </div>
+
           <!-- Visual Options -->
           <div class="toggle-group">
             <div class="toggle-item">
@@ -553,6 +709,7 @@
               <div class="toggle-switch active" id="showProgressToggle"></div>
             </div>
           </div>
+
           <!-- Action Buttons -->
           <div class="btn-row">
             <button type="button" class="btn btn-primary" id="startSearch">
@@ -572,10 +729,12 @@
         </div>
       </div>
     </div>
+
     <!-- Map Container -->
     <div class="map-container">
       <div id="map"></div>
     </div>
+
     <!-- Bottom Sheet for Results (Mobile) -->
     <div class="bottom-sheet" id="bottomSheet">
       <div class="sheet-handle"></div>
@@ -586,6 +745,7 @@
           <span id="sheetToggleIcon">▲</span>
         </h3>
       </div>
+
       <div class="sheet-content">
         <!-- Progress Section -->
         <div class="progress-section">
@@ -594,6 +754,7 @@
           </div>
           <div class="status" id="status">Ready to search...</div>
         </div>
+
         <!-- Statistics -->
         <div class="stats-grid">
           <div class="stat-card">
@@ -609,6 +770,7 @@
             <p class="stat-label">Cells</p>
           </div>
         </div>
+
         <!-- Results -->
         <div class="results-container">
           <div class="results-header">🍽️ Restaurants</div>
@@ -618,8 +780,12 @@
     </div>
   </div>
   <script>
-    // Configuration & global variables omitted for brevity; same as your original code...
-    const CONFIG = { API_KEY: 'AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg' };
+    // Configuration
+    const CONFIG = {
+      API_KEY: 'AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg'
+    };
+
+    // Global variables
     let map, info, svc;
     let searchCancelled = false;
     let currentMarkers = [];
@@ -631,12 +797,15 @@
     let lastClickedPlace = null;
     let lastClickTime = 0;
     let isSearching = false;
-    // UI state
+
+    // Mobile UI state
     let controlsPanelExpanded = false;
     let bottomSheetExpanded = false;
-    // Utility functions (same as your original code)
+
+    // Utility functions
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     const toRad = (x) => x * Math.PI / 180;
+
     function haversine(a, b) {
       const R = 6371000;
       const dLat = toRad(b.lat - a.lat);
@@ -646,30 +815,8 @@
       const A = Math.sin(dLat / 2) ** 2 + Math.cos(s1) * Math.cos(s2) * Math.sin(dLng / 2) ** 2;
       return 2 * R * Math.asin(Math.sqrt(A));
     }
-    // Your existing functions (toggleControlsPanel, toggleBottomSheet, setupToggleSwitches, updateSliderValues, createMarkerIcon, selectMarker, generateGoogleMapsUrl,
-    // handlePlaceClick, createCellOverlay, updateCurrentCell, clearVisualElements, toggleCellVisibility, nearbyAll, textAll, processPartialResults,
-    // addResultsToMap, updateResultsList, updateStats, buildGridCenters, scanArea, updateStatus, updateProgress, getCurrentLocation, initMap)
-    // remain unchanged from your original code, except toggleBottomSheet no longer toggles class instantly due to swipe gestures now.
-    // Modified toggleBottomSheet to sync with swipe gestures:
-    function toggleBottomSheet() {
-      const sheet = document.getElementById('bottomSheet');
-      const icon = document.getElementById('sheetToggleIcon');
-      
-      bottomSheetExpanded = !bottomSheetExpanded;
-      
-      if (bottomSheetExpanded) {
-        sheet.classList.add('expanded');
-        icon.textContent = '▼';
-        sheet.style.transform = `translateY(0)`;
-        currentY = 0;
-      } else {
-        sheet.classList.remove('expanded');
-        icon.textContent = '▲';
-        sheet.style.transform = `translateY(calc(100% - 70px))`;
-        currentY = window.innerHeight - 70;
-      }
-    }
-    // Other initialization...
+
+    // Mobile UI Functions
     function toggleControlsPanel() {
       const panel = document.getElementById('controlsPanel');
       const toggle = document.getElementById('controlsToggle');
@@ -687,89 +834,591 @@
         toggle.innerHTML = '<span>⚙️</span><span>Settings</span>';
       }
     }
-    // Setup event listeners for UI controls
-    function setupUIEventListeners() {
-      document.getElementById('controlsToggle').addEventListener('click', toggleControlsPanel);
-      document.getElementById('sheetHeader').addEventListener('click', toggleBottomSheet);
-      document.getElementById('startSearch').addEventListener('click', scanArea);
-      document.getElementById('cancelSearch').addEventListener('click', () => {
-        searchCancelled = true;
-        updateStatus('🛑 Cancelling search...');
-      });
-      document.getElementById('clearResults').addEventListener('click', clearVisualElements);
-      document.getElementById('getCurrentLocation').addEventListener('click', getCurrentLocation);
-      setupToggleSwitches();
-      updateSliderValues();
-    }
-    // Swipe gesture code for bottom sheet
-    (function() {
+
+    // --- Updated toggleBottomSheet: integrates with drag/snap logic ---
+    function toggleBottomSheet() {
       const sheet = document.getElementById('bottomSheet');
-      const handle = document.querySelector('.sheet-handle');
-      let startY = 0;
-      let currentY = 0;
-      let dragging = false;
-      const windowHeight = window.innerHeight;
-      const collapsedHeight = windowHeight - 70;
-      const expandedHeight = windowHeight * 0.35; // 65% expanded means 35% from top
-      function setTranslateY(y) {
-        if (y < expandedHeight) y = expandedHeight;
-        if (y > collapsedHeight) y = collapsedHeight;
+      const icon = document.getElementById('sheetToggleIcon');
+
+      // calculate heights
+      const H = sheet.getBoundingClientRect().height;
+      const peek = 60; // must match CSS calc(100% - 60px) peek
+      const collapsedTY = H - peek;
+
+      bottomSheetExpanded = !bottomSheetExpanded;
+
+      if (bottomSheetExpanded) {
+        // expand to top (0)
+        setSheetTranslateY(0, true);
+        sheet.classList.add('expanded');
+        icon.textContent = '▼';
+      } else {
+        // collapse (show peek)
+        setSheetTranslateY(collapsedTY, true);
+        sheet.classList.remove('expanded');
+        icon.textContent = '▲';
+      }
+    }
+
+    // helper to set transform (in px) with optional animation
+    function setSheetTranslateY(px, animate = true) {
+      const sheet = document.getElementById('bottomSheet');
+      if (animate) {
+        sheet.style.transition = 'transform 0.28s cubic-bezier(.2,.8,.2,1)';
+      } else {
         sheet.style.transition = 'none';
-        sheet.style.transform = `translateY(${y}px)`;
-        currentY = y;
       }
-      function onStart(evt) {
-        dragging = true;
-        startY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-        sheet.style.transition = 'none';
-      }
-      function onMove(evt) {
-        if (!dragging) return;
-        const currentTouchY = evt.touches ? evt.touches[0].clientY : evt.clientY;
-        const diff = currentTouchY - startY;
-        let newY = currentY + diff;
-        if (newY < expandedHeight) newY = expandedHeight;
-        if (newY > collapsedHeight) newY = collapsedHeight;
-        sheet.style.transform = `translateY(${newY}px)`;
-      }
-      function onEnd(evt) {
-        if (!dragging) return;
-        dragging = false;
-        const endY = evt.changedTouches ? evt.changedTouches[0].clientY : evt.clientY;
-        const diff = endY - startY;
-        sheet.style.transition = 'transform 0.3s ease';
-        const midway = (collapsedHeight + expandedHeight) / 2;
-        if (currentY + diff > midway) {
-          // Collapse
-          sheet.style.transform = `translateY(${collapsedHeight}px)`;
-          bottomSheetExpanded = false;
-          document.getElementById('sheetToggleIcon').textContent = '▲';
-          sheet.classList.remove('expanded');
-        } else {
-          // Expand
-          sheet.style.transform = `translateY(${expandedHeight}px)`;
-          bottomSheetExpanded = true;
-          document.getElementById('sheetToggleIcon').textContent = '▼';
-          sheet.classList.add('expanded');
-        }
-        currentY = parseFloat(sheet.style.transform.replace(/[^0-9.-]/g, '')) || collapsedHeight;
-      }
-      window.addEventListener('load', () => {
-        currentY = collapsedHeight;
-        sheet.style.transform = `translateY(${currentY}px)`;
+      sheet.style.transform = `translateY(${px}px)`;
+    }
+
+    function setupToggleSwitches() {
+      const showCellsToggle = document.getElementById('showCellsToggle');
+      const showProgressToggle = document.getElementById('showProgressToggle');
+
+      showCellsToggle.addEventListener('click', () => {
+        showCellsToggle.classList.toggle('active');
+        toggleCellVisibility();
       });
-      handle.addEventListener('touchstart', onStart);
-      handle.addEventListener('touchmove', onMove);
-      handle.addEventListener('touchend', onEnd);
-      handle.addEventListener('mousedown', onStart);
-      window.addEventListener('mousemove', onMove);
-      window.addEventListener('mouseup', onEnd);
-      // Prevent scrolling page when dragging handle on touch devices
-      handle.addEventListener('touchmove', evt => evt.preventDefault(), { passive: false });
-    })();
-    // Initialize map and UI
+
+      showProgressToggle.addEventListener('click', () => {
+        showProgressToggle.classList.toggle('active');
+      });
+    }
+
+    function updateSliderValues() {
+      const radiusSlider = document.getElementById('radiusSlider');
+      const cellSlider = document.getElementById('cellSlider');
+      const radiusValue = document.getElementById('radiusValue');
+      const cellValue = document.getElementById('cellValue');
+
+      radiusSlider.addEventListener('input', (e) => {
+        radiusValue.textContent = e.target.value + 'km';
+      });
+
+      cellSlider.addEventListener('input', (e) => {
+        cellValue.textContent = e.target.value + 'm';
+      });
+    }
+
+    // Marker and selection functions
+    function createMarkerIcon(isSelected = false) {
+      return {
+        url: `https://maps.google.com/mapfiles/ms/icons/${isSelected ? 'green' : 'red'}-dot.png`,
+        scaledSize: new google.maps.Size(32, 32),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(16, 32)
+      };
+    }
+
+    function selectMarker(marker, place) {
+      if (selectedMarker && selectedMarker !== marker) {
+        selectedMarker.setIcon(createMarkerIcon(false));
+      }
+
+      selectedMarker = marker;
+      marker.setIcon(createMarkerIcon(true));
+
+      info.setContent(`
+        <div style="max-width: 250px;">
+          <h4 style="margin: 0 0 8px 0; font-size: 16px;">${place.name}</h4>
+          <p style="margin: 0 0 4px 0; font-size: 14px;">⭐ ${place.rating} (${place.user_ratings_total} reviews)</p>
+          <p style="margin: 0; font-size: 12px; color: #666;">Tap again to open in Google Maps</p>
+        </div>
+      `);
+      info.open(map, marker);
+    }
+
+    function generateGoogleMapsUrl(place) {
+      if (place.place_id) {
+        return `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
+      }
+
+      const lat = place.geometry.location.lat();
+      const lng = place.geometry.location.lng();
+      const name = encodeURIComponent(place.name);
+      return `https://www.google.com/maps/search/${name}/@${lat},${lng},17z`;
+    }
+
+    function handlePlaceClick(place) {
+      const currentTime = Date.now();
+      const isDoubleClick = (lastClickedPlace === place.place_id && currentTime - lastClickTime < 500);
+
+      if (isDoubleClick) {
+        const url = generateGoogleMapsUrl(place);
+        window.open(url, '_blank');
+        lastClickedPlace = null;
+      } else {
+        const marker = currentMarkers.find(m => m.getTitle() === place.name);
+        if (marker) {
+          selectMarker(marker, place);
+        }
+
+        const listItems = document.querySelectorAll('#results li');
+        listItems.forEach(li => li.classList.remove('selected'));
+
+        const targetItem = [...listItems].find(li =>
+          li.innerHTML.includes(place.name)
+        );
+        if (targetItem) {
+          targetItem.classList.add('selected');
+          targetItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        lastClickedPlace = place.place_id;
+      }
+
+      lastClickTime = currentTime;
+    }
+
+    // Visual cell functions
+    function createCellOverlay(center, radius, isActive = false) {
+      const circle = new google.maps.Circle({
+        center: center,
+        radius: radius,
+        strokeColor: isActive ? '#ff4444' : '#4444ff',
+        strokeOpacity: isActive ? 0.8 : 0.4,
+        strokeWeight: isActive ? 3 : 1,
+        fillColor: isActive ? '#ff4444' : '#4444ff',
+        fillOpacity: isActive ? 0.15 : 0.05,
+        map: document.getElementById('showCellsToggle').classList.contains('active') ? map : null
+      });
+      return circle;
+    }
+
+    function updateCurrentCell(center, radius) {
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(null);
+      }
+      if (document.getElementById('showCellsToggle').classList.contains('active')) {
+        currentCellOverlay = createCellOverlay(center, radius, true);
+      }
+    }
+
+    function clearVisualElements() {
+      for (const overlay of cellOverlays) {
+        overlay.setMap(null);
+      }
+      cellOverlays = [];
+
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(null);
+        currentCellOverlay = null;
+      }
+
+      for (const marker of currentMarkers) {
+        marker.setMap(null);
+      }
+      currentMarkers = [];
+
+      selectedMarker = null;
+      lastClickedPlace = null;
+      lastClickTime = 0;
+
+      searchResults.clear();
+      currentCellIndex = -1;
+      updateResultsList();
+      updateStats();
+    }
+
+    function toggleCellVisibility() {
+      const showCells = document.getElementById('showCellsToggle').classList.contains('active');
+      for (const overlay of cellOverlays) {
+        overlay.setMap(showCells ? map : null);
+      }
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(showCells ? map : null);
+      }
+    }
+
+    // Search functions
+    function nearbyAll(center, radius, cellIndex) {
+      return new Promise((resolve, reject) => {
+        if (searchCancelled) return resolve([]);
+
+        let acc = [];
+        const req = {
+          location: center,
+          radius,
+          keyword: "restaurant"
+        };
+
+        const cb = (res, status, pag) => {
+          if (searchCancelled) return resolve(acc);
+
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            acc = acc.concat(res || []);
+
+            if (document.getElementById('showProgressToggle').classList.contains('active') && cellIndex === currentCellIndex) {
+              processPartialResults(res || [], center, radius);
+            }
+
+            if (pag && pag.hasNextPage && !searchCancelled) {
+              return setTimeout(() => pag.nextPage(), 2000);
+            }
+            resolve(acc);
+          } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+            resolve(acc);
+          } else {
+            reject(status);
+          }
+        };
+
+        svc.nearbySearch(req, cb);
+      });
+    }
+
+    function textAll(center, radius, cellIndex) {
+      return new Promise((resolve, reject) => {
+        if (searchCancelled) return resolve([]);
+
+        let acc = [];
+        const req = {
+          query: "restaurant",
+          location: center,
+          radius
+        };
+
+        const cb = (res, status, pag) => {
+          if (searchCancelled) return resolve(acc);
+
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            acc = acc.concat(res || []);
+
+            if (document.getElementById('showProgressToggle').classList.contains('active') && cellIndex === currentCellIndex) {
+              processPartialResults(res || [], center, radius);
+            }
+
+            if (pag && pag.hasNextPage && !searchCancelled) {
+              return setTimeout(() => pag.nextPage(), 2000);
+            }
+            resolve(acc);
+          } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+            resolve(acc);
+          } else {
+            reject(status);
+          }
+        };
+
+        svc.textSearch(req, cb);
+      });
+    }
+
+    function processPartialResults(newPlaces, cellCenter, cellRadius) {
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+
+      let newValidResults = [];
+
+      for (const place of newPlaces) {
+        if (!searchResults.has(place.place_id)) {
+          const placeLocation = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          };
+
+          const distanceToCell = haversine(cellCenter, placeLocation);
+
+          if (distanceToCell <= cellRadius * 1.5) {
+            searchResults.set(place.place_id, place);
+
+            if ((place.types || []).includes("restaurant") &&
+                (place.rating || 0) >= minRating &&
+                (place.user_ratings_total || 0) >= minReviews) {
+              newValidResults.push(place);
+            }
+          }
+        }
+      }
+
+      if (newValidResults.length > 0) {
+        addResultsToMap(newValidResults, true);
+        updateResultsList();
+        updateStats();
+        
+        // Show bottom sheet if new results found (mobile)
+        if (window.innerWidth < 768 && !bottomSheetExpanded) {
+          toggleBottomSheet();
+        }
+      }
+    }
+
+    function addResultsToMap(places, isNew = false) {
+      for (const place of places) {
+        const marker = new google.maps.Marker({
+          position: place.geometry.location,
+          map,
+          title: place.name,
+          icon: createMarkerIcon(false),
+          animation: isNew ? google.maps.Animation.DROP : null
+        });
+
+        marker.placeData = place;
+
+        marker.addListener("click", () => {
+          handlePlaceClick(place);
+        });
+
+        currentMarkers.push(marker);
+      }
+    }
+
+    function updateResultsList() {
+      const ul = document.getElementById("results");
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+
+      const filteredPlaces = [...searchResults.values()]
+        .filter(p => (p.types || []).includes("restaurant"))
+        .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews)
+        .sort((a, b) => (b.rating - a.rating) || (b.user_ratings_total - a.user_ratings_total));
+
+      ul.innerHTML = "";
+
+      if (filteredPlaces.length === 0) {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <p class="result-name">${searchResults.size > 0 ? "No restaurants match your criteria yet..." : "No results yet..."}</p>
+          <p class="result-hint">Adjust your filters or continue searching</p>
+        `;
+        li.style.cursor = "default";
+        li.style.textAlign = "center";
+        ul.appendChild(li);
+        return;
+      }
+
+      for (const place of filteredPlaces) {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <p class="result-name">${place.name}</p>
+          <p class="result-rating">⭐ ${place.rating} • ${place.user_ratings_total} reviews</p>
+          <p class="result-hint">Tap again to open in Google Maps</p>
+        `;
+
+        // Add new result animation
+        if (currentMarkers.find(m => m.placeData?.place_id === place.place_id && m.getAnimation())) {
+          li.classList.add('new-result');
+        }
+
+        li.onclick = () => handlePlaceClick(place);
+        ul.appendChild(li);
+      }
+    }
+
+    function updateStats() {
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+
+      const filteredCount = [...searchResults.values()]
+        .filter(p => (p.types || []).includes("restaurant"))
+        .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews)
+        .length;
+
+      document.getElementById('totalCount').textContent = searchResults.size;
+      document.getElementById('filteredCount').textContent = filteredCount;
+    }
+
+    function buildGridCenters(center, outerKm, cellM) {
+      const kmPerDegLat = 111.32;
+      const stepKm = (cellM * 1.2) / 1000;
+      const latStep = stepKm / kmPerDegLat;
+      const lngStep = latStep / Math.cos(center.lat * Math.PI / 180);
+      const steps = Math.ceil(outerKm / stepKm);
+      const pts = [];
+
+      for (let iy = -steps; iy <= steps; iy++) {
+        for (let ix = -steps; ix <= steps; ix++) {
+          const c = {
+            lat: center.lat + iy * latStep,
+            lng: center.lng + ix * lngStep
+          };
+          if (haversine(center, c) <= outerKm * 1000) {
+            pts.push(c);
+          }
+        }
+      }
+      return pts;
+    }
+
+    async function scanArea() {
+      if (isSearching) return;
+
+      const center = {
+        lat: parseFloat(document.getElementById('centerLat').value),
+        lng: parseFloat(document.getElementById('centerLng').value)
+      };
+      const outerRadius = parseInt(document.getElementById('radiusSlider').value);
+      const cellRadius = parseInt(document.getElementById('cellSlider').value);
+
+      if (isNaN(center.lat) || isNaN(center.lng)) {
+        updateStatus('❌ Invalid coordinates');
+        return;
+      }
+
+      isSearching = true;
+      searchCancelled = false;
+      
+      const startBtn = document.getElementById('startSearch');
+      const cancelBtn = document.getElementById('cancelSearch');
+      
+      startBtn.disabled = true;
+      startBtn.classList.add('loading');
+      cancelBtn.disabled = false;
+
+      // Close controls panel on mobile when search starts
+      if (window.innerWidth < 768 && controlsPanelExpanded) {
+        toggleControlsPanel();
+      }
+
+      const cells = buildGridCenters(center, outerRadius, cellRadius);
+
+      if (document.getElementById('showCellsToggle').classList.contains('active')) {
+        for (const cell of cells) {
+          const overlay = createCellOverlay(cell, cellRadius, false);
+          cellOverlays.push(overlay);
+        }
+      }
+
+      updateStatus(`🚀 Starting search: ${cells.length} cells to scan...`);
+      updateProgress(0);
+      document.getElementById('cellsScanned').textContent = `0/${cells.length}`;
+
+      try {
+        for (let i = 0; i < cells.length && !searchCancelled; i++) {
+          currentCellIndex = i;
+
+          updateCurrentCell(cells[i], cellRadius);
+
+          updateStatus(`🔍 Scanning cell ${i + 1}/${cells.length}... (${searchResults.size} places found)`);
+          updateProgress((i / cells.length) * 100);
+          document.getElementById('cellsScanned').textContent = `${i}/${cells.length}`;
+
+          try {
+            const [A, B] = await Promise.allSettled([
+              nearbyAll(cells[i], cellRadius, i),
+              textAll(cells[i], cellRadius, i)
+            ]);
+
+            if (!document.getElementById('showProgressToggle').classList.contains('active')) {
+              const batch = [
+                ...(A.status === "fulfilled" ? A.value : []),
+                ...(B.status === "fulfilled" ? B.value : [])
+              ];
+              for (const p of batch) {
+                if (!searchResults.has(p.place_id)) {
+                  searchResults.set(p.place_id, p);
+                }
+              }
+            }
+
+          } catch (e) {
+            console.warn('Cell search error:', e);
+          }
+
+          await sleep(300); // Slightly longer delay for mobile
+        }
+
+        currentCellIndex = -1;
+
+        if (searchCancelled) {
+          updateStatus('🛑 Search cancelled by user');
+          return;
+        }
+
+        if (!document.getElementById('showProgressToggle').classList.contains('active')) {
+          updateStatus('🔄 Processing all results...');
+
+          const minRating = parseFloat(document.getElementById('minRating').value);
+          const minReviews = parseInt(document.getElementById('minReviews').value);
+
+          const filteredPlaces = [...searchResults.values()]
+            .filter(p => (p.types || []).includes("restaurant"))
+            .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews);
+
+          addResultsToMap(filteredPlaces, false);
+          updateResultsList();
+          updateStats();
+        }
+
+        updateProgress(100);
+        updateStatus(`✅ Search complete! Found ${document.getElementById('filteredCount').textContent} restaurants`);
+
+        if (currentCellOverlay) {
+          currentCellOverlay.setMap(null);
+          currentCellOverlay = null;
+        }
+
+        // Show results on mobile
+        if (window.innerWidth < 768 && !bottomSheetExpanded) {
+          toggleBottomSheet();
+        }
+
+      } catch (error) {
+        updateStatus(`❌ Search failed: ${error}`);
+      } finally {
+        isSearching = false;
+        startBtn.disabled = false;
+        startBtn.classList.remove('loading');
+        cancelBtn.disabled = true;
+      }
+    }
+
+    function updateStatus(text) {
+      document.getElementById('status').textContent = text;
+    }
+
+    function updateProgress(percent) {
+      document.getElementById('progressFill').style.width = percent + '%';
+    }
+
+    function getCurrentLocation() {
+      const btn = document.getElementById('getCurrentLocation');
+      const originalText = btn.innerHTML;
+      
+      btn.disabled = true;
+      btn.classList.add('loading');
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            document.getElementById('centerLat').value = position.coords.latitude.toFixed(6);
+            document.getElementById('centerLng').value = position.coords.longitude.toFixed(6);
+            
+            // Center map on new location
+            const newCenter = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            map.setCenter(newCenter);
+            map.setZoom(13);
+            
+            btn.disabled = false;
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+            updateStatus('📍 Location updated');
+          },
+          (error) => {
+            updateStatus(`❌ Location error: ${error.message}`);
+            btn.disabled = false;
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 300000
+          }
+        );
+      } else {
+        updateStatus('❌ Geolocation not supported');
+        btn.disabled = false;
+        btn.classList.remove('loading');
+        btn.innerHTML = originalText;
+      }
+    }
+
     function initMap() {
       const center = { lat: 44.437, lng: 26.097 };
+
       map = new google.maps.Map(document.getElementById("map"), {
         center: center,
         zoom: 12,
@@ -782,15 +1431,33 @@
         fullscreenControl: false,
         gestureHandling: 'greedy'
       });
+
       info = new google.maps.InfoWindow();
       svc = new google.maps.places.PlacesService(map);
-      setupUIEventListeners();
+
+      // Setup event listeners
+      document.getElementById('controlsToggle').addEventListener('click', toggleControlsPanel);
+      document.getElementById('sheetHeader').addEventListener('click', toggleBottomSheet);
+      document.getElementById('startSearch').addEventListener('click', scanArea);
+      document.getElementById('cancelSearch').addEventListener('click', () => {
+        searchCancelled = true;
+        updateStatus('🛑 Cancelling search...');
+      });
+      document.getElementById('clearResults').addEventListener('click', clearVisualElements);
+      document.getElementById('getCurrentLocation').addEventListener('click', getCurrentLocation);
+
+      // Setup toggle switches and sliders
+      setupToggleSwitches();
+      updateSliderValues();
+
       // Handle window resize
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
           google.maps.event.trigger(map, 'resize');
+          
+          // Auto-close mobile panels on desktop
           if (window.innerWidth >= 768) {
             if (controlsPanelExpanded) {
               controlsPanelExpanded = false;
@@ -801,13 +1468,194 @@
               document.getElementById('bottomSheet').classList.remove('expanded');
             }
           }
+
+          // Reposition bottom sheet to appropriate state after resize:
+          repositionBottomSheetAfterResize();
         }, 250);
       });
+
       updateStatus('🎯 Ready to search. Configure parameters and tap Start Search.');
       updateStats();
     }
+
+    // Put drag/snap code below (touch + mouse support)
+    (function setupBottomSheetDrag() {
+      const sheet = document.getElementById('bottomSheet');
+      const handle = sheet.querySelector('.sheet-handle');
+      const icon = document.getElementById('sheetToggleIcon');
+
+      let startY = 0;
+      let startTY = 0;
+      let dragging = false;
+
+      // peek matches CSS calc(100% - 60px) used originally
+      const peek = 60;
+
+      function getSheetHeight() {
+        // use bounding height (the sheet element's full height)
+        return Math.max(0, sheet.getBoundingClientRect().height || sheet.offsetHeight);
+      }
+
+      function getComputedTranslateY() {
+        // read computed transform if present (matrix)
+        const st = window.getComputedStyle(sheet);
+        const tr = st.transform || st.webkitTransform || 'none';
+        if (tr && tr !== 'none') {
+          const match = tr.match(/matrix.*\((.+)\)/);
+          if (match) {
+            const vals = match[1].split(',').map(s => s.trim());
+            // matrix(a, b, c, d, tx, ty) -> ty is index 5
+            if (vals.length === 6) {
+              return parseFloat(vals[5]);
+            } else if (vals.length === 16) {
+              // matrix3d
+              return parseFloat(vals[13]);
+            }
+          }
+        }
+        // fallback: collapsed default = sheetHeight - peek (CSS translateY(calc(100% - 60px)))
+        return getSheetHeight() - peek;
+      }
+
+      function clamp(n, min, max) {
+        return Math.max(min, Math.min(max, n));
+      }
+
+      function onDragStart(clientY) {
+        dragging = true;
+        startY = clientY;
+        startTY = getComputedTranslateY();
+        sheet.style.transition = 'none';
+        // prevent page scrolling while dragging from handle
+        document.body.style.touchAction = 'none';
+      }
+
+      function onDragMove(clientY) {
+        if (!dragging) return;
+        const delta = clientY - startY;
+        const sheetH = getSheetHeight();
+        const maxTY = sheetH - peek; // collapsed (move down this px value)
+        let newTY = startTY + delta;
+        newTY = clamp(newTY, 0, maxTY);
+        sheet.style.transform = `translateY(${newTY}px)`;
+      }
+
+      function snapToNearest() {
+        const sheetH = getSheetHeight();
+        const maxTY = sheetH - peek;
+        const midTY = Math.round(sheetH / 2);
+        const candidates = [maxTY, midTY, 0];
+        const current = getComputedTranslateY();
+        // choose nearest
+        let nearest = candidates[0];
+        let bestDiff = Math.abs(candidates[0] - current);
+        for (let i = 1; i < candidates.length; i++) {
+          const d = Math.abs(candidates[i] - current);
+          if (d < bestDiff) {
+            bestDiff = d;
+            nearest = candidates[i];
+          }
+        }
+        // animate to nearest
+        setSheetTranslateY(nearest, true);
+
+        // update state & icon & class
+        bottomSheetExpanded = (nearest === 0);
+        if (bottomSheetExpanded) {
+          sheet.classList.add('expanded');
+          if (icon) icon.textContent = '▼';
+        } else {
+          sheet.classList.remove('expanded');
+          if (icon) icon.textContent = '▲';
+        }
+      }
+
+      function onDragEnd() {
+        if (!dragging) return;
+        dragging = false;
+        document.body.style.touchAction = '';
+        snapToNearest();
+      }
+
+      // Touch events
+      handle.addEventListener('touchstart', function (ev) {
+        if (ev.touches && ev.touches.length === 1) {
+          onDragStart(ev.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      handle.addEventListener('touchmove', function (ev) {
+        if (ev.touches && ev.touches.length === 1 && dragging) {
+          // prevent default to avoid page scroll while dragging
+          ev.preventDefault();
+          onDragMove(ev.touches[0].clientY);
+        }
+      }, { passive: false });
+
+      handle.addEventListener('touchend', function (ev) {
+        onDragEnd();
+      });
+
+      // Mouse events (desktop)
+      handle.addEventListener('mousedown', function (ev) {
+        ev.preventDefault();
+        onDragStart(ev.clientY);
+
+        function mm(e) {
+          onDragMove(e.clientY);
+        }
+        function mu(e) {
+          onDragEnd();
+          document.removeEventListener('mousemove', mm);
+          document.removeEventListener('mouseup', mu);
+        }
+        document.addEventListener('mousemove', mm);
+        document.addEventListener('mouseup', mu);
+      });
+
+      // Safety: reposition sheet correctly after window resizes
+      window.addEventListener('resize', () => {
+        repositionBottomSheetAfterResize();
+      });
+
+      // On initial load, ensure the sheet is at collapsed peek state (to match original CSS)
+      // but let CSS handle initial transform — we do a small sync to inline style when DOM is ready.
+      function initPosition() {
+        const sheetH = getSheetHeight();
+        const collapsedTY = Math.max(0, sheetH - peek);
+        // If current computed transform is 'none' (unlikely), set inline to match collapsed:
+        const currentTY = getComputedTranslateY();
+        if (Math.abs(currentTY - collapsedTY) > 1) {
+          // place inline at collapsed (so JS snaps smoothly later)
+          setSheetTranslateY(collapsedTY, false);
+          bottomSheetExpanded = false;
+          sheet.classList.remove('expanded');
+          if (icon) icon.textContent = '▲';
+        }
+      }
+
+      // Expose reposition helper to outer scope (used on resize from other code)
+      window.repositionBottomSheetAfterResize = function () {
+        const sheetH = getSheetHeight();
+        const collapsedTY = Math.max(0, sheetH - peek);
+        if (bottomSheetExpanded) {
+          setSheetTranslateY(0, false);
+          sheet.classList.add('expanded');
+          if (icon) icon.textContent = '▼';
+        } else {
+          setSheetTranslateY(collapsedTY, false);
+          sheet.classList.remove('expanded');
+          if (icon) icon.textContent = '▲';
+        }
+      };
+
+      // small init timeout after DOM ready
+      setTimeout(initPosition, 200);
+    })();
+
     window.initMap = initMap;
   </script>
+
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg&libraries=places&callback=initMap"></script>
 </body>
 </html>
