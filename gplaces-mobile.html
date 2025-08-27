@@ -995,4 +995,459 @@
       for (const overlay of cellOverlays) {
         overlay.setMap(showCells ? map : null);
       }
-      if (current
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(showCells ? map : null);
+      }
+    }
+
+    // Search functions
+    function nearbyAll(center, radius, cellIndex) {
+      return new Promise((resolve, reject) => {
+        if (searchCancelled) return resolve([]);
+
+        let acc = [];
+        const req = {
+          location: center,
+          radius,
+          keyword: "restaurant"
+        };
+
+        const cb = (res, status, pag) => {
+          if (searchCancelled) return resolve(acc);
+
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            acc = acc.concat(res || []);
+
+            if (document.getElementById('showProgressToggle').classList.contains('active') && cellIndex === currentCellIndex) {
+              processPartialResults(res || [], center, radius);
+            }
+
+            if (pag && pag.hasNextPage && !searchCancelled) {
+              return setTimeout(() => pag.nextPage(), 2000);
+            }
+            resolve(acc);
+          } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+            resolve(acc);
+          } else {
+            reject(status);
+          }
+        };
+
+        svc.nearbySearch(req, cb);
+      });
+    }
+
+    function textAll(center, radius, cellIndex) {
+      return new Promise((resolve, reject) => {
+        if (searchCancelled) return resolve([]);
+
+        let acc = [];
+        const req = {
+          query: "restaurant",
+          location: center,
+          radius
+        };
+
+        const cb = (res, status, pag) => {
+          if (searchCancelled) return resolve(acc);
+
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            acc = acc.concat(res || []);
+
+            if (document.getElementById('showProgressToggle').classList.contains('active') && cellIndex === currentCellIndex) {
+              processPartialResults(res || [], center, radius);
+            }
+
+            if (pag && pag.hasNextPage && !searchCancelled) {
+              return setTimeout(() => pag.nextPage(), 2000);
+            }
+            resolve(acc);
+          } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+            resolve(acc);
+          } else {
+            reject(status);
+          }
+        };
+
+        svc.textSearch(req, cb);
+      });
+    }
+
+    function processPartialResults(newPlaces, cellCenter, cellRadius) {
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+
+      let newValidResults = [];
+
+      for (const place of newPlaces) {
+        if (!searchResults.has(place.place_id)) {
+          const placeLocation = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          };
+
+          const distanceToCell = haversine(cellCenter, placeLocation);
+
+          if (distanceToCell <= cellRadius * 1.5) {
+            searchResults.set(place.place_id, place);
+
+            if ((place.types || []).includes("restaurant") &&
+                (place.rating || 0) >= minRating &&
+                (place.user_ratings_total || 0) >= minReviews) {
+              newValidResults.push(place);
+            }
+          }
+        }
+      }
+
+      if (newValidResults.length > 0) {
+        addResultsToMap(newValidResults, true);
+        updateResultsList();
+        updateStats();
+        
+        // Show bottom sheet if new results found (mobile)
+        if (window.innerWidth < 768 && !bottomSheetExpanded) {
+          toggleBottomSheet();
+        }
+      }
+    }
+
+    function addResultsToMap(places, isNew = false) {
+      for (const place of places) {
+        const marker = new google.maps.Marker({
+          position: place.geometry.location,
+          map,
+          title: place.name,
+          icon: createMarkerIcon(false),
+          animation: isNew ? google.maps.Animation.DROP : null
+        });
+
+        marker.placeData = place;
+
+        marker.addListener("click", () => {
+          handlePlaceClick(place);
+        });
+
+        currentMarkers.push(marker);
+      }
+    }
+
+    function updateResultsList() {
+      const ul = document.getElementById("results");
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+
+      const filteredPlaces = [...searchResults.values()]
+        .filter(p => (p.types || []).includes("restaurant"))
+        .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews)
+        .sort((a, b) => (b.rating - a.rating) || (b.user_ratings_total - a.user_ratings_total));
+
+      ul.innerHTML = "";
+
+      if (filteredPlaces.length === 0) {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <p class="result-name">${searchResults.size > 0 ? "No restaurants match your criteria yet..." : "No results yet..."}</p>
+          <p class="result-hint">Adjust your filters or continue searching</p>
+        `;
+        li.style.cursor = "default";
+        li.style.textAlign = "center";
+        ul.appendChild(li);
+        return;
+      }
+
+      for (const place of filteredPlaces) {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <p class="result-name">${place.name}</p>
+          <p class="result-rating">⭐ ${place.rating} • ${place.user_ratings_total} reviews</p>
+          <p class="result-hint">Tap again to open in Google Maps</p>
+        `;
+
+        // Add new result animation
+        if (currentMarkers.find(m => m.placeData?.place_id === place.place_id && m.getAnimation())) {
+          li.classList.add('new-result');
+        }
+
+        li.onclick = () => handlePlaceClick(place);
+        ul.appendChild(li);
+      }
+    }
+
+    function updateStats() {
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+
+      const filteredCount = [...searchResults.values()]
+        .filter(p => (p.types || []).includes("restaurant"))
+        .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews)
+        .length;
+
+      document.getElementById('totalCount').textContent = searchResults.size;
+      document.getElementById('filteredCount').textContent = filteredCount;
+    }
+
+    function buildGridCenters(center, outerKm, cellM) {
+      const kmPerDegLat = 111.32;
+      const stepKm = (cellM * 1.2) / 1000;
+      const latStep = stepKm / kmPerDegLat;
+      const lngStep = latStep / Math.cos(center.lat * Math.PI / 180);
+      const steps = Math.ceil(outerKm / stepKm);
+      const pts = [];
+
+      for (let iy = -steps; iy <= steps; iy++) {
+        for (let ix = -steps; ix <= steps; ix++) {
+          const c = {
+            lat: center.lat + iy * latStep,
+            lng: center.lng + ix * lngStep
+          };
+          if (haversine(center, c) <= outerKm * 1000) {
+            pts.push(c);
+          }
+        }
+      }
+      return pts;
+    }
+
+    async function scanArea() {
+      if (isSearching) return;
+
+      const center = {
+        lat: parseFloat(document.getElementById('centerLat').value),
+        lng: parseFloat(document.getElementById('centerLng').value)
+      };
+      const outerRadius = parseInt(document.getElementById('radiusSlider').value);
+      const cellRadius = parseInt(document.getElementById('cellSlider').value);
+
+      if (isNaN(center.lat) || isNaN(center.lng)) {
+        updateStatus('❌ Invalid coordinates');
+        return;
+      }
+
+      isSearching = true;
+      searchCancelled = false;
+      
+      const startBtn = document.getElementById('startSearch');
+      const cancelBtn = document.getElementById('cancelSearch');
+      
+      startBtn.disabled = true;
+      startBtn.classList.add('loading');
+      cancelBtn.disabled = false;
+
+      // Close controls panel on mobile when search starts
+      if (window.innerWidth < 768 && controlsPanelExpanded) {
+        toggleControlsPanel();
+      }
+
+      const cells = buildGridCenters(center, outerRadius, cellRadius);
+
+      if (document.getElementById('showCellsToggle').classList.contains('active')) {
+        for (const cell of cells) {
+          const overlay = createCellOverlay(cell, cellRadius, false);
+          cellOverlays.push(overlay);
+        }
+      }
+
+      updateStatus(`🚀 Starting search: ${cells.length} cells to scan...`);
+      updateProgress(0);
+      document.getElementById('cellsScanned').textContent = `0/${cells.length}`;
+
+      try {
+        for (let i = 0; i < cells.length && !searchCancelled; i++) {
+          currentCellIndex = i;
+
+          updateCurrentCell(cells[i], cellRadius);
+
+          updateStatus(`🔍 Scanning cell ${i + 1}/${cells.length}... (${searchResults.size} places found)`);
+          updateProgress((i / cells.length) * 100);
+          document.getElementById('cellsScanned').textContent = `${i}/${cells.length}`;
+
+          try {
+            const [A, B] = await Promise.allSettled([
+              nearbyAll(cells[i], cellRadius, i),
+              textAll(cells[i], cellRadius, i)
+            ]);
+
+            if (!document.getElementById('showProgressToggle').classList.contains('active')) {
+              const batch = [
+                ...(A.status === "fulfilled" ? A.value : []),
+                ...(B.status === "fulfilled" ? B.value : [])
+              ];
+              for (const p of batch) {
+                if (!searchResults.has(p.place_id)) {
+                  searchResults.set(p.place_id, p);
+                }
+              }
+            }
+
+          } catch (e) {
+            console.warn('Cell search error:', e);
+          }
+
+          await sleep(300); // Slightly longer delay for mobile
+        }
+
+        currentCellIndex = -1;
+
+        if (searchCancelled) {
+          updateStatus('🛑 Search cancelled by user');
+          return;
+        }
+
+        if (!document.getElementById('showProgressToggle').classList.contains('active')) {
+          updateStatus('🔄 Processing all results...');
+
+          const minRating = parseFloat(document.getElementById('minRating').value);
+          const minReviews = parseInt(document.getElementById('minReviews').value);
+
+          const filteredPlaces = [...searchResults.values()]
+            .filter(p => (p.types || []).includes("restaurant"))
+            .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews);
+
+          addResultsToMap(filteredPlaces, false);
+          updateResultsList();
+          updateStats();
+        }
+
+        updateProgress(100);
+        updateStatus(`✅ Search complete! Found ${document.getElementById('filteredCount').textContent} restaurants`);
+
+        if (currentCellOverlay) {
+          currentCellOverlay.setMap(null);
+          currentCellOverlay = null;
+        }
+
+        // Show results on mobile
+        if (window.innerWidth < 768 && !bottomSheetExpanded) {
+          toggleBottomSheet();
+        }
+
+      } catch (error) {
+        updateStatus(`❌ Search failed: ${error}`);
+      } finally {
+        isSearching = false;
+        startBtn.disabled = false;
+        startBtn.classList.remove('loading');
+        cancelBtn.disabled = true;
+      }
+    }
+
+    function updateStatus(text) {
+      document.getElementById('status').textContent = text;
+    }
+
+    function updateProgress(percent) {
+      document.getElementById('progressFill').style.width = percent + '%';
+    }
+
+    function getCurrentLocation() {
+      const btn = document.getElementById('getCurrentLocation');
+      const originalText = btn.innerHTML;
+      
+      btn.disabled = true;
+      btn.classList.add('loading');
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            document.getElementById('centerLat').value = position.coords.latitude.toFixed(6);
+            document.getElementById('centerLng').value = position.coords.longitude.toFixed(6);
+            
+            // Center map on new location
+            const newCenter = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            map.setCenter(newCenter);
+            map.setZoom(13);
+            
+            btn.disabled = false;
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+            updateStatus('📍 Location updated');
+          },
+          (error) => {
+            updateStatus(`❌ Location error: ${error.message}`);
+            btn.disabled = false;
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 300000
+          }
+        );
+      } else {
+        updateStatus('❌ Geolocation not supported');
+        btn.disabled = false;
+        btn.classList.remove('loading');
+        btn.innerHTML = originalText;
+      }
+    }
+
+    function initMap() {
+      const center = { lat: 44.437, lng: 26.097 };
+
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: center,
+        zoom: 12,
+        disableDefaultUI: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        gestureHandling: 'greedy'
+      });
+
+      info = new google.maps.InfoWindow();
+      svc = new google.maps.places.PlacesService(map);
+
+      // Setup event listeners
+      document.getElementById('controlsToggle').addEventListener('click', toggleControlsPanel);
+      document.getElementById('sheetHeader').addEventListener('click', toggleBottomSheet);
+      document.getElementById('startSearch').addEventListener('click', scanArea);
+      document.getElementById('cancelSearch').addEventListener('click', () => {
+        searchCancelled = true;
+        updateStatus('🛑 Cancelling search...');
+      });
+      document.getElementById('clearResults').addEventListener('click', clearVisualElements);
+      document.getElementById('getCurrentLocation').addEventListener('click', getCurrentLocation);
+
+      // Setup toggle switches and sliders
+      setupToggleSwitches();
+      updateSliderValues();
+
+      // Handle window resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          google.maps.event.trigger(map, 'resize');
+          
+          // Auto-close mobile panels on desktop
+          if (window.innerWidth >= 768) {
+            if (controlsPanelExpanded) {
+              controlsPanelExpanded = false;
+              document.getElementById('controlsPanel').classList.remove('expanded');
+            }
+            if (bottomSheetExpanded) {
+              bottomSheetExpanded = false;
+              document.getElementById('bottomSheet').classList.remove('expanded');
+            }
+          }
+        }, 250);
+      });
+
+      updateStatus('🎯 Ready to search. Configure parameters and tap Start Search.');
+      updateStats();
+    }
+
+    window.initMap = initMap;
+  </script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg&libraries=places&callback=initMap"></script>
+</body>
+</html>
