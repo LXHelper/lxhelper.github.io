@@ -3,7 +3,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="robots" content="noindex, nofollow">
-  <title>Restaurant Finder - Mobile</title>
+  <title>Restaurant Finder</title>
   <style>
     * {
       box-sizing: border-box;
@@ -11,151 +11,59 @@
     }
 
     body { 
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      font-family: system-ui, sans-serif; 
       margin: 0; 
       padding: 0; 
       background: #f8f9fa;
-      overflow-x: hidden;
     }
 
-    .mobile-container {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
+    /* Desktop Layout - Original Design */
+    .container { 
+      display: flex; 
+      height: 100vh; 
+    }
+    
+    #map { 
+      flex: 1; 
+      min-height: 500px; 
     }
 
-    /* Mobile Header */
-    .mobile-header {
-      background: #fff;
-      padding: 12px 16px;
-      border-bottom: 1px solid #e9ecef;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      z-index: 1000;
-      position: relative;
-    }
-
-    .header-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0;
-      color: #333;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .header-controls {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    /* Collapsible Controls Panel */
-    .controls-toggle {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      min-height: 44px;
-    }
-
-    .controls-toggle:active {
-      transform: scale(0.98);
-      background: #0056b3;
-    }
-
-    .controls-panel {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border-bottom: 1px solid #e9ecef;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      z-index: 999;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .controls-panel.expanded {
-      max-height: 80vh;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .controls-content {
+    #controls-panel {
+      width: 320px;
       padding: 16px;
+      background: #f8f9fa;
+      overflow-y: auto;
+      border-right: 1px solid #ddd;
     }
 
-    /* Form Groups */
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .form-group label {
       display: block;
       font-weight: 500;
-      margin-bottom: 6px;
-      font-size: 14px;
-      color: #333;
+      margin-bottom: 4px;
+      font-size: 13px;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e9ecef;
-      border-radius: 8px;
-      font-size: 16px;
-      background: #fff;
-      transition: border-color 0.2s ease;
-      min-height: 48px;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+      box-sizing: border-box;
     }
 
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: #007bff;
-      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-    }
-
-    .coords-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    /* Buttons */
-    .btn {
-      padding: 12px 20px;
+    button {
+      padding: 8px 12px;
       border: none;
-      border-radius: 8px;
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 15px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      text-decoration: none;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    .btn:active {
-      transform: scale(0.98);
+      font-size: 13px;
+      margin: 4px 4px 4px 0;
     }
 
     .btn-primary {
@@ -163,26 +71,9 @@
       color: white;
     }
 
-    .btn-primary:active {
-      background: #0056b3;
-    }
-
     .btn-secondary {
       background: #6c757d;
       color: white;
-    }
-
-    .btn-secondary:active {
-      background: #545b62;
-    }
-
-    .btn-success {
-      background: #28a745;
-      color: white;
-    }
-
-    .btn-success:active {
-      background: #1e7e34;
     }
 
     .btn-danger {
@@ -190,344 +81,237 @@
       color: white;
     }
 
-    .btn-danger:active {
-      background: #c82333;
+    button:hover {
+      opacity: 0.9;
     }
 
-    .btn:disabled {
+    button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
-      transform: none !important;
     }
 
-    .btn-row {
+    .toggle-row {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
-      margin: 16px 0;
-    }
-
-    .btn-row .btn {
-      flex: 1;
-      min-width: 120px;
-    }
-
-    /* Toggle Switches */
-    .toggle-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: 16px 0;
-    }
-
-    .toggle-item {
-      display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 12px 0;
-    }
-
-    .toggle-item label {
-      font-size: 15px;
-      font-weight: 500;
-      margin: 0;
-    }
-
-    .toggle-switch {
-      position: relative;
-      width: 48px;
-      height: 28px;
-      background: #ccc;
-      border-radius: 14px;
-      transition: background 0.2s ease;
-      cursor: pointer;
-    }
-
-    .toggle-switch::before {
-      content: '';
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      border-radius: 12px;
-      background: white;
-      top: 2px;
-      left: 2px;
-      transition: transform 0.2s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-
-    .toggle-switch.active {
-      background: #007bff;
-    }
-
-    .toggle-switch.active::before {
-      transform: translateX(20px);
-    }
-
-    /* Map Container */
-    .map-container {
-      flex: 1;
-      position: relative;
-      min-height: 300px;
-    }
-
-    #map { 
-      width: 100%;
-      height: 100%;
-      min-height: 300px;
-    }
-
-    /* Bottom Sheet for Results */
-    .bottom-sheet {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border-radius: 16px 16px 0 0;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-      z-index: 1000;
-      max-height: 50vh;
-      transform: translateY(calc(100% - 60px));
-      transition: transform 0.3s ease;
-    }
-
-    .bottom-sheet.expanded {
-      transform: translateY(0);
-    }
-
-    .sheet-handle {
-      width: 40px;
-      height: 4px;
-      background: #ccc;
-      border-radius: 2px;
-      margin: 12px auto 8px;
-    }
-
-    .sheet-header {
-      padding: 8px 20px 16px;
-      border-bottom: 1px solid #e9ecef;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .sheet-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .sheet-content {
-      padding: 16px 20px;
-      overflow-y: auto;
-      max-height: calc(50vh - 100px);
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Progress and Status */
-    .progress-section {
-      margin-bottom: 16px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      background: #e9ecef;
-      border-radius: 3px;
-      overflow: hidden;
-      margin: 8px 0;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #007bff, #00d4ff);
-      transition: width 0.3s ease;
-      width: 0%;
-    }
-
-    .status {
-      padding: 12px 16px;
-      background: #f8f9fa;
-      border-radius: 8px;
-      font-size: 14px;
-      color: #6c757d;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    /* Statistics Cards */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .stat-card {
-      background: linear-gradient(135deg, #007bff, #00d4ff);
-      color: white;
-      padding: 16px;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 24px;
-      font-weight: 700;
-      margin: 0;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      opacity: 0.9;
-      margin: 4px 0 0 0;
-      font-weight: 500;
-    }
-
-    /* Results List */
-    .results-container {
-      margin-top: 16px;
-    }
-
-    .results-header {
-      font-size: 16px;
-      font-weight: 600;
       margin-bottom: 12px;
-      color: #333;
+    }
+
+    .toggle-row label {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
     }
 
     #results {
+      max-height: 320px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: white;
       list-style: none;
       padding: 0;
       margin: 0;
     }
 
     #results li {
-      background: #f8f9fa;
-      margin: 8px 0;
-      padding: 16px;
-      border-radius: 12px;
+      margin: 0;
+      padding: 8px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      border: 2px solid transparent;
-      position: relative;
+      border-bottom: 1px solid #eee;
+      font-size: 12px;
+      line-height: 1.3;
     }
 
-    #results li:active {
-      transform: scale(0.98);
-      background: #e9ecef;
+    #results li:hover {
+      background: #f0f0f0;
     }
 
     #results li.selected {
       background: #e8f5e8;
-      border-color: #28a745;
+      border-left: 4px solid #28a745;
     }
 
-    #results li.new-result {
-      background: linear-gradient(135deg, #90ee90, #e8f5e8);
-      animation: slideIn 0.5s ease;
+    #results li:last-child {
+      border-bottom: none;
     }
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .new-result {
+      background: #e8f5e8 !important;
+      animation: highlight 2s ease-out;
     }
 
-    .result-name {
-      font-size: 16px;
-      font-weight: 600;
-      color: #333;
-      margin: 0 0 4px 0;
+    @keyframes highlight {
+      0% { background: #90ee90 !important; }
+      100% { background: #e8f5e8 !important; }
     }
 
-    .result-rating {
-      font-size: 14px;
-      color: #666;
-      margin: 0 0 4px 0;
-    }
-
-    .result-hint {
+    #status {
+      padding: 8px;
+      margin-top: 8px;
+      background: #e9ecef;
+      border-radius: 4px;
       font-size: 12px;
-      color: #999;
-      font-style: italic;
-      margin: 0;
+      min-height: 20px;
     }
 
-    /* Responsive Design */
-    @media (min-width: 768px) {
-      .mobile-container {
-        flex-direction: row;
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 4px;
+      margin: 8px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #007bff;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .coords-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .coords-row .form-group {
+      flex: 1;
+    }
+
+    .stats {
+      background: white;
+      padding: 8px;
+      border-radius: 4px;
+      margin: 8px 0;
+      font-size: 12px;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 2px 0;
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 767px) {
+      .container {
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      #controls-panel {
+        width: 100%;
+        height: auto;
+        max-height: 50vh;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        z-index: 1000;
       }
 
       .mobile-header {
-        width: 350px;
-        height: 100vh;
-        border-right: 1px solid #e9ecef;
-        border-bottom: none;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .mobile-header h3 {
+        margin: 0;
+        font-size: 16px;
       }
 
       .controls-toggle {
-        display: none;
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        cursor: pointer;
       }
 
-      .controls-panel {
-        position: static;
-        max-height: none;
-        overflow: visible;
-        box-shadow: none;
-        border-bottom: none;
+      .controls-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
       }
 
-      .controls-panel.expanded {
-        max-height: none;
+      .controls-content.expanded {
+        max-height: 40vh;
+        overflow-y: auto;
       }
 
-      .map-container {
+      .form-group input,
+      .form-group select {
+        padding: 12px 8px;
+        font-size: 16px;
+        min-height: 44px;
+      }
+
+      button {
+        padding: 12px 16px;
+        font-size: 14px;
+        min-height: 44px;
+      }
+
+      .toggle-row {
+        min-height: 44px;
+      }
+
+      #map {
         flex: 1;
+        min-height: 300px;
       }
 
-      .bottom-sheet {
-        position: static;
-        transform: none;
-        max-height: none;
-        border-radius: 0;
-        box-shadow: none;
-        background: transparent;
+      #results {
+        max-height: 200px;
       }
 
-      .bottom-sheet.expanded {
-        transform: none;
+      #results li {
+        padding: 12px;
+        font-size: 14px;
+        min-height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
-      .sheet-handle {
-        display: none;
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        text-align: center;
       }
 
-      .sheet-header {
-        cursor: default;
-        border-bottom: none;
+      .stat-item {
+        flex-direction: column;
+        background: #007bff;
+        color: white;
+        padding: 8px;
+        border-radius: 8px;
       }
 
-      .sheet-content {
-        max-height: none;
-        padding: 0;
+      .stat-item span:first-child {
+        font-size: 10px;
+        opacity: 0.8;
+      }
+
+      .stat-item span:last-child {
+        font-size: 16px;
+        font-weight: bold;
       }
     }
 
-    /* Loading States */
+    /* Loading animation */
     .btn.loading {
-      pointer-events: none;
       position: relative;
       color: transparent;
     }
@@ -535,8 +319,8 @@
     .btn.loading::after {
       content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       border: 2px solid transparent;
       border-top: 2px solid currentColor;
       border-radius: 50%;
@@ -552,222 +336,112 @@
         transform: translate(-50%, -50%) rotate(360deg);
       }
     }
-
-    /* Accessibility */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    /* Dark mode support */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #121212;
-        color: #ffffff;
-      }
-
-      .mobile-header,
-      .controls-panel,
-      .bottom-sheet {
-        background: #1e1e1e;
-        border-color: #333;
-      }
-
-      .form-group input,
-      .form-group select {
-        background: #2d2d2d;
-        border-color: #444;
-        color: #ffffff;
-      }
-
-      #results li {
-        background: #2d2d2d;
-        color: #ffffff;
-      }
-
-      #results li:active {
-        background: #3d3d3d;
-      }
-
-      .status {
-        background: #2d2d2d;
-        color: #cccccc;
-      }
-
-      .result-name {
-        color: #ffffff;
-      }
-
-      .result-rating {
-        color: #cccccc;
-      }
-
-      .result-hint {
-        color: #999;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="mobile-container">
-    <!-- Mobile Header with Controls -->
-    <div class="mobile-header">
-      <h1 class="header-title">
-        <span>🍽️</span>
-        Restaurant Finder
-      </h1>
-      
-      <div class="header-controls">
-        <button class="controls-toggle" id="controlsToggle">
-          <span>⚙️</span>
-          <span id="toggleText">Settings</span>
-        </button>
+  <div class="container">
+    <div id="controls-panel">
+      <!-- Mobile header -->
+      <div class="mobile-header">
+        <h3>Restaurant Finder</h3>
+        <button class="controls-toggle" id="controlsToggle">Settings</button>
       </div>
 
-      <!-- Collapsible Controls Panel -->
-      <div class="controls-panel" id="controlsPanel">
-        <div class="controls-content">
-          <!-- Location Controls -->
-          <div class="form-group">
-            <label>📍 Search Center</label>
-            <div class="coords-row">
+      <!-- Desktop title (hidden on mobile) -->
+      <h3 style="margin-top: 0; display: none;">Restaurant Finder</h3>
+
+      <div class="controls-content" id="controlsContent">
+        <div class="form-group">
+          <label>Search Center</label>
+          <div class="coords-row">
+            <div class="form-group">
               <input type="number" id="centerLat" step="0.001" placeholder="Latitude" value="44.437">
+            </div>
+            <div class="form-group">
               <input type="number" id="centerLng" step="0.001" placeholder="Longitude" value="26.097">
             </div>
-            <button type="button" class="btn btn-secondary" id="getCurrentLocation" style="margin-top: 8px; width: 100%;">
-              <span>📍</span>
-              Use My Location
-            </button>
           </div>
-
-          <!-- Search Parameters -->
-          <div class="form-group">
-            <label>🔍 Search Radius (km)</label>
-            <input type="range" id="radiusSlider" min="1" max="20" value="5" style="width: 100%; margin: 8px 0;">
-            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
-              <span>1km</span>
-              <span id="radiusValue">5km</span>
-              <span>20km</span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>📏 Cell Size (meters)</label>
-            <input type="range" id="cellSlider" min="500" max="3000" step="100" value="1000" style="width: 100%; margin: 8px 0;">
-            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
-              <span>500m</span>
-              <span id="cellValue">1000m</span>
-              <span>3000m</span>
-            </div>
-          </div>
-
-          <!-- Quality Filters -->
-          <div class="form-group">
-            <label>⭐ Minimum Rating</label>
-            <select id="minRating">
-              <option value="4.0">4.0+ Stars</option>
-              <option value="4.2">4.2+ Stars</option>
-              <option value="4.5">4.5+ Stars</option>
-              <option value="4.7">4.7+ Stars</option>
-              <option value="4.8" selected>4.8+ Stars</option>
-              <option value="4.9">4.9+ Stars</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>💬 Minimum Reviews</label>
-            <select id="minReviews">
-              <option value="50">50+ Reviews</option>
-              <option value="100">100+ Reviews</option>
-              <option value="500">500+ Reviews</option>
-              <option value="1000" selected>1000+ Reviews</option>
-              <option value="2000">2000+ Reviews</option>
-            </select>
-          </div>
-
-          <!-- Visual Options -->
-          <div class="toggle-group">
-            <div class="toggle-item">
-              <label>Show scan cells</label>
-              <div class="toggle-switch" id="showCellsToggle"></div>
-            </div>
-            <div class="toggle-item">
-              <label>Live results</label>
-              <div class="toggle-switch active" id="showProgressToggle"></div>
-            </div>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="btn-row">
-            <button type="button" class="btn btn-primary" id="startSearch">
-              <span>🔍</span>
-              Start Search
-            </button>
-            <button type="button" class="btn btn-danger" id="cancelSearch" disabled>
-              <span>⏹️</span>
-              Cancel
-            </button>
-          </div>
-          
-          <button type="button" class="btn btn-secondary" id="clearResults" style="width: 100%;">
-            <span>🗑️</span>
-            Clear Results
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Map Container -->
-    <div class="map-container">
-      <div id="map"></div>
-    </div>
-
-    <!-- Bottom Sheet for Results (Mobile) -->
-    <div class="bottom-sheet" id="bottomSheet">
-      <div class="sheet-handle"></div>
-      
-      <div class="sheet-header" id="sheetHeader">
-        <h3 class="sheet-title">
-          <span>📊 Results</span>
-          <span id="sheetToggleIcon">▲</span>
-        </h3>
-      </div>
-
-      <div class="sheet-content">
-        <!-- Progress Section -->
-        <div class="progress-section">
-          <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-          </div>
-          <div class="status" id="status">Ready to search...</div>
+          <button type="button" class="btn-secondary" id="getCurrentLocation">Use My Location</button>
         </div>
 
-        <!-- Statistics -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <p class="stat-number" id="totalCount">0</p>
-            <p class="stat-label">Found</p>
+        <div class="form-group">
+          <label>Search Radius (km)</label>
+          <input type="number" id="outerRadius" min="1" max="50" step="1" value="5">
+        </div>
+
+        <div class="form-group">
+          <label>Cell Size (meters)</label>
+          <input type="number" id="cellRadius" min="500" max="5000" step="100" value="1000">
+        </div>
+
+        <div class="form-group">
+          <label>Minimum Rating</label>
+          <select id="minRating">
+            <option value="4.0">4.0+</option>
+            <option value="4.2">4.2+</option>
+            <option value="4.5">4.5+</option>
+            <option value="4.7">4.7+</option>
+            <option value="4.8" selected>4.8+</option>
+            <option value="4.9">4.9+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Minimum Reviews</label>
+          <select id="minReviews">
+            <option value="100">100+</option>
+            <option value="500">500+</option>
+            <option value="1000" selected>1000+</option>
+            <option value="2000">2000+</option>
+            <option value="5000">5000+</option>
+          </select>
+        </div>
+
+        <div class="toggle-row">
+          <input type="checkbox" id="showCells" checked>
+          <label for="showCells">Show scan cells</label>
+        </div>
+
+        <div class="toggle-row">
+          <input type="checkbox" id="showProgress" checked>
+          <label for="showProgress">Live results</label>
+        </div>
+
+        <div style="margin: 16px 0;">
+          <button type="button" class="btn-primary" id="startSearch">Start Search</button>
+          <button type="button" class="btn-danger" id="cancelSearch" disabled>Cancel</button>
+          <button type="button" class="btn-secondary" id="clearResults">Clear</button>
+        </div>
+
+        <div class="progress-bar" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div id="status">Ready to search...</div>
+
+        <div class="stats" id="statsPanel">
+          <div class="stat-item">
+            <span>Total Found:</span>
+            <span id="totalCount">0</span>
           </div>
-          <div class="stat-card">
-            <p class="stat-number" id="filteredCount">0</p>
-            <p class="stat-label">Filtered</p>
+          <div class="stat-item">
+            <span>Filtered:</span>
+            <span id="filteredCount">0</span>
           </div>
-          <div class="stat-card">
-            <p class="stat-number" id="cellsScanned">0</p>
-            <p class="stat-label">Cells</p>
+          <div class="stat-item">
+            <span>Cells Scanned:</span>
+            <span id="cellsScanned">0/0</span>
           </div>
         </div>
 
-        <!-- Results -->
-        <div class="results-container">
-          <div class="results-header">🍽️ Restaurants</div>
+        <div style="margin-top: 16px;">
+          <strong>Results:</strong>
           <ul id="results"></ul>
         </div>
       </div>
     </div>
+
+    <div id="map"></div>
   </div>
 
   <script>
@@ -776,7 +450,6 @@
       API_KEY: 'AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg'
     };
 
-    // Global variables
     let map, info, svc;
     let searchCancelled = false;
     let currentMarkers = [];
@@ -787,11 +460,7 @@
     let selectedMarker = null;
     let lastClickedPlace = null;
     let lastClickTime = 0;
-    let isSearching = false;
-
-    // Mobile UI state
-    let controlsPanelExpanded = false;
-    let bottomSheetExpanded = false;
+    let controlsExpanded = false;
 
     // Utility functions
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
@@ -807,67 +476,20 @@
       return 2 * R * Math.asin(Math.sqrt(A));
     }
 
-    // Mobile UI Functions
-    function toggleControlsPanel() {
-      const panel = document.getElementById('controlsPanel');
+    // Mobile controls toggle
+    function toggleControls() {
+      const content = document.getElementById('controlsContent');
       const toggle = document.getElementById('controlsToggle');
-      const toggleText = document.getElementById('toggleText');
       
-      controlsPanelExpanded = !controlsPanelExpanded;
+      controlsExpanded = !controlsExpanded;
       
-      if (controlsPanelExpanded) {
-        panel.classList.add('expanded');
-        toggleText.textContent = 'Close';
-        toggle.innerHTML = '<span>✖️</span><span>Close</span>';
+      if (controlsExpanded) {
+        content.classList.add('expanded');
+        toggle.textContent = 'Close';
       } else {
-        panel.classList.remove('expanded');
-        toggleText.textContent = 'Settings';
-        toggle.innerHTML = '<span>⚙️</span><span>Settings</span>';
+        content.classList.remove('expanded');
+        toggle.textContent = 'Settings';
       }
-    }
-
-    function toggleBottomSheet() {
-      const sheet = document.getElementById('bottomSheet');
-      const icon = document.getElementById('sheetToggleIcon');
-      
-      bottomSheetExpanded = !bottomSheetExpanded;
-      
-      if (bottomSheetExpanded) {
-        sheet.classList.add('expanded');
-        icon.textContent = '▼';
-      } else {
-        sheet.classList.remove('expanded');
-        icon.textContent = '▲';
-      }
-    }
-
-    function setupToggleSwitches() {
-      const showCellsToggle = document.getElementById('showCellsToggle');
-      const showProgressToggle = document.getElementById('showProgressToggle');
-
-      showCellsToggle.addEventListener('click', () => {
-        showCellsToggle.classList.toggle('active');
-        toggleCellVisibility();
-      });
-
-      showProgressToggle.addEventListener('click', () => {
-        showProgressToggle.classList.toggle('active');
-      });
-    }
-
-    function updateSliderValues() {
-      const radiusSlider = document.getElementById('radiusSlider');
-      const cellSlider = document.getElementById('cellSlider');
-      const radiusValue = document.getElementById('radiusValue');
-      const cellValue = document.getElementById('cellValue');
-
-      radiusSlider.addEventListener('input', (e) => {
-        radiusValue.textContent = e.target.value + 'km';
-      });
-
-      cellSlider.addEventListener('input', (e) => {
-        cellValue.textContent = e.target.value + 'm';
-      });
     }
 
     // Marker and selection functions
@@ -888,13 +510,7 @@
       selectedMarker = marker;
       marker.setIcon(createMarkerIcon(true));
 
-      info.setContent(`
-        <div style="max-width: 250px;">
-          <h4 style="margin: 0 0 8px 0; font-size: 16px;">${place.name}</h4>
-          <p style="margin: 0 0 4px 0; font-size: 14px;">⭐ ${place.rating} (${place.user_ratings_total} reviews)</p>
-          <p style="margin: 0; font-size: 12px; color: #666;">Tap again to open in Google Maps</p>
-        </div>
-      `);
+      info.setContent(`<b>${place.name}</b><br>⭐ ${place.rating} (${place.user_ratings_total} reviews)<br><small>Click again to open in Google Maps</small>`);
       info.open(map, marker);
     }
 
@@ -927,7 +543,7 @@
         listItems.forEach(li => li.classList.remove('selected'));
 
         const targetItem = [...listItems].find(li =>
-          li.innerHTML.includes(place.name)
+          li.innerHTML.includes(`<strong>${place.name}</strong>`)
         );
         if (targetItem) {
           targetItem.classList.add('selected');
@@ -950,7 +566,7 @@
         strokeWeight: isActive ? 3 : 1,
         fillColor: isActive ? '#ff4444' : '#4444ff',
         fillOpacity: isActive ? 0.15 : 0.05,
-        map: document.getElementById('showCellsToggle').classList.contains('active') ? map : null
+        map: document.getElementById('showCells').checked ? map : null
       });
       return circle;
     }
@@ -959,7 +575,7 @@
       if (currentCellOverlay) {
         currentCellOverlay.setMap(null);
       }
-      if (document.getElementById('showCellsToggle').classList.contains('active')) {
+      if (document.getElementById('showCells').checked) {
         currentCellOverlay = createCellOverlay(center, radius, true);
       }
     }
@@ -990,16 +606,6 @@
       updateStats();
     }
 
-    function toggleCellVisibility() {
-      const showCells = document.getElementById('showCellsToggle').classList.contains('active');
-      for (const overlay of cellOverlays) {
-        overlay.setMap(showCells ? map : null);
-      }
-      if (currentCellOverlay) {
-        currentCellOverlay.setMap(showCells ? map : null);
-      }
-    }
-
     // Search functions
     function nearbyAll(center, radius, cellIndex) {
       return new Promise((resolve, reject) => {
@@ -1018,7 +624,7 @@
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             acc = acc.concat(res || []);
 
-            if (document.getElementById('showProgressToggle').classList.contains('active') && cellIndex === currentCellIndex) {
+            if (document.getElementById('showProgress').checked && cellIndex === currentCellIndex) {
               processPartialResults(res || [], center, radius);
             }
 
@@ -1054,7 +660,7 @@
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             acc = acc.concat(res || []);
 
-            if (document.getElementById('showProgressToggle').classList.contains('active') && cellIndex === currentCellIndex) {
+            if (document.getElementById('showProgress').checked && cellIndex === currentCellIndex) {
               processPartialResults(res || [], center, radius);
             }
 
@@ -1104,11 +710,6 @@
         addResultsToMap(newValidResults, true);
         updateResultsList();
         updateStats();
-        
-        // Show bottom sheet if new results found (mobile)
-        if (window.innerWidth < 768 && !bottomSheetExpanded) {
-          toggleBottomSheet();
-        }
       }
     }
 
@@ -1146,32 +747,22 @@
 
       if (filteredPlaces.length === 0) {
         const li = document.createElement("li");
-        li.innerHTML = `
-          <p class="result-name">${searchResults.size > 0 ? "No restaurants match your criteria yet..." : "No results yet..."}</p>
-          <p class="result-hint">Adjust your filters or continue searching</p>
-        `;
+        li.textContent = searchResults.size > 0 ? "No restaurants match your criteria yet..." : "No results yet...";
+        li.style.fontStyle = "italic";
         li.style.cursor = "default";
-        li.style.textAlign = "center";
         ul.appendChild(li);
         return;
       }
 
       for (const place of filteredPlaces) {
         const li = document.createElement("li");
-        li.innerHTML = `
-          <p class="result-name">${place.name}</p>
-          <p class="result-rating">⭐ ${place.rating} • ${place.user_ratings_total} reviews</p>
-          <p class="result-hint">Tap again to open in Google Maps</p>
-        `;
-
-        // Add new result animation
-        if (currentMarkers.find(m => m.placeData?.place_id === place.place_id && m.getAnimation())) {
-          li.classList.add('new-result');
-        }
+        li.innerHTML = `<strong>${place.name}</strong><br>⭐ ${place.rating} (${place.user_ratings_total} reviews)<br><small>Click again to open in Google Maps</small>`;
 
         li.onclick = () => handlePlaceClick(place);
         ul.appendChild(li);
       }
+
+      ul.scrollTop = ul.scrollHeight;
     }
 
     function updateStats() {
@@ -1210,23 +801,19 @@
     }
 
     async function scanArea() {
-      if (isSearching) return;
-
       const center = {
         lat: parseFloat(document.getElementById('centerLat').value),
         lng: parseFloat(document.getElementById('centerLng').value)
       };
-      const outerRadius = parseInt(document.getElementById('radiusSlider').value);
-      const cellRadius = parseInt(document.getElementById('cellSlider').value);
+      const outerRadius = parseInt(document.getElementById('outerRadius').value);
+      const cellRadius = parseInt(document.getElementById('cellRadius').value);
 
       if (isNaN(center.lat) || isNaN(center.lng)) {
-        updateStatus('❌ Invalid coordinates');
+        updateStatus('Error: Invalid coordinates');
         return;
       }
 
-      isSearching = true;
       searchCancelled = false;
-      
       const startBtn = document.getElementById('startSearch');
       const cancelBtn = document.getElementById('cancelSearch');
       
@@ -1234,14 +821,14 @@
       startBtn.classList.add('loading');
       cancelBtn.disabled = false;
 
-      // Close controls panel on mobile when search starts
-      if (window.innerWidth < 768 && controlsPanelExpanded) {
-        toggleControlsPanel();
+      // Close mobile controls
+      if (window.innerWidth < 768 && controlsExpanded) {
+        toggleControls();
       }
 
       const cells = buildGridCenters(center, outerRadius, cellRadius);
 
-      if (document.getElementById('showCellsToggle').classList.contains('active')) {
+      if (document.getElementById('showCells').checked) {
         for (const cell of cells) {
           const overlay = createCellOverlay(cell, cellRadius, false);
           cellOverlays.push(overlay);
@@ -1260,7 +847,7 @@
 
           updateStatus(`🔍 Scanning cell ${i + 1}/${cells.length}... (${searchResults.size} places found)`);
           updateProgress((i / cells.length) * 100);
-          document.getElementById('cellsScanned').textContent = `${i}/${cells.length}`;
+          document.getElementById('cellsScanned').textContent = `${i + 1}/${cells.length}`;
 
           try {
             const [A, B] = await Promise.allSettled([
@@ -1268,7 +855,7 @@
               textAll(cells[i], cellRadius, i)
             ]);
 
-            if (!document.getElementById('showProgressToggle').classList.contains('active')) {
+            if (!document.getElementById('showProgress').checked) {
               const batch = [
                 ...(A.status === "fulfilled" ? A.value : []),
                 ...(B.status === "fulfilled" ? B.value : [])
@@ -1284,7 +871,7 @@
             console.warn('Cell search error:', e);
           }
 
-          await sleep(300); // Slightly longer delay for mobile
+          await sleep(200);
         }
 
         currentCellIndex = -1;
@@ -1294,7 +881,7 @@
           return;
         }
 
-        if (!document.getElementById('showProgressToggle').classList.contains('active')) {
+        if (!document.getElementById('showProgress').checked) {
           updateStatus('🔄 Processing all results...');
 
           const minRating = parseFloat(document.getElementById('minRating').value);
@@ -1310,22 +897,16 @@
         }
 
         updateProgress(100);
-        updateStatus(`✅ Search complete! Found ${document.getElementById('filteredCount').textContent} restaurants`);
+        updateStatus(`✅ Search complete! Found ${document.getElementById('filteredCount').textContent} restaurants matching your criteria`);
 
         if (currentCellOverlay) {
           currentCellOverlay.setMap(null);
           currentCellOverlay = null;
         }
 
-        // Show results on mobile
-        if (window.innerWidth < 768 && !bottomSheetExpanded) {
-          toggleBottomSheet();
-        }
-
       } catch (error) {
         updateStatus(`❌ Search failed: ${error}`);
       } finally {
-        isSearching = false;
         startBtn.disabled = false;
         startBtn.classList.remove('loading');
         cancelBtn.disabled = true;
@@ -1342,10 +923,10 @@
 
     function getCurrentLocation() {
       const btn = document.getElementById('getCurrentLocation');
-      const originalText = btn.innerHTML;
+      const originalText = btn.textContent;
       
       btn.disabled = true;
-      btn.classList.add('loading');
+      btn.textContent = 'Getting location...';
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -1353,36 +934,36 @@
             document.getElementById('centerLat').value = position.coords.latitude.toFixed(6);
             document.getElementById('centerLng').value = position.coords.longitude.toFixed(6);
             
-            // Center map on new location
-            const newCenter = {
+            map.setCenter({
               lat: position.coords.latitude,
               lng: position.coords.longitude
-            };
-            map.setCenter(newCenter);
+            });
             map.setZoom(13);
             
             btn.disabled = false;
-            btn.classList.remove('loading');
-            btn.innerHTML = originalText;
+            btn.textContent = originalText;
             updateStatus('📍 Location updated');
           },
           (error) => {
-            updateStatus(`❌ Location error: ${error.message}`);
+            updateStatus(`Location error: ${error.message}`);
             btn.disabled = false;
-            btn.classList.remove('loading');
-            btn.innerHTML = originalText;
-          },
-          {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 300000
+            btn.textContent = originalText;
           }
         );
       } else {
-        updateStatus('❌ Geolocation not supported');
+        updateStatus('Geolocation not supported');
         btn.disabled = false;
-        btn.classList.remove('loading');
-        btn.innerHTML = originalText;
+        btn.textContent = originalText;
+      }
+    }
+
+    function toggleCellVisibility() {
+      const showCells = document.getElementById('showCells').checked;
+      for (const overlay of cellOverlays) {
+        overlay.setMap(showCells ? map : null);
+      }
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(showCells ? map : null);
       }
     }
 
@@ -1392,56 +973,50 @@
       map = new google.maps.Map(document.getElementById("map"), {
         center: center,
         zoom: 12,
-        disableDefaultUI: false,
-        zoomControl: true,
-        mapTypeControl: false,
-        scaleControl: false,
-        streetViewControl: false,
-        rotateControl: false,
-        fullscreenControl: false,
         gestureHandling: 'greedy'
       });
 
       info = new google.maps.InfoWindow();
       svc = new google.maps.places.PlacesService(map);
 
-      // Setup event listeners
-      document.getElementById('controlsToggle').addEventListener('click', toggleControlsPanel);
-      document.getElementById('sheetHeader').addEventListener('click', toggleBottomSheet);
+      // Setup responsive behavior
+      function handleResize() {
+        const isMobile = window.innerWidth < 768;
+        const desktopTitle = document.querySelector('h3[style*="display: none"]');
+        const mobileHeader = document.querySelector('.mobile-header');
+        
+        if (isMobile) {
+          desktopTitle.style.display = 'none';
+          mobileHeader.style.display = 'flex';
+          if (!controlsExpanded) {
+            document.getElementById('controlsContent').classList.remove('expanded');
+          }
+        } else {
+          desktopTitle.style.display = 'block';
+          mobileHeader.style.display = 'none';
+          document.getElementById('controlsContent').classList.remove('expanded');
+          document.getElementById('controlsToggle').textContent = 'Settings';
+          controlsExpanded = false;
+        }
+        
+        google.maps.event.trigger(map, 'resize');
+      }
+
+      window.addEventListener('resize', handleResize);
+      handleResize(); // Initial setup
+
+      // Event listeners
+      document.getElementById('controlsToggle').addEventListener('click', toggleControls);
       document.getElementById('startSearch').addEventListener('click', scanArea);
       document.getElementById('cancelSearch').addEventListener('click', () => {
         searchCancelled = true;
-        updateStatus('🛑 Cancelling search...');
+        updateStatus('Cancelling search...');
       });
       document.getElementById('clearResults').addEventListener('click', clearVisualElements);
       document.getElementById('getCurrentLocation').addEventListener('click', getCurrentLocation);
+      document.getElementById('showCells').addEventListener('change', toggleCellVisibility);
 
-      // Setup toggle switches and sliders
-      setupToggleSwitches();
-      updateSliderValues();
-
-      // Handle window resize
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          google.maps.event.trigger(map, 'resize');
-          
-          // Auto-close mobile panels on desktop
-          if (window.innerWidth >= 768) {
-            if (controlsPanelExpanded) {
-              controlsPanelExpanded = false;
-              document.getElementById('controlsPanel').classList.remove('expanded');
-            }
-            if (bottomSheetExpanded) {
-              bottomSheetExpanded = false;
-              document.getElementById('bottomSheet').classList.remove('expanded');
-            }
-          }
-        }, 250);
-      });
-
-      updateStatus('🎯 Ready to search. Configure parameters and tap Start Search.');
+      updateStatus('Ready to search. Configure parameters and click Start Search.');
       updateStats();
     }
 
