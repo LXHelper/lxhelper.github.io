@@ -994,48 +994,63 @@
       info.open(map, marker);
     }
 
-    function generateGoogleMapsUrl(place) {
-      if (place.place_id) {
-        return `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
-      }
+function generateGoogleMapsUrl(place) {
+  if (!place.place_id) return null;
 
-      const lat = place.geometry.location.lat();
-      const lng = place.geometry.location.lng();
-      const name = encodeURIComponent(place.name);
-      return `https://www.google.com/maps/search/${name}/@${lat},${lng},17z`;
+  const name = encodeURIComponent(place.name);
+
+  // App-first (Google Maps app)
+  const appUrl = `comgooglemaps://?q=${name}&query_place_id=${place.place_id}`;
+
+  // Fallback (web browser)
+  const webUrl = `https://www.google.com/maps/search/?api=1&query=${name}&query_place_id=${place.place_id}`;
+
+  return { appUrl, webUrl };
+}
+
+function handlePlaceClick(place) {
+  const currentTime = Date.now();
+  const isDoubleClick = (
+    lastClickedPlace === place.place_id && 
+    currentTime - lastClickTime < 500
+  );
+
+  if (isDoubleClick) {
+    const { appUrl, webUrl } = generateGoogleMapsUrl(place);
+
+    // Try to open in Maps app first
+    window.location.href = appUrl;
+
+    // Fallback to web if app not installed
+    setTimeout(() => {
+      window.location.href = webUrl;
+    }, 500);
+
+    lastClickedPlace = null;
+  } else {
+    const marker = currentMarkers.find(m => m.getTitle() === place.name);
+    if (marker) {
+      selectMarker(marker, place);
     }
 
-    function handlePlaceClick(place) {
-      const currentTime = Date.now();
-      const isDoubleClick = (lastClickedPlace === place.place_id && currentTime - lastClickTime < 500);
+    // Highlight corresponding list item
+    const listItems = document.querySelectorAll('#results li');
+    listItems.forEach(li => li.classList.remove('selected'));
 
-      if (isDoubleClick) {
-        const url = generateGoogleMapsUrl(place);
-        window.open(url, '_blank');
-        lastClickedPlace = null;
-      } else {
-        const marker = currentMarkers.find(m => m.getTitle() === place.name);
-        if (marker) {
-          selectMarker(marker, place);
-        }
-
-        // Highlight corresponding list item
-        const listItems = document.querySelectorAll('#results li');
-        listItems.forEach(li => li.classList.remove('selected'));
-
-        const targetItem = [...listItems].find(li =>
-          li.innerHTML.includes(place.name)
-        );
-        if (targetItem) {
-          targetItem.classList.add('selected');
-          targetItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        lastClickedPlace = place.place_id;
-      }
-
-      lastClickTime = currentTime;
+    const targetItem = [...listItems].find(li =>
+      li.innerHTML.includes(place.name)
+    );
+    if (targetItem) {
+      targetItem.classList.add('selected');
+      targetItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
+
+    lastClickedPlace = place.place_id;
+  }
+
+  lastClickTime = currentTime;
+}
+
 
     // Visual cell functions
     function createCellOverlay(center, radius, isActive = false) {
@@ -1518,3 +1533,4 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg&libraries=places&callback=initMap"></script>
 </body>
 </html>
+
