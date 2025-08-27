@@ -290,12 +290,6 @@
       max-height: 50vh;
       transform: translateY(calc(100% - 60px));
       transition: transform 0.3s ease;
-      /* added for smoother animation when we manipulate transform via JS */
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      -webkit-transform: translateZ(0);
-      transform-origin: 50% 100%;
     }
 
     .bottom-sheet.expanded {
@@ -308,10 +302,6 @@
       background: #ccc;
       border-radius: 2px;
       margin: 12px auto 8px;
-      /* allow touch-driven dragging on the handle */
-      touch-action: none;
-      -ms-touch-action: none;
-      cursor: grab;
     }
 
     .sheet-header {
@@ -779,6 +769,7 @@
       </div>
     </div>
   </div>
+
   <script>
     // Configuration
     const CONFIG = {
@@ -835,40 +826,19 @@
       }
     }
 
-    // --- Updated toggleBottomSheet: integrates with drag/snap logic ---
     function toggleBottomSheet() {
       const sheet = document.getElementById('bottomSheet');
       const icon = document.getElementById('sheetToggleIcon');
-
-      // calculate heights
-      const H = sheet.getBoundingClientRect().height;
-      const peek = 60; // must match CSS calc(100% - 60px) peek
-      const collapsedTY = H - peek;
-
+      
       bottomSheetExpanded = !bottomSheetExpanded;
-
+      
       if (bottomSheetExpanded) {
-        // expand to top (0)
-        setSheetTranslateY(0, true);
         sheet.classList.add('expanded');
         icon.textContent = '▼';
       } else {
-        // collapse (show peek)
-        setSheetTranslateY(collapsedTY, true);
         sheet.classList.remove('expanded');
         icon.textContent = '▲';
       }
-    }
-
-    // helper to set transform (in px) with optional animation
-    function setSheetTranslateY(px, animate = true) {
-      const sheet = document.getElementById('bottomSheet');
-      if (animate) {
-        sheet.style.transition = 'transform 0.28s cubic-bezier(.2,.8,.2,1)';
-      } else {
-        sheet.style.transition = 'none';
-      }
-      sheet.style.transform = `translateY(${px}px)`;
     }
 
     function setupToggleSwitches() {
@@ -1468,190 +1438,12 @@
               document.getElementById('bottomSheet').classList.remove('expanded');
             }
           }
-
-          // Reposition bottom sheet to appropriate state after resize:
-          repositionBottomSheetAfterResize();
         }, 250);
       });
 
       updateStatus('🎯 Ready to search. Configure parameters and tap Start Search.');
       updateStats();
     }
-
-    // Put drag/snap code below (touch + mouse support)
-    (function setupBottomSheetDrag() {
-      const sheet = document.getElementById('bottomSheet');
-      const handle = sheet.querySelector('.sheet-handle');
-      const icon = document.getElementById('sheetToggleIcon');
-
-      let startY = 0;
-      let startTY = 0;
-      let dragging = false;
-
-      // peek matches CSS calc(100% - 60px) used originally
-      const peek = 60;
-
-      function getSheetHeight() {
-        // use bounding height (the sheet element's full height)
-        return Math.max(0, sheet.getBoundingClientRect().height || sheet.offsetHeight);
-      }
-
-      function getComputedTranslateY() {
-        // read computed transform if present (matrix)
-        const st = window.getComputedStyle(sheet);
-        const tr = st.transform || st.webkitTransform || 'none';
-        if (tr && tr !== 'none') {
-          const match = tr.match(/matrix.*\((.+)\)/);
-          if (match) {
-            const vals = match[1].split(',').map(s => s.trim());
-            // matrix(a, b, c, d, tx, ty) -> ty is index 5
-            if (vals.length === 6) {
-              return parseFloat(vals[5]);
-            } else if (vals.length === 16) {
-              // matrix3d
-              return parseFloat(vals[13]);
-            }
-          }
-        }
-        // fallback: collapsed default = sheetHeight - peek (CSS translateY(calc(100% - 60px)))
-        return getSheetHeight() - peek;
-      }
-
-      function clamp(n, min, max) {
-        return Math.max(min, Math.min(max, n));
-      }
-
-      function onDragStart(clientY) {
-        dragging = true;
-        startY = clientY;
-        startTY = getComputedTranslateY();
-        sheet.style.transition = 'none';
-        // prevent page scrolling while dragging from handle
-        document.body.style.touchAction = 'none';
-      }
-
-      function onDragMove(clientY) {
-        if (!dragging) return;
-        const delta = clientY - startY;
-        const sheetH = getSheetHeight();
-        const maxTY = sheetH - peek; // collapsed (move down this px value)
-        let newTY = startTY + delta;
-        newTY = clamp(newTY, 0, maxTY);
-        sheet.style.transform = `translateY(${newTY}px)`;
-      }
-
-      function snapToNearest() {
-        const sheetH = getSheetHeight();
-        const maxTY = sheetH - peek;
-        const midTY = Math.round(sheetH / 2);
-        const candidates = [maxTY, midTY, 0];
-        const current = getComputedTranslateY();
-        // choose nearest
-        let nearest = candidates[0];
-        let bestDiff = Math.abs(candidates[0] - current);
-        for (let i = 1; i < candidates.length; i++) {
-          const d = Math.abs(candidates[i] - current);
-          if (d < bestDiff) {
-            bestDiff = d;
-            nearest = candidates[i];
-          }
-        }
-        // animate to nearest
-        setSheetTranslateY(nearest, true);
-
-        // update state & icon & class
-        bottomSheetExpanded = (nearest === 0);
-        if (bottomSheetExpanded) {
-          sheet.classList.add('expanded');
-          if (icon) icon.textContent = '▼';
-        } else {
-          sheet.classList.remove('expanded');
-          if (icon) icon.textContent = '▲';
-        }
-      }
-
-      function onDragEnd() {
-        if (!dragging) return;
-        dragging = false;
-        document.body.style.touchAction = '';
-        snapToNearest();
-      }
-
-      // Touch events
-      handle.addEventListener('touchstart', function (ev) {
-        if (ev.touches && ev.touches.length === 1) {
-          onDragStart(ev.touches[0].clientY);
-        }
-      }, { passive: true });
-
-      handle.addEventListener('touchmove', function (ev) {
-        if (ev.touches && ev.touches.length === 1 && dragging) {
-          // prevent default to avoid page scroll while dragging
-          ev.preventDefault();
-          onDragMove(ev.touches[0].clientY);
-        }
-      }, { passive: false });
-
-      handle.addEventListener('touchend', function (ev) {
-        onDragEnd();
-      });
-
-      // Mouse events (desktop)
-      handle.addEventListener('mousedown', function (ev) {
-        ev.preventDefault();
-        onDragStart(ev.clientY);
-
-        function mm(e) {
-          onDragMove(e.clientY);
-        }
-        function mu(e) {
-          onDragEnd();
-          document.removeEventListener('mousemove', mm);
-          document.removeEventListener('mouseup', mu);
-        }
-        document.addEventListener('mousemove', mm);
-        document.addEventListener('mouseup', mu);
-      });
-
-      // Safety: reposition sheet correctly after window resizes
-      window.addEventListener('resize', () => {
-        repositionBottomSheetAfterResize();
-      });
-
-      // On initial load, ensure the sheet is at collapsed peek state (to match original CSS)
-      // but let CSS handle initial transform — we do a small sync to inline style when DOM is ready.
-      function initPosition() {
-        const sheetH = getSheetHeight();
-        const collapsedTY = Math.max(0, sheetH - peek);
-        // If current computed transform is 'none' (unlikely), set inline to match collapsed:
-        const currentTY = getComputedTranslateY();
-        if (Math.abs(currentTY - collapsedTY) > 1) {
-          // place inline at collapsed (so JS snaps smoothly later)
-          setSheetTranslateY(collapsedTY, false);
-          bottomSheetExpanded = false;
-          sheet.classList.remove('expanded');
-          if (icon) icon.textContent = '▲';
-        }
-      }
-
-      // Expose reposition helper to outer scope (used on resize from other code)
-      window.repositionBottomSheetAfterResize = function () {
-        const sheetH = getSheetHeight();
-        const collapsedTY = Math.max(0, sheetH - peek);
-        if (bottomSheetExpanded) {
-          setSheetTranslateY(0, false);
-          sheet.classList.add('expanded');
-          if (icon) icon.textContent = '▼';
-        } else {
-          setSheetTranslateY(collapsedTY, false);
-          sheet.classList.remove('expanded');
-          if (icon) icon.textContent = '▲';
-        }
-      };
-
-      // small init timeout after DOM ready
-      setTimeout(initPosition, 200);
-    })();
 
     window.initMap = initMap;
   </script>
