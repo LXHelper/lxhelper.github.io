@@ -39,11 +39,34 @@
       transition: all 0.3s ease;
     }
 
-    .top-bar.minimized {
-      padding: 8px 20px;
-      min-height: 44px;
-    }
+#closeSettingsBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+#closeSettingsBtn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+#closeSettingsBtn:active {
+  transform: scale(0.95);
+}
+
+.top-bar.minimized #closeSettingsBtn {
+  display: none;
+}
     .app-title {
       font-size: 20px;
       font-weight: 600;
@@ -530,15 +553,15 @@
   </style>
 </head>
 <body>
-  <div class="app-container">
-    <!-- Top Bar -->
-    <div class="top-bar" id="topBar">
-      <h1 class="app-title">Restaurant Finder</h1>
-      <div class="search-status" id="searchStatus">
-        <div class="status-dot" id="statusDot"></div>
-        <span id="statusText">Ready</span>
-      </div>
-    </div>
+<div class="top-bar" id="topBar">
+  <h1 class="app-title">Restaurant Finder</h1>
+  <div class="search-status" id="searchStatus">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="statusText">Ready</span>
+  </div>
+  <button id="closeSettingsBtn" title="Close Search/Settings" style="background:none; border:none; font-size:20px; cursor:pointer; color:#666; padding:8px;">&times;</button>
+</div>
+
 
     <!-- Settings Panel -->
     <div class="settings-panel" id="settingsPanel">
@@ -806,6 +829,9 @@
 
       document.getElementById('totalCount').textContent = searchResults.size;
       document.getElementById('filteredCount').textContent = filteredCount;
+	  document.getElementById('closeSettingsBtn').addEventListener('click', () => {
+  hideSettings();
+  updateStatus('Search/Settings closed');
     }
 
     // Range slider updates
@@ -1533,4 +1559,5 @@ function handlePlaceClick(place) {
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg&libraries=places&callback=initMap"></script>
 </body>
 </html>
+
 
