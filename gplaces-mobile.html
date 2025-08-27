@@ -8,67 +8,266 @@
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      margin: 0;
+      padding: 0;
     }
 
-    body { 
-      font-family: system-ui, sans-serif; 
-      margin: 0; 
-      padding: 0; 
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #f8f9fa;
+      overflow: hidden;
     }
 
-    /* Desktop Layout - Original Design */
-    .container { 
-      display: flex; 
-      height: 100vh; 
-    }
-    
-    #map { 
-      flex: 1; 
-      min-height: 500px; 
+    /* Main Container */
+    .app-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
     }
 
-    #controls-panel {
-      width: 320px;
+    /* Top Header Bar */
+    .top-bar {
+      background: #fff;
+      padding: 12px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+      transition: all 0.3s ease;
+    }
+
+    .top-bar.minimized {
+      padding: 8px 20px;
+      min-height: 44px;
+    }
+
+    .app-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+
+    .top-bar.minimized .app-title {
+      font-size: 16px;
+    }
+
+    .search-status {
+      font-size: 14px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #28a745;
+    }
+
+    .status-dot.searching {
+      background: #007bff;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* Settings Panel */
+    .settings-panel {
+      background: #fff;
+      padding: 20px;
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .settings-panel.hidden {
+      max-height: 0;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+
+    /* Form Groups */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fff;
+      transition: border-color 0.2s ease;
+      appearance: none;
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+    }
+
+    .coords-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Range Sliders */
+    .range-container {
+      margin-top: 8px;
+    }
+
+    .range-input {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #e9ecef;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .range-input::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #007bff;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .range-input::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #007bff;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .range-value {
+      background: #007bff;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* Toggle Switches */
+    .toggle-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 16px;
       background: #f8f9fa;
-      overflow-y: auto;
-      border-right: 1px solid #ddd;
+      border-radius: 12px;
     }
 
-    .form-group {
-      margin-bottom: 12px;
-    }
-
-    .form-group label {
-      display: block;
+    .toggle-label {
+      font-size: 15px;
       font-weight: 500;
-      margin-bottom: 4px;
-      font-size: 13px;
+      color: #333;
     }
 
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 6px 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 13px;
-      box-sizing: border-box;
-    }
-
-    button {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 4px;
+    .toggle-switch {
+      position: relative;
+      width: 52px;
+      height: 32px;
+      background: #ccc;
+      border-radius: 16px;
+      transition: background 0.3s ease;
       cursor: pointer;
-      font-size: 13px;
-      margin: 4px 4px 4px 0;
+    }
+
+    .toggle-switch.active {
+      background: #007bff;
+    }
+
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-radius: 14px;
+      background: white;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .toggle-switch.active::before {
+      transform: translateX(20px);
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      padding: 16px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 52px;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
     }
 
     .btn-primary {
-      background: #007bff;
+      background: linear-gradient(135deg, #007bff, #0056b3);
       color: white;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
     }
 
     .btn-secondary {
@@ -81,367 +280,416 @@
       color: white;
     }
 
-    button:hover {
-      opacity: 0.9;
-    }
-
-    button:disabled {
+    .btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
+      transform: none;
     }
 
-    .toggle-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .toggle-row label {
-      margin: 0;
-      font-size: 12px;
-    }
-
-    input[type="checkbox"] {
-      width: auto;
-    }
-
-    #results {
-      max-height: 320px;
-      overflow-y: auto;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background: white;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    #results li {
-      margin: 0;
-      padding: 8px;
-      cursor: pointer;
-      border-bottom: 1px solid #eee;
-      font-size: 12px;
-      line-height: 1.3;
-    }
-
-    #results li:hover {
-      background: #f0f0f0;
-    }
-
-    #results li.selected {
-      background: #e8f5e8;
-      border-left: 4px solid #28a745;
-    }
-
-    #results li:last-child {
-      border-bottom: none;
-    }
-
-    .new-result {
-      background: #e8f5e8 !important;
-      animation: highlight 2s ease-out;
-    }
-
-    @keyframes highlight {
-      0% { background: #90ee90 !important; }
-      100% { background: #e8f5e8 !important; }
-    }
-
-    #status {
-      padding: 8px;
-      margin-top: 8px;
-      background: #e9ecef;
-      border-radius: 4px;
-      font-size: 12px;
-      min-height: 20px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: #e9ecef;
-      border-radius: 4px;
-      margin: 8px 0;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: #007bff;
-      transition: width 0.3s ease;
-      width: 0%;
-    }
-
-    .coords-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .coords-row .form-group {
-      flex: 1;
-    }
-
-    .stats {
-      background: white;
-      padding: 8px;
-      border-radius: 4px;
-      margin: 8px 0;
-      font-size: 12px;
-    }
-
-    .stat-item {
-      display: flex;
-      justify-content: space-between;
-      margin: 2px 0;
-    }
-
-    /* Mobile Optimizations */
-    @media (max-width: 767px) {
-      .container {
-        flex-direction: column;
-        height: 100vh;
-      }
-
-      #controls-panel {
-        width: 100%;
-        height: auto;
-        max-height: 50vh;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-        position: relative;
-        z-index: 1000;
-      }
-
-      .mobile-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      .mobile-header h3 {
-        margin: 0;
-        font-size: 16px;
-      }
-
-      .controls-toggle {
-        background: #007bff;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 12px;
-        cursor: pointer;
-      }
-
-      .controls-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-      }
-
-      .controls-content.expanded {
-        max-height: 40vh;
-        overflow-y: auto;
-      }
-
-      .form-group input,
-      .form-group select {
-        padding: 12px 8px;
-        font-size: 16px;
-        min-height: 44px;
-      }
-
-      button {
-        padding: 12px 16px;
-        font-size: 14px;
-        min-height: 44px;
-      }
-
-      .toggle-row {
-        min-height: 44px;
-      }
-
-      #map {
-        flex: 1;
-        min-height: 300px;
-      }
-
-      #results {
-        max-height: 200px;
-      }
-
-      #results li {
-        padding: 12px;
-        font-size: 14px;
-        min-height: 44px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-        text-align: center;
-      }
-
-      .stat-item {
-        flex-direction: column;
-        background: #007bff;
-        color: white;
-        padding: 8px;
-        border-radius: 8px;
-      }
-
-      .stat-item span:first-child {
-        font-size: 10px;
-        opacity: 0.8;
-      }
-
-      .stat-item span:last-child {
-        font-size: 16px;
-        font-weight: bold;
-      }
-    }
-
-    /* Loading animation */
     .btn.loading {
-      position: relative;
       color: transparent;
+      position: relative;
     }
 
     .btn.loading::after {
       content: '';
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       border: 2px solid transparent;
-      border-top: 2px solid currentColor;
+      border-top: 2px solid white;
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
     }
 
     @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Map Container */
+    .map-container {
+      flex: 1;
+      position: relative;
+      min-height: 200px;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Bottom Sheet */
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+      z-index: 2000;
+      max-height: 80vh;
+      transform: translateY(calc(100% - 80px));
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bottom-sheet.expanded {
+      transform: translateY(0);
+    }
+
+    .bottom-sheet.dragging {
+      transition: none;
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      margin: 12px auto 8px;
+      cursor: grab;
+      transition: all 0.2s ease;
+    }
+
+    .sheet-handle:active {
+      cursor: grabbing;
+      background: #007bff;
+      transform: scaleY(1.5);
+    }
+
+    .sheet-header {
+      padding: 8px 24px 16px;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+    }
+
+    .sheet-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sheet-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #007bff, #00a8ff);
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #f0f0f0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #007bff, #00a8ff);
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-status {
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* Results List */
+    .results-container {
+      margin-top: 20px;
+    }
+
+    .results-header {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .results-list {
+      list-style: none;
+    }
+
+    .result-item {
+      background: #f8f9fa;
+      margin-bottom: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+
+    .result-item:active {
+      transform: scale(0.98);
+    }
+
+    .result-item.selected {
+      background: #e8f5e8;
+      border-color: #28a745;
+    }
+
+    .result-item.new-result {
+      background: linear-gradient(135deg, #90ee90, #e8f5e8);
+      animation: slideIn 0.6s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
       to {
-        transform: translate(-50%, -50%) rotate(360deg);
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .result-rating {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .result-hint {
+      font-size: 12px;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Landscape adjustments */
+    @media (orientation: landscape) and (max-height: 500px) {
+      .settings-panel {
+        max-height: calc(100vh - 44px);
+      }
+      
+      .bottom-sheet {
+        max-height: 70vh;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="controls-panel">
-      <!-- Mobile header -->
-      <div class="mobile-header">
-        <h3>Restaurant Finder</h3>
-        <button class="controls-toggle" id="controlsToggle">Settings</button>
-      </div>
-
-      <!-- Desktop title (hidden on mobile) -->
-      <h3 style="margin-top: 0; display: none;">Restaurant Finder</h3>
-
-      <div class="controls-content" id="controlsContent">
-        <div class="form-group">
-          <label>Search Center</label>
-          <div class="coords-row">
-            <div class="form-group">
-              <input type="number" id="centerLat" step="0.001" placeholder="Latitude" value="44.437">
-            </div>
-            <div class="form-group">
-              <input type="number" id="centerLng" step="0.001" placeholder="Longitude" value="26.097">
-            </div>
-          </div>
-          <button type="button" class="btn-secondary" id="getCurrentLocation">Use My Location</button>
-        </div>
-
-        <div class="form-group">
-          <label>Search Radius (km)</label>
-          <input type="number" id="outerRadius" min="1" max="50" step="1" value="5">
-        </div>
-
-        <div class="form-group">
-          <label>Cell Size (meters)</label>
-          <input type="number" id="cellRadius" min="500" max="5000" step="100" value="1000">
-        </div>
-
-        <div class="form-group">
-          <label>Minimum Rating</label>
-          <select id="minRating">
-            <option value="4.0">4.0+</option>
-            <option value="4.2">4.2+</option>
-            <option value="4.5">4.5+</option>
-            <option value="4.7">4.7+</option>
-            <option value="4.8" selected>4.8+</option>
-            <option value="4.9">4.9+</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Minimum Reviews</label>
-          <select id="minReviews">
-            <option value="100">100+</option>
-            <option value="500">500+</option>
-            <option value="1000" selected>1000+</option>
-            <option value="2000">2000+</option>
-            <option value="5000">5000+</option>
-          </select>
-        </div>
-
-        <div class="toggle-row">
-          <input type="checkbox" id="showCells" checked>
-          <label for="showCells">Show scan cells</label>
-        </div>
-
-        <div class="toggle-row">
-          <input type="checkbox" id="showProgress" checked>
-          <label for="showProgress">Live results</label>
-        </div>
-
-        <div style="margin: 16px 0;">
-          <button type="button" class="btn-primary" id="startSearch">Start Search</button>
-          <button type="button" class="btn-danger" id="cancelSearch" disabled>Cancel</button>
-          <button type="button" class="btn-secondary" id="clearResults">Clear</button>
-        </div>
-
-        <div class="progress-bar" id="progressBar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-        <div id="status">Ready to search...</div>
-
-        <div class="stats" id="statsPanel">
-          <div class="stat-item">
-            <span>Total Found:</span>
-            <span id="totalCount">0</span>
-          </div>
-          <div class="stat-item">
-            <span>Filtered:</span>
-            <span id="filteredCount">0</span>
-          </div>
-          <div class="stat-item">
-            <span>Cells Scanned:</span>
-            <span id="cellsScanned">0/0</span>
-          </div>
-        </div>
-
-        <div style="margin-top: 16px;">
-          <strong>Results:</strong>
-          <ul id="results"></ul>
-        </div>
+  <div class="app-container">
+    <!-- Top Bar -->
+    <div class="top-bar" id="topBar">
+      <h1 class="app-title">Restaurant Finder</h1>
+      <div class="search-status" id="searchStatus">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusText">Ready</span>
       </div>
     </div>
 
-    <div id="map"></div>
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+      <!-- Location Settings -->
+      <div class="form-group">
+        <label class="form-label">Search Center</label>
+        <div class="coords-grid">
+          <input type="number" class="form-input" id="centerLat" step="0.001" placeholder="Latitude" value="44.437">
+          <input type="number" class="form-input" id="centerLng" step="0.001" placeholder="Longitude" value="26.097">
+        </div>
+        <button class="btn btn-secondary" id="getCurrentLocation" style="margin-top: 12px; width: 100%;">
+          📍 Use My Location
+        </button>
+      </div>
+
+      <!-- Search Radius -->
+      <div class="form-group">
+        <label class="form-label">Search Radius</label>
+        <div class="range-container">
+          <input type="range" class="range-input" id="radiusSlider" min="1" max="20" value="5">
+          <div class="range-labels">
+            <span>1km</span>
+            <span class="range-value" id="radiusValue">5km</span>
+            <span>20km</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cell Size -->
+      <div class="form-group">
+        <label class="form-label">Scan Precision</label>
+        <div class="range-container">
+          <input type="range" class="range-input" id="cellSlider" min="500" max="3000" step="100" value="1000">
+          <div class="range-labels">
+            <span>Rough</span>
+            <span class="range-value" id="cellValue">1000m</span>
+            <span>Precise</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quality Filters -->
+      <div class="form-group">
+        <label class="form-label">Minimum Rating</label>
+        <select class="form-select" id="minRating">
+          <option value="4.0">4.0+ Stars</option>
+          <option value="4.2">4.2+ Stars</option>
+          <option value="4.5">4.5+ Stars</option>
+          <option value="4.7">4.7+ Stars</option>
+          <option value="4.8" selected>4.8+ Stars</option>
+          <option value="4.9">4.9+ Stars</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Minimum Reviews</label>
+        <select class="form-select" id="minReviews">
+          <option value="100">100+ Reviews</option>
+          <option value="500">500+ Reviews</option>
+          <option value="1000" selected>1000+ Reviews</option>
+          <option value="2000">2000+ Reviews</option>
+          <option value="5000">5000+ Reviews</option>
+        </select>
+      </div>
+
+      <!-- Visual Options -->
+      <div class="form-group">
+        <label class="form-label">Display Options</label>
+        <div class="toggle-group">
+          <div class="toggle-item">
+            <span class="toggle-label">Show scan cells</span>
+            <div class="toggle-switch active" id="showCellsToggle"></div>
+          </div>
+          <div class="toggle-item">
+            <span class="toggle-label">Live results</span>
+            <div class="toggle-switch active" id="showProgressToggle"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="startSearch">
+          🔍 Start Search
+        </button>
+        <button class="btn btn-danger" id="cancelSearch" disabled>
+          ⏹️ Cancel Search
+        </button>
+        <button class="btn btn-secondary" id="clearResults">
+          🗑️ Clear Results
+        </button>
+      </div>
+    </div>
+
+    <!-- Map Container -->
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+
+    <!-- Bottom Sheet -->
+    <div class="bottom-sheet" id="bottomSheet">
+      <div class="sheet-handle" id="sheetHandle"></div>
+      
+      <div class="sheet-header" id="sheetHeader">
+        <div class="sheet-title">
+          <span>📊 Search Results</span>
+          <span id="sheetToggleIcon">▲</span>
+        </div>
+      </div>
+
+      <div class="sheet-content">
+        <!-- Progress Section -->
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-status" id="progressStatus">Ready to search</div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="totalCount">0</div>
+            <div class="stat-label">Found</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="filteredCount">0</div>
+            <div class="stat-label">Match</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="cellsScanned">0</div>
+            <div class="stat-label">Cells</div>
+          </div>
+        </div>
+
+        <!-- Quick Settings Access -->
+        <div class="form-group">
+          <button class="btn btn-secondary" id="showSettingsBtn" style="width: 100%;">
+            ⚙️ Adjust Search Settings
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div class="results-container">
+          <div class="results-header">
+            🍽️ Restaurants
+          </div>
+          <ul class="results-list" id="results"></ul>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -450,6 +698,7 @@
       API_KEY: 'AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg'
     };
 
+    // Global variables
     let map, info, svc;
     let searchCancelled = false;
     let currentMarkers = [];
@@ -460,7 +709,14 @@
     let selectedMarker = null;
     let lastClickedPlace = null;
     let lastClickTime = 0;
-    let controlsExpanded = false;
+    let isSearching = false;
+
+    // UI State
+    let settingsVisible = true;
+    let bottomSheetExpanded = false;
+    let isDragging = false;
+    let startY = 0;
+    let currentY = 0;
 
     // Utility functions
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
@@ -476,23 +732,241 @@
       return 2 * R * Math.asin(Math.sqrt(A));
     }
 
-    // Mobile controls toggle
-    function toggleControls() {
-      const content = document.getElementById('controlsContent');
-      const toggle = document.getElementById('controlsToggle');
+    // UI Functions
+    function hideSettings() {
+      const panel = document.getElementById('settingsPanel');
+      const topBar = document.getElementById('topBar');
       
-      controlsExpanded = !controlsExpanded;
+      panel.classList.add('hidden');
+      topBar.classList.add('minimized');
+      settingsVisible = false;
       
-      if (controlsExpanded) {
-        content.classList.add('expanded');
-        toggle.textContent = 'Close';
+      // Resize map after animation
+      setTimeout(() => {
+        google.maps.event.trigger(map, 'resize');
+      }, 400);
+    }
+
+    function showSettings() {
+      const panel = document.getElementById('settingsPanel');
+      const topBar = document.getElementById('topBar');
+      
+      panel.classList.remove('hidden');
+      topBar.classList.remove('minimized');
+      settingsVisible = true;
+      
+      // Resize map after animation
+      setTimeout(() => {
+        google.maps.event.trigger(map, 'resize');
+      }, 400);
+    }
+
+    function toggleBottomSheet() {
+      const sheet = document.getElementById('bottomSheet');
+      const icon = document.getElementById('sheetToggleIcon');
+      
+      bottomSheetExpanded = !bottomSheetExpanded;
+      
+      if (bottomSheetExpanded) {
+        sheet.classList.add('expanded');
+        icon.textContent = '▼';
       } else {
-        content.classList.remove('expanded');
-        toggle.textContent = 'Settings';
+        sheet.classList.remove('expanded');
+        icon.textContent = '▲';
       }
     }
 
-    // Marker and selection functions
+    function updateStatus(text, isSearching = false) {
+      const statusText = document.getElementById('statusText');
+      const statusDot = document.getElementById('statusDot');
+      const progressStatus = document.getElementById('progressStatus');
+      
+      statusText.textContent = text;
+      progressStatus.textContent = text;
+      
+      if (isSearching) {
+        statusDot.classList.add('searching');
+      } else {
+        statusDot.classList.remove('searching');
+      }
+    }
+
+    function updateProgress(percent) {
+      document.getElementById('progressFill').style.width = percent + '%';
+    }
+
+    function updateStats() {
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+
+      const filteredCount = [...searchResults.values()]
+        .filter(p => (p.types || []).includes("restaurant"))
+        .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews)
+        .length;
+
+      document.getElementById('totalCount').textContent = searchResults.size;
+      document.getElementById('filteredCount').textContent = filteredCount;
+    }
+
+    // Range slider updates
+    function setupSliders() {
+      const radiusSlider = document.getElementById('radiusSlider');
+      const cellSlider = document.getElementById('cellSlider');
+      const radiusValue = document.getElementById('radiusValue');
+      const cellValue = document.getElementById('cellValue');
+
+      radiusSlider.addEventListener('input', (e) => {
+        radiusValue.textContent = e.target.value + 'km';
+      });
+
+      cellSlider.addEventListener('input', (e) => {
+        cellValue.textContent = e.target.value + 'm';
+      });
+    }
+
+    // Toggle switches
+    function setupToggles() {
+      const showCellsToggle = document.getElementById('showCellsToggle');
+      const showProgressToggle = document.getElementById('showProgressToggle');
+
+      showCellsToggle.addEventListener('click', () => {
+        showCellsToggle.classList.toggle('active');
+        toggleCellVisibility();
+      });
+
+      showProgressToggle.addEventListener('click', () => {
+        showProgressToggle.classList.toggle('active');
+      });
+    }
+
+    // Bottom sheet drag functionality
+    function setupBottomSheetDrag() {
+      const sheet = document.getElementById('bottomSheet');
+      const handle = document.getElementById('sheetHandle');
+      const header = document.getElementById('sheetHeader');
+      
+      [handle, header].forEach(element => {
+        element.addEventListener('touchstart', handleTouchStart, { passive: false });
+        element.addEventListener('mousedown', handleMouseStart);
+      });
+      
+      function handleTouchStart(e) {
+        e.preventDefault();
+        isDragging = true;
+        startY = e.touches[0].clientY;
+        
+        sheet.classList.add('dragging');
+        
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd);
+      }
+      
+      function handleMouseStart(e) {
+        e.preventDefault();
+        isDragging = true;
+        startY = e.clientY;
+        
+        sheet.classList.add('dragging');
+        
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseEnd);
+      }
+      
+      function handleTouchMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        
+        currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+        const windowHeight = window.innerHeight;
+        const maxTranslateY = windowHeight * 0.2;
+        const minTranslateY = 0;
+        
+        let newTranslateY;
+        
+        if (bottomSheetExpanded) {
+          newTranslateY = Math.max(minTranslateY, Math.min(maxTranslateY, deltaY));
+        } else {
+          const collapsedTranslateY = windowHeight - 80;
+          newTranslateY = Math.max(minTranslateY, Math.min(collapsedTranslateY, collapsedTranslateY + deltaY));
+        }
+        
+        sheet.style.transform = `translateY(${newTranslateY}px)`;
+      }
+      
+      function handleMouseMove(e) {
+        if (!isDragging) return;
+        
+        currentY = e.clientY;
+        const deltaY = currentY - startY;
+        const windowHeight = window.innerHeight;
+        const maxTranslateY = windowHeight * 0.2;
+        const minTranslateY = 0;
+        
+        let newTranslateY;
+        
+        if (bottomSheetExpanded) {
+          newTranslateY = Math.max(minTranslateY, Math.min(maxTranslateY, deltaY));
+        } else {
+          const collapsedTranslateY = windowHeight - 80;
+          newTranslateY = Math.max(minTranslateY, Math.min(collapsedTranslateY, collapsedTranslateY + deltaY));
+        }
+        
+        sheet.style.transform = `translateY(${newTranslateY}px)`;
+      }
+      
+      function handleTouchEnd() {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        sheet.classList.remove('dragging');
+        
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleTouchEnd);
+        
+        const deltaY = currentY - startY;
+        const threshold = 60;
+        
+        if (bottomSheetExpanded) {
+          if (deltaY > threshold) {
+            toggleBottomSheet();
+          }
+        } else {
+          if (deltaY < -threshold) {
+            toggleBottomSheet();
+          }
+        }
+        
+        sheet.style.transform = '';
+      }
+      
+      function handleMouseEnd() {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        sheet.classList.remove('dragging');
+        
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseEnd);
+        
+        const deltaY = currentY - startY;
+        const threshold = 60;
+        
+        if (bottomSheetExpanded) {
+          if (deltaY > threshold) {
+            toggleBottomSheet();
+          }
+        } else {
+          if (deltaY < -threshold) {
+            toggleBottomSheet();
+          }
+        }
+        
+        sheet.style.transform = '';
+      }
+    }
+
+    // Marker functions
     function createMarkerIcon(isSelected = false) {
       return {
         url: `https://maps.google.com/mapfiles/ms/icons/${isSelected ? 'green' : 'red'}-dot.png`,
@@ -510,7 +984,13 @@
       selectedMarker = marker;
       marker.setIcon(createMarkerIcon(true));
 
-      info.setContent(`<b>${place.name}</b><br>⭐ ${place.rating} (${place.user_ratings_total} reviews)<br><small>Click again to open in Google Maps</small>`);
+      info.setContent(`
+        <div style="max-width: 250px;">
+          <h4 style="margin: 0 0 8px 0; font-size: 16px;">${place.name}</h4>
+          <p style="margin: 0 0 4px 0; font-size: 14px;">⭐ ${place.rating} (${place.user_ratings_total} reviews)</p>
+          <p style="margin: 0; font-size: 12px; color: #666;">Tap again to open in Google Maps</p>
+        </div>
+      `);
       info.open(map, marker);
     }
 
@@ -539,11 +1019,12 @@
           selectMarker(marker, place);
         }
 
+        // Highlight corresponding list item
         const listItems = document.querySelectorAll('#results li');
         listItems.forEach(li => li.classList.remove('selected'));
 
         const targetItem = [...listItems].find(li =>
-          li.innerHTML.includes(`<strong>${place.name}</strong>`)
+          li.innerHTML.includes(place.name)
         );
         if (targetItem) {
           targetItem.classList.add('selected');
@@ -558,6 +1039,8 @@
 
     // Visual cell functions
     function createCellOverlay(center, radius, isActive = false) {
+      const showCells = document.getElementById('showCellsToggle').classList.contains('active');
+      
       const circle = new google.maps.Circle({
         center: center,
         radius: radius,
@@ -566,7 +1049,7 @@
         strokeWeight: isActive ? 3 : 1,
         fillColor: isActive ? '#ff4444' : '#4444ff',
         fillOpacity: isActive ? 0.15 : 0.05,
-        map: document.getElementById('showCells').checked ? map : null
+        map: showCells ? map : null
       });
       return circle;
     }
@@ -575,7 +1058,7 @@
       if (currentCellOverlay) {
         currentCellOverlay.setMap(null);
       }
-      if (document.getElementById('showCells').checked) {
+      if (document.getElementById('showCellsToggle').classList.contains('active')) {
         currentCellOverlay = createCellOverlay(center, radius, true);
       }
     }
@@ -604,6 +1087,20 @@
       currentCellIndex = -1;
       updateResultsList();
       updateStats();
+      
+      updateStatus('Ready to search');
+      updateProgress(0);
+      document.getElementById('cellsScanned').textContent = '0';
+    }
+
+    function toggleCellVisibility() {
+      const showCells = document.getElementById('showCellsToggle').classList.contains('active');
+      for (const overlay of cellOverlays) {
+        overlay.setMap(showCells ? map : null);
+      }
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(showCells ? map : null);
+      }
     }
 
     // Search functions
@@ -624,7 +1121,7 @@
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             acc = acc.concat(res || []);
 
-            if (document.getElementById('showProgress').checked && cellIndex === currentCellIndex) {
+            if (document.getElementById('showProgressToggle').classList.contains('active') && cellIndex === currentCellIndex) {
               processPartialResults(res || [], center, radius);
             }
 
@@ -660,7 +1157,7 @@
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             acc = acc.concat(res || []);
 
-            if (document.getElementById('showProgress').checked && cellIndex === currentCellIndex) {
+            if (document.getElementById('showProgressToggle').classList.contains('active') && cellIndex === currentCellIndex) {
               processPartialResults(res || [], center, radius);
             }
 
@@ -710,6 +1207,11 @@
         addResultsToMap(newValidResults, true);
         updateResultsList();
         updateStats();
+        
+        // Show bottom sheet if new results found
+        if (!bottomSheetExpanded) {
+          toggleBottomSheet();
+        }
       }
     }
 
@@ -747,35 +1249,33 @@
 
       if (filteredPlaces.length === 0) {
         const li = document.createElement("li");
-        li.textContent = searchResults.size > 0 ? "No restaurants match your criteria yet..." : "No results yet...";
-        li.style.fontStyle = "italic";
+        li.className = 'result-item';
+        li.innerHTML = `
+          <div class="result-name">No restaurants found yet</div>
+          <div class="result-hint">Adjust your filters or continue searching</div>
+        `;
         li.style.cursor = "default";
+        li.style.textAlign = "center";
         ul.appendChild(li);
         return;
       }
 
       for (const place of filteredPlaces) {
         const li = document.createElement("li");
-        li.innerHTML = `<strong>${place.name}</strong><br>⭐ ${place.rating} (${place.user_ratings_total} reviews)<br><small>Click again to open in Google Maps</small>`;
+        li.className = 'result-item';
+        li.innerHTML = `
+          <div class="result-name">${place.name}</div>
+          <div class="result-rating">⭐ ${place.rating} • ${place.user_ratings_total} reviews</div>
+          <div class="result-hint">Tap again to open in Google Maps</div>
+        `;
+
+        if (currentMarkers.find(m => m.placeData?.place_id === place.place_id && m.getAnimation())) {
+          li.classList.add('new-result');
+        }
 
         li.onclick = () => handlePlaceClick(place);
         ul.appendChild(li);
       }
-
-      ul.scrollTop = ul.scrollHeight;
-    }
-
-    function updateStats() {
-      const minRating = parseFloat(document.getElementById('minRating').value);
-      const minReviews = parseInt(document.getElementById('minReviews').value);
-
-      const filteredCount = [...searchResults.values()]
-        .filter(p => (p.types || []).includes("restaurant"))
-        .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews)
-        .length;
-
-      document.getElementById('totalCount').textContent = searchResults.size;
-      document.getElementById('filteredCount').textContent = filteredCount;
     }
 
     function buildGridCenters(center, outerKm, cellM) {
@@ -801,19 +1301,23 @@
     }
 
     async function scanArea() {
+      if (isSearching) return;
+
       const center = {
         lat: parseFloat(document.getElementById('centerLat').value),
         lng: parseFloat(document.getElementById('centerLng').value)
       };
-      const outerRadius = parseInt(document.getElementById('outerRadius').value);
-      const cellRadius = parseInt(document.getElementById('cellRadius').value);
+      const outerRadius = parseInt(document.getElementById('radiusSlider').value);
+      const cellRadius = parseInt(document.getElementById('cellSlider').value);
 
       if (isNaN(center.lat) || isNaN(center.lng)) {
-        updateStatus('Error: Invalid coordinates');
+        updateStatus('Invalid coordinates');
         return;
       }
 
+      isSearching = true;
       searchCancelled = false;
+      
       const startBtn = document.getElementById('startSearch');
       const cancelBtn = document.getElementById('cancelSearch');
       
@@ -821,23 +1325,21 @@
       startBtn.classList.add('loading');
       cancelBtn.disabled = false;
 
-      // Close mobile controls
-      if (window.innerWidth < 768 && controlsExpanded) {
-        toggleControls();
-      }
+      // Hide settings and show map
+      hideSettings();
 
       const cells = buildGridCenters(center, outerRadius, cellRadius);
 
-      if (document.getElementById('showCells').checked) {
+      if (document.getElementById('showCellsToggle').classList.contains('active')) {
         for (const cell of cells) {
           const overlay = createCellOverlay(cell, cellRadius, false);
           cellOverlays.push(overlay);
         }
       }
 
-      updateStatus(`🚀 Starting search: ${cells.length} cells to scan...`);
+      updateStatus(`Starting search: ${cells.length} cells`, true);
       updateProgress(0);
-      document.getElementById('cellsScanned').textContent = `0/${cells.length}`;
+      document.getElementById('cellsScanned').textContent = '0';
 
       try {
         for (let i = 0; i < cells.length && !searchCancelled; i++) {
@@ -845,9 +1347,9 @@
 
           updateCurrentCell(cells[i], cellRadius);
 
-          updateStatus(`🔍 Scanning cell ${i + 1}/${cells.length}... (${searchResults.size} places found)`);
+          updateStatus(`Scanning ${i + 1}/${cells.length} (${searchResults.size} found)`, true);
           updateProgress((i / cells.length) * 100);
-          document.getElementById('cellsScanned').textContent = `${i + 1}/${cells.length}`;
+          document.getElementById('cellsScanned').textContent = i.toString();
 
           try {
             const [A, B] = await Promise.allSettled([
@@ -855,7 +1357,7 @@
               textAll(cells[i], cellRadius, i)
             ]);
 
-            if (!document.getElementById('showProgress').checked) {
+            if (!document.getElementById('showProgressToggle').classList.contains('active')) {
               const batch = [
                 ...(A.status === "fulfilled" ? A.value : []),
                 ...(B.status === "fulfilled" ? B.value : [])
@@ -871,18 +1373,18 @@
             console.warn('Cell search error:', e);
           }
 
-          await sleep(200);
+          await sleep(300);
         }
 
         currentCellIndex = -1;
 
         if (searchCancelled) {
-          updateStatus('🛑 Search cancelled by user');
+          updateStatus('Search cancelled');
           return;
         }
 
-        if (!document.getElementById('showProgress').checked) {
-          updateStatus('🔄 Processing all results...');
+        if (!document.getElementById('showProgressToggle').classList.contains('active')) {
+          updateStatus('Processing results...', true);
 
           const minRating = parseFloat(document.getElementById('minRating').value);
           const minReviews = parseInt(document.getElementById('minReviews').value);
@@ -897,36 +1399,35 @@
         }
 
         updateProgress(100);
-        updateStatus(`✅ Search complete! Found ${document.getElementById('filteredCount').textContent} restaurants matching your criteria`);
+        const foundCount = document.getElementById('filteredCount').textContent;
+        updateStatus(`Complete! Found ${foundCount} restaurants`);
 
         if (currentCellOverlay) {
           currentCellOverlay.setMap(null);
           currentCellOverlay = null;
         }
 
+        // Show results
+        if (!bottomSheetExpanded) {
+          toggleBottomSheet();
+        }
+
       } catch (error) {
-        updateStatus(`❌ Search failed: ${error}`);
+        updateStatus(`Search failed: ${error}`);
       } finally {
+        isSearching = false;
         startBtn.disabled = false;
         startBtn.classList.remove('loading');
         cancelBtn.disabled = true;
       }
     }
 
-    function updateStatus(text) {
-      document.getElementById('status').textContent = text;
-    }
-
-    function updateProgress(percent) {
-      document.getElementById('progressFill').style.width = percent + '%';
-    }
-
     function getCurrentLocation() {
       const btn = document.getElementById('getCurrentLocation');
-      const originalText = btn.textContent;
+      const originalText = btn.innerHTML;
       
       btn.disabled = true;
-      btn.textContent = 'Getting location...';
+      btn.classList.add('loading');
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -941,29 +1442,27 @@
             map.setZoom(13);
             
             btn.disabled = false;
-            btn.textContent = originalText;
-            updateStatus('📍 Location updated');
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+            updateStatus('Location updated');
           },
           (error) => {
             updateStatus(`Location error: ${error.message}`);
             btn.disabled = false;
-            btn.textContent = originalText;
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 300000
           }
         );
       } else {
         updateStatus('Geolocation not supported');
         btn.disabled = false;
-        btn.textContent = originalText;
-      }
-    }
-
-    function toggleCellVisibility() {
-      const showCells = document.getElementById('showCells').checked;
-      for (const overlay of cellOverlays) {
-        overlay.setMap(showCells ? map : null);
-      }
-      if (currentCellOverlay) {
-        currentCellOverlay.setMap(showCells ? map : null);
+        btn.classList.remove('loading');
+        btn.innerHTML = originalText;
       }
     }
 
@@ -973,40 +1472,20 @@
       map = new google.maps.Map(document.getElementById("map"), {
         center: center,
         zoom: 12,
+        disableDefaultUI: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
         gestureHandling: 'greedy'
       });
 
       info = new google.maps.InfoWindow();
       svc = new google.maps.places.PlacesService(map);
 
-      // Setup responsive behavior
-      function handleResize() {
-        const isMobile = window.innerWidth < 768;
-        const desktopTitle = document.querySelector('h3[style*="display: none"]');
-        const mobileHeader = document.querySelector('.mobile-header');
-        
-        if (isMobile) {
-          desktopTitle.style.display = 'none';
-          mobileHeader.style.display = 'flex';
-          if (!controlsExpanded) {
-            document.getElementById('controlsContent').classList.remove('expanded');
-          }
-        } else {
-          desktopTitle.style.display = 'block';
-          mobileHeader.style.display = 'none';
-          document.getElementById('controlsContent').classList.remove('expanded');
-          document.getElementById('controlsToggle').textContent = 'Settings';
-          controlsExpanded = false;
-        }
-        
-        google.maps.event.trigger(map, 'resize');
-      }
-
-      window.addEventListener('resize', handleResize);
-      handleResize(); // Initial setup
-
-      // Event listeners
-      document.getElementById('controlsToggle').addEventListener('click', toggleControls);
+      // Setup event listeners
       document.getElementById('startSearch').addEventListener('click', scanArea);
       document.getElementById('cancelSearch').addEventListener('click', () => {
         searchCancelled = true;
@@ -1014,9 +1493,22 @@
       });
       document.getElementById('clearResults').addEventListener('click', clearVisualElements);
       document.getElementById('getCurrentLocation').addEventListener('click', getCurrentLocation);
-      document.getElementById('showCells').addEventListener('change', toggleCellVisibility);
+      document.getElementById('sheetHeader').addEventListener('click', toggleBottomSheet);
+      document.getElementById('showSettingsBtn').addEventListener('click', showSettings);
 
-      updateStatus('Ready to search. Configure parameters and click Start Search.');
+      // Setup sliders and toggles
+      setupSliders();
+      setupToggles();
+      setupBottomSheetDrag();
+
+      // Handle orientation changes
+      window.addEventListener('orientationchange', () => {
+        setTimeout(() => {
+          google.maps.event.trigger(map, 'resize');
+        }, 500);
+      });
+
+      updateStatus('Ready to search');
       updateStats();
     }
 
