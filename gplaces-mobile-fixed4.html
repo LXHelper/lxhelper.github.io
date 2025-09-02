@@ -1,0 +1,1391 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Restaurant Finder</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      overflow: hidden;
+    }
+    .app-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .top-bar {
+      background: #fff;
+      padding: 12px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .top-bar.minimized {
+      padding: 8px 20px;
+      min-height: 44px;
+    }
+    .app-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+    .top-bar.minimized .app-title {
+      font-size: 16px;
+    }
+    .search-status {
+      font-size: 14px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #28a745;
+    }
+    .status-dot.searching {
+      background: #007bff;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    #closeSettingsBtn {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #666;
+      padding: 8px;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #closeSettingsBtn:hover {
+      background: rgba(0,0,0,0.1);
+      color: #333;
+    }
+    #closeSettingsBtn:active {
+      transform: scale(0.95);
+    }
+    .top-bar.minimized #closeSettingsBtn {
+      display: none;
+    }
+    .settings-panel {
+      background: #fff;
+      padding: 20px;
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .settings-panel.hidden {
+      max-height: 0;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fff;
+      transition: border-color 0.2s ease;
+      appearance: none;
+    }
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+    }
+    .coords-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .range-container {
+      margin-top: 8px;
+    }
+    .range-input {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #e9ecef;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .range-input::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #007bff;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .range-input::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #007bff;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+    }
+    .range-value {
+      background: #007bff;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .toggle-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 12px;
+    }
+    .toggle-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: #333;
+    }
+    .toggle-switch {
+      position: relative;
+      width: 52px;
+      height: 32px;
+      background: #ccc;
+      border-radius: 16px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    .toggle-switch.active {
+      background: #007bff;
+    }
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-radius: 14px;
+      background: white;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .toggle-switch.active::before {
+      transform: translateX(20px);
+    }
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .btn {
+      padding: 16px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 52px;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn.loading {
+      color: transparent;
+      position: relative;
+    }
+    .btn.loading::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .map-container {
+      flex: 1;
+      position: relative;
+      min-height: 200px;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+      z-index: 2000;
+      max-height: 80vh;
+      transform: translateY(calc(100% - 80px));
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .bottom-sheet.expanded {
+      transform: translateY(0);
+    }
+    .bottom-sheet.dragging {
+      transition: none;
+    }
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      margin: 12px auto 8px;
+      cursor: grab;
+      transition: all 0.2s ease;
+    }
+    .sheet-handle:active {
+      cursor: grabbing;
+      background: #007bff;
+      transform: scaleY(1.5);
+    }
+    .sheet-header {
+      padding: 8px 24px 16px;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+    }
+    .sheet-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sheet-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, #007bff, #00a8ff);
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 12px;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+    .progress-container {
+      margin-bottom: 20px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #f0f0f0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #007bff, #00a8ff);
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    .progress-status {
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .results-container {
+      margin-top: 20px;
+    }
+    .results-header {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .results-list {
+      list-style: none;
+    }
+    .result-item {
+      background: #f8f9fa;
+      margin-bottom: 12px;
+      padding: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+    .result-item:active {
+      transform: scale(0.98);
+    }
+    .result-item.selected {
+      background: #e8f5e8;
+      border-color: #28a745;
+    }
+    .result-item.new-result {
+      background: linear-gradient(135deg, #90ee90, #e8f5e8);
+      animation: slideIn 0.6s ease;
+    }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .result-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .result-rating {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+    .result-hint {
+      font-size: 12px;
+      color: #999;
+      font-style: italic;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    @media (orientation: landscape) and (max-height: 500px) {
+      .settings-panel {
+        max-height: calc(100vh - 44px);
+      }
+      .bottom-sheet {
+        max-height: 70vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Bar -->
+    <div class="top-bar" id="topBar">
+      <h1 class="app-title">Restaurant Finder</h1>
+      <div class="search-status" id="searchStatus">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusText">Ready</span>
+      </div>
+      <button id="closeSettingsBtn" title="Close Search/Settings">&times;</button>
+    </div>
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+      <!-- Location Settings -->
+      <div class="form-group">
+        <label class="form-label">Search Center</label>
+        <div class="coords-grid">
+          <input type="number" class="form-input" id="centerLat" step="0.001" placeholder="Latitude" value="44.437">
+          <input type="number" class="form-input" id="centerLng" step="0.001" placeholder="Longitude" value="26.097">
+        </div>
+        <button class="btn btn-secondary" id="getCurrentLocation" style="margin-top: 12px; width: 100%;">📍 Use My Location</button>
+      </div>
+      <!-- Search Radius -->
+      <div class="form-group">
+        <label class="form-label">Search Radius</label>
+        <div class="range-container">
+          <input type="range" class="range-input" id="radiusSlider" min="1" max="20" value="5">
+          <div class="range-labels">
+            <span>1km</span>
+            <span class="range-value" id="radiusValue">5km</span>
+            <span>20km</span>
+          </div>
+        </div>
+      </div>
+      <!-- Cell Size -->
+      <div class="form-group">
+        <label class="form-label">Scan Precision</label>
+        <div class="range-container">
+          <input type="range" class="range-input" id="cellSlider" min="500" max="3000" step="100" value="1000">
+          <div class="range-labels">
+            <span>Precise</span>
+            <span class="range-value" id="cellValue">1000m</span>
+            <span>Rough</span>
+          </div>
+        </div>
+      </div>
+      <!-- Quality Filters -->
+      <div class="form-group">
+        <label class="form-label">Minimum Rating</label>
+        <select class="form-select" id="minRating">
+          <option value="4.0">4.0+ Stars</option>
+          <option value="4.2">4.2+ Stars</option>
+          <option value="4.5">4.5+ Stars</option>
+          <option value="4.7">4.7+ Stars</option>
+          <option value="4.8" selected>4.8+ Stars</option>
+          <option value="4.9">4.9+ Stars</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Minimum Reviews</label>
+        <select class="form-select" id="minReviews">
+          <option value="100">100+ Reviews</option>
+          <option value="500">500+ Reviews</option>
+          <option value="1000" selected>1000+ Reviews</option>
+          <option value="2000">2000+ Reviews</option>
+          <option value="5000">5000+ Reviews</option>
+        </select>
+      </div>
+      <!-- Visual Options -->
+      <div class="form-group">
+        <label class="form-label">Display Options</label>
+        <div class="toggle-group">
+          <div class="toggle-item">
+            <span class="toggle-label">Show scan cells</span>
+            <div class="toggle-switch active" id="showCellsToggle"></div>
+          </div>
+          <div class="toggle-item">
+            <span class="toggle-label">Live results</span>
+            <div class="toggle-switch active" id="showProgressToggle"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="startSearch">🔍 Start Search</button>
+        <button class="btn btn-danger" id="cancelSearch" disabled>⏹️ Cancel Search</button>
+        <button class="btn btn-secondary" id="clearResults">🗑️ Clear Results</button>
+      </div>
+    </div>
+    <!-- Map Container -->
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+    <!-- Bottom Sheet -->
+    <div class="bottom-sheet" id="bottomSheet">
+      <div class="sheet-handle" id="sheetHandle"></div>
+      <div class="sheet-header" id="sheetHeader">
+        <div class="sheet-title">
+          <span>📊 Search Results</span>
+          <span id="sheetToggleIcon">▲</span>
+        </div>
+      </div>
+      <div class="sheet-content">
+        <!-- Progress Section -->
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-status" id="progressStatus">Ready to search</div>
+        </div>
+        <!-- Statistics -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="totalCount">0</div>
+            <div class="stat-label">Found</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="filteredCount">0</div>
+            <div class="stat-label">Match</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="cellsScanned">0</div>
+            <div class="stat-label">Cells</div>
+          </div>
+        </div>
+        <!-- Quick Settings Access -->
+        <div class="form-group">
+          <button class="btn btn-secondary" id="showSettingsBtn" style="width: 100%;">⚙️ Adjust Search Settings</button>
+        </div>
+        <!-- Results -->
+        <div class="results-container">
+          <div class="results-header">🍽️ Restaurants</div>
+          <ul class="results-list" id="results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const CONFIG = {
+      API_KEY: 'AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg'
+    };
+    let map, info, svc;
+    let searchCancelled = false;
+    let currentMarkers = [];
+    let cellOverlays = [];
+    let currentCellOverlay = null;
+    let searchResults = new Map();
+    let selectedMarker = null;
+    let lastClickedPlace = null;
+    let lastClickTime = 0;
+    let isSearching = false;
+    let settingsVisible = true;
+    let bottomSheetExpanded = false;
+    let isDragging = false;
+    let startY = 0;
+    let currentY = 0;
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const toRad = (x) => x * Math.PI / 180;
+    function haversine(a, b) {
+      const R = 6371000;
+      const dLat = toRad(b.lat - a.lat);
+      const dLng = toRad(b.lng - a.lng);
+      const s1 = toRad(a.lat);
+      const s2 = toRad(b.lat);
+      const A = Math.sin(dLat / 2) ** 2 + Math.cos(s1) * Math.cos(s2) * Math.sin(dLng / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(A));
+    }
+    function hideSettings() {
+      const panel = document.getElementById('settingsPanel');
+      const topBar = document.getElementById('topBar');
+      panel.classList.add('hidden');
+      topBar.classList.add('minimized');
+      settingsVisible = false;
+      setTimeout(() => {
+        google.maps.event.trigger(map, 'resize');
+      }, 400);
+    }
+    function showSettings() {
+      const panel = document.getElementById('settingsPanel');
+      const topBar = document.getElementById('topBar');
+      panel.classList.remove('hidden');
+      topBar.classList.remove('minimized');
+      settingsVisible = true;
+      setTimeout(() => {
+        google.maps.event.trigger(map, 'resize');
+      }, 400);
+    }
+    function toggleBottomSheet() {
+      const sheet = document.getElementById('bottomSheet');
+      const icon = document.getElementById('sheetToggleIcon');
+      bottomSheetExpanded = !bottomSheetExpanded;
+      if (bottomSheetExpanded) {
+        sheet.classList.add('expanded');
+        icon.textContent = '▼';
+      } else {
+        sheet.classList.remove('expanded');
+        icon.textContent = '▲';
+      }
+    }
+    function updateStatus(text, isSearching = false) {
+      const statusText = document.getElementById('statusText');
+      const statusDot = document.getElementById('statusDot');
+      const progressStatus = document.getElementById('progressStatus');
+      statusText.textContent = text;
+      progressStatus.textContent = text;
+      if (isSearching) {
+        statusDot.classList.add('searching');
+      } else {
+        statusDot.classList.remove('searching');
+      }
+    }
+    function updateProgress(percent) {
+      document.getElementById('progressFill').style.width = percent + '%';
+    }
+    function updateStats() {
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+      const filteredCount = [...searchResults.values()]
+        .filter(p => (p.types || []).includes("restaurant"))
+        .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews)
+        .length;
+      document.getElementById('totalCount').textContent = searchResults.size;
+      document.getElementById('filteredCount').textContent = filteredCount;
+    }
+    function setupSliders() {
+      const radiusSlider = document.getElementById('radiusSlider');
+      const cellSlider = document.getElementById('cellSlider');
+      const radiusValue = document.getElementById('radiusValue');
+      const cellValue = document.getElementById('cellValue');
+      radiusSlider.addEventListener('input', (e) => {
+        radiusValue.textContent = e.target.value + 'km';
+      });
+      cellSlider.addEventListener('input', (e) => {
+        cellValue.textContent = e.target.value + 'm';
+      });
+    }
+    function setupToggles() {
+      const showCellsToggle = document.getElementById('showCellsToggle');
+      const showProgressToggle = document.getElementById('showProgressToggle');
+      showCellsToggle.addEventListener('click', () => {
+        showCellsToggle.classList.toggle('active');
+        toggleCellVisibility();
+      });
+      showProgressToggle.addEventListener('click', () => {
+        showProgressToggle.classList.toggle('active');
+      });
+    }
+    function setupBottomSheetDrag() {
+      const sheet = document.getElementById('bottomSheet');
+      const handle = document.getElementById('sheetHandle');
+      const header = document.getElementById('sheetHeader');
+      [handle, header].forEach(element => {
+        element.addEventListener('touchstart', handleTouchStart, { passive: false });
+        element.addEventListener('mousedown', handleMouseStart);
+      });
+      function handleTouchStart(e) {
+        e.preventDefault();
+        isDragging = true;
+        startY = e.touches[0].clientY;
+        sheet.classList.add('dragging');
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd);
+      }
+      function handleMouseStart(e) {
+        e.preventDefault();
+        isDragging = true;
+        startY = e.clientY;
+        sheet.classList.add('dragging');
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseEnd);
+      }
+      function handleTouchMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+        const windowHeight = window.innerHeight;
+        const maxTranslateY = windowHeight * 0.2;
+        const minTranslateY = 0;
+        let newTranslateY;
+        if (bottomSheetExpanded) {
+          newTranslateY = Math.max(minTranslateY, Math.min(maxTranslateY, deltaY));
+        } else {
+          const collapsedTranslateY = windowHeight - 80;
+          newTranslateY = Math.max(minTranslateY, Math.min(collapsedTranslateY, collapsedTranslateY + deltaY));
+        }
+        sheet.style.transform = `translateY(${newTranslateY}px)`;
+      }
+      function handleMouseMove(e) {
+        if (!isDragging) return;
+        currentY = e.clientY;
+        const deltaY = currentY - startY;
+        const windowHeight = window.innerHeight;
+        const maxTranslateY = windowHeight * 0.2;
+        const minTranslateY = 0;
+        let newTranslateY;
+        if (bottomSheetExpanded) {
+          newTranslateY = Math.max(minTranslateY, Math.min(maxTranslateY, deltaY));
+        } else {
+          const collapsedTranslateY = windowHeight - 80;
+          newTranslateY = Math.max(minTranslateY, Math.min(collapsedTranslateY, collapsedTranslateY + deltaY));
+        }
+        sheet.style.transform = `translateY(${newTranslateY}px)`;
+      }
+      function handleTouchEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        sheet.classList.remove('dragging');
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleTouchEnd);
+        const deltaY = currentY - startY;
+        const threshold = 60;
+        if (bottomSheetExpanded) {
+          if (deltaY > threshold) {
+            toggleBottomSheet();
+          }
+        } else {
+          if (deltaY < -threshold) {
+            toggleBottomSheet();
+          }
+        }
+        sheet.style.transform = '';
+      }
+      function handleMouseEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        sheet.classList.remove('dragging');
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseEnd);
+        const deltaY = currentY - startY;
+        const threshold = 60;
+        if (bottomSheetExpanded) {
+          if (deltaY > threshold) {
+            toggleBottomSheet();
+          }
+        } else {
+          if (deltaY < -threshold) {
+            toggleBottomSheet();
+          }
+        }
+        sheet.style.transform = '';
+      }
+    }
+    function createMarkerIcon(isSelected = false) {
+      return {
+        url: `https://maps.google.com/mapfiles/ms/icons/${isSelected ? 'green' : 'red'}-dot.png`,
+        scaledSize: new google.maps.Size(32, 32),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(16, 32)
+      };
+    }
+    function selectMarker(marker, place) {
+      if (selectedMarker && selectedMarker !== marker) {
+        selectedMarker.setIcon(createMarkerIcon(false));
+      }
+      selectedMarker = marker;
+      marker.setIcon(createMarkerIcon(true));
+      info.setContent(`
+        <div style="max-width: 250px;">
+          <h4 style="margin: 0 0 8px 0; font-size: 16px;">${place.name}</h4>
+          <p style="margin: 0 0 4px 0; font-size: 14px;">⭐ ${place.rating} (${place.user_ratings_total} reviews)</p>
+          <p style="margin: 0; font-size: 12px; color: #666;">Tap again to open in Google Maps</p>
+        </div>
+      `);
+      info.open(map, marker);
+    }
+    function generateGoogleMapsUrl(place) {
+      if (!place.place_id) return null;
+      const name = encodeURIComponent(place.name);
+      const appUrl = `comgooglemaps://?q=${name}&query_place_id=${place.place_id}`;
+      const webUrl = `https://www.google.com/maps/search/?api=1&query=${name}&query_place_id=${place.place_id}`;
+      return { appUrl, webUrl };
+    }
+    function handlePlaceClick(place) {
+      const currentTime = Date.now();
+      const isDoubleClick = (
+        lastClickedPlace === place.place_id &&
+        currentTime - lastClickTime < 500
+      );
+      if (isDoubleClick) {
+        const { appUrl, webUrl } = generateGoogleMapsUrl(place);
+        window.location.href = appUrl;
+        setTimeout(() => {
+          window.location.href = webUrl;
+        }, 500);
+        lastClickedPlace = null;
+      } else {
+        const marker = currentMarkers.find(m => m.getTitle() === place.name);
+        if (marker) {
+          selectMarker(marker, place);
+        }
+        const listItems = document.querySelectorAll('#results li');
+        listItems.forEach(li => li.classList.remove('selected'));
+        const targetItem = [...listItems].find(li => li.innerHTML.includes(place.name));
+        if (targetItem) {
+          targetItem.classList.add('selected');
+          targetItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        lastClickedPlace = place.place_id;
+      }
+      lastClickTime = currentTime;
+    }
+    function createCellOverlay(center, radius, cellIndex, isActive = false) {
+      const showCells = document.getElementById('showCellsToggle').classList.contains('active');
+      const circle = new google.maps.Circle({
+        center: center,
+        radius: radius,
+        strokeColor: isActive ? '#ff4444' : '#4444ff',
+        strokeOpacity: isActive ? 0.8 : 0.4,
+        strokeWeight: isActive ? 3 : 1,
+        fillColor: isActive ? '#ff4444' : '#4444ff',
+        fillOpacity: isActive ? 0.15 : 0.05,
+        map: showCells ? map : null
+      });
+
+      // Add cell number label
+      if (showCells && cellIndex !== undefined) {
+        const cellLabel = new google.maps.InfoWindow({
+          content: `<div style="background: ${isActive ? '#ff4444' : '#4444ff'}; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 12px;">Cell ${cellIndex}</div>`,
+          position: center,
+          disableAutoPan: true
+        });
+        cellLabel.open(map);
+        circle.cellLabel = cellLabel;
+      }
+
+      return circle;
+    }
+    function updateCurrentCell(center, radius, cellIndex) {
+      if (currentCellOverlay) {
+        if (currentCellOverlay.cellLabel) {
+          currentCellOverlay.cellLabel.close();
+        }
+        currentCellOverlay.setMap(null);
+      }
+      if (document.getElementById('showCellsToggle').classList.contains('active')) {
+        currentCellOverlay = createCellOverlay(center, radius, cellIndex, true);
+      }
+    }
+    function clearVisualElements() {
+      for (const overlay of cellOverlays) {
+        overlay.setMap(null);
+      }
+      cellOverlays = [];
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(null);
+        currentCellOverlay = null;
+      }
+      for (const marker of currentMarkers) {
+        marker.setMap(null);
+      }
+      currentMarkers = [];
+      selectedMarker = null;
+      lastClickedPlace = null;
+      lastClickTime = 0;
+      searchResults.clear();
+      updateResultsList();
+      updateStats();
+      updateStatus('Ready to search');
+      updateProgress(0);
+      document.getElementById('cellsScanned').textContent = '0';
+    }
+    function toggleCellVisibility() {
+      const showCells = document.getElementById('showCellsToggle').classList.contains('active');
+      for (const overlay of cellOverlays) {
+        overlay.setMap(showCells ? map : null);
+      }
+      if (currentCellOverlay) {
+        currentCellOverlay.setMap(showCells ? map : null);
+      }
+    }
+    function nearbyAll(center, radius, cellIndex) {
+      return new Promise((resolve, reject) => {
+        if (searchCancelled) return resolve([]);
+        console.log(`🔍 Cell ${cellIndex}: Starting nearbySearch at (${center.lat.toFixed(6)}, ${center.lng.toFixed(6)}) with radius ${radius}m`);
+        let acc = [];
+        const req = {
+          location: center,
+          radius,
+          keyword: "restaurant"
+        };
+        const cb = (res, status, pag) => {
+          if (searchCancelled) return resolve(acc);
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            console.log(`📍 Cell ${cellIndex}: nearbySearch found ${res.length} places (total so far: ${acc.length + res.length})`);
+            acc = acc.concat(res || []);
+            if (document.getElementById('showProgressToggle').classList.contains('active')) {
+              processPartialResults(res || [], center, radius, cellIndex);
+            }
+            if (pag && pag.hasNextPage && !searchCancelled) {
+              console.log(`📄 Cell ${cellIndex}: nearbySearch has more pages, waiting 2s...`);
+              return setTimeout(() => pag.nextPage(), 2000);
+            }
+            console.log(`✅ Cell ${cellIndex}: nearbySearch completed with ${acc.length} total places`);
+            resolve(acc);
+          } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+            console.log(`🚫 Cell ${cellIndex}: nearbySearch found zero results`);
+            resolve(acc);
+          } else {
+            console.log(`❌ Cell ${cellIndex}: nearbySearch failed with status: ${status}`);
+            reject(status);
+          }
+        };
+        svc.nearbySearch(req, cb);
+      });
+    }
+    function textAll(center, radius, cellIndex) {
+      return new Promise((resolve, reject) => {
+        if (searchCancelled) return resolve([]);
+        console.log(`🔍 Cell ${cellIndex}: Starting textSearch at (${center.lat.toFixed(6)}, ${center.lng.toFixed(6)}) with radius ${radius}m`);
+        let acc = [];
+        const req = {
+          query: "restaurant",
+          location: center,
+          radius
+        };
+        const cb = (res, status, pag) => {
+          if (searchCancelled) return resolve(acc);
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            console.log(`📍 Cell ${cellIndex}: textSearch found ${res.length} places (total so far: ${acc.length + res.length})`);
+            acc = acc.concat(res || []);
+            if (document.getElementById('showProgressToggle').classList.contains('active')) {
+              processPartialResults(res || [], center, radius, cellIndex);
+            }
+            if (pag && pag.hasNextPage && !searchCancelled) {
+              console.log(`📄 Cell ${cellIndex}: textSearch has more pages, waiting 2s...`);
+              return setTimeout(() => pag.nextPage(), 2000);
+            }
+            console.log(`✅ Cell ${cellIndex}: textSearch completed with ${acc.length} total places`);
+            resolve(acc);
+          } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+            console.log(`🚫 Cell ${cellIndex}: textSearch found zero results`);
+            resolve(acc);
+          } else {
+            console.log(`❌ Cell ${cellIndex}: textSearch failed with status: ${status}`);
+            reject(status);
+          }
+        };
+        svc.textSearch(req, cb);
+      });
+    }
+
+    function processPartialResults(newPlaces, cellCenter, cellRadius, cellIndex) {
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+      const searchCenter = {
+        lat: parseFloat(document.getElementById('centerLat').value),
+        lng: parseFloat(document.getElementById('centerLng').value)
+      };
+      const searchRadius = parseInt(document.getElementById('radiusSlider').value) * 1000;
+
+      console.log(`🔄 Cell ${cellIndex}: Processing ${newPlaces.length} new places. Cell center: (${cellCenter.lat.toFixed(6)}, ${cellCenter.lng.toFixed(6)}), cell radius: ${cellRadius}m`);
+      console.log(`🔄 Cell ${cellIndex}: Filters: rating≥${minRating}, reviews≥${minReviews}, searchRadius≤${searchRadius}m`);
+
+      let newValidResults = [];
+      let addedCount = 0;
+      let filteredOutCellDistance = 0;
+      let filteredOutSearchDistance = 0;
+      let filteredOutRating = 0;
+      let filteredOutReviews = 0;
+      let filteredOutType = 0;
+      let duplicates = 0;
+
+      for (const place of newPlaces) {
+        if (!searchResults.has(place.place_id)) {
+          const placeLocation = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          };
+
+          // First check: Is the place actually within THIS cell's radius?
+          const distanceToCell = haversine(cellCenter, placeLocation);
+          if (distanceToCell > cellRadius * 1.2) { // Allow 20% tolerance for cell boundary
+            filteredOutCellDistance++;
+            console.log(`🚫 Cell ${cellIndex}: "${place.name}" outside cell boundary (${Math.round(distanceToCell)}m > ${Math.round(cellRadius * 1.2)}m)`);
+            continue;
+          }
+
+          // Second check: Is the place within the overall search radius?
+          const distanceToSearchCenter = haversine(searchCenter, placeLocation);
+          if (distanceToSearchCenter > searchRadius) {
+            filteredOutSearchDistance++;
+            console.log(`🚫 Cell ${cellIndex}: "${place.name}" outside search radius (${Math.round(distanceToSearchCenter)}m > ${searchRadius}m)`);
+            continue;
+          }
+
+          // Place passed distance checks, add it to results
+          searchResults.set(place.place_id, place);
+          addedCount++;
+
+          // Check if it meets restaurant criteria
+          const isRestaurant = (place.types || []).includes("restaurant");
+          const hasGoodRating = (place.rating || 0) >= minRating;
+          const hasEnoughReviews = (place.user_ratings_total || 0) >= minReviews;
+
+          if (!isRestaurant) {
+            filteredOutType++;
+          } else if (!hasGoodRating) {
+            filteredOutRating++;
+          } else if (!hasEnoughReviews) {
+            filteredOutReviews++;
+          } else {
+            newValidResults.push(place);
+            console.log(`✨ Cell ${cellIndex}: Added "${place.name}" (${place.rating}⭐, ${place.user_ratings_total} reviews) cellDist: ${Math.round(distanceToCell)}m, searchDist: ${Math.round(distanceToSearchCenter)}m`);
+          }
+        } else {
+          duplicates++;
+        }
+      }
+
+      console.log(`📊 Cell ${cellIndex}: Summary - Added: ${addedCount}, Valid: ${newValidResults.length}, Filtered: cellBoundary=${filteredOutCellDistance}, searchBoundary=${filteredOutSearchDistance}, type=${filteredOutType}, rating=${filteredOutRating}, reviews=${filteredOutReviews}, duplicates=${duplicates}`);
+
+      if (newValidResults.length > 0) {
+        addResultsToMap(newValidResults, true);
+        updateResultsList();
+        updateStats();
+        if (!bottomSheetExpanded) {
+          toggleBottomSheet();
+        }
+      }
+    }
+    function addResultsToMap(places, isNew = false) {
+      for (const place of places) {
+        const marker = new google.maps.Marker({
+          position: place.geometry.location,
+          map,
+          title: place.name,
+          icon: createMarkerIcon(false),
+          animation: isNew ? google.maps.Animation.DROP : null
+        });
+        marker.placeData = place;
+        marker.addListener("click", () => {
+          handlePlaceClick(place);
+        });
+        currentMarkers.push(marker);
+      }
+    }
+    function updateResultsList() {
+      const ul = document.getElementById("results");
+      const minRating = parseFloat(document.getElementById('minRating').value);
+      const minReviews = parseInt(document.getElementById('minReviews').value);
+      const filteredPlaces = [...searchResults.values()]
+        .filter(p => (p.types || []).includes("restaurant"))
+        .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews)
+        .sort((a, b) => (b.rating - a.rating) || (b.user_ratings_total - a.user_ratings_total));
+      ul.innerHTML = "";
+      if (filteredPlaces.length === 0) {
+        const li = document.createElement("li");
+        li.className = 'result-item';
+        li.innerHTML = `
+          <div class="result-name">No restaurants found yet</div>
+          <div class="result-hint">Adjust your filters or continue searching</div>
+        `;
+        li.style.cursor = "default";
+        li.style.textAlign = "center";
+        ul.appendChild(li);
+        return;
+      }
+      for (const place of filteredPlaces) {
+        const li = document.createElement("li");
+        li.className = 'result-item';
+        li.innerHTML = `
+          <div class="result-name">${place.name}</div>
+          <div class="result-rating">⭐ ${place.rating} • ${place.user_ratings_total} reviews</div>
+          <div class="result-hint">Tap again to open in Google Maps</div>
+        `;
+        if (currentMarkers.find(m => m.placeData?.place_id === place.place_id && m.getAnimation())) {
+          li.classList.add('new-result');
+        }
+        li.onclick = () => handlePlaceClick(place);
+        ul.appendChild(li);
+      }
+    }
+    function buildGridCenters(center, outerKm, cellM) {
+      const kmPerDegLat = 111.32;
+      const stepKm = (cellM * 1.2) / 1000;
+      const latStep = stepKm / kmPerDegLat;
+      const lngStep = latStep / Math.cos(center.lat * Math.PI / 180);
+      const steps = Math.ceil(outerKm / stepKm);
+      const pts = [];
+      for (let iy = -steps; iy <= steps; iy++) {
+        for (let ix = -steps; ix <= steps; ix++) {
+          const c = {
+            lat: center.lat + iy * latStep,
+            lng: center.lng + ix * lngStep
+          };
+          if (haversine(center, c) <= outerKm * 1000) {
+            pts.push(c);
+          }
+        }
+      }
+      return pts;
+    }
+    async function scanArea() {
+      if (isSearching) return;
+      const center = {
+        lat: parseFloat(document.getElementById('centerLat').value),
+        lng: parseFloat(document.getElementById('centerLng').value)
+      };
+      const outerRadius = parseInt(document.getElementById('radiusSlider').value);
+      const cellRadius = parseInt(document.getElementById('cellSlider').value);
+      if (isNaN(center.lat) || isNaN(center.lng)) {
+        updateStatus('Invalid coordinates');
+        return;
+      }
+      isSearching = true;
+      searchCancelled = false;
+      const startBtn = document.getElementById('startSearch');
+      const cancelBtn = document.getElementById('cancelSearch');
+      startBtn.disabled = true;
+      startBtn.classList.add('loading');
+      cancelBtn.disabled = false;
+      hideSettings();
+      const cells = buildGridCenters(center, outerRadius, cellRadius);
+      if (document.getElementById('showCellsToggle').classList.contains('active')) {
+        for (let i = 0; i < cells.length; i++) {
+          const overlay = createCellOverlay(cells[i], cellRadius, i, false);
+          cellOverlays.push(overlay);
+        }
+      }
+
+      console.log(`🚀 Starting search with ${cells.length} cells. Search center: (${center.lat}, ${center.lng}), radius: ${outerRadius}km, cell size: ${cellRadius}m`);
+      console.log(`📋 Filters: minRating=${document.getElementById('minRating').value}, minReviews=${document.getElementById('minReviews').value}, liveResults=${document.getElementById('showProgressToggle').classList.contains('active')}`);
+
+      updateStatus(`Starting search: ${cells.length} cells`, true);
+      updateProgress(0);
+      document.getElementById('cellsScanned').textContent = '0';
+
+      // Process all results normally (no batching needed for live results)
+      try {
+        for (let i = 0; i < cells.length && !searchCancelled; i++) {
+          console.log(`\n🎯 === SCANNING CELL ${i} === (${i + 1}/${cells.length})`);
+          console.log(`Cell ${i} center: (${cells[i].lat.toFixed(6)}, ${cells[i].lng.toFixed(6)})`);
+
+          updateCurrentCell(cells[i], cellRadius, i);
+          updateStatus(`Scanning ${i + 1}/${cells.length} (${searchResults.size} found)`, true);
+          updateProgress((i / cells.length) * 100);
+          document.getElementById('cellsScanned').textContent = (i + 1).toString();
+
+          try {
+            const [A, B] = await Promise.allSettled([
+              nearbyAll(cells[i], cellRadius, i),
+              textAll(cells[i], cellRadius, i)
+            ]);
+
+            const nearbyResults = A.status === "fulfilled" ? A.value : [];
+            const textResults = B.status === "fulfilled" ? B.value : [];
+            console.log(`Cell ${i} complete: nearbySearch=${nearbyResults.length}, textSearch=${textResults.length} places`);
+
+            // If live results is disabled, collect all results for final processing
+            if (!document.getElementById('showProgressToggle').classList.contains('active')) {
+              const batch = [...nearbyResults, ...textResults];
+              let batchAdded = 0;
+              let batchFilteredCell = 0;
+              let batchFilteredSearch = 0;
+
+              for (const p of batch) {
+                if (!searchResults.has(p.place_id)) {
+                  const placeLocation = {
+                    lat: p.geometry.location.lat(),
+                    lng: p.geometry.location.lng()
+                  };
+
+                  // First check: Is the place actually within THIS cell's radius?
+                  const distanceToCell = haversine(cells[i], placeLocation);
+                  if (distanceToCell > cellRadius * 1.2) {
+                    batchFilteredCell++;
+                    continue;
+                  }
+
+                  // Second check: Is the place within the overall search radius?
+                  const searchCenter = {
+                    lat: parseFloat(document.getElementById('centerLat').value),
+                    lng: parseFloat(document.getElementById('centerLng').value)
+                  };
+                  const searchRadius = parseInt(document.getElementById('radiusSlider').value) * 1000;
+                  const distanceToSearchCenter = haversine(searchCenter, placeLocation);
+
+                  if (distanceToSearchCenter <= searchRadius) {
+                    searchResults.set(p.place_id, p);
+                    batchAdded++;
+                  } else {
+                    batchFilteredSearch++;
+                  }
+                }
+              }
+              console.log(`Cell ${i} batch processing: ${batchAdded} places added, filtered: cellBoundary=${batchFilteredCell}, searchBoundary=${batchFilteredSearch} (total results now: ${searchResults.size})`);
+            }
+          } catch (e) {
+            console.warn(`❌ Cell ${i} search error:`, e);
+          }
+          await sleep(300);
+        }
+
+        if (searchCancelled) {
+          updateStatus('Search cancelled');
+          return;
+        }
+
+        // Process final results if not showing live results or remaining batch
+        if (!showLiveResults || processedResults.length > 0) {
+          updateStatus('Processing results...', true);
+          const minRating = parseFloat(document.getElementById('minRating').value);
+          const minReviews = parseInt(document.getElementById('minReviews').value);
+          const filteredPlaces = [...searchResults.values()]
+            .filter(p => (p.types || []).includes("restaurant"))
+            .filter(p => (p.rating || 0) >= minRating && (p.user_ratings_total || 0) >= minReviews);
+
+          if (!showLiveResults) {
+            addResultsToMap(filteredPlaces, false);
+          }
+          updateResultsList();
+          updateStats();
+        }
+
+        updateProgress(100);
+        const foundCount = document.getElementById('filteredCount').textContent;
+        updateStatus(`Complete! Found ${foundCount} restaurants`);
+
+        if (currentCellOverlay) {
+          currentCellOverlay.setMap(null);
+          currentCellOverlay = null;
+        }
+
+        if (!bottomSheetExpanded) {
+          toggleBottomSheet();
+        }
+      } catch (error) {
+        updateStatus(`Search failed: ${error}`);
+      } finally {
+        isSearching = false;
+        startBtn.disabled = false;
+        startBtn.classList.remove('loading');
+        cancelBtn.disabled = true;
+      }
+    }
+    function getCurrentLocation() {
+      const btn = document.getElementById('getCurrentLocation');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.classList.add('loading');
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            document.getElementById('centerLat').value = position.coords.latitude.toFixed(6);
+            document.getElementById('centerLng').value = position.coords.longitude.toFixed(6);
+            map.setCenter({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            });
+            map.setZoom(13);
+            btn.disabled = false;
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+            updateStatus('Location updated');
+          },
+          (error) => {
+            updateStatus(`Location error: ${error.message}`);
+            btn.disabled = false;
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 300000
+          }
+        );
+      } else {
+        updateStatus('Geolocation not supported');
+        btn.disabled = false;
+        btn.classList.remove('loading');
+        btn.innerHTML = originalText;
+      }
+    }
+    function initMap() {
+      const center = { lat: 44.437, lng: 26.097 };
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: center,
+        zoom: 12,
+        disableDefaultUI: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        gestureHandling: 'greedy'
+      });
+      info = new google.maps.InfoWindow();
+      svc = new google.maps.places.PlacesService(map);
+      document.getElementById('startSearch').addEventListener('click', scanArea);
+      document.getElementById('cancelSearch').addEventListener('click', () => {
+        searchCancelled = true;
+        updateStatus('Cancelling search...');
+      });
+      document.getElementById('clearResults').addEventListener('click', clearVisualElements);
+      document.getElementById('getCurrentLocation').addEventListener('click', getCurrentLocation);
+      document.getElementById('sheetHeader').addEventListener('click', toggleBottomSheet);
+      document.getElementById('showSettingsBtn').addEventListener('click', showSettings);
+      document.getElementById('closeSettingsBtn').addEventListener('click', () => {
+        hideSettings();
+        updateStatus('Search/Settings closed');
+      });
+      setupSliders();
+      setupToggles();
+      setupBottomSheetDrag();
+      window.addEventListener('orientationchange', () => {
+        setTimeout(() => {
+          google.maps.event.trigger(map, 'resize');
+        }, 500);
+      });
+      updateStatus('Ready to search');
+      updateStats();
+    }
+    window.initMap = initMap;
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0yHf3IW0QT2Rsu69esI_PzP0KXZLhksg&libraries=places&callback=initMap"></script>
+</body>
+</html>
