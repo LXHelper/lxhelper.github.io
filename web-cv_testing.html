@@ -2793,8 +2793,8 @@ setTimeout(()=>{
     return Math.max(n, memBest);
   }
   function setBest(v){ memBest = v; lsSet(LS_BEST, String(v)); }
-  function noticeSeen(){ return memNoticeSeen || lsGet(LS_NOTICE)==='1'; }
-  function setNoticeSeen(){ memNoticeSeen = true; lsSet(LS_NOTICE,'1'); }
+  function noticeSeen(){ try{ return memNoticeSeen || sessionStorage.getItem(LS_NOTICE)==='1'; }catch(_){ return memNoticeSeen; } }
+  function setNoticeSeen(){ memNoticeSeen = true; try{ sessionStorage.setItem(LS_NOTICE,'1'); }catch(_){} }
   function getRunTotal(){ return parseInt(lsGet(LS_RUN_TOTAL) || '0', 10) || 0; }
   function setRunTotal(v){ lsSet(LS_RUN_TOTAL, String(Math.max(0, Math.round(v||0)))); }
   function resetRunTotal(){ setRunTotal(0); }
@@ -4405,9 +4405,24 @@ setTimeout(()=>{
     restoreAll();
 
         // restore cursor  non-touch  non-RM
-        if (!TOUCH && !RM) document.body.classList.add('cursor-ready');
-        document.body.style.cursor = '';         
-        document.documentElement.style.cursor = ''; 
+        // Use setTimeout so this fires after any blur event the browser triggers on overlay removal
+        setTimeout(() => {
+            if (!TOUCH && !RM) {
+                document.body.classList.add('cursor-ready');
+                const cr = document.getElementById('cursorRing');
+                const cn = document.getElementById('cursorNode');
+                if (cr) cr.style.opacity = '1';
+                if (cn) cn.style.opacity = '1';
+                // Dispatch a synthetic pointermove so the cursor IIFE re-activates its 'active' flag
+                window.dispatchEvent(new PointerEvent('pointermove', {
+                    clientX: window.innerWidth / 2,
+                    clientY: window.innerHeight / 2,
+                    bubbles: true
+                }));
+            }
+            document.body.style.cursor = '';
+            document.documentElement.style.cursor = '';
+        }, 50);
 
     // restore scroll + overflow
     document.body.style.overflow = savedOverflow;
