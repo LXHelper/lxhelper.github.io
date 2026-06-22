@@ -2845,7 +2845,7 @@ setTimeout(()=>{
       if(action){ try{ action(); }catch(_){} }
     }
     function doEmail(){ try{ window.location.href='mailto:Tudor.Neamtu@lxtech.ro?subject='+encodeURIComponent('Saw your interactive CV'); }catch(_){} }
-    function doDownloadCv(){ try{ const a=document.createElement('a'); a.href='Tudor_Neamtu_CV_Designed.pdf'; a.download='Tudor_Neamtu_CV_Designed.pdf'; document.body.appendChild(a); a.click(); a.remove(); }catch(_){ location.href='Tudor_Neamtu_CV_Designed.pdf'; } }
+    function doDownloadCv(){ try{ const a=document.createElement('a'); a.href='https://lxtech.ro/other/Tudor_Neamtu_CV.pdf'; a.download='Tudor_Neamtu_CV.pdf'; document.body.appendChild(a); a.click(); a.remove(); }catch(_){ location.href='https://lxtech.ro/other/Tudor_Neamtu_CV.pdf'; } }
     function doShare(){
       const url=location.href, data={ title:'Tudor Neamțu CV', text:'Check out this interactive CV', url:url };
       try{
