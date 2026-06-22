@@ -13,26 +13,26 @@
 <link rel="canonical" href="https://lxtech.ro/web-cv" />
 
 <!-- Open Graph -->
-<meta property="og:type" content="profile" />
-<meta property="og:title" content="Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager" />
-<meta property="og:description" content="Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager. Storage, virtualization, and migration delivery at EU-institution scale." />
-<meta property="og:url" content="https://lxtech.ro/images/og-cv-preview.png" />
-<meta property="og:image" content="https://lxtech.ro/images/og-cv-preview.png" />
-<meta property="og:image:secure_url" content="https://lxtech.ro/images/og-cv-preview.png" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:alt" content="Tudor Neamțu infra.console profile preview with enterprise infrastructure metrics." />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:site_name" content="Tudor Neamțu — infra.console" />
+    <!-- Open Graph -->
+    <meta property="og:type"              content="profile">
+    <meta property="og:title"             content="Tudor Neamu · Senior IT Infrastructure Project &amp; Programme Manager">
+    <meta property="og:description"       content="Tudor Neamu · Senior IT Infrastructure Project &amp; Programme Manager. Storage, virtualization, and migration delivery at EU-institution scale.">
+    <meta property="og:url"               content="https://lxtech.ro/web-cv">
+    <meta property="og:image"             content="https://raw.githubusercontent.com/LXHelper/lxhelper.github.io/main/images/og-cv-preview.png">
+    <meta property="og:image:secure_url"  content="https://raw.githubusercontent.com/LXHelper/lxhelper.github.io/main/images/og-cv-preview.png">
+    <meta property="og:image:type"        content="image/png">
+    <meta property="og:image:alt"         content="Tudor Neamu infra.console profile preview with enterprise infrastructure metrics.">
+    <meta property="og:image:width"       content="1200">
+    <meta property="og:image:height"      content="630">
+    <meta property="og:locale"            content="en_US">
+    <meta property="og:site_name"         content="Tudor Neamu · infra.console">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager" />
 <meta name="twitter:description" content="Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager. Storage, virtualization, and migration delivery at EU-institution scale." />
 <!-- TODO: replace with your real deployed domain + a 1200x630 share image -->
-<meta name="twitter:image" content="https://lxtech.ro/images/og-cv-preview.png" />
-<meta name="twitter:image:alt" content="Tudor Neamțu infra.console profile preview with enterprise infrastructure metrics." />
+<meta name="twitter:image"     content="https://raw.githubusercontent.com/LXHelper/lxhelper.github.io/main/images/og-cv-preview.png">
 
 <!-- Favicon -->
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -2717,6 +2717,17 @@ setTimeout(()=>{
    Real CV cards are the targets, shot in place on a transparent
    full-viewport canvas. Inert until #invadersLaunch is pressed.
    ============================================================ */
+
+
+   // Safety: if pointer lock is ever used and ESC releases it, restore cursor
+        document.addEventListener('pointerlockchange', () => {
+            if (!document.pointerLockElement) {
+                document.body.style.cursor = '';
+                document.documentElement.style.cursor = '';
+            }
+        });
+
+     
 (function invadersGame(){
   'use strict';
 
@@ -2782,8 +2793,8 @@ setTimeout(()=>{
     return Math.max(n, memBest);
   }
   function setBest(v){ memBest = v; lsSet(LS_BEST, String(v)); }
-  function noticeSeen(){ return memNoticeSeen || lsGet(LS_NOTICE)==='1'; }
-  function setNoticeSeen(){ memNoticeSeen = true; lsSet(LS_NOTICE,'1'); }
+  function noticeSeen(){ try{ return memNoticeSeen || sessionStorage.getItem(LS_NOTICE)==='1'; }catch(_){ return memNoticeSeen; } }
+  function setNoticeSeen(){ memNoticeSeen = true; try{ sessionStorage.setItem(LS_NOTICE,'1'); }catch(_){} }
   function getRunTotal(){ return parseInt(lsGet(LS_RUN_TOTAL) || '0', 10) || 0; }
   function setRunTotal(v){ lsSet(LS_RUN_TOTAL, String(Math.max(0, Math.round(v||0)))); }
   function resetRunTotal(){ setRunTotal(0); }
@@ -4393,8 +4404,25 @@ setTimeout(()=>{
     // restore modified element styles (un-hide the CV)
     restoreAll();
 
-    // restore cursor (non-touch & non-RM)
-    if(!TOUCH && !RM){ document.body.classList.add('cursor-ready'); }
+        // restore cursor  non-touch  non-RM
+        // Use setTimeout so this fires after any blur event the browser triggers on overlay removal
+        setTimeout(() => {
+            if (!TOUCH && !RM) {
+                document.body.classList.add('cursor-ready');
+                const cr = document.getElementById('cursorRing');
+                const cn = document.getElementById('cursorNode');
+                if (cr) cr.style.opacity = '1';
+                if (cn) cn.style.opacity = '1';
+                // Dispatch a synthetic pointermove so the cursor IIFE re-activates its 'active' flag
+                window.dispatchEvent(new PointerEvent('pointermove', {
+                    clientX: window.innerWidth / 2,
+                    clientY: window.innerHeight / 2,
+                    bubbles: true
+                }));
+            }
+            document.body.style.cursor = '';
+            document.documentElement.style.cursor = '';
+        }, 50);
 
     // restore scroll + overflow
     document.body.style.overflow = savedOverflow;
