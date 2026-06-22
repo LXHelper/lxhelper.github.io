@@ -9,17 +9,20 @@
 <meta name="color-scheme" content="dark" />
 <title>Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager</title>
 
-<!-- TODO: replace with your real deployed domain + a 1200x630 share image -->
-<link rel="canonical" href="https://REPLACE-WITH-YOUR-DOMAIN.example/" />
+
+<link rel="canonical" href="https://lxtech.ro/web-cv" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="profile" />
 <meta property="og:title" content="Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager" />
 <meta property="og:description" content="Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager. Storage, virtualization, and migration delivery at EU-institution scale." />
 <!-- TODO: replace with your real deployed domain + a 1200x630 share image -->
-<meta property="og:url" content="https://REPLACE-WITH-YOUR-DOMAIN.example/" />
+<meta property="og:url" content="https://lxtech.ro/web-cv" />
 <!-- TODO: replace with your real deployed domain + a 1200x630 share image -->
-<meta property="og:image" content="https://REPLACE-WITH-YOUR-DOMAIN.example/og-image.png" />
+<meta property="og:image" content="https://lxtech.ro/og-cv-preview.png" />
+<meta property="og:image:secure_url" content="https://lxtech.ro/images/og-cv-preview.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content="Tudor Neamțu infra.console profile preview with enterprise infrastructure metrics." />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="en_US" />
@@ -30,7 +33,8 @@
 <meta name="twitter:title" content="Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager" />
 <meta name="twitter:description" content="Tudor Neamțu — Senior IT Infrastructure Project & Programme Manager. Storage, virtualization, and migration delivery at EU-institution scale." />
 <!-- TODO: replace with your real deployed domain + a 1200x630 share image -->
-<meta name="twitter:image" content="https://REPLACE-WITH-YOUR-DOMAIN.example/og-image.png" />
+<meta name="twitter:image" content="https://lxtech.ro/og-cv-preview.png" />
+<meta name="twitter:image:alt" content="Tudor Neamțu infra.console profile preview with enterprise infrastructure metrics." />
 
 <!-- Favicon -->
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -59,7 +63,7 @@
   "name": "Tudor Neamțu",
   "jobTitle": "Senior IT Infrastructure Project & Programme Manager",
   "email": "mailto:Tudor.Neamtu@lxtech.ro",
-  "url": "https://REPLACE-WITH-YOUR-DOMAIN.example/",
+  "url": "https://lxtech.ro/web-cv",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Bucharest",
@@ -1004,6 +1008,22 @@ a.dc-status:hover,a.dc-status:focus-visible{border-color:rgba(74,222,128,0.6);ba
   box-shadow:0 0 14px rgba(56,189,248,0.5);
 }
 
+
+/* progression channels: animated like a transmission button, not score boosts */
+.inv-boost-lead{font-size:13px;line-height:1.6;color:var(--muted);}
+.inv-boost-btn{position:relative;overflow:hidden;border-color:rgba(251,191,36,.5);background:linear-gradient(180deg,rgba(251,191,36,.08),rgba(56,189,248,.035));box-shadow:0 0 0 1px rgba(251,191,36,.08),0 0 26px -16px rgba(251,191,36,.75);animation:rankChannelPulse 1.7s var(--ease-io) infinite;}
+.inv-boost-btn::after{content:"";position:absolute;inset:-45%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-70%) rotate(12deg);animation:boostSweep 2.1s linear infinite;pointer-events:none;}
+.inv-boost-btn .boost-main{display:block;color:var(--text);font-weight:700;letter-spacing:.04em;}
+.inv-boost-btn .bx{display:block;margin-top:4px;color:var(--value);font-weight:800;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;text-shadow:0 0 12px rgba(251,191,36,.35);}
+.inv-boost-btn.applied{animation:none;border-color:var(--signal);background:var(--signal);color:#04202f;box-shadow:0 14px 34px -14px rgba(56,189,248,.75);}
+.inv-boost-btn.applied::after{display:none;}
+.inv-boost-btn.applied .boost-main,.inv-boost-btn.applied .bx,.inv-boost-btn.applied .bk{color:#04202f;text-shadow:none;}
+.inv-boost-row.has-applied .inv-boost-btn:not(.applied){opacity:.38;filter:grayscale(.45);animation:none;}
+.inv-boost-row.has-applied .inv-boost-btn:not(.applied)::after{display:none;}
+@keyframes rankChannelPulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.28),0 0 26px -16px rgba(251,191,36,.75);}50%{box-shadow:0 0 0 5px rgba(251,191,36,0),0 0 34px -10px rgba(251,191,36,.9);}}
+.inv-retry-btn{color:#1a0b00 !important;background:linear-gradient(180deg,#FFD45E,#FBBF24) !important;border:1px solid #FFE39A !important;box-shadow:0 0 0 0 rgba(255,45,107,.38),0 14px 34px -12px rgba(251,191,36,.65) !important;font-weight:700;animation:eggPulse 2.1s var(--ease-io) infinite;}
+.inv-retry-btn:hover,.inv-retry-btn:focus-visible{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 0 0 6px rgba(255,45,107,.10),0 20px 48px -12px rgba(251,191,36,.85) !important;}
+
 /* ---------- screen-reader live region (sr-only) ---------- */
 .inv-sr{
   position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;
@@ -1193,6 +1213,92 @@ a.dc-status:hover,a.dc-status:focus-visible{border-color:rgba(74,222,128,0.6);ba
 .inv-lb-note{font-family:var(--font-mono);font-size:10px;color:var(--muted);margin:8px 0 0;}
 .inv-lb-clear{background:none;border:none;color:var(--muted);text-decoration:underline;cursor:pointer;font:inherit;padding:0;}
 .inv-lb-clear:hover{color:var(--signal);}
+
+/* ---- progression/contact polish + mobile overflow guard ---- */
+html, body { max-width: 100%; overflow-x: hidden; }
+.inv-overlay, .inv-dialog, .inv-dialog-inner { box-sizing: border-box; max-width: 100vw; }
+.inv-contact-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:14px 0;}
+.inv-contact-row[hidden]{display:none !important;}
+.inv-boost-btn .bx{display:block;margin:4px 0 0;color:var(--value);font-weight:800;font-size:.95em;letter-spacing:.04em;text-shadow:0 0 10px rgba(251,191,36,.35);}
+.inv-boost-btn.next-rank{position:relative;overflow:hidden;animation:boostPulse 1.25s var(--ease-io) infinite;}
+.inv-rank-badge{display:inline-flex;align-items:center;gap:6px;margin-left:8px;padding:3px 8px;border:1px solid var(--line-strong);border-radius:999px;color:var(--value);font-size:10px;letter-spacing:.08em;}
+.inv-boost-btn.next-rank::after{content:"";position:absolute;inset:-40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.24),transparent);transform:translateX(-70%) rotate(12deg);animation:boostSweep 1.8s linear infinite;pointer-events:none;}
+.inv-boost-btn.next-rank .boost-main{display:block;color:#fff;font-weight:800;letter-spacing:.08em;text-transform:uppercase;}
+.inv-boost-row.has-applied .inv-boost-btn:not(.applied){opacity:.42;filter:grayscale(.25);animation:none;}
+.inv-contact-row .cta-primary{animation:contactPulse 1.6s var(--ease-io) infinite;}
+.inv-retry-danger{background:linear-gradient(180deg,#FFD45E,#FBBF24);color:#1a0b00;border:1px solid #FFE39A;box-shadow:0 14px 34px -12px rgba(251,191,36,.65);font-weight:700;}
+.inv-retry-danger:hover,.inv-retry-danger:focus-visible{filter:brightness(1.08);box-shadow:0 0 0 6px rgba(255,45,107,.12),0 20px 48px -12px rgba(251,191,36,.85);}
+@keyframes boostSweep{0%{transform:translateX(-70%) rotate(12deg);}100%{transform:translateX(70%) rotate(12deg);}}
+@keyframes contactPulse{0%,100%{box-shadow:0 0 0 0 rgba(56,189,248,.42),0 14px 34px -16px rgba(56,189,248,.75);}50%{box-shadow:0 0 0 8px rgba(56,189,248,0),0 18px 46px -14px rgba(103,232,249,.9);}}
+@media (max-width:560px){
+  .inv-dialog{padding:12px;align-items:flex-start;overflow-y:auto;}
+  .inv-dialog-inner{width:100%;max-width:calc(100vw - 24px);padding:22px 18px;}
+  .inv-signform{display:grid;grid-template-columns:1fr;gap:10px;}
+  .inv-name-input{width:100%;min-height:52px;}
+  .inv-dialog-actions,.inv-signform .cta{width:100%;}
+  .inv-dialog-actions .cta,.inv-signform .cta{justify-content:center;}
+  .inv-boost-row{display:grid;grid-template-columns:1fr;gap:10px;}
+  .inv-boost-btn{width:100%;min-width:0;}
+  .inv-score-block{gap:12px 16px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .inv-boost-btn.next-rank,.inv-contact-row .cta-primary{animation:none !important;}
+  .inv-boost-btn.next-rank::after{display:none;}
+}
+
+
+/* Mobile modal hardening */
+html, body { max-width:100%; overflow-x:hidden; }
+.inv-dialog, .inv-dialog-inner { max-width:100vw; }
+.inv-dialog-inner { width:min(560px, calc(100vw - 24px)); }
+@media (max-width:560px){
+  .inv-dialog{padding:10px; align-items:flex-start;}
+  .inv-dialog-inner{width:calc(100vw - 20px); padding:24px 18px;}
+  .inv-signform{display:grid; grid-template-columns:1fr;}
+  .inv-signform .cta{width:100%; justify-content:center;}
+  .inv-boost-row{grid-template-columns:1fr;}
+}
+
+
+/* End-game action layout: Email full width, CV left, Share right */
+.inv-boost-row{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px 12px !important;
+}
+.inv-boost-row .inv-boost-btn{
+  width:100% !important;
+  min-width:0 !important;
+  min-height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  text-align:center;
+}
+#invBoostEmail{grid-column:1 / -1;}
+#invBoostDownload{grid-column:1;}
+#invBoostShare{grid-column:2;}
+.inv-boost-btn .boost-main{display:inline !important;}
+.inv-boost-btn .bx{display:none !important;}
+.inv-signform{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:12px !important;
+  align-items:stretch;
+}
+.inv-signform .inv-name-input{grid-column:1 / -1;width:100%;min-height:58px;}
+.inv-signform #invSubmitScore{grid-column:1;}
+.inv-signform #invUplink{grid-column:2;}
+.inv-signform .cta{width:100%;justify-content:center;min-height:58px;}
+#invUplink.inv-retry-danger{background:linear-gradient(180deg,#FFD45E,#FBBF24);color:#1a0b00;border-color:#FFE39A;}
+#invUplink.inv-retry-danger .arrow{color:#1a0b00;}
+@media (max-width:420px){
+  .inv-boost-row,.inv-signform{gap:10px !important;}
+  .inv-boost-row .inv-boost-btn{min-height:58px;font-size:11px;padding:10px 8px;}
+  .inv-signform .cta{min-height:56px;font-size:12px;padding:13px 10px;}
+}
+
 </style>
 </head>
 <body>
@@ -1412,7 +1518,7 @@ a.dc-status:hover,a.dc-status:focus-visible{border-color:rgba(74,222,128,0.6);ba
           <div class="bar-row" role="button" tabindex="0" data-hint="At Genpact, ran the global project portfolio under PRINCE2 — including the company-wide COVID remote-work programme."><div class="bar-top"><span class="name">PRINCE2 (Practitioner)</span><span class="lvl">EXPERT</span></div><div class="bar-track"><span class="bar-fill" data-w="95" style="--final:95%"></span></div></div>
           <div class="bar-row" role="button" tabindex="0" data-hint="As Scrum Master at the European Commission (cSNAP), drove the Backup &amp; Storage squad from Waterfall to SAFe with ART-level delivery."><div class="bar-top"><span class="name">SAFe 5/6 (Scrum Master / Agilist)</span><span class="lvl">EXPERT</span></div><div class="bar-track"><span class="bar-fill" data-w="92" style="--final:92%"></span></div></div>
           <div class="bar-row" role="button" tabindex="0" data-hint="Facilitated full Scrum ceremonies on the EC squad, lifting sprint predictability to ~86–93%."><div class="bar-top"><span class="name">Scrum</span><span class="lvl">EXPERT</span></div><div class="bar-track"><span class="bar-fill" data-w="90" style="--final:90%"></span></div></div>
-          <div class="bar-row" role="button" tabindex="0" data-hint="Delivered EU-institution storage and virtualization projects under PM² on OASIS2 at the European Commission."><div class="bar-top"><span class="name">PM²</span><span class="lvl">ADVANCED</span></div><div class="bar-track"><span class="bar-fill" data-w="85" style="--final:85%"></span></div></div>
+          <div class="bar-row" role="button" tabindex="0" data-hint="Delivered EU-institution storage and virtualization projects under PM²under OASIS2 at the European Commission."><div class="bar-top"><span class="name">PM²</span><span class="lvl">ADVANCED</span></div><div class="bar-track"><span class="bar-fill" data-w="85" style="--final:85%"></span></div></div>
           <div class="bar-row" role="button" tabindex="0" data-hint="Applied ITIL service practices in multi-tier support at Heineken, where I also earned the Six Sigma Yellow Belt."><div class="bar-top"><span class="name">ITIL Foundation · Six Sigma (YB)</span><span class="lvl">PROFICIENT</span></div><div class="bar-track"><span class="bar-fill" data-w="78" style="--final:78%"></span></div></div>
         </div>
       </article>
@@ -1460,7 +1566,7 @@ a.dc-status:hover,a.dc-status:focus-visible{border-color:rgba(74,222,128,0.6);ba
           <span class="tag" role="button" tabindex="0" data-hint="Ran a programme of 83+ concurrent client migrations during the COVID remote-work transition at Genpact.">Portfolio &amp; programme management</span>
           <span class="tag" role="button" tabindex="0" data-hint="Led and mentored a team of 10+ project managers at Genpact.">Team leadership &amp; mentoring</span>
           <span class="tag" role="button" tabindex="0" data-hint="Translated technical status and risk into governance reporting for company leadership at Genpact.">Stakeholder management</span>
-          <span class="tag" role="button" tabindex="0" data-hint="Performed risk analysis and managed escalations to safeguard sprint and PI delivery at the EC.">Risk &amp; issue management</span>
+          <span class="tag" role="button" tabindex="0" data-hint="Performed risk analysis and managed escalations to safeguard projects, sprints and PI delivery.">Risk &amp; issue management</span>
           <span class="tag" role="button" tabindex="0" data-hint="Authored the annual IT-infrastructure estate report for senior C3 management at the EC.">Governance reporting</span>
           <span class="tag" role="button" tabindex="0" data-hint="Negotiated vendor contracts and managed external support teams at Heineken.">Vendor &amp; contract management</span>
         </div>
@@ -1650,7 +1756,7 @@ a.dc-status:hover,a.dc-status:focus-visible{border-color:rgba(74,222,128,0.6);ba
       </a>
       <!-- Asset link — Download CV -->
       <!-- TODO: once deployed, point this at the hosted CV URL -->
-      <a href="Tudor_Neamtu_CV_Designed.pdf" download class="cta cta-ghost" data-magnetic>
+      <a href="https://lxtech.ro/web-cv/other/Tudor_Neamtu_CV.pdf" download class="cta cta-ghost" data-magnetic>
         <span>Download CV</span><span aria-hidden="true">↓</span>
       </a>
     </div>
@@ -1736,18 +1842,24 @@ a.dc-status:hover,a.dc-status:focus-visible{border-color:rgba(74,222,128,0.6);ba
       </div>
 
       <div class="inv-boost">
-        <p class="inv-boost-lead">Boost your score before you sign <span class="inv-mult" id="invMult">×1.0</span></p>
+        <p class="inv-boost-lead" id="invBoostLead">You've made it through the first round, but can you make it until the end?</p>
         <div class="inv-boost-row">
-          <button type="button" class="inv-boost-btn" id="invBoostEmail"><span class="bk" aria-hidden="true">✉</span> Email Tudor <span class="bx">+50%</span></button>
-          <button type="button" class="inv-boost-btn" id="invBoostDownload"><span class="bk" aria-hidden="true">↓</span> Download CV <span class="bx">+50%</span></button>
-          <button type="button" class="inv-boost-btn" id="invBoostShare"><span class="bk" aria-hidden="true">↗</span> Share <span class="bx">+50%</span></button>
+          <button type="button" class="inv-boost-btn" id="invBoostEmail"><span class="bk" aria-hidden="true">✉</span> <span class="boost-main">Email Tudor</span></button>
+          <button type="button" class="inv-boost-btn" id="invBoostDownload"><span class="bk" aria-hidden="true">↓</span> <span class="boost-main">Download CV</span></button>
+          <button type="button" class="inv-boost-btn" id="invBoostShare"><span class="bk" aria-hidden="true">↗</span> <span class="boost-main">Share</span></button>
         </div>
       </div>
 
       <div class="inv-signform">
         <label class="inv-sr" for="invName">Your name for the leaderboard</label>
         <input type="text" id="invName" class="inv-name-input" maxlength="14" placeholder="Enter your name / initials" autocomplete="off" />
-        <button type="button" class="cta cta-primary" id="invSubmitScore"><span>Log score</span><span class="arrow" aria-hidden="true">↳</span></button>
+        <button type="button" class="cta cta-primary" id="invSubmitScore"><span>Submit</span><span class="arrow" aria-hidden="true">↳</span></button>
+        <button type="button" class="cta cta-ghost inv-retry-btn inv-retry-danger" id="invUplink"><span>Next Run</span><span class="arrow" aria-hidden="true">↻</span></button>
+      </div>
+
+      <div class="inv-contact-row" id="invContactRow" hidden>
+        <a href="mailto:Tudor.Neamtu@lxtech.ro?subject=Interactive%20CV%20follow-up" class="cta cta-primary"><span>Contact Tudor</span><span aria-hidden="true">↗</span></a>
+        <a href="https://www.linkedin.com/in/tudor-neamtu/" target="_blank" rel="noopener noreferrer" class="cta cta-ghost"><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
       </div>
 
       <div class="inv-leaderboard" id="invLeaderboard">
@@ -1756,11 +1868,7 @@ a.dc-status:hover,a.dc-status:focus-visible{border-color:rgba(74,222,128,0.6);ba
         <p class="inv-lb-note">saved on this device · <button type="button" class="inv-lb-clear" id="invLbClear">clear</button></p>
       </div>
 
-      <div class="inv-dialog-actions">
-        <button type="button" class="cta cta-primary" id="invUplink">
-          <span>RETRY</span><span class="arrow" aria-hidden="true">↻</span>
-        </button>
-      </div>
+
     </div>
   </div>
 </div>
@@ -2620,6 +2728,53 @@ setTimeout(()=>{
   /* ---------- persistent state (best score + notice dismissal) ---------- */
   const LS_BEST   = 'infra.invaders.highscore';
   const LS_NOTICE = 'infra.invaders.noticeSeen';
+  const LS_STAGE  = 'infra.invaders.stage';
+  const LS_RUN_TOTAL = 'infra.invaders.runTotal';
+  const SS_CONTINUE = 'infra.invaders.continueNextRun';
+  let currentStage = 1;
+  let lastRunOutcome = 'clear';
+  function getStage(){
+    const raw = parseInt(lsGet(LS_STAGE) || '1', 10);
+    return Math.max(1, Math.min(5, raw || 1));
+  }
+  function setStage(v){ currentStage = Math.max(1, Math.min(5, v||1)); lsSet(LS_STAGE, String(currentStage)); }
+  function resetStage(){ setStage(1); }
+  // Level progression: L1 single particle, L2 triple particles, L3 rockets+tougher targets, L4 laser+moving targets, L5 red boss with full arsenal.
+  function rankForStage(stage){
+    const map = {
+      1:{ rank:'Level 1',    weapon:'Default weapon · single particle',          hp:1 },
+      2:{ rank:'Level 2',    weapon:'Extra firepower · three particles',       hp:1 },
+      3:{ rank:'Level 3',    weapon:'Rockets + tougher squares',              hp:1 },
+      4:{ rank:'Level 4',    weapon:'Laser + moving squares',                 hp:1 },
+      5:{ rank:'Level 5',    weapon:'Boss ship · full arsenal · 3 HP',        hp:3 }
+    };
+    return map[Math.max(1, Math.min(5, stage))] || map[1];
+  }
+
+  function nextRunLabel(stage){
+    const next = Math.min(5, stage + 1);
+    if(next === 2) return 'NEXT RUN · EXTRA FIREPOWER';
+    if(next === 3) return 'NEXT RUN · ROCKETS + TOUGHER SQUARES';
+    if(next === 4) return 'NEXT RUN · LASER + MOVING SQUARES';
+    if(next === 5) return 'NEXT RUN · RED SHIP BOSS';
+    return 'SYSTEM CLEARED · CONTACT CHANNEL OPEN';
+  }
+  function progressionLead(stage, outcome){
+    if(outcome === 'death') return 'It was a good run, operator. You might need a copilot next time.';
+    if(outcome === 'win5') return 'Fifth run cleared. Sixth and final level is classified — contact channel open.';
+    if(stage <= 1) return "You've made it through the first round, but can you make it until the end?";
+    if(stage === 2) return 'Extra firepower verified. The database is adapting; the next run gets tougher.';
+    if(stage === 3) return 'Rockets armed. Next escalation: lasers online and targets start moving like asteroids.';
+    if(stage === 4) return 'Full arsenal confirmed. One last firewall remains: hostile red ship boss run.';
+    return 'Boss run cleared. Contact channel open.';
+  }
+  function clearTitleForStage(stage){
+    if(stage <= 1) return 'DATABASE CORRUPTED';
+    if(stage === 2) return 'FIREPOWER VERIFIED';
+    if(stage === 3) return 'ROCKETS ONLINE';
+    if(stage === 4) return 'ASTEROIDS CLEARED';
+    return 'DATABASE CORRUPTED';
+  }
   let memBest = 0, memNoticeSeen = false;     // in-memory fallback if LS blocked
   function lsGet(k){ try{ return window.localStorage.getItem(k); }catch(_){ return null; } }
   function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(_){ /* ignore */ } }
@@ -2631,6 +2786,9 @@ setTimeout(()=>{
   function setBest(v){ memBest = v; lsSet(LS_BEST, String(v)); }
   function noticeSeen(){ return memNoticeSeen || lsGet(LS_NOTICE)==='1'; }
   function setNoticeSeen(){ memNoticeSeen = true; lsSet(LS_NOTICE,'1'); }
+  function getRunTotal(){ return parseInt(lsGet(LS_RUN_TOTAL) || '0', 10) || 0; }
+  function setRunTotal(v){ lsSet(LS_RUN_TOTAL, String(Math.max(0, Math.round(v||0)))); }
+  function resetRunTotal(){ setRunTotal(0); }
 
   /* ---------- leaderboard (local now; swap load/submit for a remote DB later) ---------- */
   const LS_LB = 'infra.invaders.leaderboard';
@@ -2659,35 +2817,45 @@ setTimeout(()=>{
   let prepEndExtras = null;
   function setupEndExtras(){
     if(endExtrasWired) return;
-    const elMult=document.getElementById('invMult'), elBoosted=document.getElementById('invBoostedScore');
+    const elMult=document.getElementById('invMult'), boostLead=document.getElementById('invBoostLead');
     const bEmail=document.getElementById('invBoostEmail'), bDl=document.getElementById('invBoostDownload'), bShare=document.getElementById('invBoostShare');
+    const boostRow=document.querySelector('.inv-boost-row');
+    const contactRow=document.getElementById('invContactRow');
     const nameInput=document.getElementById('invName'), submitBtn=document.getElementById('invSubmitScore');
     const lbList=document.getElementById('invLbList'), lbClear=document.getElementById('invLbClear');
     if(!submitBtn || !lbList) return;
     endExtrasWired = true;
 
-    let base=0, mult=1, applied={}, submitted=false;
-    function boosted(){ return Math.round(base * mult); }
+    let base=0, submitted=false, outcome='clear';
+    function finalScore(){ return Math.round(base); }
+    let levelApplied=false;
     function updateUI(){
-      if(elMult) elMult.textContent = '×' + mult.toFixed(1);
-      if(elBoosted) elBoosted.textContent = boosted().toLocaleString('en-US');
+      const stage = Math.max(1, Math.min(5, (typeof currentStage==='number'?currentStage:1)));
+      if(elMult) elMult.textContent = rankForStage(stage).rank.toUpperCase();
+      // Keep the end-screen message only at the top of the dialog.
+      // The old secondary lead above the contact buttons duplicated that text on mobile.
+      if(boostLead){ boostLead.textContent = ''; boostLead.hidden = true; }
+      if(contactRow) contactRow.hidden = true;
+      if(btnUplink){ const t=btnUplink.querySelector('span'); if(t) t.textContent = (outcome==='death' || outcome==='win5') ? 'Restart' : 'Next Run'; }
     }
-    function applyBoost(kind, btn, action){
-      if(!applied[kind]){ applied[kind]=true; mult+=0.5; if(btn) btn.classList.add('applied'); updateUI(); }
+    function markAction(btn, action){
+      [bEmail,bDl,bShare].forEach(b=>{ if(b) b.classList.remove('applied'); });
+      if(btn) btn.classList.add('applied');
+      if(boostRow) boostRow.classList.add('has-applied');
       if(action){ try{ action(); }catch(_){} }
     }
     function doEmail(){ try{ window.location.href='mailto:Tudor.Neamtu@lxtech.ro?subject='+encodeURIComponent('Saw your interactive CV'); }catch(_){} }
-    function doDownload(){ try{ const a=document.createElement('a'); a.href='Tudor_Neamtu_CV_Designed.pdf'; a.setAttribute('download',''); document.body.appendChild(a); a.click(); a.remove(); }catch(_){} }
+    function doDownloadCv(){ try{ const a=document.createElement('a'); a.href='Tudor_Neamtu_CV_Designed.pdf'; a.download='Tudor_Neamtu_CV_Designed.pdf'; document.body.appendChild(a); a.click(); a.remove(); }catch(_){ location.href='Tudor_Neamtu_CV_Designed.pdf'; } }
     function doShare(){
       const url=location.href, data={ title:'Tudor Neamțu CV', text:'Check out this interactive CV', url:url };
       try{
         if(navigator.share){ navigator.share(data).catch(()=>{}); }
-        else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(()=>{ const x=bShare&&bShare.querySelector('.bx'); if(x) x.textContent='copied'; }).catch(()=>{}); }
+        else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(()=>{ const x=bShare&&bShare.querySelector('.bx'); if(x) x.textContent='LINK COPIED'; }).catch(()=>{}); }
       }catch(_){}
     }
-    if(bEmail) bEmail.addEventListener('click', ()=> applyBoost('email', bEmail, doEmail));
-    if(bDl) bDl.addEventListener('click', ()=> applyBoost('download', bDl, doDownload));
-    if(bShare) bShare.addEventListener('click', ()=> applyBoost('share', bShare, doShare));
+    if(bEmail) bEmail.addEventListener('click', ()=> markAction(bEmail, doEmail));
+    if(bDl) bDl.addEventListener('click', ()=> markAction(bDl, doDownloadCv));
+    if(bShare) bShare.addEventListener('click', ()=> markAction(bShare, doShare));
 
     function renderLb(arr, youTs){
       lbList.innerHTML='';
@@ -2703,20 +2871,21 @@ setTimeout(()=>{
     function submit(){
       if(submitted) return;
       let nm=((nameInput&&nameInput.value)||'').trim().slice(0,14) || 'ANON';
-      const sc=boosted(), ts=Date.now();
+      const sc=finalScore(), ts=Date.now();
       submitted=true;
-      if(submitBtn){ submitBtn.disabled=true; const t=submitBtn.querySelector('span'); if(t) t.textContent='Signed ✓'; }
+      if(submitBtn){ submitBtn.disabled=true; const t=submitBtn.querySelector('span'); if(t) t.textContent='Submitted ✓'; }
       Leaderboard.submit(nm, sc, ts).then(arr=> renderLb(arr, ts));
     }
     if(submitBtn) submitBtn.addEventListener('click', submit);
     if(nameInput) nameInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); submit(); } });
     if(lbClear) lbClear.addEventListener('click', ()=> Leaderboard.clear().then(arr=> renderLb(arr)));
 
-    prepEndExtras = function(finalScore){
-      base=finalScore||0; mult=1; applied={}; submitted=false;
-      [bEmail,bDl,bShare].forEach(b=>{ if(b) b.classList.remove('applied'); });
-      const x=bShare&&bShare.querySelector('.bx'); if(x) x.textContent='+50%';
-      if(submitBtn){ submitBtn.disabled=false; const t=submitBtn.querySelector('span'); if(t) t.textContent='Log score'; }
+    prepEndExtras = function(finalScoreValue, outcomeValue){
+      base=finalScoreValue||0; submitted=false; outcome=outcomeValue||'clear'; levelApplied=false;
+      [bEmail,bDl,bShare].forEach(b=>{ if(b) b.classList.remove('applied','next-rank'); });
+      if(boostRow) boostRow.classList.remove('has-applied');
+      [bEmail,bDl,bShare].forEach(b=>{ if(b){ b.hidden = false; }});
+      if(submitBtn){ submitBtn.disabled=false; const t=submitBtn.querySelector('span'); if(t) t.textContent='Submit'; }
       if(nameInput) nameInput.value='';
       updateUI();
       Leaderboard.load().then(arr=> renderLb(arr));
@@ -2746,10 +2915,14 @@ setTimeout(()=>{
   let invaders = [];           // target data model
   let totalArea = 0;           // sum of all captured target areas (for integrity %)
   let bullets = [];            // pool
+  let enemyBullets = [];       // hostile fire pool
+  let lasers = [];             // short-lived player beam effects
+  let enemyLasers = [];        // short-lived boss beam effects
   let particles = [];          // pool
   let stamps = [];             // faint "CORRUPTED" stamps (doc-positioned)
 
   let player = null;
+  let enemy = null, bossSpawned = false, playerHP = 1, lastRocketT = 0, lastLaserT = 0, lastEnemyFireT = 0, lastEnemyRocketT = 0, lastEnemyLaserT = 0;
   let keys = { rotLeft:false, rotRight:false, thrust:false, fire:false };
   let lastFireT = 0;
   const FIRE_CD = 170;         // ms
@@ -2761,6 +2934,8 @@ setTimeout(()=>{
   const MAX_SPEED   = 0.72;    // px/ms
   const BULLET_SPD  = 0.95;    // px/ms
   const BULLET_LIFE = 850;     // ms
+  const ROCKET_CD = 760;
+  const LASER_CD = 1250;
   // aim / input state
   const pointerAim = { x:0, y:0, active:false };   // mouse aim
   let mouseLeft = false, mouseRight = false;       // mouse buttons: fire / thrust
@@ -2842,6 +3017,8 @@ setTimeout(()=>{
   ];
   const LARGE_SEL = '.cap-card,.deploy-card,.tl-entry,.strip-card';
   const AMBER_SEL = '.is-value,.dc-metric.v,.v';
+  const AMBER_HP_BONUS = 2;      // yellow/value targets are mini-bosses now
+  const AMBER_POINT_MULT = 2.5;  // tougher yellow targets pay out more
 
   function tierOf(el){
     // amber for value-flagged elements; else cyan/indigo split for variety
@@ -2891,7 +3068,13 @@ setTimeout(()=>{
     invaders = keep.map(o=>{
       const el = o.el;
       const large = el.matches && el.matches(LARGE_SEL);
+      const tier = tierOf(el);
+      const amber = tier === 'amber';
       const area = o.r.width * o.r.height;
+      const baseHp = large ? 2 : 1;
+      const stageHpBonus = currentStage >= 3 ? 1 : 0;
+      const stageFiveBonus = currentStage >= 5 ? 1 : 0;
+      const maxHp = baseHp + stageHpBonus + stageFiveBonus + (amber ? AMBER_HP_BONUS : 0);
       maxDocBottom = Math.max(maxDocBottom, o.r.bottom + sy);
       return {
         el,
@@ -2899,14 +3082,20 @@ setTimeout(()=>{
         docLeft: o.r.left + sx,
         w: o.r.width,
         h: o.r.height,
-        hp: large ? 2 : 1,
-        maxHp: large ? 2 : 1,
-        points: o.pts,
-        tier: tierOf(el),
+        hp: maxHp,
+        maxHp,
+        points: amber ? Math.round(o.pts * AMBER_POINT_MULT) : o.pts,
+        tier,
         area,
         alive: true,
         flash: 0,         // non-lethal hit flash timer (ms)
-        shake: 0
+        shake: 0,
+        lastHit: 0,       // used for progressive damage animation
+        ox:0, oy:0,
+        moveA: (currentStage>=4 ? 8 + Math.random()*16 : 0),
+        moveB: (currentStage>=4 ? 5 + Math.random()*12 : 0),
+        moveS: 0.0007 + Math.random()*0.0008,
+        moveP: Math.random()*Math.PI*2
       };
     });
     totalArea = invaders.reduce((s,i)=> s + i.area, 0) || 1;
@@ -2929,8 +3118,8 @@ setTimeout(()=>{
     const sy = window.scrollY || window.pageYOffset;
     const sx = window.scrollX || window.pageXOffset;
     return {
-      x: inv.docLeft - sx,
-      y: inv.docTop - sy,
+      x: inv.docLeft - sx + (inv.ox||0),
+      y: inv.docTop - sy + (inv.oy||0),
       w: inv.w,
       h: inv.h
     };
@@ -2940,8 +3129,13 @@ setTimeout(()=>{
   const PARTICLE_CAP = 600;
   function getBullet(){
     for(const b of bullets){ if(!b.active) return b; }
-    const b = { x:0,y:0,vx:0,vy:0,life:0,active:false };
+    const b = { x:0,y:0,vx:0,vy:0,life:0,active:false,type:'bullet',damage:1,radius:2.4 };
     bullets.push(b); return b;
+  }
+  function getEnemyBullet(){
+    for(const b of enemyBullets){ if(!b.active) return b; }
+    const b = { x:0,y:0,vx:0,vy:0,life:0,active:false };
+    enemyBullets.push(b); return b;
   }
   function getParticle(){
     for(const p of particles){ if(!p.active) return p; }
@@ -3025,7 +3219,7 @@ setTimeout(()=>{
   /* ---------- HUD ---------- */
   function updateHud(){
     if(hudScore) hudScore.textContent = String(score);
-    if(hudCombo) hudCombo.textContent = '×' + liveSpeedMult().toFixed(1);
+    if(hudCombo) hudCombo.textContent = rankForStage(currentStage).rank.toUpperCase() + (currentStage>=5 ? ' · HP ' + playerHP : ' · ×' + liveSpeedMult().toFixed(1));
     if(hudTargets) hudTargets.textContent = String(aliveCount());
     if(hudBest) hudBest.textContent = String(getBest());
     const pct = integrityPct();
@@ -3060,7 +3254,29 @@ setTimeout(()=>{
 
   /* ---------- player (free-flying, asteroids-style) ---------- */
   function initPlayer(){
+    const info = rankForStage(currentStage);
+    playerHP = info.hp || 1;
     player = { x: VW/2, y: VH/2, vx:0, vy:0, angle:-Math.PI/2, thrusting:false };
+    enemy = null;
+    bossSpawned = false;
+  }
+  function spawnBoss(){
+    if(currentStage < 5 || bossSpawned) return false;
+    bossSpawned = true;
+    enemyBullets.length = 0;
+    enemyLasers.length = 0;
+    enemy = {
+      x: VW*0.18, y: Math.max(118, VH*0.24), vx:0, vy:0,
+      angle:0, thrusting:false,
+      hp:28, maxHp:28, active:true,
+      firePhase:0
+    };
+    const now = performance.now();
+    lastEnemyFireT = now + 450;
+    lastEnemyRocketT = now + 1200;
+    lastEnemyLaserT = now + 1800;
+    if(escLive) escLive.textContent = 'Warning. Hostile red ship detected. Boss HP bar online.';
+    return true;
   }
 
   function fire(){
@@ -3068,16 +3284,46 @@ setTimeout(()=>{
     const now = performance.now();
     if(now - lastFireT < FIRE_CD) return;
     let live = 0; for(const b of bullets){ if(b.active) live++; }
-    if(live >= MAX_BULLETS) return;
+    const maxLive = currentStage >= 4 ? 12 : (currentStage >= 3 ? 9 : (currentStage >= 2 ? 7 : MAX_BULLETS));
+    if(live >= maxLive) return;
     lastFireT = now;
     const ca = Math.cos(player.angle), sa = Math.sin(player.angle);
-    const b = getBullet();
-    b.active = true;
-    b.x = player.x + ca * 15;   // muzzle at the nose
-    b.y = player.y + sa * 15;
-    b.vx = ca * BULLET_SPD;     // travel along the ship's heading
-    b.vy = sa * BULLET_SPD;
-    b.life = 0;
+    const spread = currentStage >= 2 ? [-0.13,0,0.13] : [0];
+    for(const off of spread){
+      const a = player.angle + off, c = Math.cos(a), s = Math.sin(a);
+      const b = getBullet();
+      b.active = true; b.type='bullet'; b.damage=1; b.radius=2.4;
+      b.x = player.x + c * 15; b.y = player.y + s * 15;
+      b.vx = c * BULLET_SPD; b.vy = s * BULLET_SPD;
+      b.life = 0;
+    }
+    if(currentStage >= 3 && now - lastRocketT > ROCKET_CD){
+      lastRocketT = now;
+      const r = getBullet();
+      r.active = true; r.type='rocket'; r.damage=2; r.radius=8;
+      r.x = player.x + ca * 18; r.y = player.y + sa * 18;
+      r.vx = ca * (BULLET_SPD*0.76); r.vy = sa * (BULLET_SPD*0.76);
+      r.life = 0;
+    }
+    if(currentStage >= 4 && now - lastLaserT > LASER_CD){
+      lastLaserT = now;
+      const len = 900;
+      lasers.push({ x:player.x, y:player.y, a:player.angle, born:now, life:180, len:len });
+      // hitscan damage through anything in front of the ship
+      for(const inv of invaders){
+        if(!inv.alive) continue;
+        const vr = viewRect(inv);
+        const cx = vr.x + vr.w/2, cy = vr.y + vr.h/2;
+        const dx = cx - player.x, dy = cy - player.y;
+        const forward = dx*ca + dy*sa;
+        if(forward < 0 || forward > len) continue;
+        const side = Math.abs(-sa*dx + ca*dy);
+        if(side < Math.max(16, Math.min(vr.w,vr.h)*0.42)){
+          inv.hp -= 2; inv.flash=170; inv.shake=150; inv.lastHit=now;
+          if(inv.hp <= 0) destroyTarget(inv);
+        }
+      }
+    }
   }
 
   /* ---------- collision: bucket alive targets by x for perf ---------- */
@@ -3089,19 +3335,34 @@ setTimeout(()=>{
         if(!inv.alive) continue;
         const vr = viewRect(inv);
         if(vr.y + vr.h < -40 || vr.y > VH + 40) continue;  // offscreen
-        if(b.x >= vr.x && b.x <= vr.x + vr.w && b.y >= vr.y && b.y <= vr.y + vr.h){
+        const hit = b.type==='rocket'
+          ? (b.x >= vr.x-b.radius && b.x <= vr.x+vr.w+b.radius && b.y >= vr.y-b.radius && b.y <= vr.y+vr.h+b.radius)
+          : (b.x >= vr.x && b.x <= vr.x + vr.w && b.y >= vr.y && b.y <= vr.y + vr.h);
+        if(hit){
           b.active = false;
-          inv.hp -= 1;
+          inv.hp -= (b.damage || 1);
+          if(b.type==='rocket') spawnExplosion(vr.x, vr.y, vr.w, vr.h, inv.tier, false);
           if(inv.hp <= 0){
             destroyTarget(inv);
           }else{
-            // non-lethal: white flash + sparks + tiny shake
-            inv.flash = 120;
-            inv.shake = 90;
+            // non-lethal: white flash + sparks + tiny shake + persistent damage state
+            inv.flash = 150;
+            inv.shake = inv.tier === 'amber' ? 130 : 90;
+            inv.lastHit = performance.now();
             spawnExplosion(vr.x, vr.y, vr.w, vr.h, inv.tier, false);
             updateHud();
           }
           break;
+        }
+      }
+    }
+    if(enemy && enemy.active){
+      for(const b of bullets){
+        if(!b.active) continue;
+        if(Math.hypot(b.x-enemy.x, b.y-enemy.y) < (b.type==='rocket'?18:12)){
+          b.active=false; enemy.hp -= (b.damage||1);
+          spawnExplosion(enemy.x-14, enemy.y-10, 28, 20, 'amber', false);
+          if(enemy.hp <= 0){ enemy.active=false; score += 500; updateHud(); }
         }
       }
     }
@@ -3124,7 +3385,7 @@ setTimeout(()=>{
   }
   function advanceSweep(){
     if(advancing) return;
-    if(aliveCount() === 0){ finish(true); return; }
+    if(aliveCount() === 0){ if(currentStage >= 5 && !bossSpawned){ spawnBoss(); return; } if(enemy && enemy.active){ return; } finish(true); return; }
     if(lastTargetPassed() && aliveInViewport() === 0){ finish(true); return; }
     advancing = true;
     const step = Math.round(VH * 0.8);
@@ -3135,7 +3396,7 @@ setTimeout(()=>{
     smoothScrollTo(target, 520, ()=>{
       advancing = false;
       screenStartT = performance.now();
-      if(reachedBottom && aliveInViewport() === 0){ finish(true); }
+      if(reachedBottom && aliveInViewport() === 0){ if(currentStage >= 5 && !bossSpawned){ spawnBoss(); } else if(!(enemy && enemy.active)) finish(true); }
     });
   }
 
@@ -3171,6 +3432,56 @@ setTimeout(()=>{
   }
 
   function update(dt, now){
+    if(currentStage >= 4){
+      for(const inv of invaders){
+        if(!inv.alive) continue;
+        inv.ox = Math.sin(now*inv.moveS + inv.moveP) * inv.moveA;
+        inv.oy = Math.cos(now*inv.moveS*0.83 + inv.moveP) * inv.moveB;
+      }
+    }
+    if(enemy && enemy.active && player){
+      // Boss uses the same steering idea as the player's autopilot, but hunts the operator instead of squares.
+      const dx = player.x - enemy.x, dy = player.y - enemy.y;
+      const dist = Math.max(1, Math.hypot(dx, dy));
+      const desired = Math.atan2(dy, dx);
+      let da = ((desired - (enemy.angle||0) + Math.PI*3) % (Math.PI*2)) - Math.PI;
+      enemy.angle = (enemy.angle||0) + Math.max(-0.0065*dt, Math.min(0.0065*dt, da));
+      const ideal = Math.min(VW, VH) * 0.30;
+      const push = dist > ideal ? 0.00135 : -0.00070;
+      enemy.vx += Math.cos(enemy.angle) * push * dt;
+      enemy.vy += Math.sin(enemy.angle) * push * dt;
+      enemy.vx += Math.sin(now*0.0021) * 0.00028 * dt;
+      enemy.vy += Math.cos(now*0.0017) * 0.00022 * dt;
+      const sp = Math.hypot(enemy.vx, enemy.vy), maxSp = 0.84;
+      if(sp > maxSp){ enemy.vx = enemy.vx/sp*maxSp; enemy.vy = enemy.vy/sp*maxSp; }
+      enemy.x += enemy.vx * dt; enemy.y += enemy.vy * dt;
+      enemy.x = Math.max(34, Math.min(VW-34, enemy.x));
+      enemy.y = Math.max(92, Math.min(VH-42, enemy.y));
+      enemy.thrusting = dist > ideal*0.8;
+      const canShoot = Math.abs(da) < 0.55;
+      if(canShoot && now - lastEnemyFireT > 620){
+        lastEnemyFireT = now;
+        for(const off of [-0.14,0,0.14]){
+          const a = desired + off;
+          const eb = getEnemyBullet();
+          eb.active=true; eb.type='bullet'; eb.damage=1; eb.radius=3.2;
+          eb.x=enemy.x + Math.cos(a)*18; eb.y=enemy.y + Math.sin(a)*18;
+          eb.vx=Math.cos(a)*0.42; eb.vy=Math.sin(a)*0.42; eb.life=0;
+        }
+      }
+      if(canShoot && now - lastEnemyRocketT > 1900){
+        lastEnemyRocketT = now;
+        const eb = getEnemyBullet();
+        eb.active=true; eb.type='rocket'; eb.damage=1; eb.radius=7;
+        eb.x=enemy.x + Math.cos(desired)*20; eb.y=enemy.y + Math.sin(desired)*20;
+        eb.vx=Math.cos(desired)*0.31; eb.vy=Math.sin(desired)*0.31; eb.life=0;
+      }
+      if(canShoot && now - lastEnemyLaserT > 2600){
+        lastEnemyLaserT = now;
+        // Beam damage is checked after a short visible wind-up so the player is never hit by an invisible laser.
+        enemyLasers.push({ x:enemy.x, y:enemy.y, a:desired, born:now, life:260, len:900, hit:false });
+      }
+    }
     // resume auto-pilot after a stretch with no manual input
     if(!autopilot && (now - lastInputT) > AUTO_RESUME_MS) autopilot = true;
 
@@ -3237,6 +3548,40 @@ setTimeout(()=>{
     }
     collideBullets();
 
+    // hostile fire from fifth run enemy
+    for(const eb of enemyBullets){
+      if(!eb.active) continue;
+      eb.x += eb.vx * dt; eb.y += eb.vy * dt; eb.life += dt;
+      const rad = eb.type === 'rocket' ? 18 : 15;
+      if(eb.life > 4400 || eb.x < -40 || eb.x > VW+40 || eb.y < -40 || eb.y > VH+40){ eb.active=false; continue; }
+      if(player && Math.hypot(eb.x-player.x, eb.y-player.y) < rad){
+        eb.active=false; playerHP -= (eb.damage || 1);
+        spawnExplosion(player.x-12, player.y-12, 24, 24, 'amber', false);
+        if(playerHP <= 0){ finish(false); return; }
+      }
+    }
+
+    // laser beam timers
+    for(let i=lasers.length-1;i>=0;i--){
+      if(now - lasers[i].born > lasers[i].life) lasers.splice(i,1);
+    }
+    for(let i=enemyLasers.length-1;i>=0;i--){
+      const l = enemyLasers[i];
+      const age = now - l.born;
+      if(age > l.life){ enemyLasers.splice(i,1); continue; }
+      if(!l.hit && age > 140 && player){
+        const px = player.x - l.x, py = player.y - l.y;
+        const forward = px*Math.cos(l.a) + py*Math.sin(l.a);
+        const side = Math.abs(-Math.sin(l.a)*px + Math.cos(l.a)*py);
+        if(forward > 0 && forward < l.len && side < 16){
+          l.hit = true;
+          playerHP -= 1;
+          spawnExplosion(player.x-12, player.y-12, 24, 24, 'amber', false);
+          if(playerHP <= 0){ finish(false); return; }
+        }
+      }
+    }
+
     // particles
     for(const p of particles){
       if(!p.active) continue;
@@ -3257,13 +3602,13 @@ setTimeout(()=>{
     }
 
     // end as soon as every captured target is destroyed
-    if(aliveCount() === 0){ finish(true); return; }
+    if(aliveCount() === 0){ if(currentStage >= 5 && !bossSpawned){ spawnBoss(); return; } if(enemy && enemy.active){ return; } finish(true); return; }
 
     // sweep: when the current viewport band is clear (or the per-screen timeout
     // elapses), reveal the next band. If we're already at the bottom, end.
     if(!advancing){
       if(aliveInViewport() === 0){
-        if(lastTargetPassed()) finish(true);
+        if(lastTargetPassed()){ if(currentStage >= 5 && !bossSpawned){ spawnBoss(); } else if(!(enemy && enemy.active)) finish(true); }
         else advanceSweep();
       }else if(now - screenStartT > SCREEN_TIMEOUT){
         advanceSweep();
@@ -3273,6 +3618,47 @@ setTimeout(()=>{
 
   function render(now){
     ctx.clearRect(0,0,VW,VH);
+
+    // player lives: 3 mini ships in the top-left HUD area during the boss run
+    if(currentStage >= 5){
+      ctx.save();
+      ctx.font = '700 10px ' + getMono();
+      ctx.fillStyle = COL.bright;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.shadowColor = COL.cyan;
+      ctx.shadowBlur = 8;
+      ctx.fillText('HP', 18, 92);
+      for(let i=0;i<3;i++){
+        const alive = i < Math.max(0, playerHP);
+        const x = 28 + i*28, y = 122;
+        ctx.save();
+        ctx.translate(x,y);
+        ctx.rotate(-Math.PI/2);
+        ctx.globalAlpha = alive ? 1 : 0.22;
+        ctx.beginPath();
+        ctx.moveTo(10,0);
+        ctx.lineTo(-8,7);
+        ctx.lineTo(-4,0);
+        ctx.lineTo(-8,-7);
+        ctx.closePath();
+        ctx.fillStyle = alive ? COL.cyan : 'rgba(162,171,189,.35)';
+        ctx.fill();
+        ctx.lineWidth = alive ? 1.4 : 1;
+        ctx.strokeStyle = alive ? COL.bright : 'rgba(162,171,189,.5)';
+        ctx.stroke();
+        if(alive){
+          ctx.globalAlpha = .8;
+          ctx.beginPath();
+          ctx.moveTo(-9,3); ctx.lineTo(-15,3);
+          ctx.moveTo(-9,-3); ctx.lineTo(-15,-3);
+          ctx.strokeStyle = COL.bright;
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+      ctx.restore();
+    }
 
     // target outlines + flash overlay (drawn on transparent canvas over real cards)
     for(const inv of invaders){
@@ -3303,11 +3689,51 @@ setTimeout(()=>{
         ctx.fillStyle = COL.white;
         ctx.fillRect(vr.x, vr.y, vr.w, vr.h);
       }
-      // damage tick for 2-hp cards
-      if(inv.maxHp > 1 && inv.hp < inv.maxHp){
-        ctx.globalAlpha = 0.85;
-        ctx.fillStyle = COL.amber;
-        ctx.fillRect(vr.x+4, vr.y+4, 6, 6);
+      // progressive damage: targets look increasingly corrupted before they disappear
+      if(inv.hp < inv.maxHp){
+        const dmg = (inv.maxHp - inv.hp) / inv.maxHp;
+        const hitPulse = Math.max(0, 1 - ((now - (inv.lastHit || 0)) / 260));
+        const cracks = Math.max(1, Math.ceil(dmg * 5));
+        ctx.save();
+        ctx.translate(ox, 0);
+
+        // warm danger wash grows with damage; yellow/value targets feel heavier
+        ctx.globalAlpha = (0.10 + dmg * 0.24) + hitPulse * 0.18;
+        ctx.fillStyle = inv.tier === 'amber' ? 'rgba(251,191,36,0.95)' : 'rgba(56,189,248,0.75)';
+        ctx.fillRect(vr.x, vr.y, vr.w, vr.h);
+
+        // fractured scanline bands
+        ctx.globalAlpha = 0.22 + dmg * 0.34;
+        ctx.strokeStyle = inv.tier === 'amber' ? '#ff2d6b' : COL.bright;
+        ctx.lineWidth = 1;
+        for(let k=0;k<cracks;k++){
+          const yy = vr.y + ((k+1)/(cracks+1))*vr.h + Math.sin(now*0.012+k)*3;
+          ctx.beginPath();
+          ctx.moveTo(vr.x + 3, yy);
+          ctx.lineTo(vr.x + vr.w * (0.35 + 0.12*k), yy + (k%2?8:-8));
+          ctx.lineTo(vr.x + vr.w - 4, yy + (k%2?-3:3));
+          ctx.stroke();
+        }
+
+        // pixel chunks: more chunks appear as HP drops
+        const chunks = Math.ceil(dmg * 8);
+        ctx.globalAlpha = 0.78;
+        ctx.fillStyle = inv.tier === 'amber' ? COL.amber : COL.cyan;
+        for(let k=0;k<chunks;k++){
+          const px = vr.x + 5 + ((k*37) % Math.max(10, vr.w-12));
+          const py = vr.y + 5 + ((k*23) % Math.max(10, vr.h-12));
+          const sz = 3 + (k % 3) * 2;
+          ctx.fillRect(px, py, sz, sz);
+        }
+
+        // tiny HP pips in the corner so tough yellow squares clearly need more hits
+        const pip = 5, gap = 3;
+        for(let k=0;k<inv.maxHp;k++){
+          ctx.globalAlpha = k < inv.hp ? 0.9 : 0.22;
+          ctx.fillStyle = k < inv.hp ? (inv.tier === 'amber' ? COL.amber : COL.bright) : COL.white;
+          ctx.fillRect(vr.x + 5 + k*(pip+gap), vr.y + 5, pip, pip);
+        }
+        ctx.restore();
       }
       ctx.restore();
     }
@@ -3371,13 +3797,107 @@ setTimeout(()=>{
     }
     ctx.globalAlpha = 1;
 
-    // bullets (bright tracers)
-    ctx.fillStyle = COL.bright;
+    // bullets (bright tracers + rockets)
     for(const b of bullets){
       if(!b.active) continue;
+      ctx.fillStyle = b.type==='rocket' ? COL.amber : COL.bright;
       ctx.beginPath();
-      ctx.arc(b.x, b.y, 2.4, 0, Math.PI*2);
+      ctx.arc(b.x, b.y, b.type==='rocket' ? 5.4 : 2.4, 0, Math.PI*2);
       ctx.fill();
+      if(b.type==='rocket'){
+        ctx.globalAlpha = .45;
+        ctx.fillRect(b.x - b.vx*26, b.y - b.vy*26, 14, 2);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    // lasers
+    for(const l of lasers){
+      const a = Math.max(0, 1 - (now - l.born)/l.life);
+      ctx.save();
+      ctx.globalAlpha = a * .9;
+      ctx.strokeStyle = COL.bright;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(l.x, l.y);
+      ctx.lineTo(l.x + Math.cos(l.a)*l.len, l.y + Math.sin(l.a)*l.len);
+      ctx.stroke();
+      ctx.globalAlpha = a * .25;
+      ctx.lineWidth = 11;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // final-round boss HP bar
+    if(enemy && enemy.active){
+      const max = enemy.maxHp || 18;
+      const hpPct = Math.max(0, Math.min(1, enemy.hp / max));
+      const bw = Math.min(520, VW - 36), bh = 10;
+      const bx = (VW - bw) / 2, by = 72;
+      ctx.save();
+      ctx.globalAlpha = 0.95;
+      ctx.fillStyle = 'rgba(6,7,13,.78)';
+      ctx.strokeStyle = 'rgba(255,45,107,.72)';
+      ctx.lineWidth = 1;
+      ctx.fillRect(bx, by, bw, bh);
+      ctx.strokeRect(bx+.5, by+.5, bw-1, bh-1);
+      ctx.fillStyle = '#ff2d6b';
+      ctx.fillRect(bx, by, bw*hpPct, bh);
+      ctx.font = '11px ' + getMono();
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#ffb4c8';
+      ctx.fillText('HOSTILE RED SHIP · BOSS HP ' + Math.ceil(enemy.hp) + '/' + max, VW/2, by-8);
+      ctx.restore();
+    }
+
+    // hostile bullets + enemy ship
+    for(const eb of enemyBullets){
+      if(!eb.active) continue;
+      ctx.save();
+      ctx.fillStyle = eb.type === 'rocket' ? '#FBBF24' : '#ff2d6b';
+      ctx.shadowColor = ctx.fillStyle;
+      ctx.shadowBlur = eb.type === 'rocket' ? 16 : 10;
+      ctx.beginPath();
+      ctx.arc(eb.x, eb.y, eb.type === 'rocket' ? 5.4 : 3.2, 0, Math.PI*2);
+      ctx.fill();
+      if(eb.type === 'rocket'){
+        ctx.strokeStyle = '#ff2d6b'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.arc(eb.x, eb.y, 8, 0, Math.PI*2); ctx.stroke();
+      }
+      ctx.restore();
+    }
+    // boss lasers
+    for(const l of enemyLasers){
+      const age = (now - l.born) / l.life;
+      const a = Math.max(0, 1-age);
+      ctx.save();
+      ctx.globalAlpha = a;
+      ctx.translate(l.x,l.y); ctx.rotate(l.a);
+      ctx.strokeStyle = '#ff2d6b'; ctx.lineWidth = 3; ctx.shadowColor = '#ff2d6b'; ctx.shadowBlur = 14;
+      ctx.beginPath(); ctx.moveTo(18,0); ctx.lineTo(l.len,0); ctx.stroke();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(18,0); ctx.lineTo(l.len,0); ctx.stroke();
+      ctx.restore();
+    }
+    if(enemy && enemy.active){
+      ctx.save();
+      ctx.translate(enemy.x, enemy.y);
+      ctx.rotate(enemy.angle || 0);
+      const L = 18, B = 12;
+      if(enemy.thrusting){
+        ctx.fillStyle='rgba(255,45,107,.55)'; ctx.shadowColor='#ff2d6b'; ctx.shadowBlur=14;
+        ctx.beginPath(); ctx.moveTo(-L*.72,5); ctx.lineTo(-L*.72-12-Math.random()*8,0); ctx.lineTo(-L*.72,-5); ctx.closePath(); ctx.fill();
+      }
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#ff2d6b'; ctx.fillStyle = 'rgba(255,45,107,.25)'; ctx.shadowColor = '#ff2d6b'; ctx.shadowBlur = 12;
+      // evil mirror of the player craft: sharp nose, split wings, red core
+      ctx.beginPath();
+      ctx.moveTo(L,0); ctx.lineTo(-L*.75,-B); ctx.lineTo(-L*.38,-3); ctx.lineTo(-L*.9,0); ctx.lineTo(-L*.38,3); ctx.lineTo(-L*.75,B); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#ff2d6b'; ctx.shadowBlur = 18;
+      ctx.beginPath(); ctx.arc(-2,0,3.8,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#FBBF24'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(-L*.15,-B*.7); ctx.lineTo(L*.62,0); ctx.lineTo(-L*.15,B*.7); ctx.stroke();
+      ctx.restore();
     }
 
     // player ship (free-flying, faces its heading — asteroids-style)
@@ -3460,7 +3980,7 @@ setTimeout(()=>{
     window.__lenis?.stop?.();
     try{ heroAPI?.resume?.(); }catch(_){}   // calm path leaves hero running
     bindCalmAbort();
-    if(btnUplink){ btnUplink.addEventListener('click', ()=>{ location.reload(); }, { signal: controller.signal }); }
+    if(btnUplink){ btnUplink.addEventListener('click', ()=>{ if(lastRunOutcome==='clear' && currentStage < 5){ setStage(currentStage + 1); sessionStorage.setItem(SS_CONTINUE, '1'); } else if(lastRunOutcome==='death' || lastRunOutcome==='win5'){ resetStage(); resetRunTotal(); sessionStorage.removeItem(SS_CONTINUE); } location.reload(); }, { signal: controller.signal }); }
     fadeNext();
   }
   function bindCalmAbort(){
@@ -3474,28 +3994,66 @@ setTimeout(()=>{
     if(!isRunning) return;
     // stop the loop but keep overlay/canvas visible behind dialog
     if(rafId){ cancelAnimationFrame(rafId); rafId = null; }
-    showEndDialog();
+    showEndDialog(viaClear !== false);
   }
 
-  function showEndDialog(){
+  function showEndDialog(cleared=true){
     const pct = integrityPct ? integrityPct() : 0;
     // time bonus — the faster the whole CV was wiped, the bigger the payout
     const elapsed = gameStartT ? Math.max(0, (performance.now() - gameStartT)/1000) : 0;
     const timeBonus = Math.max(0, Math.round((TIME_BASE - elapsed) * TIME_RATE));
-    score += timeBonus;
+    const stageScore = score + timeBonus;
+    const previousRunTotal = currentStage > 1 ? getRunTotal() : 0;
+    const cumulativeScore = previousRunTotal + stageScore;
+    score = cumulativeScore;
+    setRunTotal(cumulativeScore);
     if(dlgTime){
       const mm = Math.floor(elapsed/60), ss = Math.floor(elapsed%60);
       dlgTime.textContent = mm + ':' + (ss<10?'0':'') + ss;
     }
     const prevBest = getBest();
-    const isHigh = score > prevBest;
-    if(isHigh) setBest(score);
+    const isHigh = cumulativeScore > prevBest;
+    if(isHigh) setBest(cumulativeScore);
 
-    if(dlgScore) dlgScore.textContent = String(score);
+    if(dlgScore) dlgScore.textContent = String(cumulativeScore);
     if(dlgIntegrity) dlgIntegrity.textContent = (typeof pct==='number'?pct:0) + '%';
     if(dlgBest) dlgBest.textContent = String(getBest());
     if(dlgNewHigh) dlgNewHigh.hidden = !isHigh;
-    if(prepEndExtras) prepEndExtras(score);
+
+    let outcome = 'clear';
+    if(!cleared){
+      outcome = 'death';
+      resetStage();
+      resetRunTotal();
+      const title = document.getElementById('invDialogTitle');
+      if(title){ title.textContent = 'OPERATOR DOWN'; title.setAttribute('data-text','OPERATOR DOWN'); }
+      const msg = document.getElementById('invDialogMsg');
+      if(msg) msg.textContent = 'It was a good run, operator. You might need a copilot next time. Contact channel is open.';
+      if(btnUplink){ const t=btnUplink.querySelector('span'); if(t) t.textContent='Restart'; }
+    }else if(currentStage >= 5){
+      outcome = 'win5';
+      resetStage();
+      resetRunTotal();
+      const title = document.getElementById('invDialogTitle');
+      if(title){ title.textContent = 'FIVE RUN CLEAR'; title.setAttribute('data-text','FIVE RUN CLEAR'); }
+      const msg = document.getElementById('invDialogMsg');
+      if(msg) msg.textContent = 'WOW! You actually did it, defeated the undefeated boss to see this. “I respect the dedication. Most people just dislike a CV. You apparently had to destroy it in combat five times. If you still need to vent, reach out via the contact button for the sixth and final level.';
+      if(btnUplink){ const t=btnUplink.querySelector('span'); if(t) t.textContent='Restart'; }
+    }else{
+      const nextStage = Math.min(5, currentStage + 1);
+      const nextInfo = rankForStage(nextStage);
+      const title = document.getElementById('invDialogTitle');
+      const clearTitle = clearTitleForStage(currentStage);
+      if(title){ title.textContent = clearTitle; title.setAttribute('data-text', clearTitle); }
+      const msg = document.getElementById('invDialogMsg');
+      if(msg){
+        if(currentStage >= 4) msg.textContent = 'WARNING! Boss level triggered! Only 3 hits before you go down.  ';
+        else msg.textContent = progressionLead(currentStage, 'clear') + ' Press Next Run to continue. Next tier: ' + nextInfo.weapon + '.';
+      }
+      if(btnUplink){ const t=btnUplink.querySelector('span'); if(t) t.textContent='Next Run'; }
+    }
+    lastRunOutcome = outcome;
+    if(prepEndExtras) prepEndExtras(score, outcome);
 
     if(dialog){
       dialog.hidden = false;
@@ -3632,7 +4190,18 @@ setTimeout(()=>{
     }, { signal: sig });
     window.addEventListener('blur', ()=>{ keys.rotLeft=keys.rotRight=keys.thrust=keys.fire=false; touchFiring=false; mouseLeft=mouseRight=false; joy.active=false; joy.id=null; }, { signal: sig });
 
-    if(btnUplink) btnUplink.addEventListener('click', ()=>{ location.reload(); }, { signal: sig });
+    // Next Run must persist the promoted stage across the reload. Without the session flag, init resets back to Level 1.
+    if(btnUplink) btnUplink.addEventListener('click', ()=>{
+      if(lastRunOutcome==='clear' && currentStage < 5){
+        setStage(currentStage + 1);
+        sessionStorage.setItem(SS_CONTINUE, '1');
+      } else if(lastRunOutcome==='death' || lastRunOutcome==='win5'){
+        resetStage();
+        resetRunTotal();
+        sessionStorage.removeItem(SS_CONTINUE);
+      }
+      location.reload();
+    }, { signal: sig });
   }
   function dialogOpen(){ return dialog && !dialog.hidden; }
 
@@ -3709,8 +4278,13 @@ setTimeout(()=>{
       controller = new AbortController();
 
       // reset state
-      invaders = []; bullets.length = 0; particles.length = 0; stamps.length = 0;
-      modified = []; score = 0; combo = 1; lastKillT = 0; sweepDone = false;
+      const continuingRun = sessionStorage.getItem(SS_CONTINUE) === '1';
+      sessionStorage.removeItem(SS_CONTINUE);
+      currentStage = continuingRun ? getStage() : 1;
+      if(!continuingRun){ resetStage(); resetRunTotal(); }
+      if(currentStage <= 1) resetRunTotal();
+      invaders = []; bullets.length = 0; enemyBullets.length = 0; lasers.length = 0; enemyLasers.length = 0; particles.length = 0; stamps.length = 0; bossSpawned = false;
+      modified = []; score = 0; combo = 1; lastKillT = 0; lastRocketT = 0; lastLaserT = 0; lastEnemyFireT = 0; lastEnemyRocketT = 0; lastEnemyLaserT = 0; sweepDone = false;
       advancing = false; maxDocBottom = 0;
       announced = { 25:false, 50:false, 75:false, 100:false };
       keys.rotLeft = keys.rotRight = keys.thrust = keys.fire = false;
