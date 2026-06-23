@@ -289,7 +289,53 @@
       .cursor-dot, .cursor-ring { display: none !important; }
       * { scroll-behavior: auto !important; }
     }
-  </style>
+  
+  /* ── Music Button ── */
+  #music-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  }
+  #music-btn:hover {
+    background: rgba(255,255,255,0.16);
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(0,0,0,0.5);
+  }
+  #music-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: opacity 0.2s;
+  }
+  #music-btn .icon-mute { display: none; }
+  #music-btn.muted .icon-play { display: none; }
+  #music-btn.muted .icon-mute { display: block; }
+  /* ripple pulse when playing */
+  @keyframes music-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.22); }
+    70%  { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  }
+  #music-btn:not(.muted) { animation: music-pulse 2.4s ease-out infinite; }
+</style>
 
   <script>
     (function(){ try { if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-anim'); } catch(e){} })();
@@ -507,8 +553,8 @@
         nav_home:'Home', nav_solutions:'Solutions', nav_about:'Company', nav_contact:'Contact',
         hero_eyebrow:'Software · AI · Project Delivery',
         status_operational:'Available',
-        hero_title: 'Software built well. Projects delivered fast.',
-        hero_sub: 'We combine quality software development with disciplined project management, helping businesses launch custom apps, automation, and AI solutions without the usual implementation drag.',
+        hero_title: 'Building software like never before. With personality. With charm.',
+        hero_sub: 'We craft custom apps, automation, and AI solutions that feel sharp, elegant, and unmistakably yours — delivered with serious project discipline and a little cinematic flair.',
         hero_cta:'Start a project', hero_cta2:'See what we do',
         scroll_cue:'Scroll',
         solutions_title:'What we build',
@@ -993,5 +1039,60 @@
     }
   });
   </script>
+
+  <!-- Music Toggle Button -->
+  <audio id="bg-music" src="https://lxtech.ro/audio/Starlight_on_the_Leather_Seat.mp3" loop preload="auto"></audio>
+  <button id="music-btn" aria-label="Toggle music" title="Toggle music">
+    <!-- Sound ON icon -->
+    <svg class="icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+    </svg>
+    <!-- Sound OFF icon -->
+    <svg class="icon-mute" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+  </button>
+  <script>
+    (function() {
+      const btn = document.getElementById('music-btn');
+      const audio = document.getElementById('bg-music');
+      audio.volume = 0.5;
+
+      function tryPlay() {
+        audio.play().catch(() => {
+          // Autoplay blocked — wait for first user interaction
+          document.addEventListener('click', function onFirst() {
+            audio.play();
+            document.removeEventListener('click', onFirst);
+          }, { once: true });
+        });
+      }
+
+      // Start playing on load
+      window.addEventListener('load', tryPlay);
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (audio.paused) {
+          audio.play();
+          btn.classList.remove('muted');
+          btn.setAttribute('aria-label', 'Mute music');
+        } else {
+          audio.pause();
+          btn.classList.add('muted');
+          btn.setAttribute('aria-label', 'Play music');
+        }
+      });
+
+      // Sync button state if audio is paused for any reason
+      audio.addEventListener('pause', () => btn.classList.add('muted'));
+      audio.addEventListener('play',  () => btn.classList.remove('muted'));
+    })();
+  </script>
+
 </body>
 </html>
