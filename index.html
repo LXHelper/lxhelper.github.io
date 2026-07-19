@@ -860,7 +860,7 @@
 
   <!-- MOTION + WEBGL -->
   <script>
-  window.addEventListener('load', function () {
+  document.addEventListener('DOMContentLoaded', function () {
     const root = document.documentElement;
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const hasGSAP = !!window.gsap;
