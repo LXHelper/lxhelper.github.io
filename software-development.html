@@ -6,7 +6,7 @@
   <title>Custom Software Development | LuXTech Innovation</title>
 
   <!-- SEO -->
-  <meta name="description" content="LuXTech builds focused mobile, desktop and internal applications — from early requirements and prototypes to production delivery and ongoing improvement. See our software track record." />
+  <meta name="description" content="LuXTech builds focused mobile, desktop and internal applications, from early requirements and prototypes to production delivery and ongoing improvement. See our software track record." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#06080F" />
   <link rel="canonical" href="https://lxtech.ro/software-development.html" />
@@ -16,8 +16,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="LuXTech Innovation" />
-  <meta property="og:title" content="Custom Software That Solves a Real Problem — LuXTech Innovation" />
-  <meta property="og:description" content="Focused mobile, desktop and internal applications — from requirements and prototypes to production delivery and ongoing improvement." />
+  <meta property="og:title" content="Custom Software That Solves a Real Problem | LuXTech Innovation" />
+  <meta property="og:description" content="Focused mobile, desktop and internal applications, from requirements and prototypes to production delivery and ongoing improvement." />
   <meta property="og:url" content="https://lxtech.ro/software-development.html" />
   <meta property="og:image" content="https://lxhelper.github.io/images/LX_logo.png" />
   <meta property="og:locale" content="en_US" />
@@ -38,6 +38,7 @@
 
   <link rel="stylesheet" href="services.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script>
     (function(){ try { if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-anim'); } catch(e){} })();
   </script>
@@ -59,7 +60,7 @@
       "logo": "https://lxhelper.github.io/images/LX_logo.png",
       "email": "contact@lxtech.ro"
     },
-    "description": "Focused mobile, desktop and internal applications — from early requirements and prototypes to production delivery and ongoing improvement.",
+    "description": "Focused mobile, desktop and internal applications, from early requirements and prototypes to production delivery and ongoing improvement.",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Custom software services",
@@ -93,12 +94,14 @@
   <div id="gl" aria-hidden="true"></div>
   <div class="veil" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
 
   <!-- HEADER -->
   <header>
     <div class="wrap">
       <nav class="nav" aria-label="Primary">
-        <a href="index.html#home" class="brand" aria-label="LuXTech Innovation — home">
+        <a href="index.html#home" class="brand" aria-label="LuXTech Innovation home" data-cursor>
           <img src="https://lxhelper.github.io/images/LX_logo.png" alt="" onerror="this.style.display='none'" />
           <b>LUXTECH<i>.</i>INNOVATION</b>
         </a>
@@ -110,7 +113,7 @@
           <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
         </div>
         <div class="lang" id="lang">
-          <button class="lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+          <button class="lang-btn magnetic" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language" data-cursor>
             <span id="langCurrent">EN</span>
             <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
           </button>
@@ -132,28 +135,30 @@
     <div class="wrap">
       <div class="subbar">
         <a class="backlink" href="index.html#solutions"><span class="ar" aria-hidden="true">←</span><span data-i18n="back_to_services">Back to services</span></a>
-        <span class="notice" role="status"><span class="g" aria-hidden="true"></span><span class="nt"></span></span>
       </div>
     </div>
 
     <!-- HERO -->
     <section class="page-hero">
       <div class="wrap">
-        <span class="eyebrow reveal"><span class="code">S/01</span><span>Custom Software</span></span>
-        <h1 class="reveal">Custom software that solves a <span class="gold">real problem</span>.</h1>
-        <p class="lead reveal">Focused mobile, desktop and internal applications — from early requirements and prototypes to production delivery and ongoing improvement. Delivery is led hands-on by a senior consultant and product owner, so one person is accountable from the first sketch to the live release.</p>
+        <span class="eyebrow reveal"><span class="code">S/01</span><span data-i18n="sw_hero_eyebrow">Custom Software</span></span>
+        <h1 class="reveal"><span data-i18n="sw_hero_title_pre">Custom software that solves a </span><span class="gold" data-i18n="sw_hero_title_gold">real problem</span><span data-i18n="sw_hero_title_post">.</span></h1>
+        <p class="lead reveal" data-i18n="sw_hero_lead">Focused mobile, desktop and internal applications, from early requirements and prototypes to production delivery and ongoing improvement. Delivery is led hands-on by a senior consultant and product owner, so one person is accountable from the first sketch to the live release.</p>
         <div class="hero-cta reveal">
-          <a href="#contact" class="btn btn-primary">Discuss your project <span class="arr">→</span></a>
-          <a href="#experience" class="btn btn-ghost">See relevant experience</a>
+          <a href="#contact" class="btn btn-primary magnetic" data-cursor><span data-i18n="sw_hero_cta1">Discuss your project</span> <span class="arr">→</span></a>
+          <a href="#experience" class="btn btn-ghost magnetic" data-cursor data-i18n="sw_hero_cta2">See relevant experience</a>
         </div>
 
-        <!-- PROOF STRIP -->
+        <!-- PROOF STRIP: hidden for now — these figures reference a single product (MetroBUC),
+             not the software practice as a whole. Restore once there's a second reference to
+             broaden the strip, or replace with practice-wide numbers.
         <div class="proof cols-4 reveal" role="list" aria-label="Software delivery at a glance">
-          <div class="p" role="listitem"><span class="n">14+ yrs</span><span class="l">In IT delivery</span></div>
-          <div class="p" role="listitem"><span class="n">500+</span><span class="l">MetroBUC installs in ~3 months</span></div>
-          <div class="p" role="listitem"><span class="n">40.7%</span><span class="l">Store-listing conversion</span></div>
-          <div class="p" role="listitem"><span class="n">1</span><span class="l">Accountable owner, end to end</span></div>
+          <div class="p" role="listitem"><span class="n">14+ yrs</span><span class="l" data-i18n="sw_proof_1">In IT delivery</span></div>
+          <div class="p" role="listitem"><span class="n">700+</span><span class="l" data-i18n="sw_proof_2">MetroBUC organic installs in ~4 months</span></div>
+          <div class="p" role="listitem"><span class="n">40.7%</span><span class="l" data-i18n="sw_proof_3">Store-listing conversion</span></div>
+          <div class="p" role="listitem"><span class="n">1</span><span class="l" data-i18n="sw_proof_4">Accountable owner, end to end</span></div>
         </div>
+        -->
       </div>
     </section>
 
@@ -161,16 +166,16 @@
     <section class="sec">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">A</span><span>Where we fit</span></div>
-          <h2 class="sec-title">You may need us when…</h2>
+          <div class="sec-eyebrow"><span class="code">A</span><span data-i18n="sw_fit_kicker">Where we fit</span></div>
+          <h2 class="sec-title" data-i18n="sw_fit_title">You may need us when…</h2>
         </div>
         <ul class="problems reveal">
-          <li>A business process still relies on repetitive spreadsheets, manual files or copy-paste between tools.</li>
-          <li>An application idea needs to become a working MVP you can actually put in front of users.</li>
-          <li>An off-the-shelf tool is too generic, too expensive, or too cumbersome for how your team really works.</li>
-          <li>An existing process needs a dedicated mobile or desktop interface instead of a shared document.</li>
-          <li>A prototype proved the concept and now has to become a stable production application.</li>
-          <li>You need one accountable owner across requirements, delivery, testing and launch.</li>
+          <li data-i18n="sw_fit_1">A business process still relies on repetitive spreadsheets, manual files or copy-paste between tools.</li>
+          <li data-i18n="sw_fit_2">An application idea needs to become a working MVP you can actually put in front of users.</li>
+          <li data-i18n="sw_fit_3">An off-the-shelf tool is too generic, too expensive, or too cumbersome for how your team really works.</li>
+          <li data-i18n="sw_fit_4">An existing process needs a dedicated mobile or desktop interface instead of a shared document.</li>
+          <li data-i18n="sw_fit_5">A prototype proved the concept and now has to become a stable production application.</li>
+          <li data-i18n="sw_fit_6">You need one accountable owner across requirements, delivery, testing and launch.</li>
         </ul>
       </div>
     </section>
@@ -179,23 +184,23 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">B</span><span>What we deliver</span></div>
-          <h2 class="sec-title">Software you can commission.</h2>
-          <p class="sec-intro">Concrete pieces of work, each with a clear scope and a defined outcome — commission one, or the whole path from idea to production.</p>
+          <div class="sec-eyebrow"><span class="code">B</span><span data-i18n="sw_deliver_kicker">What we deliver</span></div>
+          <h2 class="sec-title" data-i18n="sw_deliver_title">Software you can commission.</h2>
+          <p class="sec-intro" data-i18n="sw_deliver_intro">Concrete pieces of work, each with a clear scope and a defined outcome: commission one, or the whole path from idea to production.</p>
         </div>
         <ul class="deliver cols-3 reveal">
-          <li><b>Android applications</b>Native Kotlin apps, from product spec to a published Google Play listing.</li>
-          <li><b>Windows &amp; desktop tools</b>Focused desktop software for document, data and productivity workflows.</li>
-          <li><b>Internal business applications</b>Line-of-business tools shaped around how your team actually operates.</li>
-          <li><b>Workflow &amp; admin tools</b>Replace spreadsheet-heavy or manual routines with a dedicated interface.</li>
-          <li><b>MVP &amp; prototype development</b>A working product on a real deadline to validate an idea quickly.</li>
-          <li><b>Application modernisation</b>Take an ageing or fragile tool and rebuild it on a stable footing.</li>
-          <li><b>API &amp; data integration</b>Connect systems and move data reliably between the tools you already use.</li>
-          <li><b>Product ownership</b>Requirements and specifications translated into a delivery plan we then own.</li>
-          <li><b>Testing, deployment &amp; support</b>CI/CD pipelines, release automation, crash monitoring and post-launch updates.</li>
-          <li><b>AI-assisted development</b>Faster delivery using AI coding tools, always under human technical review.</li>
-          <li><b>Companion landing pages</b>Product websites and landing pages that match the software they present.</li>
-          <li><b>Requirements definition</b>Turn a rough brief into a scoped, buildable specification before a line is written.</li>
+          <li><b data-i18n="sw_deliver_1_title">Android applications</b><span data-i18n="sw_deliver_1_desc">Native Kotlin apps, from product spec to a published Google Play listing.</span></li>
+          <li><b data-i18n="sw_deliver_2_title">Windows &amp; desktop tools</b><span data-i18n="sw_deliver_2_desc">Focused desktop software for document, data and productivity workflows.</span></li>
+          <li><b data-i18n="sw_deliver_3_title">Internal business applications</b><span data-i18n="sw_deliver_3_desc">Line-of-business tools shaped around how your team actually operates.</span></li>
+          <li><b data-i18n="sw_deliver_4_title">Workflow &amp; admin tools</b><span data-i18n="sw_deliver_4_desc">Replace spreadsheet-heavy or manual routines with a dedicated interface.</span></li>
+          <li><b data-i18n="sw_deliver_5_title">MVP &amp; prototype development</b><span data-i18n="sw_deliver_5_desc">A working product on a real deadline to validate an idea quickly.</span></li>
+          <li><b data-i18n="sw_deliver_6_title">Application modernisation</b><span data-i18n="sw_deliver_6_desc">Take an ageing or fragile tool and rebuild it on a stable footing.</span></li>
+          <li><b data-i18n="sw_deliver_7_title">API &amp; data integration</b><span data-i18n="sw_deliver_7_desc">Connect systems and move data reliably between the tools you already use.</span></li>
+          <li><b data-i18n="sw_deliver_8_title">Product ownership</b><span data-i18n="sw_deliver_8_desc">Requirements and specifications translated into a delivery plan we then own.</span></li>
+          <li><b data-i18n="sw_deliver_9_title">Testing, deployment &amp; support</b><span data-i18n="sw_deliver_9_desc">CI/CD pipelines, release automation, crash monitoring and post-launch updates.</span></li>
+          <li><b data-i18n="sw_deliver_10_title">AI-assisted development</b><span data-i18n="sw_deliver_10_desc">Faster delivery using AI coding tools, always under human technical review.</span></li>
+          <li><b data-i18n="sw_deliver_11_title">Companion landing pages</b><span data-i18n="sw_deliver_11_desc">Product websites and landing pages that match the software they present.</span></li>
+          <li><b data-i18n="sw_deliver_12_title">Requirements definition</b><span data-i18n="sw_deliver_12_desc">Turn a rough brief into a scoped, buildable specification before a line is written.</span></li>
         </ul>
       </div>
     </section>
@@ -204,49 +209,48 @@
     <section class="sec" id="experience" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">C</span><span>Selected experience</span></div>
-          <h2 class="sec-title">Evidence of full-lifecycle delivery.</h2>
-          <p class="sec-intro">Not just code: requirements, architecture, release engineering, monitoring and live operations — carried through to production.</p>
+          <div class="sec-eyebrow"><span class="code">C</span><span data-i18n="sw_exp_kicker">Selected experience</span></div>
+          <h2 class="sec-title" data-i18n="sw_exp_title">Evidence of full-lifecycle delivery.</h2>
+          <p class="sec-intro" data-i18n="sw_exp_intro">Not just code: requirements, architecture, release engineering, monitoring and live operations, carried through to production.</p>
         </div>
 
         <!-- Case study 1 — MetroBUC -->
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Android · Native Kotlin · <b>Live on Google Play</b></span>
+              <span class="kicker"><span data-i18n="sw_case1_kicker">Android · Native Kotlin · </span><b data-i18n="sw_case1_kicker_b">Live on Google Play</b></span>
               <h3>MetroBUC</h3>
             </div>
-            <span class="status">In production</span>
+            <span class="status" data-i18n="sw_case1_status">In production</span>
           </div>
           <div class="metrics">
-            <div class="m"><span class="n">500+</span><span class="t">Installs · ~3 months</span></div>
-            <div class="m"><span class="n">260+</span><span class="t">Active devices</span></div>
-            <div class="m"><span class="n">230+</span><span class="t">Monthly active users</span></div>
-            <div class="m"><span class="n">40.7%</span><span class="t">Store-listing conversion</span></div>
+            <div class="m"><span class="n">700+</span><span class="t" data-i18n="sw_case1_metric1">Organic installs · 4 months</span></div>
+            <div class="m"><span class="n">420+</span><span class="t" data-i18n="sw_case1_metric2">Monthly active users (~60%)</span></div>
+            <div class="m"><span class="n">40.7%</span><span class="t" data-i18n="sw_case1_metric3">Store-listing conversion</span></div>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>Bucharest metro riders needed reliable routing and arrival information that also worked underground, where connectivity drops.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>A native Kotlin app with offline metro routing, real-time arrival information and push notifications; a companion website; CI/CD automation; Google Play publishing; advertising integration; and Firebase with production crash monitoring.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Reached 500+ installs, 260+ active devices and 230+ monthly active users within roughly three months, at a 40.7% store-listing conversion rate — with ongoing product updates and live troubleshooting.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Kotlin</span><span>Offline routing</span><span>Push · Firebase</span><span>CI/CD</span><span>Play Store release</span><span>Crash monitoring</span><span>Product ownership</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_situation">Situation</span><p data-i18n="sw_case1_situation">Bucharest metro riders needed reliable routing and arrival information that also worked underground, where connectivity drops.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_work">Work delivered</span><p data-i18n="sw_case1_work">A native Kotlin app with offline metro routing, real-time arrival information and push notifications; a companion website; CI/CD automation; Google Play publishing; advertising integration; and Firebase with production crash monitoring.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_outcome">Outcome</span><p data-i18n="sw_case1_outcome">Reached 700+ organic installs within roughly four months, with around 60% of installs (420+) staying monthly active, at a 40.7% store-listing conversion rate. Ongoing product updates and live troubleshooting continue.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="sw_case1_cap1">Kotlin</span><span data-i18n="sw_case1_cap2">Offline routing</span><span data-i18n="sw_case1_cap3">Push · Firebase</span><span data-i18n="sw_case1_cap4">CI/CD</span><span data-i18n="sw_case1_cap5">Play Store release</span><span data-i18n="sw_case1_cap6">Crash monitoring</span><span data-i18n="sw_case1_cap7">Product ownership</span></div></div>
           </div>
-          <a class="ext" href="https://play.google.com/store/apps/details?id=com.MetroBuc" target="_blank" rel="noopener noreferrer">View on Google Play <span aria-hidden="true">↗</span></a>
+          <a class="ext" href="https://play.google.com/store/apps/details?id=com.MetroBuc" target="_blank" rel="noopener noreferrer"><span data-i18n="sw_case1_link">View on Google Play</span> <span aria-hidden="true">↗</span></a>
         </article>
 
-        <!-- Case study 2 — ACTA PDF -->
+        <!-- Case study 2 — ActaSuite -->
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Windows · Desktop · <b>In development</b></span>
-              <h3>ACTA PDF</h3>
+              <span class="kicker"><span data-i18n="sw_case2_kicker">Windows · Desktop · </span><b data-i18n="sw_case2_kicker_b">MVP in testing</b></span>
+              <h3>ActaSuite</h3>
             </div>
-            <span class="status">MVP in progress</span>
+            <span class="status" data-i18n="sw_case2_status">MVP in testing</span>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>A document workflow that depended on reading, comparing and scoring PDFs by hand — slow, repetitive and hard to keep consistent.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>A Windows desktop application (currently a developing product / MVP) for structured PDF processing: extraction and interpretation of information from PDF documents, configurable templates, and automated comparison and scoring.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Converts a previously manual document workflow into a repeatable tool. ACTA PDF is still in development — we present it as evidence of desktop and document-processing capability, not as a finished commercial product.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Windows desktop</span><span>PDF processing</span><span>Templates</span><span>Automated scoring</span><span>Workflow automation</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_situation">Situation</span><p data-i18n="sw_case2_situation">A document workflow that depended on reading, comparing, scoring and converting PDFs by hand: slow, repetitive and hard to keep consistent.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_work">Work delivered</span><p data-i18n="sw_case2_work">ActaSuite, a growing suite of Windows desktop document tools built entirely in the EU, currently including structured PDF processing (extraction and interpretation of information from PDF documents, configurable templates, and automated comparison and scoring), PDF-to-Word conversion, and PDF editing, with more tools planned for the suite.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_outcome">Outcome</span><p data-i18n="sw_case2_outcome">Converts a previously manual document workflow into a repeatable tool. ActaSuite is in MVP testing; we present it as evidence of desktop and document-processing capability, not as a finished commercial product.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="sw_case2_cap1">Windows desktop</span><span data-i18n="sw_case2_cap2">PDF processing</span><span data-i18n="sw_case2_cap3">PDF to Word</span><span data-i18n="sw_case2_cap4">PDF editing</span><span data-i18n="sw_case2_cap5">Templates</span><span data-i18n="sw_case2_cap6">Automated scoring</span><span data-i18n="sw_case2_cap7">Workflow automation</span></div></div>
           </div>
         </article>
 
@@ -254,16 +258,16 @@
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Embedded · Full stack · <b>Working prototype</b></span>
-              <h3>Connected-device prototypes</h3>
+              <span class="kicker"><span data-i18n="sw_case3_kicker">Embedded · Full stack · </span><b data-i18n="sw_case3_kicker_b">Working prototype</b></span>
+              <h3 data-i18n="sw_case3_title">Connected-device prototypes</h3>
             </div>
-            <span class="status">Concept to prototype</span>
+            <span class="status" data-i18n="sw_case3_status">Concept to prototype</span>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>Hardware ideas that needed to be proven end to end before any investment in production.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>ESP32 firmware prototypes, 3D-printed enclosures, and paired Android, Windows and Linux applications — a full concept-to-working-prototype chain.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Demonstrates that LuXTech can carry a connected-device idea across firmware, enclosure and companion software in a single delivery.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>ESP32 firmware</span><span>3D printing</span><span>Android</span><span>Windows</span><span>Linux</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_situation">Situation</span><p data-i18n="sw_case3_situation">Hardware ideas that needed to be proven end to end before any investment in production.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_work">Work delivered</span><p data-i18n="sw_case3_work">ESP32 firmware prototypes, 3D-printed enclosures, and paired Android, Windows and Linux applications: a full concept-to-working-prototype chain.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_outcome">Outcome</span><p data-i18n="sw_case3_outcome">Demonstrates that LuXTech can carry a connected-device idea across firmware, enclosure and companion software in a single delivery.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="sw_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="sw_case3_cap1">ESP32 firmware</span><span data-i18n="sw_case3_cap2">3D printing</span><span data-i18n="sw_case3_cap3">Android</span><span data-i18n="sw_case3_cap4">Windows</span><span data-i18n="sw_case3_cap5">Linux</span></div></div>
           </div>
         </article>
       </div>
@@ -273,19 +277,19 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">D</span><span>One accountable delivery path</span></div>
-          <h2 class="sec-title">One owner, from idea to improvement.</h2>
-          <p class="sec-intro">You do not have to coordinate a chain of separate suppliers. LuXTech can cover the whole path, with a single point of accountability throughout.</p>
+          <div class="sec-eyebrow"><span class="code">D</span><span data-i18n="sw_flow_kicker">One accountable delivery path</span></div>
+          <h2 class="sec-title" data-i18n="sw_flow_title">One owner, from idea to improvement.</h2>
+          <p class="sec-intro" data-i18n="sw_flow_intro">You do not have to coordinate a chain of separate suppliers. LuXTech can cover the whole path, with a single point of accountability throughout.</p>
         </div>
         <div class="flow reveal" role="list" aria-label="End-to-end delivery path">
-          <span class="node" role="listitem">Requirements</span><span class="sep" aria-hidden="true">→</span>
-          <span class="node" role="listitem">Architecture</span><span class="sep" aria-hidden="true">→</span>
-          <span class="node" role="listitem">Prototype</span><span class="sep" aria-hidden="true">→</span>
-          <span class="node" role="listitem">Development</span><span class="sep" aria-hidden="true">→</span>
-          <span class="node" role="listitem">Testing</span><span class="sep" aria-hidden="true">→</span>
-          <span class="node" role="listitem">Deployment</span><span class="sep" aria-hidden="true">→</span>
-          <span class="node" role="listitem">Monitoring</span><span class="sep" aria-hidden="true">→</span>
-          <span class="node" role="listitem">Improvement</span>
+          <span class="node" role="listitem" data-i18n="sw_flow_1">Requirements</span><span class="sep" aria-hidden="true">→</span>
+          <span class="node" role="listitem" data-i18n="sw_flow_2">Architecture</span><span class="sep" aria-hidden="true">→</span>
+          <span class="node" role="listitem" data-i18n="sw_flow_3">Prototype</span><span class="sep" aria-hidden="true">→</span>
+          <span class="node" role="listitem" data-i18n="sw_flow_4">Development</span><span class="sep" aria-hidden="true">→</span>
+          <span class="node" role="listitem" data-i18n="sw_flow_5">Testing</span><span class="sep" aria-hidden="true">→</span>
+          <span class="node" role="listitem" data-i18n="sw_flow_6">Deployment</span><span class="sep" aria-hidden="true">→</span>
+          <span class="node" role="listitem" data-i18n="sw_flow_7">Monitoring</span><span class="sep" aria-hidden="true">→</span>
+          <span class="node" role="listitem" data-i18n="sw_flow_8">Improvement</span>
         </div>
       </div>
     </section>
@@ -294,21 +298,21 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">E</span><span>How an engagement works</span></div>
-          <h2 class="sec-title">A straightforward way to start.</h2>
+          <div class="sec-eyebrow"><span class="code">E</span><span data-i18n="sw_engage_kicker">How an engagement works</span></div>
+          <h2 class="sec-title" data-i18n="sw_engage_title">A straightforward way to start.</h2>
         </div>
         <div class="engage reveal">
-          <div class="step"><span class="no">01</span><h3>Discovery</h3><p>We learn the process, the constraints and what success actually looks like for you.</p></div>
-          <div class="step"><span class="no">02</span><h3>Scope &amp; recommendation</h3><p>You get an honest scope, a recommended approach, and a realistic timeline and cost.</p></div>
-          <div class="step"><span class="no">03</span><h3>Delivery</h3><p>We build in reviewable increments, so you see working software early and often.</p></div>
-          <div class="step"><span class="no">04</span><h3>Testing &amp; acceptance</h3><p>We test against the agreed scope and hand over only what meets it.</p></div>
-          <div class="step"><span class="no">05</span><h3>Handover &amp; improvement</h3><p>Documentation, deployment and — if you want it — continued support and iteration.</p></div>
+          <div class="step"><span class="no">01</span><h3 data-i18n="sw_step1_title">Discovery</h3><p data-i18n="sw_step1_desc">We learn the process, the constraints and what success actually looks like for you.</p></div>
+          <div class="step"><span class="no">02</span><h3 data-i18n="sw_step2_title">Scope &amp; recommendation</h3><p data-i18n="sw_step2_desc">You get an honest scope, a recommended approach, and a realistic timeline and cost.</p></div>
+          <div class="step"><span class="no">03</span><h3 data-i18n="sw_step3_title">Delivery</h3><p data-i18n="sw_step3_desc">We build in reviewable increments, so you see working software early and often.</p></div>
+          <div class="step"><span class="no">04</span><h3 data-i18n="sw_step4_title">Testing &amp; acceptance</h3><p data-i18n="sw_step4_desc">We test against the agreed scope and hand over only what meets it.</p></div>
+          <div class="step"><span class="no">05</span><h3 data-i18n="sw_step5_title">Handover &amp; improvement</h3><p data-i18n="sw_step5_desc">Documentation, deployment and, if you want it, continued support and iteration.</p></div>
         </div>
 
         <!-- Sibling services -->
         <div class="siblings reveal">
-          <a href="applied-ai.html"><span class="ix">S/02</span><span>Applied AI</span> <span aria-hidden="true">→</span></a>
-          <a href="project-delivery.html"><span class="ix">S/03</span><span>Project Delivery</span> <span aria-hidden="true">→</span></a>
+          <a href="applied-ai.html"><span class="ix">S/02</span><span data-i18n="sw_sib_ai">Applied AI</span> <span aria-hidden="true">→</span></a>
+          <a href="project-delivery.html"><span class="ix">S/03</span><span data-i18n="sw_sib_pm">Project Delivery</span> <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -317,11 +321,11 @@
     <section class="sec contact" id="contact" style="padding-top:0;">
       <div class="wrap">
         <div class="sec-eyebrow reveal"><span class="code">F</span><span data-i18n="nav_contact">Contact</span></div>
-        <h2 class="reveal" style="margin-top:1.4rem;">Let’s turn the idea into a workable plan.</h2>
-        <a href="mailto:contact@lxtech.ro?subject=Software%20project%20enquiry" class="email reveal">contact@lxtech.ro <span class="arr mono">↗</span></a>
-        <p class="sub reveal">Describe the business need in a few lines — the process, the pain, and what a good result would look like. You’ll get an honest read on scope and feasibility back.</p>
+        <h2 class="reveal" style="margin-top:1.4rem;" data-i18n="sw_contact_title">Let’s turn the idea into a workable plan.</h2>
+        <a href="mailto:contact@lxtech.ro?subject=Software%20project%20enquiry" class="email reveal magnetic" data-cursor>contact@lxtech.ro <span class="arr mono">↗</span></a>
+        <p class="sub reveal" data-i18n="sw_contact_sub">Describe the business need in a few lines: the process, the pain, and what a good result would look like. You’ll get an honest read on scope and feasibility back.</p>
         <div class="reveal" style="margin-top:2.2rem;">
-          <a href="mailto:contact@lxtech.ro?subject=Software%20project%20enquiry" class="btn btn-primary">Discuss your project <span class="arr">→</span></a>
+          <a href="mailto:contact@lxtech.ro?subject=Software%20project%20enquiry" class="btn btn-primary magnetic" data-cursor><span data-i18n="sw_hero_cta1">Discuss your project</span> <span class="arr">→</span></a>
         </div>
       </div>
     </section>
@@ -335,8 +339,10 @@
     </div>
   </footer>
 
+  <script src="software-development.i18n.js" defer></script>
   <script src="services.js" defer></script>
   <script src="aurora.js" defer></script>
+  <script src="cursor.js" defer></script>
 
   <!-- Music Toggle Button -->
   <audio id="bg-music" src="audio/Calculated_Calm.mp3" loop preload="auto"></audio>

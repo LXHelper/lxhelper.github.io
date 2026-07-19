@@ -6,7 +6,7 @@
   <title>IT Project Delivery &amp; Consultancy | LuXTech Innovation</title>
 
   <!-- SEO -->
-  <meta name="description" content="Senior project and programme leadership for infrastructure, transformation, Agile delivery and cross-functional technology initiatives — Waterfall, Agile, SAFe, PM² or PRINCE2 as the work requires." />
+  <meta name="description" content="Senior project and programme leadership for infrastructure, transformation, Agile delivery and cross-functional technology initiatives: Waterfall, Agile, SAFe, PM² or PRINCE2 as the work requires." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#06080F" />
   <link rel="canonical" href="https://lxtech.ro/project-delivery.html" />
@@ -16,7 +16,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="LuXTech Innovation" />
-  <meta property="og:title" content="Project Delivery for Complex Technical Change — LuXTech Innovation" />
+  <meta property="og:title" content="Project Delivery for Complex Technical Change | LuXTech Innovation" />
   <meta property="og:description" content="Senior project and programme leadership for infrastructure, transformation, Agile delivery and cross-functional technology initiatives." />
   <meta property="og:url" content="https://lxtech.ro/project-delivery.html" />
   <meta property="og:image" content="https://lxhelper.github.io/images/LX_logo.png" />
@@ -38,6 +38,7 @@
 
   <link rel="stylesheet" href="services.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script>
     (function(){ try { if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-anim'); } catch(e){} })();
   </script>
@@ -93,12 +94,14 @@
   <div id="gl" aria-hidden="true"></div>
   <div class="veil" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
 
   <!-- HEADER -->
   <header>
     <div class="wrap">
       <nav class="nav" aria-label="Primary">
-        <a href="index.html#home" class="brand" aria-label="LuXTech Innovation — home">
+        <a href="index.html#home" class="brand" aria-label="LuXTech Innovation home" data-cursor>
           <img src="https://lxhelper.github.io/images/LX_logo.png" alt="" onerror="this.style.display='none'" />
           <b>LUXTECH<i>.</i>INNOVATION</b>
         </a>
@@ -110,7 +113,7 @@
           <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
         </div>
         <div class="lang" id="lang">
-          <button class="lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+          <button class="lang-btn magnetic" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language" data-cursor>
             <span id="langCurrent">EN</span>
             <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
           </button>
@@ -132,27 +135,26 @@
     <div class="wrap">
       <div class="subbar">
         <a class="backlink" href="index.html#solutions"><span class="ar" aria-hidden="true">←</span><span data-i18n="back_to_services">Back to services</span></a>
-        <span class="notice" role="status"><span class="g" aria-hidden="true"></span><span class="nt"></span></span>
       </div>
     </div>
 
     <!-- HERO -->
     <section class="page-hero">
       <div class="wrap">
-        <span class="eyebrow reveal"><span class="code">S/03</span><span>Project Delivery</span></span>
-        <h1 class="reveal">Project delivery for <span class="gold">complex technical change</span>.</h1>
-        <p class="lead reveal">Senior project and programme leadership for infrastructure, transformation, Agile delivery and cross-functional technology initiatives. Delivery is led hands-on by a consultant with 14+ years across global corporates and European Commission environments.</p>
+        <span class="eyebrow reveal"><span class="code">S/03</span><span data-i18n="pm_eyebrow">Project Delivery</span></span>
+        <h1 class="reveal"><span data-i18n="pm_hero_title_pre">Project delivery for</span> <span class="gold" data-i18n="pm_hero_title_gold">complex technical change</span><span data-i18n="pm_hero_title_post">.</span></h1>
+        <p class="lead reveal" data-i18n="pm_hero_lead">Senior project and programme leadership for infrastructure, transformation, Agile delivery and cross-functional technology initiatives. Delivery is led hands-on by a consultant with 14+ years across global corporates and European Commission environments.</p>
         <div class="hero-cta reveal">
-          <a href="#contact" class="btn btn-primary">Discuss your project <span class="arr">→</span></a>
-          <a href="#experience" class="btn btn-ghost">See relevant experience</a>
+          <a href="#contact" class="btn btn-primary magnetic" data-cursor><span data-i18n="pm_hero_cta1">Discuss your project</span> <span class="arr">→</span></a>
+          <a href="#experience" class="btn btn-ghost magnetic" data-cursor data-i18n="pm_hero_cta2">See relevant experience</a>
         </div>
 
         <!-- PROOF STRIP -->
         <div class="proof cols-4 reveal" role="list" aria-label="Delivery track record at a glance">
-          <div class="p" role="listitem"><span class="n">14+ yrs</span><span class="l">IT &amp; project delivery</span></div>
-          <div class="p" role="listitem"><span class="n">€5M+</span><span class="l">Programmes &amp; projects managed</span></div>
-          <div class="p" role="listitem"><span class="n">80+</span><span class="l">Concurrent projects coordinated</span></div>
-          <div class="p" role="listitem"><span class="n">40+</span><span class="l">EU institutions &amp; bodies served</span></div>
+          <div class="p" role="listitem"><span class="n">14+ yrs</span><span class="l" data-i18n="pm_proof_1">IT &amp; project delivery</span></div>
+          <div class="p" role="listitem"><span class="n">€5M+</span><span class="l" data-i18n="pm_proof_2">Programmes &amp; projects managed</span></div>
+          <div class="p" role="listitem"><span class="n">80+</span><span class="l" data-i18n="pm_proof_3">Concurrent projects coordinated</span></div>
+          <div class="p" role="listitem"><span class="n">40+</span><span class="l" data-i18n="pm_proof_4">EU institutions &amp; bodies served</span></div>
         </div>
       </div>
     </section>
@@ -161,9 +163,9 @@
     <section class="sec">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">A</span><span>Method fits the work</span></div>
-          <h2 class="sec-title">No single framework, forced onto everything.</h2>
-          <p class="sec-intro">LuXTech does not push every initiative into Scrum — or into any one method. The right delivery model depends on the work. We use Waterfall, Agile, Scrum, Kanban, SAFe, PM², PRINCE2 or a pragmatic hybrid when each is appropriate.</p>
+          <div class="sec-eyebrow"><span class="code">A</span><span data-i18n="pm_method_eyebrow">Method fits the work</span></div>
+          <h2 class="sec-title" data-i18n="pm_method_title">No single framework, forced onto everything.</h2>
+          <p class="sec-intro" data-i18n="pm_method_intro">LuXTech does not push every initiative into Scrum, or into any one method. The right delivery model depends on the work. We use Waterfall, Agile, Scrum, Kanban, SAFe, PM², PRINCE2 or a pragmatic hybrid when each is appropriate.</p>
         </div>
         <div class="certs reveal" aria-label="Delivery frameworks">
           <span class="cert"><b>Waterfall</b></span>
@@ -175,6 +177,7 @@
           <span class="cert"><b>PRINCE2</b></span>
           <span class="cert"><b>Hybrid</b></span>
         </div>
+        <p class="sec-intro reveal" data-i18n="pm_method_tools">The method sets the structure; the tooling fits how your team already works. We run delivery with a wide array of tools, Mural, Klaxoon, Confluence and others, rather than forcing a single stack on every engagement.</p>
       </div>
     </section>
 
@@ -182,16 +185,16 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">B</span><span>Where we fit</span></div>
-          <h2 class="sec-title">You may need us when…</h2>
+          <div class="sec-eyebrow"><span class="code">B</span><span data-i18n="pm_fit_eyebrow">Where we fit</span></div>
+          <h2 class="sec-title" data-i18n="pm_fit_title">You may need us when…</h2>
         </div>
         <ul class="problems reveal">
-          <li>A delayed or drifting project needs someone to recover control of scope, time and budget.</li>
-          <li>A complex infrastructure or transformation programme needs senior, hands-on leadership.</li>
-          <li>Delivery is stuck in ceremonies that don’t fit, and the method needs an honest reassessment.</li>
-          <li>A PMO or governance layer needs designing, or improving so reporting is actually useful.</li>
-          <li>Multiple concurrent projects need coordinating across teams, vendors and dependencies.</li>
-          <li>You need interim project leadership to hold delivery together through a transition.</li>
+          <li data-i18n="pm_fit_1">A delayed or drifting project needs someone to recover control of scope, time and budget.</li>
+          <li data-i18n="pm_fit_2">A complex infrastructure or transformation programme needs senior, hands-on leadership.</li>
+          <li data-i18n="pm_fit_3">Delivery is stuck in ceremonies that don’t fit, and the method needs an honest reassessment.</li>
+          <li data-i18n="pm_fit_4">A PMO or governance layer needs designing, or improving so reporting is actually useful.</li>
+          <li data-i18n="pm_fit_5">Multiple concurrent projects need coordinating across teams, vendors and dependencies.</li>
+          <li data-i18n="pm_fit_6">You need interim project leadership to hold delivery together through a transition.</li>
         </ul>
       </div>
     </section>
@@ -200,26 +203,26 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">C</span><span>What we deliver</span></div>
-          <h2 class="sec-title">Delivery leadership you can commission.</h2>
+          <div class="sec-eyebrow"><span class="code">C</span><span data-i18n="pm_deliver_eyebrow">What we deliver</span></div>
+          <h2 class="sec-title" data-i18n="pm_deliver_title">Delivery leadership you can commission.</h2>
         </div>
         <ul class="deliver cols-3 reveal">
-          <li><b>Project management consultancy</b>Senior delivery leadership applied to your specific initiative.</li>
-          <li><b>Programme &amp; portfolio coordination</b>Keeping many moving projects aligned and on track.</li>
-          <li><b>Project recovery</b>Regaining control of a delayed or at-risk delivery.</li>
-          <li><b>Infrastructure-project delivery</b>Storage, backup, virtualisation and platform change, delivered safely.</li>
-          <li><b>Transformation &amp; transition</b>Managing organisational and technical change end to end.</li>
-          <li><b>Waterfall, Agile &amp; hybrid delivery</b>The method matched to the work, not the other way round.</li>
-          <li><b>Scrum Master services</b>Facilitation, ceremonies and impediment removal for delivery teams.</li>
-          <li><b>Agile &amp; SAFe implementation</b>Introducing Agile and ART-level practice where it earns its place.</li>
-          <li><b>PMO design &amp; improvement</b>Setting up or sharpening the delivery office and its reporting.</li>
-          <li><b>Governance &amp; executive reporting</b>Turning technical status into decisions leadership can act on.</li>
-          <li><b>Risk, issue &amp; dependency management</b>Seeing problems early and managing them deliberately.</li>
-          <li><b>Vendor &amp; contract coordination</b>Holding suppliers to scope, quality and timeline.</li>
-          <li><b>Stakeholder alignment</b>Keeping sponsors, teams and users pointed the same way.</li>
-          <li><b>Requirements &amp; delivery planning</b>Translating intent into a plan that can actually be delivered.</li>
-          <li><b>Interim project leadership</b>Stepping in to lead delivery through a gap or a change.</li>
-          <li><b>Delivery-method assessment</b>An honest review of whether your current approach fits.</li>
+          <li><b data-i18n="pm_deliver_1_title">Project management consultancy</b><span data-i18n="pm_deliver_1_desc">Senior delivery leadership applied to your specific initiative.</span></li>
+          <li><b data-i18n="pm_deliver_2_title">Programme &amp; portfolio coordination</b><span data-i18n="pm_deliver_2_desc">Keeping many moving projects aligned and on track.</span></li>
+          <li><b data-i18n="pm_deliver_3_title">Project recovery</b><span data-i18n="pm_deliver_3_desc">Regaining control of a delayed or at-risk delivery.</span></li>
+          <li><b data-i18n="pm_deliver_4_title">Infrastructure-project delivery</b><span data-i18n="pm_deliver_4_desc">Storage, backup, virtualisation and platform change, delivered safely.</span></li>
+          <li><b data-i18n="pm_deliver_5_title">Transformation &amp; transition</b><span data-i18n="pm_deliver_5_desc">Managing organisational and technical change end to end.</span></li>
+          <li><b data-i18n="pm_deliver_6_title">Waterfall, Agile &amp; hybrid delivery</b><span data-i18n="pm_deliver_6_desc">The method matched to the work, not the other way round.</span></li>
+          <li><b data-i18n="pm_deliver_7_title">Scrum Master services</b><span data-i18n="pm_deliver_7_desc">Facilitation, ceremonies and impediment removal for delivery teams.</span></li>
+          <li><b data-i18n="pm_deliver_8_title">Agile &amp; SAFe implementation</b><span data-i18n="pm_deliver_8_desc">Introducing Agile and ART-level practice where it earns its place.</span></li>
+          <li><b data-i18n="pm_deliver_9_title">PMO design &amp; improvement</b><span data-i18n="pm_deliver_9_desc">Setting up or sharpening the delivery office and its reporting.</span></li>
+          <li><b data-i18n="pm_deliver_10_title">Governance &amp; executive reporting</b><span data-i18n="pm_deliver_10_desc">Turning technical status into decisions leadership can act on.</span></li>
+          <li><b data-i18n="pm_deliver_11_title">Risk, issue &amp; dependency management</b><span data-i18n="pm_deliver_11_desc">Seeing problems early and managing them deliberately.</span></li>
+          <li><b data-i18n="pm_deliver_12_title">Vendor &amp; contract coordination</b><span data-i18n="pm_deliver_12_desc">Holding suppliers to scope, quality and timeline.</span></li>
+          <li><b data-i18n="pm_deliver_13_title">Stakeholder alignment</b><span data-i18n="pm_deliver_13_desc">Keeping sponsors, teams and users pointed the same way.</span></li>
+          <li><b data-i18n="pm_deliver_14_title">Requirements &amp; delivery planning</b><span data-i18n="pm_deliver_14_desc">Translating intent into a plan that can actually be delivered.</span></li>
+          <li><b data-i18n="pm_deliver_15_title">Interim project leadership</b><span data-i18n="pm_deliver_15_desc">Stepping in to lead delivery through a gap or a change.</span></li>
+          <li><b data-i18n="pm_deliver_16_title">Delivery-method assessment</b><span data-i18n="pm_deliver_16_desc">An honest review of whether your current approach fits.</span></li>
         </ul>
       </div>
     </section>
@@ -228,29 +231,29 @@
     <section class="sec" id="experience" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">D</span><span>Selected experience</span></div>
-          <h2 class="sec-title">Delivery under real pressure and scale.</h2>
+          <div class="sec-eyebrow"><span class="code">D</span><span data-i18n="pm_exp_eyebrow">Selected experience</span></div>
+          <h2 class="sec-title" data-i18n="pm_exp_title">Delivery under real pressure and scale.</h2>
         </div>
 
         <!-- Case study 1 — Remote-work transition -->
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Programme leadership · <b>COVID-19 transition</b></span>
-              <h3>Company-wide remote-work transition</h3>
+              <span class="kicker"><span data-i18n="pm_case1_kicker">Programme leadership ·</span> <b data-i18n="pm_case1_kicker_b">COVID-19 transition</b></span>
+              <h3 data-i18n="pm_case1_h">Company-wide remote-work transition</h3>
             </div>
-            <span class="status">Programme</span>
+            <span class="status" data-i18n="pm_case1_status">Programme</span>
           </div>
           <div class="metrics">
-            <div class="m"><span class="n">10+</span><span class="t">PMs led &amp; mentored</span></div>
-            <div class="m"><span class="n">83+</span><span class="t">Concurrent migrations</span></div>
-            <div class="m"><span class="n">5,000+</span><span class="t">Employees affected</span></div>
+            <div class="m"><span class="n">10+</span><span class="t" data-i18n="pm_case1_m1">PMs led &amp; mentored</span></div>
+            <div class="m"><span class="n">83+</span><span class="t" data-i18n="pm_case1_m2">Concurrent migrations</span></div>
+            <div class="m"><span class="n">5,000+</span><span class="t" data-i18n="pm_case1_m3">Employees affected</span></div>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>An organisation had to move to a fully remote operating model at speed during COVID-19, across many client environments at once.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>Led the transition programme, coordinating and mentoring 10+ project managers and overseeing 83+ concurrent client infrastructure migrations — each client environment with its own technical design.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Changes affecting 5,000+ employees were delivered under a single coordinated programme, holding scope and reporting through sustained pressure.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Programme management</span><span>PRINCE2</span><span>Mentoring</span><span>Concurrent delivery</span><span>Governance</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_situation">Situation</span><p data-i18n="pm_case1_situation">An organisation had to move to a fully remote operating model at speed during COVID-19, across many client environments at once.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_work">Work delivered</span><p data-i18n="pm_case1_work">Led the transition programme, coordinating and mentoring 10+ project managers and overseeing 83+ concurrent client infrastructure migrations, each client environment with its own technical design.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_outcome">Outcome</span><p data-i18n="pm_case1_outcome">Changes affecting 5,000+ employees were delivered under a single coordinated programme, holding scope and reporting through sustained pressure.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="pm_case1_cap1">Programme management</span><span>PRINCE2</span><span data-i18n="pm_case1_cap3">Mentoring</span><span data-i18n="pm_case1_cap4">Concurrent delivery</span><span data-i18n="pm_case1_cap5">Governance</span></div></div>
           </div>
         </article>
 
@@ -258,19 +261,19 @@
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Transition &amp; transformation · <b>International</b></span>
-              <h3>International transitions &amp; building projects</h3>
+              <span class="kicker"><span data-i18n="pm_case2_kicker">Transition &amp; transformation ·</span> <b data-i18n="pm_case2_kicker_b">International</b></span>
+              <h3 data-i18n="pm_case2_h">International transitions &amp; building projects</h3>
             </div>
-            <span class="status">Portfolio</span>
+            <span class="status" data-i18n="pm_case2_status">Portfolio</span>
           </div>
           <div class="metrics">
-            <div class="m"><span class="n">~1,000</span><span class="t">Employees per initiative</span></div>
+            <div class="m"><span class="n">~1,000</span><span class="t" data-i18n="pm_case2_m1">Employees per initiative</span></div>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>A running mix of international change initiatives — each with its own people, sites and infrastructure to move.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>Ran rebadging and acquisition/BPO transitions, building takeovers, office and building relocations, infrastructure changes and new-client onboarding, with international and multi-location coordination.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>These initiatives often affected approximately 1,000 employees each, delivered in parallel with a local floor-support function.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Transition management</span><span>Multi-location</span><span>Onboarding</span><span>Infrastructure change</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_situation">Situation</span><p data-i18n="pm_case2_situation">A running mix of international change initiatives, each with its own people, sites and infrastructure to move.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_work">Work delivered</span><p data-i18n="pm_case2_work">Ran rebadging and acquisition/BPO transitions, building takeovers, office and building relocations, infrastructure changes and new-client onboarding, with international and multi-location coordination.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_outcome">Outcome</span><p data-i18n="pm_case2_outcome">These initiatives often affected approximately 1,000 employees each, delivered in parallel with a local floor-support function.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="pm_case2_cap1">Transition management</span><span data-i18n="pm_case2_cap2">Multi-location</span><span data-i18n="pm_case2_cap3">Onboarding</span><span data-i18n="pm_case2_cap4">Infrastructure change</span></div></div>
           </div>
         </article>
 
@@ -278,20 +281,19 @@
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Agile transformation · <b>Scrum Master</b></span>
-              <h3>Waterfall-to-Agile transformation</h3>
+              <span class="kicker"><span data-i18n="pm_case3_kicker">Agile transformation ·</span> <b data-i18n="pm_case3_kicker_b">Scrum Master</b></span>
+              <h3 data-i18n="pm_case3_h">Waterfall-to-Agile transformation</h3>
             </div>
-            <span class="status">Transformation</span>
+            <span class="status" data-i18n="pm_case3_status">Transformation</span>
           </div>
           <div class="metrics">
-            <div class="m"><span class="n">86–93%</span><span class="t">Sprint predictability</span></div>
-            <div class="m"><span class="n">8+1</span><span class="t">Engineers &amp; developer</span></div>
+            <div class="m"><span class="n">9</span><span class="t" data-i18n="pm_case3_m1">Architects &amp; developers</span></div>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>A Backup and Storage squad delivering in Waterfall needed to move to Agile/SAFe without losing service continuity.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>Led the squad’s transition with eight engineers and one developer: introduced ceremonies and ART-level practices, and strengthened backlog refinement and Definition of Done. Coordinated dependencies across storage, backup, virtualisation, operating systems and security teams.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Improved sprint predictability and commitment reliability to approximately 86–93%.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>SAFe</span><span>Scrum Master</span><span>Backlog refinement</span><span>Dependency management</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_situation">Situation</span><p data-i18n="pm_case3_situation">A Backup and Storage squad delivering in Waterfall needed to move to Agile/SAFe without losing service continuity.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_work">Work delivered</span><p data-i18n="pm_case3_work">Led the squad’s transition with nine architects and developers: introduced ceremonies and ART-level practices, and strengthened backlog refinement and Definition of Done. Coordinated dependencies across storage, backup, virtualisation, operating systems and security teams. Where a clean cut to Agile wasn’t practical, we ran a pragmatic Waterfall/Agile hybrid, keeping Waterfall-style milestone gates for service-continuity commitments while the squad delivered day to day in Scrum sprints.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_outcome">Outcome</span><p data-i18n="pm_case3_outcome">Moved the squad onto a sustainable Agile/SAFe rhythm without disrupting service continuity, using a hybrid approach where a full Agile cut-over carried too much risk.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_caps">Relevant capabilities</span><div class="caps"><span>SAFe</span><span data-i18n="pm_case3_cap2">Scrum Master</span><span data-i18n="pm_case3_cap3">Backlog refinement</span><span data-i18n="pm_case3_cap4">Dependency management</span><span data-i18n="pm_case3_cap5">Waterfall/Agile hybrid</span></div></div>
           </div>
         </article>
 
@@ -299,20 +301,20 @@
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Infrastructure delivery · <b>European Commission</b></span>
-              <h3>European Commission infrastructure delivery</h3>
+              <span class="kicker"><span data-i18n="pm_case4_kicker">Infrastructure delivery ·</span> <b>European Commission</b></span>
+              <h3 data-i18n="pm_case4_h">European Commission infrastructure delivery</h3>
             </div>
-            <span class="status">Contractor</span>
+            <span class="status" data-i18n="pm_case4_status">Contractor</span>
           </div>
           <div class="metrics">
-            <div class="m"><span class="n">40+</span><span class="t">EU institutions &amp; bodies</span></div>
-            <div class="m"><span class="n">20,000+</span><span class="t">VMs &amp; servers impacted</span></div>
+            <div class="m"><span class="n">40+</span><span class="t" data-i18n="pm_case4_m1">EU institutions &amp; bodies</span></div>
+            <div class="m"><span class="n">20,000+</span><span class="t" data-i18n="pm_case4_m2">VMs &amp; servers impacted</span></div>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>Storage, backup and virtualisation change in environments serving 40+ EU institutions, agencies and national bodies — where service continuity is non-negotiable.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>Delivered SAN, NAS and object-storage initiatives, operating-system migrations, Linux modernisation, security hardening and a unified endpoint-protection rollout, with extensive pre-release testing.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Impact across 20,000+ virtual machines and servers, delivered with multi-stage testing to protect service continuity.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Storage &amp; backup</span><span>Virtualisation</span><span>OS migration</span><span>Security hardening</span><span>Pre-release testing</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_situation">Situation</span><p data-i18n="pm_case4_situation">Storage, backup and virtualisation change in environments serving 40+ EU institutions, agencies and national bodies, where service continuity is non-negotiable.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_work">Work delivered</span><p data-i18n="pm_case4_work">Delivered SAN, NAS and object-storage initiatives, operating-system migrations, Linux modernisation, security hardening and a unified endpoint-protection rollout, with extensive pre-release testing.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_outcome">Outcome</span><p data-i18n="pm_case4_outcome">Impact across 20,000+ virtual machines and servers, delivered with multi-stage testing to protect service continuity.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="pm_case4_cap1">Storage &amp; backup</span><span data-i18n="pm_case4_cap2">Virtualisation</span><span data-i18n="pm_case4_cap3">OS migration</span><span data-i18n="pm_case4_cap4">Security hardening</span><span data-i18n="pm_case4_cap5">Pre-release testing</span></div></div>
           </div>
         </article>
 
@@ -320,19 +322,19 @@
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Portfolio &amp; PMO · <b>EMEA</b></span>
-              <h3>Portfolio &amp; PMO improvement</h3>
+              <span class="kicker"><span data-i18n="pm_case5_kicker">Portfolio &amp; PMO ·</span> <b>EMEA</b></span>
+              <h3 data-i18n="pm_case5_h">Portfolio &amp; PMO improvement</h3>
             </div>
-            <span class="status">Portfolio</span>
+            <span class="status" data-i18n="pm_case5_status">Portfolio</span>
           </div>
           <div class="metrics">
-            <div class="m"><span class="n">~30</span><span class="t">Concurrent projects (EMEA)</span></div>
+            <div class="m"><span class="n">~30</span><span class="t" data-i18n="pm_case5_m1">Concurrent projects (EMEA)</span></div>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>A large EMEA infrastructure portfolio needed consistent delivery discipline and governance leadership could rely on.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>Delivered approximately 30 concurrent infrastructure projects across EMEA; created a project-management methodology adopted by an internal PM forum and PMO; mentored project managers; and translated technical risk and status into governance reporting.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Authored an annual infrastructure estate report for senior European Commission management, giving leadership a clear view of the estate.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Portfolio delivery</span><span>PMO methodology</span><span>Mentoring</span><span>Executive reporting</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_situation">Situation</span><p data-i18n="pm_case5_situation">A large EMEA infrastructure portfolio needed consistent delivery discipline and governance leadership could rely on.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_work">Work delivered</span><p data-i18n="pm_case5_work">Delivered approximately 30 concurrent infrastructure projects across EMEA; created a project-management methodology adopted by an internal PM forum and PMO; mentored project managers; and translated technical risk and status into governance reporting.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_outcome">Outcome</span><p data-i18n="pm_case5_outcome">Authored an annual infrastructure estate report for senior European Commission management, giving leadership a clear view of the estate.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="pm_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="pm_case5_cap1">Portfolio delivery</span><span data-i18n="pm_case5_cap2">PMO methodology</span><span data-i18n="pm_case5_cap3">Mentoring</span><span data-i18n="pm_case5_cap4">Executive reporting</span></div></div>
           </div>
         </article>
       </div>
@@ -342,18 +344,18 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">E</span><span>Credentials</span></div>
-          <h2 class="sec-title">Formally certified, practically applied.</h2>
+          <div class="sec-eyebrow"><span class="code">E</span><span data-i18n="pm_certs_eyebrow">Credentials</span></div>
+          <h2 class="sec-title" data-i18n="pm_certs_title">Formally certified, practically applied.</h2>
         </div>
         <div class="certs reveal" aria-label="Certifications">
-          <span class="cert"><b>PRINCE2</b> Practitioner</span>
-          <span class="cert"><b>SAFe 6</b> Agilist</span>
-          <span class="cert"><b>SAFe 5</b> Agilist</span>
-          <span class="cert"><b>ITIL</b> Foundation</span>
-          <span class="cert"><b>Six Sigma</b> Yellow Belt</span>
-          <span class="cert">Experience with <b>PM²</b>, <b>Scrum</b> &amp; <b>Kanban</b></span>
+          <span class="cert"><b>PRINCE2</b> <span data-i18n="pm_cert_practitioner">Practitioner</span></span>
+          <span class="cert"><b>SAFe 6</b> <span data-i18n="pm_cert_agilist">Agilist</span></span>
+          <span class="cert"><b>SAFe 5</b> <span data-i18n="pm_cert_agilist">Agilist</span></span>
+          <span class="cert"><b>ITIL</b> <span data-i18n="pm_cert_foundation">Foundation</span></span>
+          <span class="cert"><b>Six Sigma</b> <span data-i18n="pm_cert_yellowbelt">Yellow Belt</span></span>
+          <span class="cert"><span data-i18n="pm_cert_experience_with">Experience with</span> <b>PM²</b>, <b>Scrum</b> &amp; <b>Kanban</b></span>
         </div>
-        <p class="certs-note">Credentials are held by the senior consultant leading delivery.</p>
+        <p class="certs-note" data-i18n="pm_certs_note">Credentials are held by the senior consultant leading delivery.</p>
       </div>
     </section>
 
@@ -361,21 +363,21 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">F</span><span>How an engagement works</span></div>
-          <h2 class="sec-title">A clear way to take control.</h2>
+          <div class="sec-eyebrow"><span class="code">F</span><span data-i18n="pm_engage_eyebrow">How an engagement works</span></div>
+          <h2 class="sec-title" data-i18n="pm_engage_title">A clear way to take control.</h2>
         </div>
         <div class="engage reveal">
-          <div class="step"><span class="no">01</span><h3>Discovery</h3><p>We assess the current state — scope, risks, dependencies and where delivery actually stands.</p></div>
-          <div class="step"><span class="no">02</span><h3>Scope &amp; recommendation</h3><p>A recommended delivery model and plan, with the method matched to the work.</p></div>
-          <div class="step"><span class="no">03</span><h3>Delivery</h3><p>Hands-on leadership: coordinating teams, vendors and dependencies against the plan.</p></div>
-          <div class="step"><span class="no">04</span><h3>Testing &amp; acceptance</h3><p>Structured testing and acceptance so change lands without breaking service.</p></div>
-          <div class="step"><span class="no">05</span><h3>Handover &amp; continued improvement</h3><p>Governance, reporting and — where useful — ongoing delivery support.</p></div>
+          <div class="step"><span class="no">01</span><h3 data-i18n="pm_step1_h">Discovery</h3><p data-i18n="pm_step1_p">We assess the current state: scope, risks, dependencies and where delivery actually stands.</p></div>
+          <div class="step"><span class="no">02</span><h3 data-i18n="pm_step2_h">Scope &amp; recommendation</h3><p data-i18n="pm_step2_p">A recommended delivery model and plan, with the method matched to the work.</p></div>
+          <div class="step"><span class="no">03</span><h3 data-i18n="pm_step3_h">Delivery</h3><p data-i18n="pm_step3_p">Hands-on leadership: coordinating teams, vendors and dependencies against the plan.</p></div>
+          <div class="step"><span class="no">04</span><h3 data-i18n="pm_step4_h">Testing &amp; acceptance</h3><p data-i18n="pm_step4_p">Structured testing and acceptance so change lands without breaking service.</p></div>
+          <div class="step"><span class="no">05</span><h3 data-i18n="pm_step5_h">Handover &amp; continued improvement</h3><p data-i18n="pm_step5_p">Governance, reporting and, where useful, ongoing delivery support.</p></div>
         </div>
 
         <!-- Sibling services -->
         <div class="siblings reveal">
-          <a href="software-development.html"><span class="ix">S/01</span><span>Custom Software</span> <span aria-hidden="true">→</span></a>
-          <a href="applied-ai.html"><span class="ix">S/02</span><span>Applied AI</span> <span aria-hidden="true">→</span></a>
+          <a href="software-development.html"><span class="ix">S/01</span><span data-i18n="pm_sibling_software">Custom Software</span> <span aria-hidden="true">→</span></a>
+          <a href="applied-ai.html"><span class="ix">S/02</span><span data-i18n="pm_sibling_ai">Applied AI</span> <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -384,11 +386,11 @@
     <section class="sec contact" id="contact" style="padding-top:0;">
       <div class="wrap">
         <div class="sec-eyebrow reveal"><span class="code">G</span><span data-i18n="nav_contact">Contact</span></div>
-        <h2 class="reveal" style="margin-top:1.4rem;">Let’s turn the idea into a workable plan.</h2>
-        <a href="mailto:contact@lxtech.ro?subject=Project%20delivery%20consultancy%20enquiry" class="email reveal">contact@lxtech.ro <span class="arr mono">↗</span></a>
-        <p class="sub reveal">Describe the initiative and where it stands — delayed, starting, or mid-flight. You’ll get a straight assessment of how we’d take it forward.</p>
+        <h2 class="reveal" style="margin-top:1.4rem;" data-i18n="pm_contact_title">Let’s turn the idea into a workable plan.</h2>
+        <a href="mailto:contact@lxtech.ro?subject=Project%20delivery%20consultancy%20enquiry" class="email reveal magnetic" data-cursor>contact@lxtech.ro <span class="arr mono">↗</span></a>
+        <p class="sub reveal" data-i18n="pm_contact_sub">Describe the initiative and where it stands: delayed, starting, or mid-flight. You’ll get a straight assessment of how we’d take it forward.</p>
         <div class="reveal" style="margin-top:2.2rem;">
-          <a href="mailto:contact@lxtech.ro?subject=Project%20delivery%20consultancy%20enquiry" class="btn btn-primary">Discuss your project <span class="arr">→</span></a>
+          <a href="mailto:contact@lxtech.ro?subject=Project%20delivery%20consultancy%20enquiry" class="btn btn-primary magnetic" data-cursor><span data-i18n="pm_hero_cta1">Discuss your project</span> <span class="arr">→</span></a>
         </div>
       </div>
     </section>
@@ -402,8 +404,10 @@
     </div>
   </footer>
 
+  <script src="project-delivery.i18n.js" defer></script>
   <script src="services.js" defer></script>
   <script src="aurora.js" defer></script>
+  <script src="cursor.js" defer></script>
 
   <!-- Music Toggle Button -->
   <audio id="bg-music" src="audio/Calculated_Calm.mp3" loop preload="auto"></audio>

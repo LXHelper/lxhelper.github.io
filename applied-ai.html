@@ -6,7 +6,7 @@
   <title>Applied AI &amp; Business Automation | LuXTech Innovation</title>
 
   <!-- SEO -->
-  <meta name="description" content="LuXTech finds useful AI and automation opportunities, builds practical implementations, and integrates them into how your organisation already works — with human review and clear governance." />
+  <meta name="description" content="LuXTech finds useful AI and automation opportunities, builds practical implementations, and integrates them into how your organisation already works, with human review and clear governance." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#06080F" />
   <link rel="canonical" href="https://lxtech.ro/applied-ai.html" />
@@ -16,8 +16,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="LuXTech Innovation" />
-  <meta property="og:title" content="Applied AI for Work That Actually Needs Improving — LuXTech Innovation" />
-  <meta property="og:description" content="Practical AI and automation, integrated into the way your organisation already works — with human review and clear governance." />
+  <meta property="og:title" content="Applied AI for Work That Actually Needs Improving | LuXTech Innovation" />
+  <meta property="og:description" content="Practical AI and automation, integrated into the way your organisation already works, with human review and clear governance." />
   <meta property="og:url" content="https://lxtech.ro/applied-ai.html" />
   <meta property="og:image" content="https://lxhelper.github.io/images/LX_logo.png" />
   <meta property="og:locale" content="en_US" />
@@ -38,6 +38,7 @@
 
   <link rel="stylesheet" href="services.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script>
     (function(){ try { if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-anim'); } catch(e){} })();
   </script>
@@ -93,12 +94,14 @@
   <div id="gl" aria-hidden="true"></div>
   <div class="veil" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
 
   <!-- HEADER -->
   <header>
     <div class="wrap">
       <nav class="nav" aria-label="Primary">
-        <a href="index.html#home" class="brand" aria-label="LuXTech Innovation — home">
+        <a href="index.html#home" class="brand" aria-label="LuXTech Innovation home" data-cursor>
           <img src="https://lxhelper.github.io/images/LX_logo.png" alt="" onerror="this.style.display='none'" />
           <b>LUXTECH<i>.</i>INNOVATION</b>
         </a>
@@ -110,7 +113,7 @@
           <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
         </div>
         <div class="lang" id="lang">
-          <button class="lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+          <button class="lang-btn magnetic" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language" data-cursor>
             <span id="langCurrent">EN</span>
             <svg class="chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
           </button>
@@ -132,27 +135,26 @@
     <div class="wrap">
       <div class="subbar">
         <a class="backlink" href="index.html#solutions"><span class="ar" aria-hidden="true">←</span><span data-i18n="back_to_services">Back to services</span></a>
-        <span class="notice" role="status"><span class="g" aria-hidden="true"></span><span class="nt"></span></span>
       </div>
     </div>
 
     <!-- HERO -->
     <section class="page-hero">
       <div class="wrap">
-        <span class="eyebrow reveal"><span class="code">S/02</span><span>Applied AI</span></span>
-        <h1 class="reveal">Applied AI for work that <span class="gold">actually needs improving</span>.</h1>
-        <p class="lead reveal">We identify useful AI and automation opportunities, build practical implementations, and integrate them into the way your organisation already works. No AI for its own sake — the goal is measurable value, with a human still accountable for the result.</p>
+        <span class="eyebrow reveal"><span class="code">S/02</span><span data-i18n="ai_hero_eyebrow">Applied AI</span></span>
+        <h1 class="reveal"><span data-i18n="ai_hero_title_prefix">Applied AI for work that</span> <span class="gold" data-i18n="ai_hero_title_gold">actually needs improving</span>.</h1>
+        <p class="lead reveal" data-i18n="ai_hero_lead">We identify useful AI and automation opportunities, build practical implementations, and integrate them into the way your organisation already works. No AI for its own sake: the goal is measurable value, with a human still accountable for the result.</p>
         <div class="hero-cta reveal">
-          <a href="#contact" class="btn btn-primary">Discuss your project <span class="arr">→</span></a>
-          <a href="#experience" class="btn btn-ghost">See relevant experience</a>
+          <a href="#contact" class="btn btn-primary magnetic" data-cursor><span data-i18n="ai_hero_cta1">Discuss your project</span> <span class="arr">→</span></a>
+          <a href="#experience" class="btn btn-ghost magnetic" data-cursor data-i18n="ai_hero_cta2">See relevant experience</a>
         </div>
 
         <!-- PROOF STRIP -->
         <div class="proof cols-4 reveal" role="list" aria-label="Automation track record at a glance">
-          <div class="p" role="listitem"><span class="n">€150K+</span><span class="l">Savings from a process platform</span></div>
-          <div class="p" role="listitem"><span class="n">108→1</span><span class="l">Deployment sequences consolidated</span></div>
-          <div class="p" role="listitem"><span class="n">200+</span><span class="l">Apps in a self-service shop</span></div>
-          <div class="p" role="listitem"><span class="n">11</span><span class="l">Sites served by one automation</span></div>
+          <div class="p" role="listitem"><span class="n">€150K+</span><span class="l" data-i18n="ai_proof_1">Savings from a process platform</span></div>
+          <div class="p" role="listitem"><span class="n">108→1</span><span class="l" data-i18n="ai_proof_2">Deployment sequences consolidated</span></div>
+          <div class="p" role="listitem"><span class="n">200+</span><span class="l" data-i18n="ai_proof_3">Apps in a self-service shop</span></div>
+          <div class="p" role="listitem"><span class="n">11</span><span class="l" data-i18n="ai_proof_4">Sites served by one automation</span></div>
         </div>
       </div>
     </section>
@@ -161,16 +163,16 @@
     <section class="sec">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">A</span><span>Be clear about the tool</span></div>
-          <h2 class="sec-title">AI, automation, or both?</h2>
-          <p class="sec-intro">Not every automation project is an AI project — and treating it that way wastes money and adds risk. We choose the simplest tool that fits the work.</p>
+          <div class="sec-eyebrow"><span class="code">A</span><span data-i18n="ai_tool_eyebrow">Be clear about the tool</span></div>
+          <h2 class="sec-title" data-i18n="ai_tool_title">AI, automation, or both?</h2>
+          <p class="sec-intro" data-i18n="ai_tool_intro">Not every automation project is an AI project, and treating it that way wastes money and adds risk. We choose the simplest tool that fits the work.</p>
         </div>
         <div class="compare reveal">
-          <div class="c"><h3><span class="code">01</span>Automation</h3><p>Use it when the rules are stable and predictable. Deterministic steps, reliable and cheap to run — no model required.</p></div>
-          <div class="c"><h3><span class="code">02</span>AI</h3><p>Use it when the work needs interpretation, summarisation or flexible language understanding that fixed rules can’t capture.</p></div>
-          <div class="c"><h3><span class="code">03</span>Both</h3><p>Combine them when AI must feed a controlled business workflow — the model handles judgement, automation handles the reliable plumbing.</p></div>
+          <div class="c"><h3><span class="code">01</span><span data-i18n="ai_compare_1_title">Automation</span></h3><p data-i18n="ai_compare_1_desc">Use it when the rules are stable and predictable. Deterministic steps, reliable and cheap to run: no model required.</p></div>
+          <div class="c"><h3><span class="code">02</span><span data-i18n="ai_compare_2_title">AI</span></h3><p data-i18n="ai_compare_2_desc">Use it when the work needs interpretation, summarisation or flexible language understanding that fixed rules can’t capture.</p></div>
+          <div class="c"><h3><span class="code">03</span><span data-i18n="ai_compare_3_title">Both</span></h3><p data-i18n="ai_compare_3_desc">Combine them when AI must feed a controlled business workflow: the model handles judgement, automation handles the reliable plumbing.</p></div>
         </div>
-        <p class="sec-intro reveal">We also keep the categories distinct in delivery: deterministic automation, AI-assisted workflows, generative AI, and local or private AI models each have their place — and each gets human review and governance.</p>
+        <p class="sec-intro reveal" data-i18n="ai_tool_outro">We also keep the categories distinct in delivery: deterministic automation, AI-assisted workflows, generative AI, and local or private AI models each have their place, and each gets human review and governance.</p>
       </div>
     </section>
 
@@ -178,17 +180,18 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">B</span><span>Where we fit</span></div>
-          <h2 class="sec-title">You may need us when…</h2>
+          <div class="sec-eyebrow"><span class="code">B</span><span data-i18n="ai_fit_eyebrow">Where we fit</span></div>
+          <h2 class="sec-title" data-i18n="ai_fit_title">You may need us when…</h2>
         </div>
         <ul class="problems reveal">
-          <li>Employees repeatedly copy information between documents and systems by hand.</li>
-          <li>Reporting takes days of manual consolidation before anyone can act on it.</li>
-          <li>Teams have access to AI tools but no reliable model for actually implementing them.</li>
-          <li>Management wants AI but hasn’t identified a genuinely useful first use case.</li>
-          <li>Sensitive information makes public AI services unsuitable for the task.</li>
-          <li>A proof of concept exists but was never integrated into operational work.</li>
-          <li>Staff spend too much time searching, summarising, formatting or classifying information.</li>
+          <li data-i18n="ai_problem_1">Employees repeatedly copy information between documents and systems by hand.</li>
+          <li data-i18n="ai_problem_2">Reporting takes days of manual consolidation before anyone can act on it.</li>
+          <li data-i18n="ai_problem_3">Teams have access to AI tools but no reliable model for actually implementing them.</li>
+          <li data-i18n="ai_problem_4">Management wants AI but hasn’t identified a genuinely useful first use case.</li>
+          <li data-i18n="ai_problem_5">Sensitive information makes public AI services unsuitable for the task.</li>
+          <li data-i18n="ai_problem_6">A proof of concept exists but was never integrated into operational work.</li>
+          <li data-i18n="ai_problem_7">Staff spend too much time searching, summarising, formatting or classifying information.</li>
+          <li data-i18n="ai_problem_8">The same question gets answered from scratch every time because past answers live in someone's head, not a searchable system.</li>
         </ul>
       </div>
     </section>
@@ -197,25 +200,25 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">C</span><span>What we deliver</span></div>
-          <h2 class="sec-title">Practical AI &amp; automation you can commission.</h2>
+          <div class="sec-eyebrow"><span class="code">C</span><span data-i18n="ai_deliver_eyebrow">What we deliver</span></div>
+          <h2 class="sec-title" data-i18n="ai_deliver_title">Practical AI &amp; automation you can commission.</h2>
         </div>
         <ul class="deliver cols-3 reveal">
-          <li><b>Opportunity &amp; workflow discovery</b>Find where AI or automation would actually create value — and where it wouldn’t.</li>
-          <li><b>Process mapping</b>Document how work really flows before changing anything.</li>
-          <li><b>AI readiness assessment</b>An honest look at data, tooling and risk before you invest.</li>
-          <li><b>Document-processing workflows</b>Extract, interpret and route information from documents at volume.</li>
-          <li><b>Knowledge &amp; information assistants</b>Answer questions over your own material, reliably and traceably.</li>
-          <li><b>Internal copilots</b>Task-specific assistants built around one team’s real work.</li>
-          <li><b>Reporting &amp; summarisation</b>Turn days of manual consolidation into a repeatable step.</li>
-          <li><b>AI-assisted classification</b>Sort and tag information with a human check where it matters.</li>
-          <li><b>Local &amp; privacy-conscious agents</b>Keep sensitive data in-house with local or private models.</li>
-          <li><b>Integration with your processes</b>Wire AI output into the systems and steps you already run.</li>
-          <li><b>Prompt &amp; workflow design</b>Design the prompts and flows, then test them against real cases.</li>
-          <li><b>Prototype &amp; proof of concept</b>Prove value on a small scope before committing to more.</li>
-          <li><b>Human-in-the-loop review</b>Keep a person accountable at the points that carry risk.</li>
-          <li><b>Governance &amp; adoption planning</b>Risk, access and rollout planned so the tool is actually used.</li>
-          <li><b>Training &amp; enablement</b>Practical hand-holding so your team can run it without us.</li>
+          <li><b data-i18n="ai_deliver_1_title">Opportunity &amp; workflow discovery</b><span data-i18n="ai_deliver_1_desc">Find where AI or automation would actually create value, and where it wouldn’t.</span></li>
+          <li><b data-i18n="ai_deliver_2_title">Process mapping</b><span data-i18n="ai_deliver_2_desc">Document how work really flows before changing anything.</span></li>
+          <li><b data-i18n="ai_deliver_3_title">AI readiness assessment</b><span data-i18n="ai_deliver_3_desc">An honest look at data, tooling and risk before you invest.</span></li>
+          <li><b data-i18n="ai_deliver_4_title">Document-processing workflows</b><span data-i18n="ai_deliver_4_desc">Extract, interpret and route information from documents at volume.</span></li>
+          <li><b data-i18n="ai_deliver_5_title">Knowledge &amp; information assistants</b><span data-i18n="ai_deliver_5_desc">Answer questions over your own material, reliably and traceably.</span></li>
+          <li><b data-i18n="ai_deliver_6_title">Internal copilots</b><span data-i18n="ai_deliver_6_desc">Task-specific assistants built around one team’s real work.</span></li>
+          <li><b data-i18n="ai_deliver_7_title">Reporting &amp; summarisation</b><span data-i18n="ai_deliver_7_desc">Turn days of manual consolidation into a repeatable step.</span></li>
+          <li><b data-i18n="ai_deliver_8_title">AI-assisted classification</b><span data-i18n="ai_deliver_8_desc">Sort and tag information with a human check where it matters.</span></li>
+          <li><b data-i18n="ai_deliver_9_title">Local &amp; privacy-conscious agents</b><span data-i18n="ai_deliver_9_desc">Keep sensitive data in-house with local or private models.</span></li>
+          <li><b data-i18n="ai_deliver_10_title">Integration with your processes</b><span data-i18n="ai_deliver_10_desc">Wire AI output into the systems and steps you already run.</span></li>
+          <li><b data-i18n="ai_deliver_11_title">Prompt &amp; workflow design</b><span data-i18n="ai_deliver_11_desc">Design the prompts and flows, then test them against real cases.</span></li>
+          <li><b data-i18n="ai_deliver_12_title">Prototype &amp; proof of concept</b><span data-i18n="ai_deliver_12_desc">Prove value on a small scope before committing to more.</span></li>
+          <li><b data-i18n="ai_deliver_13_title">Human-in-the-loop review</b><span data-i18n="ai_deliver_13_desc">Keep a person accountable at the points that carry risk.</span></li>
+          <li><b data-i18n="ai_deliver_14_title">Governance &amp; adoption planning</b><span data-i18n="ai_deliver_14_desc">Risk, access and rollout planned so the tool is actually used.</span></li>
+          <li><b data-i18n="ai_deliver_15_title">Training &amp; enablement</b><span data-i18n="ai_deliver_15_desc">Practical hand-holding so your team can run it without us.</span></li>
         </ul>
       </div>
     </section>
@@ -224,46 +227,46 @@
     <section class="sec" id="experience" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">D</span><span>Selected experience</span></div>
-          <h2 class="sec-title">Automation that produced a measurable result.</h2>
-          <p class="sec-intro">A note on honesty: we label work as <em>automation</em> unless AI was explicitly part of it. The value came from removing repetitive work, not from a buzzword.</p>
+          <div class="sec-eyebrow"><span class="code">D</span><span data-i18n="ai_exp_eyebrow">Selected experience</span></div>
+          <h2 class="sec-title" data-i18n="ai_exp_title">Automation that produced a measurable result.</h2>
+          <p class="sec-intro"><span data-i18n="ai_exp_intro_1">A note on honesty: we label work as</span> <em data-i18n="ai_exp_intro_em">automation</em> <span data-i18n="ai_exp_intro_2">unless AI was explicitly part of it. The value came from removing repetitive work, not from a buzzword.</span></p>
         </div>
 
         <!-- Case study 1 — AI-assisted delivery -->
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">AI-assisted delivery · <b>Human-owned</b></span>
-              <h3>AI-assisted product delivery</h3>
+              <span class="kicker"><span data-i18n="ai_case1_kicker">AI-assisted delivery ·</span> <b data-i18n="ai_case1_kicker_b">Human-owned</b></span>
+              <h3 data-i18n="ai_case1_heading">AI-assisted product delivery</h3>
             </div>
-            <span class="status">Ongoing practice</span>
+            <span class="status" data-i18n="ai_case1_status">Ongoing practice</span>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>Modern AI coding tools can accelerate delivery — but only if someone stays accountable for correctness, security and integration.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>LuXTech uses Claude, ChatGPT, Gemini and locally hosted coding agents inside a controlled development workflow. We remain responsible for requirements, architecture decisions, technical specifications, prompt design, code review, integration, testing, debugging, security-minded implementation and production troubleshooting.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>MetroBUC is live evidence that AI-assisted workflows can support a real production product — when they are paired with human ownership and real testing.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Prompt design</span><span>Code review</span><span>Local agents</span><span>Testing</span><span>Security-minded delivery</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_situation">Situation</span><p data-i18n="ai_case1_situation">Modern AI coding tools can accelerate delivery, but only if someone stays accountable for correctness, security and integration.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_work">Work delivered</span><p data-i18n="ai_case1_work">LuXTech uses Claude, ChatGPT, Gemini and locally hosted coding agents inside a controlled development workflow. We remain responsible for requirements, architecture decisions, technical specifications, prompt design, code review, integration, testing, debugging, security-minded implementation and production troubleshooting.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_outcome">Outcome</span><p data-i18n="ai_case1_outcome">MetroBUC is live evidence that AI-assisted workflows can support a real production product, when they are paired with human ownership and real testing.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="ai_case1_cap1">Prompt design</span><span data-i18n="ai_case1_cap2">Code review</span><span data-i18n="ai_case1_cap3">Local agents</span><span data-i18n="ai_case1_cap4">Testing</span><span data-i18n="ai_case1_cap5">Security-minded delivery</span></div></div>
           </div>
-          <a class="ext" href="software-development.html#experience">See MetroBUC as a software case study <span aria-hidden="true">→</span></a>
+          <a class="ext" href="software-development.html#experience"><span data-i18n="ai_case1_ext">See MetroBUC as a software case study</span> <span aria-hidden="true">→</span></a>
         </article>
 
         <!-- Case study 2 — Continuous Improvement Platform -->
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Process automation · <b>Measurable savings</b></span>
-              <h3>Continuous Improvement Platform</h3>
+              <span class="kicker"><span data-i18n="ai_case2_kicker">Process automation ·</span> <b data-i18n="ai_case2_kicker_b">Measurable savings</b></span>
+              <h3 data-i18n="ai_case2_heading">Continuous Improvement Platform</h3>
             </div>
-            <span class="status">Automation</span>
+            <span class="status" data-i18n="ai_case2_status">Automation</span>
           </div>
           <div class="metrics">
-            <div class="m"><span class="n">€150K+</span><span class="t">Cost savings generated</span></div>
+            <div class="m"><span class="n">€150K+</span><span class="t" data-i18n="ai_case2_metric1">Cost savings generated</span></div>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>Improvement ideas across a large delivery organisation were scattered and rarely turned into measurable savings.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>Designed and implemented a proprietary gamified Continuous Improvement Platform that captured grassroots ideas and turned them into a tracked savings engine.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Generated more than €150,000 in cost savings. We present this as process-automation and measurable-improvement experience — not as an AI solution.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Process design</span><span>Automation</span><span>Measurement</span><span>Adoption</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_situation">Situation</span><p data-i18n="ai_case2_situation">Improvement ideas across a large delivery organisation were scattered and rarely turned into measurable savings.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_work">Work delivered</span><p data-i18n="ai_case2_work">Designed and implemented a proprietary gamified Continuous Improvement Platform that captured grassroots ideas and turned them into a tracked savings engine.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_outcome">Outcome</span><p data-i18n="ai_case2_outcome">Generated more than €150,000 in cost savings. We present this as process-automation and measurable-improvement experience, not as an AI solution.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="ai_case2_cap1">Process design</span><span data-i18n="ai_case2_cap2">Automation</span><span data-i18n="ai_case2_cap3">Measurement</span><span data-i18n="ai_case2_cap4">Adoption</span></div></div>
           </div>
         </article>
 
@@ -271,21 +274,21 @@
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Deployment automation · <b>Scalable</b></span>
-              <h3>Deployment automation</h3>
+              <span class="kicker"><span data-i18n="ai_case3_kicker">Deployment automation ·</span> <b data-i18n="ai_case3_kicker_b">Scalable</b></span>
+              <h3 data-i18n="ai_case3_heading">Deployment automation</h3>
             </div>
-            <span class="status">Automation</span>
+            <span class="status" data-i18n="ai_case3_status">Automation</span>
           </div>
           <div class="metrics">
-            <div class="m"><span class="n">108→1</span><span class="t">Task sequences</span></div>
-            <div class="m"><span class="n">11</span><span class="t">Sites supported</span></div>
-            <div class="m"><span class="n">200+</span><span class="t">Apps in self-service shop</span></div>
+            <div class="m"><span class="n">108→1</span><span class="t" data-i18n="ai_case3_metric1">Task sequences</span></div>
+            <div class="m"><span class="n">11</span><span class="t" data-i18n="ai_case3_metric2">Sites supported</span></div>
+            <div class="m"><span class="n">200+</span><span class="t" data-i18n="ai_case3_metric3">Apps in self-service shop</span></div>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>Software deployment relied on 108 separate task sequences — repetitive, error-prone and hard to maintain across sites.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>Consolidated 108 separate deployment task sequences into one universal, location-aware automated deployment supporting 11 sites, plus a self-service application shop containing 200+ applications.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Repetitive technical work was replaced with scalable automation that teams could self-serve — clear evidence of spotting repetition and engineering it away.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Deployment automation</span><span>Standardisation</span><span>Self-service</span><span>Multi-site</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_situation">Situation</span><p data-i18n="ai_case3_situation">Software deployment relied on 108 separate task sequences: repetitive, error-prone and hard to maintain across sites.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_work">Work delivered</span><p data-i18n="ai_case3_work">Consolidated 108 separate deployment task sequences into one universal, location-aware automated deployment supporting 11 sites, plus a self-service application shop containing 200+ applications.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_outcome">Outcome</span><p data-i18n="ai_case3_outcome">Repetitive technical work was replaced with scalable automation that teams could self-serve, clear evidence of spotting repetition and engineering it away.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="ai_case3_cap1">Deployment automation</span><span data-i18n="ai_case3_cap2">Standardisation</span><span data-i18n="ai_case3_cap3">Self-service</span><span data-i18n="ai_case3_cap4">Multi-site</span></div></div>
           </div>
         </article>
 
@@ -293,16 +296,16 @@
         <article class="study reveal">
           <div class="study-head">
             <div>
-              <span class="kicker">Administrative automation · <b>Time recovered</b></span>
-              <h3>Onboarding-process automation</h3>
+              <span class="kicker"><span data-i18n="ai_case4_kicker">Administrative automation ·</span> <b data-i18n="ai_case4_kicker_b">Time recovered</b></span>
+              <h3 data-i18n="ai_case4_heading">Onboarding-process automation</h3>
             </div>
-            <span class="status">Automation</span>
+            <span class="status" data-i18n="ai_case4_status">Automation</span>
           </div>
           <div class="study-grid">
-            <div class="cell"><span class="lbl">Situation</span><p>Employee onboarding involved recurring manual steps that consumed staff time every cycle.</p></div>
-            <div class="cell"><span class="lbl">Work delivered</span><p>Automated an employee onboarding workflow, eliminating recurring manual work.</p></div>
-            <div class="cell"><span class="lbl">Outcome</span><p>Freed several days of staff effort. Labelled as automation experience — a clean example of removing manual toil.</p></div>
-            <div class="cell"><span class="lbl">Relevant capabilities</span><div class="caps"><span>Workflow automation</span><span>Admin processes</span><span>Time recovery</span></div></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_situation">Situation</span><p data-i18n="ai_case4_situation">Employee onboarding involved recurring manual steps that consumed staff time every cycle.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_work">Work delivered</span><p data-i18n="ai_case4_work">Automated an employee onboarding workflow, eliminating recurring manual work.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_outcome">Outcome</span><p data-i18n="ai_case4_outcome">Freed several days of staff effort. Labelled as automation experience: a clean example of removing manual toil.</p></div>
+            <div class="cell"><span class="lbl" data-i18n="ai_lbl_caps">Relevant capabilities</span><div class="caps"><span data-i18n="ai_case4_cap1">Workflow automation</span><span data-i18n="ai_case4_cap2">Admin processes</span><span data-i18n="ai_case4_cap3">Time recovery</span></div></div>
           </div>
         </article>
       </div>
@@ -312,17 +315,17 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">E</span><span>Responsible implementation</span></div>
-          <h2 class="sec-title">AI you can put your name to.</h2>
-          <p class="sec-intro">Practical AI has to be defensible as well as useful. We build with these principles in place from the start.</p>
+          <div class="sec-eyebrow"><span class="code">E</span><span data-i18n="ai_resp_eyebrow">Responsible implementation</span></div>
+          <h2 class="sec-title" data-i18n="ai_resp_title">AI you can put your name to.</h2>
+          <p class="sec-intro" data-i18n="ai_resp_intro">Practical AI has to be defensible as well as useful. We build with these principles in place from the start.</p>
         </div>
         <ul class="principles reveal">
-          <li>Data minimisation — only what the task genuinely needs.</li>
-          <li>Human review at the points that carry risk.</li>
-          <li>Traceability — you can see why an output was produced.</li>
-          <li>Access control over data and models.</li>
-          <li>Realistic performance expectations, tested against real cases.</li>
-          <li>Avoiding unnecessary AI where a simpler tool is safer.</li>
+          <li data-i18n="ai_principle_1">Data minimisation: only what the task genuinely needs.</li>
+          <li data-i18n="ai_principle_2">Human review at the points that carry risk.</li>
+          <li data-i18n="ai_principle_3">Traceability: you can see why an output was produced.</li>
+          <li data-i18n="ai_principle_4">Access control over data and models.</li>
+          <li data-i18n="ai_principle_5">Realistic performance expectations, tested against real cases.</li>
+          <li data-i18n="ai_principle_6">Avoiding unnecessary AI where a simpler tool is safer.</li>
         </ul>
       </div>
     </section>
@@ -331,21 +334,21 @@
     <section class="sec" style="padding-top:0;">
       <div class="wrap">
         <div class="reveal">
-          <div class="sec-eyebrow"><span class="code">F</span><span>How an engagement works</span></div>
-          <h2 class="sec-title">From use case to working tool.</h2>
+          <div class="sec-eyebrow"><span class="code">F</span><span data-i18n="ai_engage_eyebrow">How an engagement works</span></div>
+          <h2 class="sec-title" data-i18n="ai_engage_title">From use case to working tool.</h2>
         </div>
         <div class="engage reveal">
-          <div class="step"><span class="no">01</span><h3>Discovery</h3><p>We map the workflow and find where AI or automation genuinely helps — and where it doesn’t.</p></div>
-          <div class="step"><span class="no">02</span><h3>Scope &amp; recommendation</h3><p>A recommended approach — automation, AI, or both — with scope, risk and a realistic outcome.</p></div>
-          <div class="step"><span class="no">03</span><h3>Implementation</h3><p>We build a working implementation and integrate it into your existing processes.</p></div>
-          <div class="step"><span class="no">04</span><h3>Testing &amp; acceptance</h3><p>Tested against real cases, with human-in-the-loop review where it matters.</p></div>
-          <div class="step"><span class="no">05</span><h3>Handover &amp; enablement</h3><p>Governance, documentation and training so your team can run it with confidence.</p></div>
+          <div class="step"><span class="no">01</span><h3 data-i18n="ai_step1_title">Discovery</h3><p data-i18n="ai_step1_desc">We map the workflow and find where AI or automation genuinely helps, and where it doesn’t.</p></div>
+          <div class="step"><span class="no">02</span><h3 data-i18n="ai_step2_title">Scope &amp; recommendation</h3><p data-i18n="ai_step2_desc">A recommended approach (automation, AI, or both) with scope, risk and a realistic outcome.</p></div>
+          <div class="step"><span class="no">03</span><h3 data-i18n="ai_step3_title">Implementation</h3><p data-i18n="ai_step3_desc">We build a working implementation and integrate it into your existing processes.</p></div>
+          <div class="step"><span class="no">04</span><h3 data-i18n="ai_step4_title">Testing &amp; acceptance</h3><p data-i18n="ai_step4_desc">Tested against real cases, with human-in-the-loop review where it matters.</p></div>
+          <div class="step"><span class="no">05</span><h3 data-i18n="ai_step5_title">Handover &amp; enablement</h3><p data-i18n="ai_step5_desc">Governance, documentation and training so your team can run it with confidence.</p></div>
         </div>
 
         <!-- Sibling services -->
         <div class="siblings reveal">
-          <a href="software-development.html"><span class="ix">S/01</span><span>Custom Software</span> <span aria-hidden="true">→</span></a>
-          <a href="project-delivery.html"><span class="ix">S/03</span><span>Project Delivery</span> <span aria-hidden="true">→</span></a>
+          <a href="software-development.html"><span class="ix">S/01</span><span data-i18n="ai_sibling_sw">Custom Software</span> <span aria-hidden="true">→</span></a>
+          <a href="project-delivery.html"><span class="ix">S/03</span><span data-i18n="ai_sibling_pm">Project Delivery</span> <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -354,11 +357,11 @@
     <section class="sec contact" id="contact" style="padding-top:0;">
       <div class="wrap">
         <div class="sec-eyebrow reveal"><span class="code">G</span><span data-i18n="nav_contact">Contact</span></div>
-        <h2 class="reveal" style="margin-top:1.4rem;">Let’s turn the idea into a workable plan.</h2>
-        <a href="mailto:contact@lxtech.ro?subject=AI%20implementation%20enquiry" class="email reveal">contact@lxtech.ro <span class="arr mono">↗</span></a>
-        <p class="sub reveal">Tell us where the repetitive or manual work is. We’ll say honestly whether AI, automation, or a mix is the right answer — and what a useful first step looks like.</p>
+        <h2 class="reveal" style="margin-top:1.4rem;" data-i18n="ai_contact_title">Let’s turn the idea into a workable plan.</h2>
+        <a href="mailto:contact@lxtech.ro?subject=AI%20implementation%20enquiry" class="email reveal magnetic" data-cursor>contact@lxtech.ro <span class="arr mono">↗</span></a>
+        <p class="sub reveal" data-i18n="ai_contact_sub">Tell us where the repetitive or manual work is. We’ll say honestly whether AI, automation, or a mix is the right answer, and what a useful first step looks like.</p>
         <div class="reveal" style="margin-top:2.2rem;">
-          <a href="mailto:contact@lxtech.ro?subject=AI%20implementation%20enquiry" class="btn btn-primary">Discuss your project <span class="arr">→</span></a>
+          <a href="mailto:contact@lxtech.ro?subject=AI%20implementation%20enquiry" class="btn btn-primary magnetic" data-cursor><span data-i18n="ai_hero_cta1">Discuss your project</span> <span class="arr">→</span></a>
         </div>
       </div>
     </section>
@@ -372,8 +375,10 @@
     </div>
   </footer>
 
+  <script src="applied-ai.i18n.js" defer></script>
   <script src="services.js" defer></script>
   <script src="aurora.js" defer></script>
+  <script src="cursor.js" defer></script>
 
   <!-- Music Toggle Button -->
   <audio id="bg-music" src="audio/Calculated_Calm.mp3" loop preload="auto"></audio>

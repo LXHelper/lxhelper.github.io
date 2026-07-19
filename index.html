@@ -253,6 +253,19 @@
     .more:hover { gap: .85rem; color: #8fb0ff; } .more .pl { color: var(--gold); }
     .more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
+    /* ---- Service card as link (stretched-link pattern) ---- */
+    .svc { position: relative; }
+    .svc h3 a.svc-link { color: inherit; transition: color .25s; }
+    .svc h3 a.svc-link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 8px; }
+    .svc h3 a.svc-link:focus-visible { outline: none; }
+    .svc h3 a.svc-link:focus-visible::after { outline: 2px solid var(--gold); outline-offset: 6px; }
+    .svc:hover h3 a.svc-link { color: var(--gold); }
+    .svc-actions { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 2; pointer-events: none; }
+    .svc .more { position: relative; z-index: 2; pointer-events: auto; }
+    .svc-explore { font-family: var(--m); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: inline-flex; align-items: center; gap: .5rem; transition: color .25s, gap .25s; }
+    .svc:hover .svc-explore { color: var(--gold); gap: .85rem; }
+    .svc-explore .ar { color: var(--gold); }
+
     /* ---- About ---- */
     .about-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
     .about-statement { font-family: var(--d); font-weight: 500; font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.18; letter-spacing: -0.015em; max-width: 20ch; }
@@ -425,34 +438,43 @@
 
       <article class="svc reveal" data-cursor>
         <div class="ix">01</div>
-        <h3 data-i18n="sol_mobile_title"></h3>
+        <h3><a class="svc-link" href="software-development.html" data-i18n="sol_mobile_title"></a></h3>
         <div>
           <p class="body" data-i18n="sol_mobile_desc"></p>
-          <div class="chips"><span class="chip">Windows</span><span class="chip">Android</span><span class="chip">Kotlin</span></div>
+          <div class="chips"><span class="chip">Windows</span><span class="chip">macOS</span><span class="chip">Android</span><span class="chip">iOS</span></div>
           <div id="m1" class="collapsible"><div><p class="body" style="margin-top:.2rem" data-i18n="sol_mobile_more"></p></div></div>
-          <button id="b1" class="more" type="button"><span class="pl">+</span><span></span></button>
+          <div class="svc-actions">
+            <button id="b1" class="more" type="button"><span class="pl">+</span><span></span></button>
+            <span class="svc-explore" aria-hidden="true"><span data-i18n="explore_service"></span><span class="ar">→</span></span>
+          </div>
         </div>
       </article>
 
       <article class="svc reveal" data-cursor>
         <div class="ix">02</div>
-        <h3 data-i18n="sol_ai_title"></h3>
+        <h3><a class="svc-link" href="applied-ai.html" data-i18n="sol_ai_title"></a></h3>
         <div>
           <p class="body" data-i18n="sol_ai_desc"></p>
           <div class="chips"><span class="chip">Automation</span><span class="chip">Local agents</span><span class="chip">Workflows</span></div>
           <div id="m2" class="collapsible"><div><p class="body" style="margin-top:.2rem" data-i18n="sol_ai_more"></p></div></div>
-          <button id="b2" class="more" type="button"><span class="pl">+</span><span></span></button>
+          <div class="svc-actions">
+            <button id="b2" class="more" type="button"><span class="pl">+</span><span></span></button>
+            <span class="svc-explore" aria-hidden="true"><span data-i18n="explore_service"></span><span class="ar">→</span></span>
+          </div>
         </div>
       </article>
 
       <article class="svc reveal" data-cursor>
         <div class="ix">03</div>
-        <h3 data-i18n="sol_custom_title"></h3>
+        <h3><a class="svc-link" href="project-delivery.html" data-i18n="sol_custom_title"></a></h3>
         <div>
           <p class="body" data-i18n="sol_custom_desc"></p>
-          <div class="chips"><span class="chip">Scrum</span><span class="chip">SAFe</span><span class="chip">PM²</span><span class="chip">PRINCE2</span></div>
+          <div class="chips"><span class="chip">Scrum</span><span class="chip">Kanban</span><span class="chip">SAFe</span><span class="chip">PM²</span><span class="chip">PRINCE2</span></div>
           <div id="m3" class="collapsible"><div><p class="body" style="margin-top:.2rem" data-i18n="sol_custom_more"></p></div></div>
-          <button id="b3" class="more" type="button"><span class="pl">+</span><span></span></button>
+          <div class="svc-actions">
+            <button id="b3" class="more" type="button"><span class="pl">+</span><span></span></button>
+            <span class="svc-explore" aria-hidden="true"><span data-i18n="explore_service"></span><span class="ar">→</span></span>
+          </div>
         </div>
       </article>
     </div>
@@ -558,15 +580,15 @@
         hero_cta:'Start a project', hero_cta2:'See what we do',
         scroll_cue:'Scroll',
         solutions_title:'What we build',
-        sol_mobile_title:'Mobile & Desktop Applications',
-        sol_mobile_desc:'Intuitive, scalable applications for Windows and Android, shaped around your workflows.',
+        sol_mobile_title:'Software',
+        sol_mobile_desc:'Intuitive, scalable applications for Windows, macOS, Android and iOS, shaped around your workflows.',
         sol_mobile_more:'Performance, security, and a seamless experience tuned to your internal and external processes, from first prototype to production release.',
         sol_ai_title:'Applied AI',
         sol_ai_desc:'Artificial intelligence and automation that streamline operations, cut errors, and raise output.',
         sol_ai_more:'Custom solutions that turn data and intelligent algorithms into fast, reliable business decisions at scale, kept practical and measurable.',
         sol_custom_title:'Project Delivery',
         sol_custom_desc:'Efficient delivery for projects of any complexity, with full control over scope, time, and budget.',
-        sol_custom_more:'We apply the right methodology, Agile (Scrum, Kanban, SAFe) or classic Waterfall (PM², PRINCE2, PMP), and keep timelines and budgets under tight control throughout.',
+        sol_custom_more:'We apply the right methodology, Agile (Scrum, Kanban, SAFe) or classic Waterfall (PM², PRINCE2, PMP), and keep timelines and budgets under tight control throughout, using a wide array of tools (Mural, Klaxoon, Confluence and others) to fit how your team already collaborates.',
         about_title:'Who we are',
         about_desc:'LuXTech Innovation is a Romanian studio, founded in 2024, that turns curious observations into clear, efficient digital systems.',
         about_extra_1:'We explore, decode, and build technologies that simplify, automate, and amplify what a business can do. Whatever your field, we turn ideas into working software that supports long-term growth.',
@@ -574,7 +596,8 @@
         contact_title:'Let’s build something.',
         contact_sub:'Tell us what you’re working on. We reply to every serious enquiry.',
         contact_button:'Start the conversation',
-        expand_more:'Read more', expand_less:'Close'
+        expand_more:'Read more', expand_less:'Close',
+        explore_service:'Explore service'
       },
       ro: {
         nav_home:'Acasă', nav_solutions:'Soluții', nav_about:'Companie', nav_contact:'Contact',
@@ -585,15 +608,15 @@
         hero_cta:'Începe un proiect', hero_cta2:'Vezi ce facem',
         scroll_cue:'Derulează',
         solutions_title:'Ce construim',
-        sol_mobile_title:'Aplicații Mobile și Desktop',
-        sol_mobile_desc:'Aplicații intuitive și scalabile pentru Windows și Android, adaptate fluxurilor tale de lucru.',
+        sol_mobile_title:'Software',
+        sol_mobile_desc:'Aplicații intuitive și scalabile pentru Windows, macOS, Android și iOS, adaptate fluxurilor tale de lucru.',
         sol_mobile_more:'Performanță, securitate și o experiență fluidă, integrate eficient în procesele tale interne și externe, de la primul prototip până la lansarea în producție.',
         sol_ai_title:'AI Aplicat',
         sol_ai_desc:'Inteligență artificială și automatizări care optimizează procesele, reduc erorile și cresc productivitatea.',
         sol_ai_more:'Soluții personalizate care transformă datele și algoritmii inteligenți în decizii rapide și sigure, la scară, păstrate practice și măsurabile.',
         sol_custom_title:'Management de Proiect',
         sol_custom_desc:'Livrare eficientă pentru proiecte de orice complexitate, cu control deplin asupra scopului, timpului și bugetului.',
-        sol_custom_more:'Aplicăm metodologia potrivită, Agile (Scrum, Kanban, SAFe) sau Waterfall clasic (PM², PRINCE2, PMP), și menținem termenele și bugetele sub control strict pe tot parcursul.',
+        sol_custom_more:'Aplicăm metodologia potrivită, Agile (Scrum, Kanban, SAFe) sau Waterfall clasic (PM², PRINCE2, PMP), și menținem termenele și bugetele sub control strict pe tot parcursul, folosind o gamă largă de instrumente (Mural, Klaxoon, Confluence și altele) adaptate modului în care echipa ta colaborează deja.',
         about_title:'Cine suntem',
         about_desc:'LuXTech Innovation este un studio românesc, înființat în 2024, care transformă observațiile curioase în sisteme digitale clare și eficiente.',
         about_extra_1:'Investigăm, decodăm și dezvoltăm tehnologii care simplifică, automatizează și amplifică ce poate face o afacere. Indiferent de domeniu, transformăm ideile în software funcțional care susține creșterea pe termen lung.',
@@ -601,7 +624,8 @@
         contact_title:'Hai să construim ceva.',
         contact_sub:'Spune-ne la ce lucrezi. Răspundem fiecărei solicitări serioase.',
         contact_button:'Începe conversația',
-        expand_more:'Citește mai mult', expand_less:'Închide'
+        expand_more:'Citește mai mult', expand_less:'Închide',
+        explore_service:'Explorează serviciul'
       },
       fr: {
         nav_home:'Accueil', nav_solutions:'Solutions', nav_about:'Société', nav_contact:'Contact',
@@ -612,15 +636,15 @@
         hero_cta:'Démarrer un projet', hero_cta2:'Nos services',
         scroll_cue:'Défiler',
         solutions_title:'Ce que nous construisons',
-        sol_mobile_title:'Applications Mobiles et Bureautiques',
-        sol_mobile_desc:'Des applications intuitives et évolutives pour Windows et Android, adaptées à vos flux de travail.',
+        sol_mobile_title:'Logiciel',
+        sol_mobile_desc:'Des applications intuitives et évolutives pour Windows, macOS, Android et iOS, adaptées à vos flux de travail.',
         sol_mobile_more:'Performance, sécurité et expérience fluide, intégrées à vos processus internes et externes, du premier prototype à la mise en production.',
         sol_ai_title:'IA Appliquée',
         sol_ai_desc:'Intelligence artificielle et automatisation qui optimisent les processus, réduisent les erreurs et augmentent la productivité.',
         sol_ai_more:'Des solutions sur mesure qui transforment les données et les algorithmes intelligents en décisions rapides et fiables, à grande échelle.',
         sol_custom_title:'Gestion de Projet',
         sol_custom_desc:'Une livraison efficace pour des projets de toute complexité, avec un contrôle total des délais et des budgets.',
-        sol_custom_more:'Nous appliquons la bonne méthodologie, Agile (Scrum, Kanban, SAFe) ou Waterfall (PM², PRINCE2), en gardant délais et budgets sous contrôle strict.',
+        sol_custom_more:'Nous appliquons la bonne méthodologie, Agile (Scrum, Kanban, SAFe) ou Waterfall (PM², PRINCE2), en gardant délais et budgets sous contrôle strict, avec un large éventail d’outils (Mural, Klaxoon, Confluence et autres) adaptés à la façon dont votre équipe collabore déjà.',
         about_title:'Qui nous sommes',
         about_desc:'LuXTech Innovation est un studio roumain, fondé en 2024, qui transforme des observations curieuses en systèmes numériques clairs et efficaces.',
         about_extra_1:'Quel que soit votre domaine, nous transformons vos idées en logiciels fonctionnels qui soutiennent une croissance durable.',
@@ -628,7 +652,8 @@
         contact_title:'Construisons ensemble.',
         contact_sub:'Parlez-nous de votre projet. Nous répondons à chaque demande sérieuse.',
         contact_button:'Démarrer la conversation',
-        expand_more:'Lire la suite', expand_less:'Fermer'
+        expand_more:'Lire la suite', expand_less:'Fermer',
+        explore_service:'Découvrir le service'
       },
       de: {
         nav_home:'Start', nav_solutions:'Lösungen', nav_about:'Unternehmen', nav_contact:'Kontakt',
@@ -639,15 +664,15 @@
         hero_cta:'Projekt starten', hero_cta2:'Was wir tun',
         scroll_cue:'Scrollen',
         solutions_title:'Was wir bauen',
-        sol_mobile_title:'Mobile & Desktop-Anwendungen',
-        sol_mobile_desc:'Intuitive, skalierbare Anwendungen für Windows und Android, abgestimmt auf Ihre Arbeitsabläufe.',
+        sol_mobile_title:'Software',
+        sol_mobile_desc:'Intuitive, skalierbare Anwendungen für Windows, macOS, Android und iOS, abgestimmt auf Ihre Arbeitsabläufe.',
         sol_mobile_more:'Leistung, Sicherheit und ein nahtloses Erlebnis, integriert in Ihre internen und externen Prozesse, vom ersten Prototyp bis zur Produktion.',
         sol_ai_title:'Angewandte KI',
         sol_ai_desc:'Künstliche Intelligenz und Automatisierung, die Prozesse optimieren, Fehler reduzieren und die Produktivität steigern.',
         sol_ai_more:'Maßgeschneiderte Lösungen, die Daten und intelligente Algorithmen in schnelle, verlässliche Entscheidungen verwandeln, praxisnah und messbar.',
         sol_custom_title:'Projektmanagement',
         sol_custom_desc:'Effiziente Umsetzung für Projekte jeder Komplexität, mit voller Kontrolle über Zeit und Budget.',
-        sol_custom_more:'Wir setzen die passende Methodik ein, Agile (Scrum, Kanban, SAFe) oder klassisch (PM², PRINCE2), und halten Zeitpläne und Budgets unter strenger Kontrolle.',
+        sol_custom_more:'Wir setzen die passende Methodik ein, Agile (Scrum, Kanban, SAFe) oder klassisch (PM², PRINCE2), und halten Zeitpläne und Budgets unter strenger Kontrolle, mit einer breiten Auswahl an Tools (Mural, Klaxoon, Confluence und weiteren), passend zur bestehenden Zusammenarbeit Ihres Teams.',
         about_title:'Wer wir sind',
         about_desc:'LuXTech Innovation ist ein rumänisches Studio, gegründet 2024, das neugierige Beobachtungen in klare, effiziente digitale Systeme verwandelt.',
         about_extra_1:'Unabhängig von Ihrer Branche verwandeln wir Ideen in funktionierende Software, die langfristiges Wachstum unterstützt.',
@@ -655,7 +680,8 @@
         contact_title:'Lassen Sie uns etwas bauen.',
         contact_sub:'Erzählen Sie uns von Ihrem Vorhaben. Wir antworten auf jede ernsthafte Anfrage.',
         contact_button:'Gespräch beginnen',
-        expand_more:'Mehr anzeigen', expand_less:'Weniger'
+        expand_more:'Mehr anzeigen', expand_less:'Weniger',
+        explore_service:'Service ansehen'
       },
       lb: {
         nav_home:'Doheem', nav_solutions:'Léisungen', nav_about:'Firma', nav_contact:'Kontakt',
@@ -666,15 +692,15 @@
         hero_cta:'E Projet starten', hero_cta2:'Wat mir maachen',
         scroll_cue:'Scrollen',
         solutions_title:'Wat mir bauen',
-        sol_mobile_title:'Mobil- an Desktop-Applikatiounen',
-        sol_mobile_desc:'Intuitiv a skaleierbar Applikatioune fir Windows an Android, ugepasst un Är Aarbechtsprozesser.',
+        sol_mobile_title:'Software',
+        sol_mobile_desc:'Intuitiv a skaleierbar Applikatioune fir Windows, macOS, Android an iOS, ugepasst un Är Aarbechtsprozesser.',
         sol_mobile_more:'Leeschtung, Sécherheet an eng fléissend Erfarung, integréiert an Är intern an extern Prozesser, vum éischte Prototyp bis an d’Produktioun.',
         sol_ai_title:'Ugewannten AI',
         sol_ai_desc:'Kënschtlech Intelligenz an Automatisatioun déi Prozesser optiméieren, Feeler reduzéieren an d’Produktivitéit erhéijen.',
         sol_ai_more:'Personaliséiert Léisungen déi Donnéeën an intelligent Algorithmen a séier, zouverlässeg Entscheedungen ëmsetzen.',
         sol_custom_title:'Projetmanagement',
         sol_custom_desc:'Effizient Ëmsetzung fir Projete vun all Komplexitéit, mat voller Kontroll iwwer Zäit a Budget.',
-        sol_custom_more:'Mir setzen déi richteg Method an, Agile (Scrum, SAFe) oder klassesch (PM², PRINCE2), a behalen Zäitpläng a Budgeten ënner Kontroll.',
+        sol_custom_more:'Mir setzen déi richteg Method an, Agile (Scrum, Kanban, SAFe) oder klassesch (PM², PRINCE2), a behalen Zäitpläng a Budgeten ënner Kontroll, mat enger breeder Palette un Tools (Mural, Klaxoon, Confluence an anerer), ugepasst un déi Aart wéi Äert Team scho zesummeschafft.',
         about_title:'Wie mir sinn',
         about_desc:'LuXTech Innovation ass e rumänesche Studio, gegrënnt 2024, dee neugiereg Beobachtungen a kloer, effizient digital Systemer ëmsetzt.',
         about_extra_1:'Egal a wéi engem Beräich, mir maachen aus Iddien funktionéierend Software déi laangfristegt Wuesstem ënnerstëtzt.',
@@ -682,7 +708,8 @@
         contact_title:'Loosst eis eppes bauen.',
         contact_sub:'Sot eis wourun Dir schafft. Mir äntweren op all eescht Ufro.',
         contact_button:'D’Gespréich ufänken',
-        expand_more:'Méi weisen', expand_less:'Zoumaachen'
+        expand_more:'Méi weisen', expand_less:'Zoumaachen',
+        explore_service:'Service entdecken'
       },
       sk: {
         nav_home:'Domov', nav_solutions:'Riešenia', nav_about:'Firma', nav_contact:'Kontakt',
@@ -693,15 +720,15 @@
         hero_cta:'Začať projekt', hero_cta2:'Čo robíme',
         scroll_cue:'Posunúť',
         solutions_title:'Čo tvoríme',
-        sol_mobile_title:'Mobilné a Desktopové Aplikácie',
-        sol_mobile_desc:'Intuitívne a škálovateľné aplikácie pre Windows a Android, prispôsobené vašim procesom.',
+        sol_mobile_title:'Softvér',
+        sol_mobile_desc:'Intuitívne a škálovateľné aplikácie pre Windows, macOS, Android a iOS, prispôsobené vašim procesom.',
         sol_mobile_more:'Výkon, bezpečnosť a plynulý zážitok integrovaný do vašich interných aj externých procesov, od prototypu po produkciu.',
         sol_ai_title:'Aplikovaná AI',
         sol_ai_desc:'Umelá inteligencia a automatizácia, ktoré zefektívňujú procesy, znižujú chyby a zvyšujú produktivitu.',
         sol_ai_more:'Riešenia na mieru, ktoré menia dáta a inteligentné algoritmy na rýchle a spoľahlivé rozhodnutia vo veľkom rozsahu.',
         sol_custom_title:'Projektový Manažment',
         sol_custom_desc:'Efektívne dodanie projektov akejkoľvek zložitosti s plnou kontrolou nad časom a rozpočtom.',
-        sol_custom_more:'Používame vhodnú metodológiu, Agile (Scrum, Kanban, SAFe) alebo Waterfall (PM², PRINCE2), a držíme termíny aj rozpočty pod kontrolou.',
+        sol_custom_more:'Používame vhodnú metodológiu, Agile (Scrum, Kanban, SAFe) alebo Waterfall (PM², PRINCE2), a držíme termíny aj rozpočty pod kontrolou, s využitím širokej škály nástrojov (Mural, Klaxoon, Confluence a ďalšie) prispôsobených tomu, ako váš tím už spolupracuje.',
         about_title:'Kto sme',
         about_desc:'LuXTech Innovation je rumunské štúdio, založené v roku 2024, ktoré mení zvedavé pozorovania na jasné a efektívne digitálne systémy.',
         about_extra_1:'Bez ohľadu na váš odbor meníme nápady na funkčný softvér, ktorý podporuje dlhodobý rast.',
@@ -709,7 +736,8 @@
         contact_title:'Poďme niečo vytvoriť.',
         contact_sub:'Povedzte nám, na čom pracujete. Odpovedáme na každú vážnu požiadavku.',
         contact_button:'Začať konverzáciu',
-        expand_more:'Zobraziť viac', expand_less:'Zavrieť'
+        expand_more:'Zobraziť viac', expand_less:'Zavrieť',
+        explore_service:'Zobraziť službu'
       }
     };
 
@@ -744,6 +772,14 @@
       });
 
       toggles.forEach(o => label(o.b, o.open));
+
+      // Accessible names for the clickable service cards (title + "explore service")
+      const exploreLabel = (t.explore_service !== undefined) ? t.explore_service
+        : ((translations.en && translations.en.explore_service) || 'Explore service');
+      document.querySelectorAll('.svc-link').forEach(a => {
+        if (a.textContent) a.setAttribute('aria-label', a.textContent + ' — ' + exploreLabel);
+      });
+
       if (window.__splitHero) window.__splitHero();
     }
 
@@ -786,6 +822,7 @@
       current.textContent = val.toUpperCase();
       options.forEach(o => o.setAttribute('aria-selected', String(o.dataset.val === val)));
       document.documentElement.lang = val;
+      try { localStorage.setItem('lx_lang', val); } catch (e) {}
       applyLang(val);
     }
 
@@ -811,8 +848,11 @@
     document.addEventListener('click', e => { if (!lang.contains(e.target)) closeMenu(false); });
 
     (function initLang(){
-      const u = (navigator.language || 'ro').toLowerCase();
       const supported = ['ro','en','fr','de','sk','lb'];
+      let stored = null;
+      try { stored = localStorage.getItem('lx_lang'); } catch (e) {}
+      if (stored && supported.indexOf(stored) !== -1) { selectLang(stored); return; }
+      const u = (navigator.language || 'ro').toLowerCase();
       const def = supported.find(l => u.startsWith(l)) || 'ro';
       selectLang(def);
     })();
@@ -1041,7 +1081,7 @@
   </script>
 
   <!-- Music Toggle Button -->
-  <audio id="bg-music" src="https://lxtech.ro/audio/Starlight_on_the_Leather_Seat.mp3" loop preload="auto"></audio>
+  <audio id="bg-music" src="https://lxtech.ro/audio/Calculated_Calm.mp3" loop preload="auto"></audio>
   <button id="music-btn" aria-label="Toggle music" title="Toggle music">
     <!-- Sound ON icon -->
     <svg class="icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
