@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Usage — TransitLive</title>
+    <meta name="description" content="How TransitLive uses data and network, and the Google Play Data safety mapping">
+    <style>
+        :root {
+            --navy:#0B1220; --teal:#35E0C8; --teal-dark:#12B39A; --green:#6EE86A;
+            --teal-pale:rgba(53,224,200,0.12); --teal-pale2:rgba(53,224,200,0.06);
+            --white:#FFFFFF; --off-white:#F6F9FB; --text-main:#0B1220; --text-body:#3A4453;
+            --text-muted:#79839A; --border:rgba(11,18,32,0.09);
+            --accent-strip:linear-gradient(90deg,#6EE86A 0%,#35E0C8 50%,#12B39A 100%);
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text-body);background:var(--off-white);}
+        .line-strip{height:4px;background:var(--accent-strip);}
+        header{background:var(--navy);color:var(--white);padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+        header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 110%,rgba(53,224,200,0.20) 0%,transparent 70%);pointer-events:none;}
+        .header-icon{width:56px;height:56px;border-radius:16px;background:var(--teal-pale);border:1.5px solid rgba(53,224,200,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:26px;}
+        header h1{font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:10px;}
+        .header-meta{font-size:0.9rem;color:rgba(255,255,255,0.6);font-weight:300;letter-spacing:0.03em;}
+        .header-badge{display:inline-flex;align-items:center;gap:6px;margin-top:18px;padding:6px 14px;background:var(--teal-pale);border:1px solid rgba(53,224,200,0.35);border-radius:999px;font-size:0.78rem;font-weight:500;color:var(--teal);letter-spacing:0.04em;text-transform:uppercase;}
+        .nav-bar{background:var(--white);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(11,18,32,0.06);}
+        .nav-bar a{text-decoration:none;font-size:0.82rem;font-weight:500;padding:7px 16px;border-radius:999px;border:1.5px solid var(--border);color:var(--text-muted);transition:all 0.2s;white-space:nowrap;}
+        .nav-bar a:hover,.nav-bar a.active{background:var(--navy);border-color:var(--navy);color:var(--white);}
+        .container{max-width:780px;margin:0 auto;padding:48px 24px 80px;}
+        .section{margin-bottom:40px;scroll-margin-top:80px;}
+        .section-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+        .section-num{width:32px;height:32px;border-radius:8px;background:var(--navy);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0;}
+        .section h2{font-size:1.2rem;font-weight:600;color:var(--text-main);letter-spacing:-0.01em;}
+        .section p{margin-bottom:14px;} .section p:last-child{margin-bottom:0;}
+        .section h3{font-size:1rem;font-weight:600;color:var(--text-main);margin:20px 0 10px;}
+        .section ul{padding-left:20px;margin-bottom:14px;} .section li{margin-bottom:6px;}
+        .section a{color:var(--teal-dark);text-decoration:none;font-weight:600;} .section a:hover{text-decoration:underline;}
+        .data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9rem;}
+        .data-table th{background:var(--navy);color:var(--teal);font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:10px 14px;text-align:left;}
+        .data-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+        .data-table tr:last-child td{border-bottom:none;} .data-table tr:nth-child(even) td{background:var(--teal-pale2);}
+        .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.72rem;font-weight:600;}
+        .tag.yes{background:rgba(255,152,0,0.12);color:#e65100;} .tag.no{background:rgba(56,142,60,0.12);color:#2e7d32;}
+        .callout{border-radius:12px;padding:16px 20px;margin:16px 0;display:flex;gap:12px;align-items:flex-start;background:rgba(56,142,60,0.06);border:1px solid rgba(56,142,60,0.2);}
+        .callout-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+        .callout-body{flex:1;font-size:0.92rem;} .callout-body strong{display:block;margin-bottom:4px;font-size:0.88rem;font-weight:600;color:#2e7d32;}
+        footer{background:var(--navy);color:rgba(255,255,255,0.7);text-align:center;padding:32px 24px;font-size:0.85rem;}
+        @media (max-width:600px){.container{padding:32px 16px 60px;}.data-table{font-size:0.82rem;}}
+    </style>
+</head>
+<body>
+
+<div class="line-strip"></div>
+
+<header>
+    <div class="header-icon">📊</div>
+    <h1>Data Usage</h1>
+    <p class="header-meta">TransitLive — Android App</p>
+    <div class="header-badge">📊 Last updated: August 2026</div>
+</header>
+
+<nav class="nav-bar">
+    <a href="terms.html">Terms &amp; Conditions</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="data-usage.html" class="active">Data Usage</a>
+</nav>
+
+<div class="container">
+
+    <div class="callout">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+            <strong>The essentials</strong>
+            TransitLive keeps your favourites, alerts and location on your device. It uses mobile/Wi-Fi data to load the map, fetch live transit positions, show ads, and report crashes. Nothing personal is sold — outside data processing comes from Google AdMob (after you consent), Firebase Crashlytics/Analytics, and Google Play Billing (only if you buy TransitLive Pro).
+        </div>
+    </div>
+
+    <section class="section" id="s1">
+        <div class="section-header"><div class="section-num">01</div><h2>Network &amp; data consumption</h2></div>
+        <p>The app uses your internet connection for:</p>
+        <ul>
+            <li><strong>Map tiles</strong> — downloaded from OpenStreetMap / CARTO as you pan and zoom. This is the largest data user; cached by the OS where possible.</li>
+            <li><strong>Live transit data</strong> — small, frequent requests (roughly every 10 seconds while the app is open) for vehicle positions and arrivals.</li>
+            <li><strong>GTFS schedule download</strong> — a one-time download (~8 MB) of the Bucharest schedule, refreshed periodically.</li>
+            <li><strong>Ads</strong> — AdMob loads ad creatives over the network.</li>
+            <li><strong>Crash &amp; usage reporting</strong> — Firebase Crashlytics/Analytics send small diagnostic payloads in the background.</li>
+            <li><strong>Purchases</strong> — Google Play Billing calls when you buy or restore TransitLive Pro.</li>
+        </ul>
+        <p>If you are on a limited data plan, most usage comes from map tiles; staying zoomed on one area reduces it.</p>
+    </section>
+
+    <section class="section" id="s2">
+        <div class="section-header"><div class="section-num">02</div><h2>Google Play Data safety mapping</h2></div>
+        <p>This table maps how the app's behavior corresponds to the Google Play "Data safety" categories.</p>
+        <table class="data-table">
+            <thead><tr><th>Data type</th><th>Collected / shared</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td>Precise / approximate location</td><td><span class="tag yes">Collected</span></td><td>Used for nearby stops and map centering; shared with AdMob only for ad context, and only after consent.</td></tr>
+                <tr><td>Advertising ID / device IDs</td><td><span class="tag yes">Collected &amp; shared</span></td><td>By Google AdMob, only after consent, for ads.</td></tr>
+                <tr><td>App activity / interactions</td><td><span class="tag yes">Collected &amp; shared</span></td><td>Ad impressions/clicks (AdMob, after consent) and general app-usage events (Firebase Analytics).</td></tr>
+                <tr><td>Crash logs &amp; diagnostics</td><td><span class="tag yes">Collected &amp; shared</span></td><td>Firebase Crashlytics, active on Play-installed builds only.</td></tr>
+                <tr><td>Purchase history</td><td><span class="tag yes">Collected</span></td><td>Google Play Billing processes TransitLive Pro purchases; we only receive entitlement status, not payment details.</td></tr>
+                <tr><td>Files, contacts, messages, health</td><td><span class="tag no">Not collected</span></td><td>The app never requests or accesses these.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section" id="s3">
+        <div class="section-header"><div class="section-num">03</div><h2>Data retention</h2></div>
+        <p>Locally stored data (favourites, alerts, cached schedule, settings) persists until you clear the app's data or uninstall it. We hold no server-side copy of your data. Data processed by Google AdMob, Firebase Crashlytics/Analytics, and Google Play Billing is retained according to <a href="https://policies.google.com/privacy" target="_blank">Google's policies</a>.</p>
+    </section>
+
+    <section class="section" id="s4">
+        <div class="section-header"><div class="section-num">04</div><h2>Security</h2></div>
+        <p>All network requests use HTTPS. Data stored on your device is protected by Android's app sandbox. Because we operate no backend that stores your personal data, there is no central database of user data to breach.</p>
+    </section>
+
+    <section class="section" id="s5">
+        <div class="section-header"><div class="section-num">05</div><h2>Contact</h2></div>
+        <p>Questions about data usage: <a href="mailto:contact@lxtech.ro">contact@lxtech.ro</a></p>
+    </section>
+
+</div>
+
+<footer>© 2026 TransitLive · Bucharest public transit, live.</footer>
+
+</body>
+</html>

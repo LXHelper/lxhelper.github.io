@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — TransitLive</title>
+    <meta name="description" content="Privacy Policy for the TransitLive Android app">
+    <style>
+        :root {
+            --navy:       #0B1220;
+            --navy-mid:   #101B2E;
+            --navy-light: #16233B;
+            --teal:       #35E0C8;
+            --teal-dark:  #12B39A;
+            --green:      #6EE86A;
+            --teal-pale:  rgba(53,224,200,0.12);
+            --teal-pale2: rgba(53,224,200,0.06);
+            --white:      #FFFFFF;
+            --off-white:  #F6F9FB;
+            --text-main:  #0B1220;
+            --text-body:  #3A4453;
+            --text-muted: #79839A;
+            --border:     rgba(11,18,32,0.09);
+            --accent-strip: linear-gradient(90deg, #6EE86A 0%, #35E0C8 50%, #12B39A 100%);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 16px; line-height: 1.7; color: var(--text-body); background: var(--off-white); }
+        .line-strip { height: 4px; background: var(--accent-strip); }
+        header { background: var(--navy); color: var(--white); padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 110%, rgba(53,224,200,0.20) 0%, transparent 70%); pointer-events: none; }
+        .header-icon { width: 56px; height: 56px; border-radius: 16px; background: var(--teal-pale); border: 1.5px solid rgba(53,224,200,0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 26px; }
+        header h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+        .header-meta { font-size: 0.9rem; color: rgba(255,255,255,0.6); font-weight: 300; letter-spacing: 0.03em; }
+        .header-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; padding: 6px 14px; background: var(--teal-pale); border: 1px solid rgba(53,224,200,0.35); border-radius: 999px; font-size: 0.78rem; font-weight: 500; color: var(--teal); letter-spacing: 0.04em; text-transform: uppercase; }
+        .nav-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(11,18,32,0.06); }
+        .nav-bar a { text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 7px 16px; border-radius: 999px; border: 1.5px solid var(--border); color: var(--text-muted); transition: all 0.2s; white-space: nowrap; }
+        .nav-bar a:hover, .nav-bar a.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+        .container { max-width: 780px; margin: 0 auto; padding: 48px 24px 80px; }
+        .toc { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; margin-bottom: 48px; }
+        .toc-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 14px; }
+        .toc ol { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; counter-reset: toc-item; }
+        .toc li { counter-increment: toc-item; }
+        .toc a { text-decoration: none; color: var(--text-body); font-size: 0.88rem; display: flex; align-items: baseline; gap: 8px; transition: color 0.15s; }
+        .toc a::before { content: counter(toc-item, decimal-leading-zero); font-size: 0.72rem; font-weight: 700; color: var(--teal-dark); flex-shrink: 0; }
+        .toc a:hover { color: var(--navy); }
+        @media (max-width: 520px) { .toc ol { grid-template-columns: 1fr; } }
+        .section { margin-bottom: 44px; scroll-margin-top: 80px; }
+        .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+        .section-num { width: 32px; height: 32px; border-radius: 8px; background: var(--navy); color: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+        .section h2 { font-size: 1.2rem; font-weight: 600; color: var(--text-main); letter-spacing: -0.01em; }
+        .section p { margin-bottom: 14px; }
+        .section p:last-child { margin-bottom: 0; }
+        .section h3 { font-size: 1rem; font-weight: 600; color: var(--text-main); margin: 20px 0 10px; }
+        .section ul, .section ol { padding-left: 20px; margin-bottom: 14px; }
+        .section li { margin-bottom: 6px; }
+        .section a { color: var(--teal-dark); text-decoration: none; font-weight: 600; }
+        .section a:hover { text-decoration: underline; }
+        .callout { border-radius: 12px; padding: 16px 20px; margin: 16px 0; display: flex; gap: 12px; align-items: flex-start; }
+        .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+        .callout-body { flex: 1; font-size: 0.92rem; }
+        .callout-body strong { display: block; margin-bottom: 4px; font-size: 0.88rem; font-weight: 600; }
+        .callout.info  { background: var(--teal-pale2); border: 1px solid rgba(53,224,200,0.22); }
+        .callout.info  .callout-body strong { color: var(--teal-dark); }
+        .callout.good  { background: rgba(56,142,60,0.06); border: 1px solid rgba(56,142,60,0.2); }
+        .callout.good  .callout-body strong { color: #2e7d32; }
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        .data-table th { background: var(--navy); color: var(--teal); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:nth-child(even) td { background: var(--teal-pale2); }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; }
+        .tag.local  { background: rgba(56,142,60,0.12); color: #2e7d32; }
+        .tag.admob  { background: rgba(255,152,0,0.12); color: #e65100; }
+        .tag.third  { background: rgba(53,224,200,0.14); color: #0c8f7c; }
+        .tag.never  { background: rgba(11,18,32,0.08); color: #79839a; }
+        footer { background: var(--navy); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 0.85rem; }
+        @media (max-width: 600px) { .container { padding: 32px 16px 60px; } .toc { padding: 20px; } .data-table { font-size: 0.82rem; } }
+    </style>
+</head>
+<body>
+
+<div class="line-strip"></div>
+
+<header>
+    <div class="header-icon">🛡️</div>
+    <h1>Privacy Policy</h1>
+    <p class="header-meta">TransitLive — Android App</p>
+    <div class="header-badge">🛡️ Last updated: August 2026</div>
+</header>
+
+<nav class="nav-bar">
+    <a href="terms.html">Terms &amp; Conditions</a>
+    <a href="privacy.html" class="active">Privacy Policy</a>
+    <a href="data-usage.html">Data Usage</a>
+</nav>
+
+<div class="container">
+
+    <div class="callout good">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+            <strong>In short</strong>
+            Almost everything stays on your device. We don't sell your data. Firebase (Crashlytics and Analytics) helps us catch crashes and understand basic app usage, and Google AdMob serves the ads that keep TransitLive free — AdMob's ad-related data collection only activates <em>after</em> you make a choice in the GDPR consent form shown on first launch. If you subscribe to or purchase TransitLive Pro, that purchase is handled entirely by Google Play. Your live GPS location is used on-device to find nearby stops and is never sent to our own servers.
+        </div>
+    </div>
+
+    <div class="toc">
+        <p class="toc-title">Contents</p>
+        <ol>
+            <li><a href="#s1">What data the app uses</a></li>
+            <li><a href="#s2">Local storage</a></li>
+            <li><a href="#s3">Live transit data</a></li>
+            <li><a href="#s4">Advertising &amp; AdMob</a></li>
+            <li><a href="#s4b">Analytics &amp; crash reporting</a></li>
+            <li><a href="#s4c">Purchases &amp; subscriptions</a></li>
+            <li><a href="#s5">Permissions</a></li>
+            <li><a href="#s6">Third-party integrations</a></li>
+            <li><a href="#s7">Data sharing</a></li>
+            <li><a href="#s8">Your rights &amp; controls</a></li>
+            <li><a href="#s9">Children's privacy</a></li>
+            <li><a href="#s10">Changes &amp; contact</a></li>
+        </ol>
+    </div>
+
+    <section class="section" id="s1">
+        <div class="section-header"><div class="section-num">01</div><h2>What data the app uses</h2></div>
+        <p>The table below summarizes every category of data TransitLive touches and where it goes.</p>
+        <table class="data-table">
+            <thead><tr><th>Data type</th><th>Purpose</th><th>Where it goes</th></tr></thead>
+            <tbody>
+                <tr><td>GPS / precise location</td><td>Nearby stops, centering the map, live vehicle proximity</td><td><span class="tag local">On-device only</span></td></tr>
+                <tr><td>Favourite stops</td><td>Stops you star for quick access</td><td><span class="tag local">On-device only</span></td></tr>
+                <tr><td>Departure alerts</td><td>The lines you asked to be notified about</td><td><span class="tag local">On-device only</span></td></tr>
+                <tr><td>Cached transit schedule (GTFS)</td><td>Stops, routes and timetables, downloaded once</td><td><span class="tag local">On-device only</span></td></tr>
+                <tr><td>Map viewport &amp; requests</td><td>Loading OpenStreetMap map tiles</td><td><span class="tag third">OSM / CARTO servers</span></td></tr>
+                <tr><td>Live vehicle / arrival requests</td><td>Real-time bus, tram &amp; trolley positions</td><td><span class="tag third">STB / TPBI servers</span></td></tr>
+                <tr><td>Crash logs &amp; diagnostics</td><td>Finding and fixing app crashes</td><td><span class="tag admob">Firebase Crashlytics</span></td></tr>
+                <tr><td>App usage / interaction events</td><td>Understanding feature usage, improving the app</td><td><span class="tag admob">Firebase Analytics</span></td></tr>
+                <tr><td>Purchase history</td><td>Activating TransitLive Pro (subscription or lifetime unlock)</td><td><span class="tag third">Google Play Billing</span></td></tr>
+                <tr><td>Advertising ID</td><td>Personalized ads (requires consent)</td><td><span class="tag admob">Google AdMob</span></td></tr>
+                <tr><td>Device / OS info</td><td>Ad delivery &amp; targeting (requires consent)</td><td><span class="tag admob">Google AdMob</span></td></tr>
+                <tr><td>Approximate location (IP-based)</td><td>Ad context (requires consent)</td><td><span class="tag admob">Google AdMob</span></td></tr>
+                <tr><td>Name, email, contacts, messages, health</td><td>—</td><td><span class="tag never">Never collected</span></td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section" id="s2">
+        <div class="section-header"><div class="section-num">02</div><h2>Local storage — what stays on your device</h2></div>
+        <p>The following are created and stored solely on your Android device (using a local Room database and SharedPreferences). None of it is transmitted to any server we operate:</p>
+        <ul>
+            <li><strong>Favourite stops</strong> — the stops you star for quick access</li>
+            <li><strong>Departure alerts</strong> — which lines you asked to be alerted about</li>
+            <li><strong>Cached transit data (GTFS)</strong> — stops, routes, trips and timetables for Bucharest, downloaded once and refreshed periodically</li>
+            <li><strong>App settings &amp; state</strong> — including an anonymous per-install identifier used only to talk to the live transit API, and a flag that you accepted the terms and gave consent on first launch</li>
+            <li><strong>Pro status</strong> — whether you've unlocked TransitLive Pro, cached locally after Google Play confirms your purchase</li>
+        </ul>
+        <div class="callout info">
+            <span class="callout-icon">ℹ️</span>
+            <div class="callout-body">
+                <strong>GPS location</strong>
+                When you grant location permission, the app reads your GPS position to find stops within walking distance and to center the map on you. This is used in real time on your device and is not logged or transmitted anywhere by us.
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="s3">
+        <div class="section-header"><div class="section-num">03</div><h2>Live transit data</h2></div>
+        <p>To show real-time vehicles and arrivals, TransitLive makes standard HTTPS requests to public Bucharest public-transport data services (operated by <strong>STB</strong> and <strong>TPBI</strong>) and downloads the static GTFS schedule. As with any web request, those servers receive your device's IP address in order to respond. We send only what is needed to fetch transit data — no personal identifiers, no location coordinates.</p>
+        <p>Map imagery is loaded from <strong>OpenStreetMap</strong> / CARTO tile servers when you view the map; those servers likewise receive a standard HTTP request including your IP address.</p>
+    </section>
+
+    <section class="section" id="s4">
+        <div class="section-header"><div class="section-num">04</div><h2>Advertising &amp; AdMob</h2></div>
+        <p>TransitLive is free and supported by ads delivered by <strong>Google AdMob</strong> — native ads shown in the nearby-departures list and in the vehicle/stop detail sheets, plus an interstitial ad shown when you exit the app.</p>
+
+        <h3>GDPR consent</h3>
+        <p>On first launch (and whenever legally required), a GDPR consent form appears — powered by Google's User Messaging Platform (UMP). You can:</p>
+        <ul>
+            <li><strong>Accept personalized ads</strong> — AdMob may use your advertising ID and device info to show more relevant ads.</li>
+            <li><strong>Decline / use non-personalized ads</strong> — ads are still shown, but without personalization. AdMob still collects some contextual signals (e.g. approximate IP-based location, app context).</li>
+        </ul>
+        <p>Where required, the consent form is shown to users in the European Economic Area, the UK and Switzerland; users elsewhere may not see it.</p>
+
+        <h3>What AdMob may collect (if you consented)</h3>
+        <ul>
+            <li>Your Google advertising ID</li>
+            <li>Device model, OS version, mobile network</li>
+            <li>Approximate location (IP-based)</li>
+            <li>Ad interaction data (impressions, clicks)</li>
+        </ul>
+        <p>For full details, see the <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a> and <a href="https://support.google.com/admob/answer/6128543" target="_blank">AdMob data practices</a>.</p>
+    </section>
+
+    <section class="section" id="s4b">
+        <div class="section-header"><div class="section-num">4B</div><h2>Analytics &amp; crash reporting</h2></div>
+        <p>TransitLive uses <strong>Firebase Crashlytics</strong> and <strong>Firebase Analytics</strong> (both Google services) to catch crashes and understand basic, aggregate app usage — for example, which screens are opened or whether the app crashed on your device. This runs independently of the AdMob consent choice described above; it is not used for advertising and is not linked to your identity.</p>
+        <p>Crashlytics reporting is disabled entirely in development/debug builds and only active in the version you install from Google Play. Data collected includes device model, OS version, app version, and stack traces at the time of a crash — never the contents of your favourites, alerts, or location history.</p>
+        <p>For full details, see the <a href="https://firebase.google.com/support/privacy" target="_blank">Firebase privacy and security policy</a>.</p>
+    </section>
+
+    <section class="section" id="s4c">
+        <div class="section-header"><div class="section-num">4C</div><h2>Purchases &amp; subscriptions</h2></div>
+        <p>TransitLive offers an optional <strong>TransitLive Pro</strong> upgrade (a monthly subscription or a one-time lifetime purchase) that removes ads and unlocks a Pro app icon. All purchases are processed entirely by <strong>Google Play Billing</strong> — we never see or store your payment details (card numbers, billing address, etc.). We only receive confirmation of your entitlement (i.e. that you own "Pro"), which is used on-device to disable ads and switch the launcher icon.</p>
+        <p>Subscriptions can be managed or cancelled at any time from the Google Play Store app under Payments &amp; subscriptions.</p>
+    </section>
+
+    <section class="section" id="s5">
+        <div class="section-header"><div class="section-num">05</div><h2>Permissions the app requests</h2></div>
+        <ul>
+            <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong> — optional; used to find nearby stops and center the map. Granted and revocable by you at any time in Android Settings.</li>
+            <li><strong>INTERNET</strong> — required to load OSM map tiles, fetch live transit data, and show AdMob ads.</li>
+            <li><strong>AD_ID</strong> — required by Google Play policy when AdMob is present; used by AdMob only if you consent.</li>
+            <li><strong>POST_NOTIFICATIONS</strong> (Android 13+) — optional; requested only for departure alerts you arm yourself.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s6">
+        <div class="section-header"><div class="section-num">06</div><h2>Third-party integrations</h2></div>
+        <ul>
+            <li><strong>Google AdMob</strong> — ad delivery and GDPR consent management (after consent).</li>
+            <li><strong>Firebase Crashlytics &amp; Analytics</strong> — crash reporting and aggregate usage stats.</li>
+            <li><strong>Google Play Billing</strong> — processing TransitLive Pro purchases and subscriptions.</li>
+            <li><strong>STB / TPBI transit services</strong> — real-time vehicle positions, arrivals and the static GTFS schedule.</li>
+            <li><strong>OpenStreetMap / CARTO</strong> — map tile imagery, loaded when you view the map.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s7">
+        <div class="section-header"><div class="section-num">07</div><h2>Data sharing</h2></div>
+        <p>We do not sell, trade or rent your personal information to anyone. The only data that leaves your device is:</p>
+        <ul>
+            <li>Ad-related signals sent to Google AdMob (only after consent)</li>
+            <li>Crash and usage data sent to Firebase Crashlytics / Analytics</li>
+            <li>Purchase requests sent to Google Play Billing (if you choose to buy TransitLive Pro)</li>
+            <li>Standard HTTPS requests to STB / TPBI transit servers and OSM / CARTO tile servers (standard IP logging by those services)</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s8">
+        <div class="section-header"><div class="section-num">08</div><h2>Your rights &amp; controls</h2></div>
+        <ul>
+            <li><strong>Access &amp; deletion</strong> — all your locally stored data is on your device; clear it via Android Settings → Apps → TransitLive → Clear data, or by uninstalling the app.</li>
+            <li><strong>Location</strong> — revoke any time via Android Settings → Apps → TransitLive → Permissions.</li>
+            <li><strong>Ad consent</strong> — you can reset or change your consent choice from within the app; declining stops personalized ads.</li>
+            <li><strong>Analytics/Crashlytics deletion request</strong> — email us (below) with your approximate install date and device model and we will submit a deletion request to Firebase for any associated crash/usage data.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s9">
+        <div class="section-header"><div class="section-num">09</div><h2>Children's privacy</h2></div>
+        <p>TransitLive is not directed at children under 13. We do not knowingly collect personal data from children. If you believe a child has provided personal data through the app, contact us and we will take appropriate action.</p>
+    </section>
+
+    <section class="section" id="s10">
+        <div class="section-header"><div class="section-num">10</div><h2>Changes &amp; contact</h2></div>
+        <p>We may update this Privacy Policy from time to time. When we do, we'll update the "Last updated" date at the top of this page. Continued use of the app after changes take effect constitutes acceptance of the updated policy.</p>
+        <p>For any privacy questions or requests:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:contact@lxtech.ro">contact@lxtech.ro</a></li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>© 2026 TransitLive · Bucharest public transit, live.</footer>
+
+</body>
+</html>
