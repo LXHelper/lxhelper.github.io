@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Usage — TransitLive</title>
+    <title>Data Usage – TransitLive</title>
     <meta name="description" content="How TransitLive uses data and network, and the Google Play Data safety mapping">
     <style>
         :root {
@@ -48,7 +48,7 @@
         @media (max-width:600px){.container{padding:32px 16px 60px;}.data-table{font-size:0.82rem;}}
     </style>
 <style>
-    /* Language toggle — mirrors .nav-bar pill styling so it reads as part of the chrome. */
+    /* Language toggle: mirrors .nav-bar pill styling so it reads as part of the chrome. */
     .lang-switch { display: flex; justify-content: center; gap: 0; padding: 10px 24px 0; background: var(--white); }
     .lang-switch .lang-group { display: inline-flex; border: 1.5px solid var(--border); border-radius: 999px; overflow: hidden; }
     .lang-switch button { appearance: none; border: 0; background: transparent; cursor: pointer;
@@ -60,7 +60,7 @@
     [data-lang] { display: none; }
     [data-lang].is-active { display: block; }
 </style>
-<meta data-title-en="Data Usage — TransitLive" data-title-ro="Utilizarea datelor — TransitLive">
+<meta data-title-en="Data Usage – TransitLive" data-title-ro="Utilizarea datelor – TransitLive">
 </head>
 <body>
 
@@ -77,7 +77,7 @@
 <header>
     <div class="header-icon">📊</div>
     <h1>Data Usage</h1>
-    <p class="header-meta">TransitLive — Android App</p>
+    <p class="header-meta">TransitLive – Android App</p>
     <div class="header-badge">📊 Last updated: August 2026</div>
 </header>
 
@@ -93,7 +93,7 @@
         <span class="callout-icon">✅</span>
         <div class="callout-body">
             <strong>The essentials</strong>
-            TransitLive keeps your favourites, alerts and location on your device. It uses mobile/Wi-Fi data to load the map, fetch live transit positions, show ads, and report crashes. Nothing personal is sold — outside data processing comes from Google AdMob (after you consent), Firebase Crashlytics/Analytics, and Google Play Billing (only if you buy TransitLive Pro).
+            TransitLive keeps your favourites, alerts and location on your device. It uses mobile/Wi-Fi data to load the map, fetch live transit positions, show ads, and report crashes. Nothing personal is sold. Outside data processing comes from Google AdMob (after you consent), Firebase Crashlytics/Analytics, and Google Play Billing (only if you buy TransitLive Pro).
         </div>
     </div>
 
@@ -101,14 +101,14 @@
         <div class="section-header"><div class="section-num">01</div><h2>Network &amp; data consumption</h2></div>
         <p>The app uses your internet connection for:</p>
         <ul>
-            <li><strong>Map</strong> — none. The map is built into the app and uses <em>no</em> data as you pan and zoom.</li>
-            <li><strong>Live transit data</strong> — small, frequent requests (roughly every 10 seconds while the app is open) for vehicle positions and arrivals.</li>
-            <li><strong>GTFS schedule download</strong> — a one-time download (~8 MB) of the Bucharest schedule, refreshed periodically.</li>
-            <li><strong>Ads</strong> — AdMob loads ad creatives over the network.</li>
-            <li><strong>Crash &amp; usage reporting</strong> — Firebase Crashlytics/Analytics send small diagnostic payloads in the background.</li>
-            <li><strong>Purchases</strong> — Google Play Billing calls when you buy or restore TransitLive Pro.</li>
+            <li><strong>Map</strong>: none. The map is built into the app and uses <em>no</em> data as you pan and zoom.</li>
+            <li><strong>Live transit data</strong>: small, frequent requests (roughly every 10 seconds while the app is open) to our relay service for vehicle positions and arrivals.</li>
+            <li><strong>GTFS schedule download</strong>: a one-time download (~8 MB) of the Bucharest schedule, refreshed periodically.</li>
+            <li><strong>Ads</strong>: AdMob loads ad creatives over the network.</li>
+            <li><strong>Crash &amp; usage reporting</strong>: Firebase Crashlytics/Analytics send small diagnostic payloads in the background.</li>
+            <li><strong>Purchases</strong>: Google Play Billing calls when you buy or restore TransitLive Pro.</li>
         </ul>
-        <p>If you are on a limited data plan, the map itself costs you nothing — most remaining usage comes from live vehicle positions while the app is open, and from ads.</p>
+        <p>If you are on a limited data plan, the map itself costs you nothing. Most remaining usage comes from live vehicle positions while the app is open, and from ads.</p>
     </section>
 
     <section class="section" id="s2">
@@ -117,7 +117,7 @@
         <table class="data-table">
             <thead><tr><th>Data type</th><th>Collected / shared</th><th>Notes</th></tr></thead>
             <tbody>
-                <tr><td>Precise / approximate location</td><td><span class="tag yes">Collected</span></td><td>Used for nearby stops and map centering; shared with AdMob only for ad context, and only after consent.</td></tr>
+                <tr><td>Precise / approximate location</td><td><span class="tag yes">Collected</span></td><td>Used on-device for nearby stops and map centering; never sent to our servers. Shared with AdMob only for ad context, and only after consent.</td></tr>
                 <tr><td>Advertising ID / device IDs</td><td><span class="tag yes">Collected &amp; shared</span></td><td>By Google AdMob, only after consent, for ads.</td></tr>
                 <tr><td>App activity / interactions</td><td><span class="tag yes">Collected &amp; shared</span></td><td>Ad impressions/clicks (AdMob, after consent) and general app-usage events (Firebase Analytics).</td></tr>
                 <tr><td>Crash logs &amp; diagnostics</td><td><span class="tag yes">Collected &amp; shared</span></td><td>Firebase Crashlytics, active on Play-installed builds only.</td></tr>
@@ -153,7 +153,7 @@
 <header>
     <div class="header-icon">📊</div>
     <h1>Utilizarea datelor</h1>
-    <p class="header-meta">TransitLive — Aplicație Android</p>
+    <p class="header-meta">TransitLive – Aplicație Android</p>
     <div class="header-badge">📊 Ultima actualizare: septembrie 2026</div>
 </header>
 
@@ -169,7 +169,7 @@
         <span class="callout-icon">✅</span>
         <div class="callout-body">
             <strong>Esențialul</strong>
-            TransitLive păstrează favoritele, alertele și locația ta pe dispozitiv. Folosește date mobile/Wi-Fi pentru a încărca harta, a prelua pozițiile în timp real, a afișa reclame și a raporta erorile. Nu se vinde nimic din datele tale personale — prelucrarea externă a datelor este realizată de Google AdMob (după ce îți dai consimțământul), Firebase Crashlytics/Analytics și Google Play Billing (doar dacă achiziționezi TransitLive Pro).
+            TransitLive păstrează favoritele, alertele și locația ta pe dispozitiv. Folosește date mobile/Wi-Fi pentru a încărca harta, a prelua pozițiile în timp real, a afișa reclame și a raporta erorile. Nu se vinde nimic din datele tale personale. Prelucrarea externă a datelor este realizată de Google AdMob (după ce îți dai consimțământul), Firebase Crashlytics/Analytics și Google Play Billing (doar dacă achiziționezi TransitLive Pro).
         </div>
     </div>
 
@@ -177,14 +177,14 @@
         <div class="section-header"><div class="section-num">01</div><h2>Rețea și consum de date</h2></div>
         <p>Aplicația îți folosește conexiunea la internet pentru:</p>
         <ul>
-            <li><strong>Hartă</strong> — deloc. Harta este inclusă în aplicație și <em>nu</em> consumă date când o deplasezi sau o mărești.</li>
-            <li><strong>Date de transport în timp real</strong> — cereri mici și frecvente (aproximativ la fiecare 10 secunde cât timp aplicația este deschisă) pentru pozițiile vehiculelor și sosiri.</li>
-            <li><strong>Descărcarea orarului GTFS</strong> — o descărcare unică (~8 MB) a orarului Bucureștiului, actualizată periodic.</li>
-            <li><strong>Reclame</strong> — AdMob încarcă materialele publicitare prin rețea.</li>
-            <li><strong>Raportarea erorilor și a utilizării</strong> — Firebase Crashlytics/Analytics trimit în fundal pachete mici de date de diagnostic.</li>
-            <li><strong>Achiziții</strong> — apeluri către Google Play Billing atunci când cumperi sau restaurezi TransitLive Pro.</li>
+            <li><strong>Hartă</strong>: deloc. Harta este inclusă în aplicație și <em>nu</em> consumă date când o deplasezi sau o mărești.</li>
+            <li><strong>Date de transport în timp real</strong>: cereri mici și frecvente (aproximativ la fiecare 10 secunde cât timp aplicația este deschisă) către serviciul nostru releu, pentru pozițiile vehiculelor și sosiri.</li>
+            <li><strong>Descărcarea orarului GTFS</strong>: o descărcare unică (~8 MB) a orarului Bucureștiului, actualizată periodic.</li>
+            <li><strong>Reclame</strong>: AdMob încarcă materialele publicitare prin rețea.</li>
+            <li><strong>Raportarea erorilor și a utilizării</strong>: Firebase Crashlytics/Analytics trimit în fundal pachete mici de date de diagnostic.</li>
+            <li><strong>Achiziții</strong>: apeluri către Google Play Billing atunci când cumperi sau restaurezi TransitLive Pro.</li>
         </ul>
-        <p>Dacă ai un abonament de date limitat, harta în sine nu te costă nimic — cea mai mare parte a consumului rămas provine din pozițiile vehiculelor în timp real, cât timp aplicația este deschisă, și din reclame.</p>
+        <p>Dacă ai un abonament de date limitat, harta în sine nu te costă nimic. Cea mai mare parte a consumului rămas provine din pozițiile vehiculelor în timp real, cât timp aplicația este deschisă, și din reclame.</p>
     </section>
 
     <section class="section" id="s2">
@@ -193,7 +193,7 @@
         <table class="data-table">
             <thead><tr><th>Tip de date</th><th>Colectate / partajate</th><th>Observații</th></tr></thead>
             <tbody>
-                <tr><td>Locație precisă / aproximativă</td><td><span class="tag yes">Colectate</span></td><td>Folosite pentru stațiile din apropiere și centrarea hărții; partajate cu AdMob doar pentru contextul reclamelor și numai după consimțământ.</td></tr>
+                <tr><td>Locație precisă / aproximativă</td><td><span class="tag yes">Colectate</span></td><td>Folosite pe dispozitiv pentru stațiile din apropiere și centrarea hărții; nu sunt trimise niciodată către serverele noastre. Partajate cu AdMob doar pentru contextul reclamelor și numai după consimțământ.</td></tr>
                 <tr><td>ID de publicitate / ID-uri de dispozitiv</td><td><span class="tag yes">Colectate și partajate</span></td><td>De către Google AdMob, doar după consimțământ, pentru reclame.</td></tr>
                 <tr><td>Activitate în aplicație / interacțiuni</td><td><span class="tag yes">Colectate și partajate</span></td><td>Afișări/clicuri pe reclame (AdMob, după consimțământ) și evenimente generale de utilizare a aplicației (Firebase Analytics).</td></tr>
                 <tr><td>Jurnale de erori și diagnostice</td><td><span class="tag yes">Colectate și partajate</span></td><td>Firebase Crashlytics, activ doar în versiunile instalate din Play.</td></tr>

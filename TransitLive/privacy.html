@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — TransitLive</title>
+    <title>Privacy Policy – TransitLive</title>
     <meta name="description" content="Privacy Policy for the TransitLive Android app">
     <style>
         :root {
@@ -78,7 +78,7 @@
         @media (max-width: 600px) { .container { padding: 32px 16px 60px; } .toc { padding: 20px; } .data-table { font-size: 0.82rem; } }
     </style>
 <style>
-    /* Language toggle — mirrors .nav-bar pill styling so it reads as part of the chrome. */
+    /* Language toggle: mirrors .nav-bar pill styling so it reads as part of the chrome. */
     .lang-switch { display: flex; justify-content: center; gap: 0; padding: 10px 24px 0; background: var(--white); }
     .lang-switch .lang-group { display: inline-flex; border: 1.5px solid var(--border); border-radius: 999px; overflow: hidden; }
     .lang-switch button { appearance: none; border: 0; background: transparent; cursor: pointer;
@@ -90,7 +90,7 @@
     [data-lang] { display: none; }
     [data-lang].is-active { display: block; }
 </style>
-<meta data-title-en="Privacy Policy — TransitLive" data-title-ro="Politica de confidențialitate — TransitLive">
+<meta data-title-en="Privacy Policy – TransitLive" data-title-ro="Politica de confidențialitate – TransitLive">
 </head>
 <body>
 
@@ -107,7 +107,7 @@
 <header>
     <div class="header-icon">🛡️</div>
     <h1>Privacy Policy</h1>
-    <p class="header-meta">TransitLive — Android App</p>
+    <p class="header-meta">TransitLive – Android App</p>
     <div class="header-badge">🛡️ Last updated: August 2026</div>
 </header>
 
@@ -123,7 +123,7 @@
         <span class="callout-icon">✅</span>
         <div class="callout-body">
             <strong>In short</strong>
-            Almost everything stays on your device. We don't sell your data. Firebase (Crashlytics and Analytics) helps us catch crashes and understand basic app usage, and Google AdMob serves the ads that keep TransitLive free — AdMob's ad-related data collection only activates <em>after</em> you make a choice in the GDPR consent form shown on first launch. If you subscribe to or purchase TransitLive Pro, that purchase is handled entirely by Google Play. Your live GPS location is used on-device to find nearby stops and is never sent to our own servers.
+            Almost everything stays on your device. We don't sell your data. Firebase (Crashlytics and Analytics) helps us catch crashes and understand basic app usage, and Google AdMob serves the ads that keep TransitLive free. AdMob's ad-related data collection only activates <em>after</em> you make a choice in the GDPR consent form shown on first launch. If you subscribe to or purchase TransitLive Pro, that purchase is handled entirely by Google Play. Your live GPS location is used on-device to find nearby stops and is never sent to our own servers.
         </div>
     </div>
 
@@ -156,27 +156,29 @@
                 <tr><td>Departure alerts</td><td>The lines you asked to be notified about</td><td><span class="tag local">On-device only</span></td></tr>
                 <tr><td>Cached transit schedule (GTFS)</td><td>Stops, routes and timetables, downloaded once</td><td><span class="tag local">On-device only</span></td></tr>
                 <tr><td>Map imagery</td><td>Built into the app; drawn on your device</td><td><span class="tag local">On-device only</span></td></tr>
-                <tr><td>Live vehicle / arrival requests</td><td>Real-time bus, tram &amp; trolley positions</td><td><span class="tag third">STB / TPBI servers</span></td></tr>
+                <tr><td>Live vehicle / arrival requests</td><td>Real-time bus, tram &amp; trolley positions</td><td><span class="tag third">Our relay service</span></td></tr>
+                <tr><td>Timetable download (GTFS)</td><td>The published schedule, fetched periodically</td><td><span class="tag third">TPBI open-data server</span></td></tr>
+                <tr><td>Place search queries</td><td>Turning a typed place name into map coordinates</td><td><span class="tag third">OpenStreetMap Nominatim</span></td></tr>
                 <tr><td>Crash logs &amp; diagnostics</td><td>Finding and fixing app crashes</td><td><span class="tag admob">Firebase Crashlytics</span></td></tr>
                 <tr><td>App usage / interaction events</td><td>Understanding feature usage, improving the app</td><td><span class="tag admob">Firebase Analytics</span></td></tr>
                 <tr><td>Purchase history</td><td>Activating TransitLive Pro (subscription or lifetime unlock)</td><td><span class="tag third">Google Play Billing</span></td></tr>
                 <tr><td>Advertising ID</td><td>Personalized ads (requires consent)</td><td><span class="tag admob">Google AdMob</span></td></tr>
                 <tr><td>Device / OS info</td><td>Ad delivery &amp; targeting (requires consent)</td><td><span class="tag admob">Google AdMob</span></td></tr>
                 <tr><td>Approximate location (IP-based)</td><td>Ad context (requires consent)</td><td><span class="tag admob">Google AdMob</span></td></tr>
-                <tr><td>Name, email, contacts, messages, health</td><td>—</td><td><span class="tag never">Never collected</span></td></tr>
+                <tr><td>Name, email, contacts, messages, health</td><td>None</td><td><span class="tag never">Never collected</span></td></tr>
             </tbody>
         </table>
     </section>
 
     <section class="section" id="s2">
-        <div class="section-header"><div class="section-num">02</div><h2>Local storage — what stays on your device</h2></div>
-        <p>The following are created and stored solely on your Android device (using a local Room database and SharedPreferences). None of it is transmitted to any server we operate:</p>
+        <div class="section-header"><div class="section-num">02</div><h2>Local storage: what stays on your device</h2></div>
+        <p>The following are created and stored solely on your Android device. None of it is transmitted to any server we operate:</p>
         <ul>
-            <li><strong>Favourite stops</strong> — the stops you star for quick access</li>
-            <li><strong>Departure alerts</strong> — which lines you asked to be alerted about</li>
-            <li><strong>Cached transit data (GTFS)</strong> — stops, routes, trips and timetables for Bucharest, downloaded once and refreshed periodically</li>
-            <li><strong>App settings &amp; state</strong> — including an anonymous per-install identifier used only to talk to the live transit API, and a flag that you accepted the terms and gave consent on first launch</li>
-            <li><strong>Pro status</strong> — whether you've unlocked TransitLive Pro, cached locally after Google Play confirms your purchase</li>
+            <li><strong>Favourite stops</strong>: the stops you star for quick access</li>
+            <li><strong>Departure alerts</strong>: which lines you asked to be alerted about</li>
+            <li><strong>Cached transit data (GTFS)</strong>: stops, routes, trips and timetables for Bucharest, downloaded once and refreshed periodically</li>
+            <li><strong>App settings &amp; state</strong>: including a flag that you accepted the terms and gave consent on first launch</li>
+            <li><strong>Pro status</strong>: whether you've unlocked TransitLive Pro, cached locally after Google Play confirms your purchase</li>
         </ul>
         <div class="callout info">
             <span class="callout-icon">ℹ️</span>
@@ -189,19 +191,22 @@
 
     <section class="section" id="s3">
         <div class="section-header"><div class="section-num">03</div><h2>Live transit data</h2></div>
-        <p>To show real-time vehicles and arrivals, TransitLive makes standard HTTPS requests to public Bucharest public-transport data services (operated by <strong>STB</strong> and <strong>TPBI</strong>) and downloads the static GTFS schedule. As with any web request, those servers receive your device's IP address in order to respond. We send only what is needed to fetch transit data — no personal identifiers, no location coordinates.</p>
+        <p>To show real-time vehicles and arrivals, the app makes standard HTTPS requests to <strong>a caching relay service we operate</strong>. The relay collects the data from the Bucharest transit operator once and serves it to all users, so <strong>the app never contacts the operator's systems directly for live data</strong>.</p>
+        <p>As with any web request, our relay receives your device's IP address in order to respond. We send no personal identifiers and no location coordinates with these requests, we do not store them, and we build no profile of you. The relay runs on third-party hosting infrastructure, where standard server logs may be generated as they would for any website.</p>
+        <p>Separately, the app downloads the <strong>published timetable (GTFS)</strong> from a public transit open-data server maintained by TPBI, and refreshes it periodically. That is a plain file download containing nothing about you.</p>
+        <p>If you search for a place by name, the text you type is sent to <strong>OpenStreetMap's Nominatim</strong> service to convert it into map coordinates. Your GPS location is not sent with it, and we do not store your searches.</p>
         <p>Map imagery is <strong>not</strong> downloaded: it ships inside the app and is drawn on your device, so viewing, panning or zooming the map contacts no map server and discloses your IP address to no one.</p>
     </section>
 
     <section class="section" id="s4">
         <div class="section-header"><div class="section-num">04</div><h2>Advertising &amp; AdMob</h2></div>
-        <p>TransitLive is free and supported by ads delivered by <strong>Google AdMob</strong> — native ads shown in the nearby-departures list and in the vehicle/stop detail sheets, plus an interstitial ad shown when you exit the app.</p>
+        <p>TransitLive is free and supported by ads delivered by <strong>Google AdMob</strong>: native ads shown in the nearby-departures list and in the vehicle/stop detail sheets, plus an interstitial ad shown when you exit the app.</p>
 
         <h3>GDPR consent</h3>
-        <p>On first launch (and whenever legally required), a GDPR consent form appears — powered by Google's User Messaging Platform (UMP). You can:</p>
+        <p>On first launch (and whenever legally required), a GDPR consent form appears, powered by Google's User Messaging Platform (UMP). You can:</p>
         <ul>
-            <li><strong>Accept personalized ads</strong> — AdMob may use your advertising ID and device info to show more relevant ads.</li>
-            <li><strong>Decline / use non-personalized ads</strong> — ads are still shown, but without personalization. AdMob still collects some contextual signals (e.g. approximate IP-based location, app context).</li>
+            <li><strong>Accept personalized ads</strong>: AdMob may use your advertising ID and device info to show more relevant ads.</li>
+            <li><strong>Decline / use non-personalized ads</strong>: ads are still shown, but without personalization. AdMob still collects some contextual signals (e.g. approximate IP-based location, app context).</li>
         </ul>
         <p>Where required, the consent form is shown to users in the European Economic Area, the UK and Switzerland; users elsewhere may not see it.</p>
 
@@ -217,35 +222,37 @@
 
     <section class="section" id="s4b">
         <div class="section-header"><div class="section-num">4B</div><h2>Analytics &amp; crash reporting</h2></div>
-        <p>TransitLive uses <strong>Firebase Crashlytics</strong> and <strong>Firebase Analytics</strong> (both Google services) to catch crashes and understand basic, aggregate app usage — for example, which screens are opened or whether the app crashed on your device. This runs independently of the AdMob consent choice described above; it is not used for advertising and is not linked to your identity.</p>
-        <p>Crashlytics reporting is disabled entirely in development/debug builds and only active in the version you install from Google Play. Data collected includes device model, OS version, app version, and stack traces at the time of a crash — never the contents of your favourites, alerts, or location history.</p>
+        <p>TransitLive uses <strong>Firebase Crashlytics</strong> and <strong>Firebase Analytics</strong> (both Google services) to catch crashes and understand basic, aggregate app usage: for example, which screens are opened or whether the app crashed on your device. This runs independently of the AdMob consent choice described above; it is not used for advertising and is not linked to your identity.</p>
+        <p>Crashlytics reporting is disabled entirely in development/debug builds and only active in the version you install from Google Play. Data collected includes device model, OS version, app version, and stack traces at the time of a crash, never the contents of your favourites, alerts, or location history.</p>
         <p>For full details, see the <a href="https://firebase.google.com/support/privacy" target="_blank">Firebase privacy and security policy</a>.</p>
     </section>
 
     <section class="section" id="s4c">
         <div class="section-header"><div class="section-num">4C</div><h2>Purchases &amp; subscriptions</h2></div>
-        <p>TransitLive offers an optional <strong>TransitLive Pro</strong> upgrade (a monthly subscription or a one-time lifetime purchase) that removes ads and unlocks a Pro app icon. All purchases are processed entirely by <strong>Google Play Billing</strong> — we never see or store your payment details (card numbers, billing address, etc.). We only receive confirmation of your entitlement (i.e. that you own "Pro"), which is used on-device to disable ads and switch the launcher icon.</p>
+        <p>TransitLive offers an optional <strong>TransitLive Pro</strong> upgrade (a monthly subscription or a one-time lifetime purchase) that removes ads and unlocks a Pro app icon. All purchases are processed entirely by <strong>Google Play Billing</strong>. We never see or store your payment details (card numbers, billing address, etc.). We only receive confirmation of your entitlement (i.e. that you own "Pro"), which is used on-device to disable ads and switch the launcher icon.</p>
         <p>Subscriptions can be managed or cancelled at any time from the Google Play Store app under Payments &amp; subscriptions.</p>
     </section>
 
     <section class="section" id="s5">
         <div class="section-header"><div class="section-num">05</div><h2>Permissions the app requests</h2></div>
         <ul>
-            <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong> — optional; used to find nearby stops and center the map. Granted and revocable by you at any time in Android Settings.</li>
-            <li><strong>INTERNET</strong> — required to fetch live transit data and show AdMob ads. Not used for the map, which is built into the app.</li>
-            <li><strong>AD_ID</strong> — required by Google Play policy when AdMob is present; used by AdMob only if you consent.</li>
-            <li><strong>POST_NOTIFICATIONS</strong> (Android 13+) — optional; requested only for departure alerts you arm yourself.</li>
+            <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong>: optional; used to find nearby stops and center the map. Granted and revocable by you at any time in Android Settings.</li>
+            <li><strong>INTERNET</strong>: required to fetch live transit data and show AdMob ads. Not used for the map, which is built into the app.</li>
+            <li><strong>AD_ID</strong>: required by Google Play policy when AdMob is present; used by AdMob only if you consent.</li>
+            <li><strong>POST_NOTIFICATIONS</strong> (Android 13+): optional; requested only for departure alerts you arm yourself.</li>
         </ul>
     </section>
 
     <section class="section" id="s6">
         <div class="section-header"><div class="section-num">06</div><h2>Third-party integrations</h2></div>
         <ul>
-            <li><strong>Google AdMob</strong> — ad delivery and GDPR consent management (after consent).</li>
-            <li><strong>Firebase Crashlytics &amp; Analytics</strong> — crash reporting and aggregate usage stats.</li>
-            <li><strong>Google Play Billing</strong> — processing TransitLive Pro purchases and subscriptions.</li>
-            <li><strong>STB / TPBI transit services</strong> — real-time vehicle positions, arrivals and the static GTFS schedule.</li>
-            <li><strong>OpenStreetMap / OpenMapTiles</strong> — the source of the map data bundled inside the app (attribution only; no requests are made to them).</li>
+            <li><strong>Google AdMob</strong>: ad delivery and GDPR consent management (after consent).</li>
+            <li><strong>Firebase Crashlytics &amp; Analytics</strong>: crash reporting and aggregate usage stats.</li>
+            <li><strong>Google Play Billing</strong>: processing TransitLive Pro purchases and subscriptions.</li>
+            <li><strong>Our relay service</strong>: real-time vehicle positions and arrivals, collected from the transit operator on your behalf; hosted on third-party cloud infrastructure.</li>
+            <li><strong>TPBI open data</strong>: the published timetable (GTFS), downloaded as a file.</li>
+            <li><strong>OpenStreetMap Nominatim</strong>: converts a place name you search into map coordinates.</li>
+            <li><strong>OpenStreetMap / OpenMapTiles</strong>: the source of the map data bundled inside the app (attribution only; no requests are made to them).</li>
         </ul>
     </section>
 
@@ -256,17 +263,18 @@
             <li>Ad-related signals sent to Google AdMob (only after consent)</li>
             <li>Crash and usage data sent to Firebase Crashlytics / Analytics</li>
             <li>Purchase requests sent to Google Play Billing (if you choose to buy TransitLive Pro)</li>
-            <li>Standard HTTPS requests to STB / TPBI transit servers (standard IP logging by those services)</li>
+            <li>Standard HTTPS requests to our relay service for live transit data, and to the TPBI open-data server for the timetable file</li>
+            <li>Place-name searches sent to OpenStreetMap Nominatim (only when you use search)</li>
         </ul>
     </section>
 
     <section class="section" id="s8">
         <div class="section-header"><div class="section-num">08</div><h2>Your rights &amp; controls</h2></div>
         <ul>
-            <li><strong>Access &amp; deletion</strong> — all your locally stored data is on your device; clear it via Android Settings → Apps → TransitLive → Clear data, or by uninstalling the app.</li>
-            <li><strong>Location</strong> — revoke any time via Android Settings → Apps → TransitLive → Permissions.</li>
-            <li><strong>Ad consent</strong> — you can reset or change your consent choice from within the app; declining stops personalized ads.</li>
-            <li><strong>Analytics/Crashlytics deletion request</strong> — email us (below) with your approximate install date and device model and we will submit a deletion request to Firebase for any associated crash/usage data.</li>
+            <li><strong>Access &amp; deletion</strong>: all your locally stored data is on your device; clear it via Android Settings → Apps → TransitLive → Clear data, or by uninstalling the app.</li>
+            <li><strong>Location</strong>: revoke any time via Android Settings → Apps → TransitLive → Permissions.</li>
+            <li><strong>Ad consent</strong>: you can reset or change your consent choice from within the app; declining stops personalized ads.</li>
+            <li><strong>Analytics/Crashlytics deletion request</strong>: email us (below) with your approximate install date and device model and we will submit a deletion request to Firebase for any associated crash/usage data.</li>
         </ul>
     </section>
 
@@ -295,7 +303,7 @@
 <header>
     <div class="header-icon">🛡️</div>
     <h1>Politica de confidențialitate</h1>
-    <p class="header-meta">TransitLive — Aplicație Android</p>
+    <p class="header-meta">TransitLive – Aplicație Android</p>
     <div class="header-badge">🛡️ Ultima actualizare: septembrie 2026</div>
 </header>
 
@@ -311,7 +319,7 @@
         <span class="callout-icon">✅</span>
         <div class="callout-body">
             <strong>Pe scurt</strong>
-            Aproape totul rămâne pe dispozitivul tău. Nu îți vindem datele. Firebase (Crashlytics și Analytics) ne ajută să depistăm blocările și să înțelegem utilizarea de bază a aplicației, iar Google AdMob livrează reclamele care mențin TransitLive gratuită — colectarea de date pentru publicitate de către AdMob se activează doar <em>după</em> ce faci o alegere în formularul de consimțământ GDPR afișat la prima pornire. Dacă te abonezi sau cumperi TransitLive Pro, acea achiziție este gestionată integral de Google Play. Locația ta GPS este folosită pe dispozitiv pentru a găsi stațiile din apropiere și nu este trimisă niciodată către serverele noastre.
+            Aproape totul rămâne pe dispozitivul tău. Nu îți vindem datele. Firebase (Crashlytics și Analytics) ne ajută să depistăm blocările și să înțelegem utilizarea de bază a aplicației, iar Google AdMob livrează reclamele care mențin TransitLive gratuită. Colectarea de date pentru publicitate de către AdMob se activează doar <em>după</em> ce faci o alegere în formularul de consimțământ GDPR afișat la prima pornire. Dacă te abonezi sau cumperi TransitLive Pro, acea achiziție este gestionată integral de Google Play. Locația ta GPS este folosită pe dispozitiv pentru a găsi stațiile din apropiere și nu este trimisă niciodată către serverele noastre.
         </div>
     </div>
 
@@ -344,27 +352,29 @@
                 <tr><td>Alerte de plecare</td><td>Liniile pentru care ai cerut notificări</td><td><span class="tag local">Doar pe dispozitiv</span></td></tr>
                 <tr><td>Orar de transport în cache (GTFS)</td><td>Stații, trasee și orare, descărcate o singură dată</td><td><span class="tag local">Doar pe dispozitiv</span></td></tr>
                 <tr><td>Imaginile hărții</td><td>Incluse în aplicație; desenate pe dispozitivul tău</td><td><span class="tag local">Doar pe dispozitiv</span></td></tr>
-                <tr><td>Cereri pentru vehicule / sosiri în timp real</td><td>Poziții în timp real ale autobuzelor, tramvaielor și troleibuzelor</td><td><span class="tag third">Servere STB / TPBI</span></td></tr>
+                <tr><td>Cereri pentru vehicule / sosiri în timp real</td><td>Poziții în timp real ale autobuzelor, tramvaielor și troleibuzelor</td><td><span class="tag third">Serviciul nostru releu</span></td></tr>
+                <tr><td>Descărcarea orarului (GTFS)</td><td>Orarul publicat, preluat periodic</td><td><span class="tag third">Server de date deschise TPBI</span></td></tr>
+                <tr><td>Căutări de locuri</td><td>Transformarea unui nume de loc scris de tine în coordonate</td><td><span class="tag third">OpenStreetMap Nominatim</span></td></tr>
                 <tr><td>Jurnale de erori și diagnostice</td><td>Depistarea și remedierea blocărilor aplicației</td><td><span class="tag admob">Firebase Crashlytics</span></td></tr>
                 <tr><td>Evenimente de utilizare / interacțiune</td><td>Înțelegerea utilizării funcțiilor, îmbunătățirea aplicației</td><td><span class="tag admob">Firebase Analytics</span></td></tr>
                 <tr><td>Istoricul achizițiilor</td><td>Activarea TransitLive Pro (abonament sau deblocare pe viață)</td><td><span class="tag third">Google Play Billing</span></td></tr>
                 <tr><td>ID de publicitate</td><td>Reclame personalizate (necesită consimțământ)</td><td><span class="tag admob">Google AdMob</span></td></tr>
                 <tr><td>Informații despre dispozitiv / sistem</td><td>Livrarea și targetarea reclamelor (necesită consimțământ)</td><td><span class="tag admob">Google AdMob</span></td></tr>
                 <tr><td>Locație aproximativă (pe bază de IP)</td><td>Context pentru reclame (necesită consimțământ)</td><td><span class="tag admob">Google AdMob</span></td></tr>
-                <tr><td>Nume, e-mail, contacte, mesaje, sănătate</td><td>—</td><td><span class="tag never">Niciodată colectate</span></td></tr>
+                <tr><td>Nume, e-mail, contacte, mesaje, sănătate</td><td>Niciunul</td><td><span class="tag never">Niciodată colectate</span></td></tr>
             </tbody>
         </table>
     </section>
 
     <section class="section" id="s2">
-        <div class="section-header"><div class="section-num">02</div><h2>Stocare locală — ce rămâne pe dispozitivul tău</h2></div>
-        <p>Următoarele sunt create și stocate exclusiv pe dispozitivul tău Android (folosind o bază de date Room locală și SharedPreferences). Niciuna dintre ele nu este transmisă către vreun server operat de noi:</p>
+        <div class="section-header"><div class="section-num">02</div><h2>Stocare locală: ce rămâne pe dispozitivul tău</h2></div>
+        <p>Următoarele sunt create și stocate exclusiv pe dispozitivul tău Android. Niciuna dintre ele nu este transmisă către vreun server operat de noi:</p>
         <ul>
-            <li><strong>Stații favorite</strong> — stațiile pe care le marchezi pentru acces rapid</li>
-            <li><strong>Alerte de plecare</strong> — liniile pentru care ai cerut să fii alertat</li>
-            <li><strong>Date de transport în cache (GTFS)</strong> — stații, trasee, curse și orare pentru București, descărcate o dată și actualizate periodic</li>
-            <li><strong>Setări și starea aplicației</strong> — inclusiv un identificator anonim per instalare, folosit doar pentru comunicarea cu API-ul de transport în timp real, și un indicator că ai acceptat termenii și ți-ai dat consimțământul la prima pornire</li>
-            <li><strong>Statusul Pro</strong> — dacă ai deblocat TransitLive Pro, memorat local după ce Google Play îți confirmă achiziția</li>
+            <li><strong>Stații favorite</strong>: stațiile pe care le marchezi pentru acces rapid</li>
+            <li><strong>Alerte de plecare</strong>: liniile pentru care ai cerut să fii alertat</li>
+            <li><strong>Date de transport în cache (GTFS)</strong>: stații, trasee, curse și orare pentru București, descărcate o dată și actualizate periodic</li>
+            <li><strong>Setări și starea aplicației</strong>: inclusiv un indicator că ai acceptat termenii și ți-ai dat consimțământul la prima pornire</li>
+            <li><strong>Statusul Pro</strong>: dacă ai deblocat TransitLive Pro, memorat local după ce Google Play îți confirmă achiziția</li>
         </ul>
         <div class="callout info">
             <span class="callout-icon">ℹ️</span>
@@ -377,19 +387,22 @@
 
     <section class="section" id="s3">
         <div class="section-header"><div class="section-num">03</div><h2>Date de transport în timp real</h2></div>
-        <p>Pentru a afișa vehicule și sosiri în timp real, TransitLive face cereri HTTPS standard către servicii publice de date privind transportul din București (operate de <strong>STB</strong> și <strong>TPBI</strong>) și descarcă orarul static GTFS. Ca la orice cerere web, acele servere primesc adresa IP a dispozitivului tău pentru a putea răspunde. Trimitem doar ce este necesar pentru a prelua datele de transport — fără identificatori personali, fără coordonate de locație.</p>
+        <p>Pentru a afișa vehicule și sosiri în timp real, aplicația face cereri HTTPS standard către <strong>un serviciu releu cu memorie cache pe care îl operăm noi</strong>. Releul preia datele de la operatorul de transport din București o singură dată și le servește tuturor utilizatorilor, astfel încât <strong>aplicația nu contactează niciodată direct sistemele operatorului pentru date în timp real</strong>.</p>
+        <p>Ca la orice cerere web, releul nostru primește adresa IP a dispozitivului tău pentru a putea răspunde. Nu trimitem identificatori personali și nici coordonate de locație împreună cu aceste cereri, nu le stocăm și nu construim niciun profil despre tine. Releul rulează pe infrastructură de găzduire terță, unde pot fi generate jurnale standard de server, la fel ca pentru orice site web.</p>
+        <p>Separat, aplicația descarcă <strong>orarul publicat (GTFS)</strong> de pe un server public de date deschise administrat de TPBI și îl actualizează periodic. Aceasta este o simplă descărcare de fișier, care nu conține nimic despre tine.</p>
+        <p>Dacă cauți un loc după nume, textul pe care îl scrii este trimis către serviciul <strong>Nominatim al OpenStreetMap</strong> pentru a fi transformat în coordonate pe hartă. Locația ta GPS nu este trimisă împreună cu el, iar noi nu stocăm căutările tale.</p>
         <p>Imaginile hărții <strong>nu</strong> sunt descărcate: ele sunt incluse în aplicație și desenate pe dispozitivul tău, așa că vizualizarea, deplasarea sau mărirea hărții nu contactează niciun server de hărți și nu dezvăluie adresa ta IP nimănui.</p>
     </section>
 
     <section class="section" id="s4">
         <div class="section-header"><div class="section-num">04</div><h2>Publicitate și AdMob</h2></div>
-        <p>TransitLive este gratuită și susținută de reclame livrate de <strong>Google AdMob</strong> — reclame native afișate în lista de plecări din apropiere și în panourile de detalii ale vehiculelor și stațiilor, plus o reclamă interstițială afișată la ieșirea din aplicație.</p>
+        <p>TransitLive este gratuită și susținută de reclame livrate de <strong>Google AdMob</strong>: reclame native afișate în lista de plecări din apropiere și în panourile de detalii ale vehiculelor și stațiilor, plus o reclamă interstițială afișată la ieșirea din aplicație.</p>
 
         <h3>Consimțământul GDPR</h3>
-        <p>La prima pornire (și ori de câte ori legea o cere), apare un formular de consimțământ GDPR — furnizat prin User Messaging Platform (UMP) de la Google. Poți:</p>
+        <p>La prima pornire (și ori de câte ori legea o cere), apare un formular de consimțământ GDPR, furnizat prin User Messaging Platform (UMP) de la Google. Poți:</p>
         <ul>
-            <li><strong>Accepta reclame personalizate</strong> — AdMob poate folosi ID-ul tău de publicitate și informații despre dispozitiv pentru a afișa reclame mai relevante.</li>
-            <li><strong>Refuza / folosi reclame nepersonalizate</strong> — reclamele sunt afișate în continuare, dar fără personalizare. AdMob colectează totuși unele semnale contextuale (de exemplu locația aproximativă pe bază de IP, contextul aplicației).</li>
+            <li><strong>Accepta reclame personalizate</strong>: AdMob poate folosi ID-ul tău de publicitate și informații despre dispozitiv pentru a afișa reclame mai relevante.</li>
+            <li><strong>Refuza / folosi reclame nepersonalizate</strong>: reclamele sunt afișate în continuare, dar fără personalizare. AdMob colectează totuși unele semnale contextuale (de exemplu locația aproximativă pe bază de IP, contextul aplicației).</li>
         </ul>
         <p>Acolo unde este necesar, formularul de consimțământ este afișat utilizatorilor din Spațiul Economic European, Regatul Unit și Elveția; este posibil ca utilizatorii din alte zone să nu îl vadă.</p>
 
@@ -405,35 +418,37 @@
 
     <section class="section" id="s4b">
         <div class="section-header"><div class="section-num">4B</div><h2>Analiză și raportarea erorilor</h2></div>
-        <p>TransitLive folosește <strong>Firebase Crashlytics</strong> și <strong>Firebase Analytics</strong> (ambele servicii Google) pentru a depista blocările și a înțelege utilizarea de bază, agregată, a aplicației — de exemplu ce ecrane sunt deschise sau dacă aplicația s-a blocat pe dispozitivul tău. Acest lucru funcționează independent de alegerea privind consimțământul AdMob descrisă mai sus; nu este folosit pentru publicitate și nu este legat de identitatea ta.</p>
-        <p>Raportarea prin Crashlytics este dezactivată complet în versiunile de dezvoltare/debug și este activă doar în versiunea pe care o instalezi din Google Play. Datele colectate includ modelul dispozitivului, versiunea sistemului de operare, versiunea aplicației și urmele de stivă din momentul unei blocări — niciodată conținutul favoritelor, al alertelor sau al istoricului tău de locație.</p>
+        <p>TransitLive folosește <strong>Firebase Crashlytics</strong> și <strong>Firebase Analytics</strong> (ambele servicii Google) pentru a depista blocările și a înțelege utilizarea de bază, agregată, a aplicației: de exemplu ce ecrane sunt deschise sau dacă aplicația s-a blocat pe dispozitivul tău. Acest lucru funcționează independent de alegerea privind consimțământul AdMob descrisă mai sus; nu este folosit pentru publicitate și nu este legat de identitatea ta.</p>
+        <p>Raportarea prin Crashlytics este dezactivată complet în versiunile de dezvoltare/debug și este activă doar în versiunea pe care o instalezi din Google Play. Datele colectate includ modelul dispozitivului, versiunea sistemului de operare, versiunea aplicației și urmele de stivă din momentul unei blocări, niciodată conținutul favoritelor, al alertelor sau al istoricului tău de locație.</p>
         <p>Pentru detalii complete, consultă <a href="https://firebase.google.com/support/privacy" target="_blank">politica Firebase privind confidențialitatea și securitatea</a>.</p>
     </section>
 
     <section class="section" id="s4c">
         <div class="section-header"><div class="section-num">4C</div><h2>Achiziții și abonamente</h2></div>
-        <p>TransitLive oferă o versiune opțională <strong>TransitLive Pro</strong> (un abonament lunar sau o achiziție unică pe viață) care elimină reclamele și deblochează o pictogramă Pro a aplicației. Toate achizițiile sunt procesate integral de <strong>Google Play Billing</strong> — noi nu vedem și nu stocăm niciodată datele tale de plată (numere de card, adresă de facturare etc.). Primim doar confirmarea dreptului tău de acces (adică faptul că deții „Pro"), care este folosită pe dispozitiv pentru a dezactiva reclamele și a schimba pictograma aplicației.</p>
+        <p>TransitLive oferă o versiune opțională <strong>TransitLive Pro</strong> (un abonament lunar sau o achiziție unică pe viață) care elimină reclamele și deblochează o pictogramă Pro a aplicației. Toate achizițiile sunt procesate integral de <strong>Google Play Billing</strong>. Noi nu vedem și nu stocăm niciodată datele tale de plată (numere de card, adresă de facturare etc.). Primim doar confirmarea dreptului tău de acces (adică faptul că deții „Pro"), care este folosită pe dispozitiv pentru a dezactiva reclamele și a schimba pictograma aplicației.</p>
         <p>Abonamentele pot fi gestionate sau anulate oricând din aplicația Magazin Google Play, la secțiunea Plăți și abonamente.</p>
     </section>
 
     <section class="section" id="s5">
         <div class="section-header"><div class="section-num">05</div><h2>Permisiunile solicitate de aplicație</h2></div>
         <ul>
-            <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong> — opționale; folosite pentru a găsi stațiile din apropiere și a centra harta. Acordate și revocabile de tine oricând din Setările Android.</li>
-            <li><strong>INTERNET</strong> — necesară pentru a prelua datele de transport în timp real și pentru a afișa reclamele AdMob. Nu este folosită pentru hartă, care este inclusă în aplicație.</li>
-            <li><strong>AD_ID</strong> — necesară conform politicii Google Play atunci când AdMob este prezent; folosită de AdMob doar dacă îți dai consimțământul.</li>
-            <li><strong>POST_NOTIFICATIONS</strong> (Android 13+) — opțională; solicitată doar pentru alertele de plecare pe care le activezi tu.</li>
+            <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong>: opționale; folosite pentru a găsi stațiile din apropiere și a centra harta. Acordate și revocabile de tine oricând din Setările Android.</li>
+            <li><strong>INTERNET</strong>: necesară pentru a prelua datele de transport în timp real și pentru a afișa reclamele AdMob. Nu este folosită pentru hartă, care este inclusă în aplicație.</li>
+            <li><strong>AD_ID</strong>: necesară conform politicii Google Play atunci când AdMob este prezent; folosită de AdMob doar dacă îți dai consimțământul.</li>
+            <li><strong>POST_NOTIFICATIONS</strong> (Android 13+): opțională; solicitată doar pentru alertele de plecare pe care le activezi tu.</li>
         </ul>
     </section>
 
     <section class="section" id="s6">
         <div class="section-header"><div class="section-num">06</div><h2>Integrări cu terți</h2></div>
         <ul>
-            <li><strong>Google AdMob</strong> — livrarea reclamelor și gestionarea consimțământului GDPR (după consimțământ).</li>
-            <li><strong>Firebase Crashlytics și Analytics</strong> — raportarea erorilor și statistici agregate de utilizare.</li>
-            <li><strong>Google Play Billing</strong> — procesarea achizițiilor și abonamentelor TransitLive Pro.</li>
-            <li><strong>Serviciile de transport STB / TPBI</strong> — poziții ale vehiculelor în timp real, sosiri și orarul static GTFS.</li>
-            <li><strong>OpenStreetMap / OpenMapTiles</strong> — sursa datelor cartografice incluse în aplicație (doar atribuire; nu se fac cereri către ele).</li>
+            <li><strong>Google AdMob</strong>: livrarea reclamelor și gestionarea consimțământului GDPR (după consimțământ).</li>
+            <li><strong>Firebase Crashlytics și Analytics</strong>: raportarea erorilor și statistici agregate de utilizare.</li>
+            <li><strong>Google Play Billing</strong>: procesarea achizițiilor și abonamentelor TransitLive Pro.</li>
+            <li><strong>Serviciul nostru releu</strong>: poziții ale vehiculelor în timp real și sosiri, preluate de la operatorul de transport în numele tău; găzduit pe infrastructură cloud terță.</li>
+            <li><strong>Date deschise TPBI</strong>: orarul publicat (GTFS), descărcat ca fișier.</li>
+            <li><strong>OpenStreetMap Nominatim</strong>: transformă un nume de loc căutat de tine în coordonate pe hartă.</li>
+            <li><strong>OpenStreetMap / OpenMapTiles</strong>: sursa datelor cartografice incluse în aplicație (doar atribuire; nu se fac cereri către ele).</li>
         </ul>
     </section>
 
@@ -444,17 +459,18 @@
             <li>Semnale legate de publicitate trimise către Google AdMob (doar după consimțământ)</li>
             <li>Date despre erori și utilizare trimise către Firebase Crashlytics / Analytics</li>
             <li>Cereri de achiziție trimise către Google Play Billing (dacă alegi să cumperi TransitLive Pro)</li>
-            <li>Cereri HTTPS standard către serverele de transport STB / TPBI (înregistrare standard a adresei IP de către acele servicii)</li>
+            <li>Cereri HTTPS standard către serviciul nostru releu pentru datele de transport în timp real și către serverul de date deschise TPBI pentru fișierul cu orarul</li>
+            <li>Căutări de locuri trimise către OpenStreetMap Nominatim (doar când folosești căutarea)</li>
         </ul>
     </section>
 
     <section class="section" id="s8">
         <div class="section-header"><div class="section-num">08</div><h2>Drepturile și controalele tale</h2></div>
         <ul>
-            <li><strong>Acces și ștergere</strong> — toate datele stocate local se află pe dispozitivul tău; le poți șterge din Setări Android → Aplicații → TransitLive → Ștergere date sau dezinstalând aplicația.</li>
-            <li><strong>Locație</strong> — o poți revoca oricând din Setări Android → Aplicații → TransitLive → Permisiuni.</li>
-            <li><strong>Consimțământul pentru reclame</strong> — poți reseta sau modifica alegerea privind consimțământul din aplicație; refuzul oprește reclamele personalizate.</li>
-            <li><strong>Cerere de ștergere Analytics/Crashlytics</strong> — scrie-ne (mai jos) menționând data aproximativă a instalării și modelul dispozitivului, iar noi vom depune o cerere de ștergere către Firebase pentru datele asociate de erori/utilizare.</li>
+            <li><strong>Acces și ștergere</strong>: toate datele stocate local se află pe dispozitivul tău; le poți șterge din Setări Android → Aplicații → TransitLive → Ștergere date sau dezinstalând aplicația.</li>
+            <li><strong>Locație</strong>: o poți revoca oricând din Setări Android → Aplicații → TransitLive → Permisiuni.</li>
+            <li><strong>Consimțământul pentru reclame</strong>: poți reseta sau modifica alegerea privind consimțământul din aplicație; refuzul oprește reclamele personalizate.</li>
+            <li><strong>Cerere de ștergere Analytics/Crashlytics</strong>: scrie-ne (mai jos) menționând data aproximativă a instalării și modelul dispozitivului, iar noi vom depune o cerere de ștergere către Firebase pentru datele asociate de erori/utilizare.</li>
         </ul>
     </section>
 
