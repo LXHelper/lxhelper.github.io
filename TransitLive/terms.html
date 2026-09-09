@@ -40,16 +40,38 @@
         footer{background:var(--navy);color:rgba(255,255,255,0.7);text-align:center;padding:32px 24px;font-size:0.85rem;}
         @media (max-width:600px){.container{padding:32px 16px 60px;}}
     </style>
+<style>
+    /* Language toggle — mirrors .nav-bar pill styling so it reads as part of the chrome. */
+    .lang-switch { display: flex; justify-content: center; gap: 0; padding: 10px 24px 0; background: var(--white); }
+    .lang-switch .lang-group { display: inline-flex; border: 1.5px solid var(--border); border-radius: 999px; overflow: hidden; }
+    .lang-switch button { appearance: none; border: 0; background: transparent; cursor: pointer;
+        font: inherit; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+        padding: 6px 16px; color: var(--text-muted); transition: background 0.2s, color 0.2s; }
+    .lang-switch button[aria-pressed="true"] { background: var(--navy); color: var(--white); }
+    .lang-switch button:focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
+    /* Only the active language is rendered. */
+    [data-lang] { display: none; }
+    [data-lang].is-active { display: block; }
+</style>
+<meta data-title-en="Terms &amp; Conditions — TransitLive" data-title-ro="Termeni și condiții — TransitLive">
 </head>
 <body>
 
+<div class="lang-switch">
+    <div class="lang-group" role="group" aria-label="Language / Limbă">
+        <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+        <button type="button" data-set-lang="ro" aria-pressed="false">Română</button>
+    </div>
+</div>
+
+<div data-lang="en">
 <div class="line-strip"></div>
 
 <header>
     <div class="header-icon">📜</div>
     <h1>Terms &amp; Conditions</h1>
     <p class="header-meta">TransitLive — Android App</p>
-    <div class="header-badge">📜 Last updated: August 2026</div>
+    <div class="header-badge">📜 Last updated: September 2026</div>
 </header>
 
 <nav class="nav-bar">
@@ -64,61 +86,302 @@
         <span class="callout-icon">ℹ️</span>
         <div class="callout-body">
             <strong>Plain-language summary</strong>
-            TransitLive is a free, ad-supported app that shows live Bucharest public transit. Transit times are estimates from third-party data and are provided "as is" — always allow a margin when catching a vehicle. By using the app you accept these terms.
+            TransitLive is a free, ad-supported app that shows Bucharest public transit. Live vehicle positions and arrival times are <strong>estimates that reach you with a delay</strong> — usually seconds, sometimes minutes — so always allow a margin when catching a vehicle. The app is provided "as is", and features or cities may change, be withdrawn or be discontinued at any time. By using the app, you agree to these terms.
         </div>
     </div>
 
     <section class="section" id="s1">
         <div class="section-header"><div class="section-num">01</div><h2>Acceptance of terms</h2></div>
-        <p>By downloading, installing or using TransitLive ("the app"), you agree to these Terms &amp; Conditions and to our <a href="privacy.html">Privacy Policy</a>. If you do not agree, please do not use the app.</p>
+        <p><strong>By downloading, installing or using TransitLive ("the app"), you agree to be bound by these Terms &amp; Conditions and by our <a href="privacy.html">Privacy Policy</a>.</strong> If you do not agree, do not use the app and please uninstall it.</p>
+        <p>We may revise these terms from time to time. Where a change is material, the app will ask you to accept the updated terms before you continue. Otherwise, continued use of the app after a revision takes effect constitutes acceptance of the revised terms.</p>
     </section>
 
     <section class="section" id="s2">
         <div class="section-header"><div class="section-num">02</div><h2>What the app does</h2></div>
-        <p>TransitLive displays public transit information for Bucharest, including live vehicle positions, nearby stops, route shapes and estimated arrival times. It combines the static GTFS schedule with real-time data from public transit services.</p>
+        <p>TransitLive displays public transit information for Bucharest, including live vehicle positions, nearby stops, route shapes and estimated arrival times. It combines the static GTFS schedule with real-time data relayed from public transit services.</p>
+        <p>The app also offers favourite stops, optional departure notifications, and an optional paid upgrade (see section 07). TransitLive is an <strong>independent client</strong> built on publicly available data — it is not an official product of any transit operator, and it does not sell tickets or process fares.</p>
     </section>
 
     <section class="section" id="s3">
-        <div class="section-header"><div class="section-num">03</div><h2>Accuracy &amp; "as is" disclaimer</h2></div>
-        <p>All transit data — arrival times, vehicle positions, routes and schedules — comes from third-party public data sources and is provided <strong>"as is" and "as available"</strong>, without warranty of any kind. Times are estimates and may be inaccurate, delayed or unavailable due to source outages, GPS drift, service disruptions or network conditions.</p>
-        <p>Do not rely on the app as your sole source for time-critical decisions. Always keep a safety margin and verify with official operator information where it matters.</p>
+        <div class="section-header"><div class="section-num">03</div><h2>Live data, delays &amp; accuracy</h2></div>
+        <div class="callout">
+            <span class="callout-icon">⏱️</span>
+            <div class="callout-body">
+                <strong>Live data is never instantaneous</strong>
+                What you see on the map has already happened. Treat every position and time as an approximation, not a live camera feed.
+            </div>
+        </div>
+        <p><strong>Live vehicle positions are delayed.</strong> A position shown in the app has travelled from the vehicle's onboard equipment, through the operator's tracking system, through a relay and cache, and across your network connection. Each step adds latency. In practice the data you see is <strong>seconds to minutes old</strong>, and a vehicle may appear behind or ahead of where it actually is. Vehicles may also disappear from the map temporarily, or not appear at all, if they are not reporting.</p>
+        <p><strong>Arrival times are estimates, not guarantees.</strong> They are predictions derived from the data described above, and they can change, be wrong, or fail to account for traffic, disruptions, diversions, driver changes or cancellations.</p>
+        <p><strong>When live data is unavailable, the app falls back to the published timetable.</strong> Scheduled times reflect the planned service only — they do not account for real-world delays at all, and the gap between schedule and reality can be significant.</p>
+        <p>Transit data, schedules and route geometry come from third-party public sources and may be stale, incomplete, incorrect or temporarily unavailable due to source outages, GPS drift, service disruptions, network conditions or upstream data errors.</p>
+        <p><strong>Do not rely on the app as your sole source of information for time-critical decisions.</strong> Always allow a safety margin, and verify with official operator information where it matters.</p>
     </section>
 
     <section class="section" id="s4">
-        <div class="section-header"><div class="section-num">04</div><h2>Advertising</h2></div>
-        <p>The app is free and supported by advertising delivered by Google AdMob, including native ads in the departures/detail sheets and an interstitial ad on exit. Your ad-consent choices are governed by the GDPR consent flow described in the <a href="privacy.html">Privacy Policy</a>.</p>
-    </section>
-
-    <section class="section" id="s4b">
-        <div class="section-header"><div class="section-num">4B</div><h2>TransitLive Pro (subscriptions &amp; purchases)</h2></div>
-        <p>TransitLive offers an optional paid upgrade, "TransitLive Pro," as an auto-renewing monthly subscription or a one-time lifetime purchase, both billed through Google Play. Pro removes ads and unlocks an alternate app icon.</p>
-        <p>Subscriptions renew automatically until cancelled and are billed to your Google Play account. You can view, manage or cancel a subscription at any time from the Google Play Store app under Payments &amp; subscriptions. Refunds are handled per Google Play's standard refund policy; we do not process refunds directly.</p>
+        <div class="section-header"><div class="section-num">04</div><h2>Provided "as is"</h2></div>
+        <p>The app and all information it presents are provided <strong>"as is" and "as available"</strong>, without warranties or conditions of any kind, whether express, implied or statutory. To the maximum extent permitted by applicable law, we disclaim all such warranties, including any implied warranties of merchantability, fitness for a particular purpose, accuracy, completeness, availability and non-infringement.</p>
+        <p>We do not warrant that the app will be uninterrupted, timely, secure or error-free, that defects will be corrected, or that the data it displays will be accurate or reliable.</p>
+        <p>Nothing in this section limits any rights you have as a consumer that cannot be excluded or limited under applicable law.</p>
     </section>
 
     <section class="section" id="s5">
-        <div class="section-header"><div class="section-num">05</div><h2>Acceptable use</h2></div>
-        <p>You agree not to misuse the app, including attempting to reverse-engineer it for malicious purposes, overloading the third-party data sources it relies on, or using it in any unlawful way.</p>
+        <div class="section-header"><div class="section-num">05</div><h2>Changes, availability &amp; discontinuation</h2></div>
+        <p><strong>The app is provided free of charge and may change at any time.</strong> We may modify, suspend, limit, withdraw or discontinue the app, any feature, any supported city, or the service as a whole, <strong>at any time, with or without notice, and without liability to you</strong>.</p>
+        <p>Features may be added, altered or removed between versions. Support for a particular city or transport mode may end. We are under no obligation to maintain, update or continue providing the app or any part of it.</p>
+        <p>The app depends on third-party data sources and services that we do not control. If those sources change their format, restrict access, become unreliable or cease to operate, the app's functionality may degrade or stop working entirely — including permanently — through no fault of ours.</p>
+        <p>Older versions of the app may stop working when a dependency they rely on changes. We do not guarantee the continued availability of any specific feature, city or version.</p>
     </section>
 
     <section class="section" id="s6">
-        <div class="section-header"><div class="section-num">06</div><h2>Intellectual property</h2></div>
-        <p>The app's code, design and branding are owned by the developer. Map data is © OpenStreetMap contributors. Transit data belongs to its respective operators (STB, TPBI and related bodies). This app is an independent client and is not affiliated with, endorsed by, or an official product of those operators.</p>
+        <div class="section-header"><div class="section-num">06</div><h2>Advertising</h2></div>
+        <p>The app is free and supported by advertising delivered by Google AdMob, including native ads in the departures and detail sheets and an interstitial ad on exit. Your ad-consent choices are governed by the GDPR consent flow described in the <a href="privacy.html">Privacy Policy</a>, which you are asked about after accepting these terms.</p>
     </section>
 
     <section class="section" id="s7">
-        <div class="section-header"><div class="section-num">07</div><h2>Limitation of liability</h2></div>
-        <p>To the maximum extent permitted by law, the developer is not liable for any loss, missed connection, delay, or damage arising from your use of, or inability to use, the app or from reliance on the information it presents.</p>
+        <div class="section-header"><div class="section-num">07</div><h2>TransitLive Pro (subscriptions &amp; purchases)</h2></div>
+        <p>TransitLive offers an optional paid upgrade, "TransitLive Pro," as an auto-renewing monthly subscription or a one-time lifetime purchase, both billed through Google Play. Pro removes ads and unlocks an alternate app icon.</p>
+        <p>Subscriptions renew automatically until cancelled and are billed to your Google Play account. You can view, manage or cancel a subscription at any time from the Google Play Store app under Payments &amp; subscriptions. Cancelling stops future renewals; it does not retroactively refund the current period. Refunds are handled per Google Play's standard refund policy; we do not process refunds directly.</p>
+        <p>Pro benefits are tied to the app's features as they exist from time to time. If an underlying feature changes or is discontinued under section 05, the corresponding Pro benefit may change with it. A lifetime purchase means for the lifetime of the app — it does not oblige us to operate the app indefinitely.</p>
     </section>
 
     <section class="section" id="s8">
-        <div class="section-header"><div class="section-num">08</div><h2>Changes &amp; contact</h2></div>
-        <p>We may update these terms from time to time; the "Last updated" date reflects the latest revision. Continued use after changes take effect constitutes acceptance.</p>
+        <div class="section-header"><div class="section-num">08</div><h2>Acceptable use</h2></div>
+        <p>You agree not to misuse the app. In particular, you agree not to:</p>
+        <ul>
+            <li>reverse-engineer, decompile or tamper with the app for malicious purposes;</li>
+            <li>place unreasonable load on the app or on the third-party data sources it relies on, including through automated or bulk requests;</li>
+            <li>scrape, harvest, resell or redistribute the transit data obtained through the app;</li>
+            <li>circumvent, disable or interfere with security, consent or billing mechanisms;</li>
+            <li>use the app in any unlawful way or in breach of any applicable regulation.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s9">
+        <div class="section-header"><div class="section-num">09</div><h2>Third-party data &amp; services</h2></div>
+        <p>Map data is © OpenStreetMap contributors, available under the Open Database License. Transit schedules, route and vehicle data belong to their respective operators and authorities (STB, TPBI and related bodies).</p>
+        <p><strong>TransitLive is an independent application. It is not affiliated with, endorsed by, sponsored by, or an official product of any transit operator or authority.</strong> Operator names and route designations are used solely to identify the services being displayed.</p>
+        <p>The app also relies on third-party services including Google Play, Google AdMob and Firebase. Their own terms and privacy policies govern those services; we are not responsible for them.</p>
+    </section>
+
+    <section class="section" id="s10">
+        <div class="section-header"><div class="section-num">10</div><h2>Intellectual property</h2></div>
+        <p>The app's source code, design, user interface and branding are owned by the developer and are protected by applicable intellectual property law. These terms grant you a personal, non-exclusive, non-transferable, revocable licence to use the app for your own non-commercial purposes. No other rights are granted.</p>
+    </section>
+
+    <section class="section" id="s11">
+        <div class="section-header"><div class="section-num">11</div><h2>Limitation of liability</h2></div>
+        <p>To the maximum extent permitted by applicable law, the developer shall not be liable for any loss or damage arising out of or in connection with your use of, or inability to use, the app, or your reliance on any information it presents — including, without limitation, <strong>missed connections, missed appointments, delays, wasted journeys, additional transport costs, or losses caused by inaccurate, delayed, incomplete or unavailable transit data</strong>.</p>
+        <p>To the same extent, we shall not be liable for any indirect, incidental, special, consequential or punitive damages, or for any loss of profits, revenue, data or goodwill, however caused and under any theory of liability.</p>
+        <p>Nothing in these terms excludes or limits liability for death or personal injury caused by negligence, for fraud or fraudulent misrepresentation, or for any other liability that cannot lawfully be excluded or limited. If you are a consumer, your statutory rights are not affected.</p>
+    </section>
+
+    <section class="section" id="s12">
+        <div class="section-header"><div class="section-num">12</div><h2>Termination</h2></div>
+        <p>You may stop using the app at any time by uninstalling it. We may suspend or terminate your access to the app, or to any feature, if you breach these terms or if we discontinue the service under section 05.</p>
+        <p>Provisions that by their nature should survive termination — including the disclaimers in sections 03 and 04, the limitation of liability in section 11, and the intellectual property terms in section 10 — remain in effect after these terms end.</p>
+    </section>
+
+    <section class="section" id="s13">
+        <div class="section-header"><div class="section-num">13</div><h2>Governing law &amp; severability</h2></div>
+        <p>These terms are governed by the laws of Romania, without regard to conflict-of-law rules. If you are a consumer resident elsewhere, you retain the benefit of any mandatory consumer-protection provisions of the law of your country of residence.</p>
+        <p>If any provision of these terms is held to be invalid or unenforceable, that provision shall be limited or severed to the minimum extent necessary, and the remaining provisions shall continue in full force and effect. Our failure to enforce any provision is not a waiver of it.</p>
+    </section>
+
+    <section class="section" id="s14">
+        <div class="section-header"><div class="section-num">14</div><h2>Changes to these terms &amp; contact</h2></div>
+        <p>We may update these terms from time to time; the "Last updated" date above reflects the latest revision. Where a revision is material, the app will ask you to review and accept the updated terms before you continue to use it.</p>
         <p><strong>Contact:</strong> <a href="mailto:contact@lxtech.ro">contact@lxtech.ro</a></p>
     </section>
 
 </div>
 
 <footer>© 2026 TransitLive · Bucharest public transit, live.</footer>
+</div>
+
+<div data-lang="ro">
+<div class="line-strip"></div>
+
+<header>
+    <div class="header-icon">📜</div>
+    <h1>Termeni și condiții</h1>
+    <p class="header-meta">TransitLive — Aplicație Android</p>
+    <div class="header-badge">📜 Ultima actualizare: septembrie 2026</div>
+</header>
+
+<nav class="nav-bar">
+    <a href="terms.html" class="active">Termeni și condiții</a>
+    <a href="privacy.html">Politica de confidențialitate</a>
+    <a href="data-usage.html">Utilizarea datelor</a>
+</nav>
+
+<div class="container">
+
+    <div class="callout">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body">
+            <strong>Pe scurt</strong>
+            TransitLive este o aplicație gratuită, susținută de reclame, care afișează transportul public din București. Pozițiile vehiculelor în timp real și timpii de sosire sunt <strong>estimări care ajung la tine cu o întârziere</strong> — de obicei secunde, uneori minute — așa că lasă întotdeauna o marjă atunci când prinzi un vehicul. Aplicația este oferită „ca atare", iar funcțiile sau orașele pot fi modificate, retrase sau întrerupte oricând. Prin utilizarea aplicației, ești de acord cu acești termeni.
+        </div>
+    </div>
+
+    <section class="section" id="s1">
+        <div class="section-header"><div class="section-num">01</div><h2>Acceptarea termenilor</h2></div>
+        <p><strong>Prin descărcarea, instalarea sau utilizarea aplicației TransitLive („aplicația"), ești de acord să respecți acești Termeni și condiții, precum și <a href="privacy.html">Politica noastră de confidențialitate</a>.</strong> Dacă nu ești de acord, te rugăm să nu folosești aplicația și să o dezinstalezi.</p>
+        <p>Putem revizui acești termeni din când în când. Atunci când o modificare este semnificativă, aplicația îți va cere să accepți termenii actualizați înainte de a continua. În caz contrar, utilizarea în continuare a aplicației după intrarea în vigoare a unei revizuiri constituie acceptarea termenilor revizuiți.</p>
+    </section>
+
+    <section class="section" id="s2">
+        <div class="section-header"><div class="section-num">02</div><h2>Ce face aplicația</h2></div>
+        <p>TransitLive afișează informații despre transportul public din București, inclusiv poziții ale vehiculelor în timp real, stații din apropiere, trasee și timpi estimați de sosire. Combină orarul static GTFS cu date în timp real preluate prin releu de la serviciile publice de transport.</p>
+        <p>Aplicația oferă de asemenea stații favorite, notificări opționale de plecare și o versiune plătită opțională (vezi secțiunea 07). TransitLive este o <strong>aplicație independentă</strong> construită pe date public disponibile — nu este un produs oficial al vreunui operator de transport și nu vinde bilete și nu procesează tarife.</p>
+    </section>
+
+    <section class="section" id="s3">
+        <div class="section-header"><div class="section-num">03</div><h2>Date în timp real, întârzieri și acuratețe</h2></div>
+        <div class="callout">
+            <span class="callout-icon">⏱️</span>
+            <div class="callout-body">
+                <strong>Datele în timp real nu sunt niciodată instantanee</strong>
+                Ceea ce vezi pe hartă s-a întâmplat deja. Tratează fiecare poziție și fiecare timp ca pe o aproximare, nu ca pe o transmisie live.
+            </div>
+        </div>
+        <p><strong>Pozițiile vehiculelor în timp real sunt întârziate.</strong> O poziție afișată în aplicație a parcurs drumul de la echipamentul de la bordul vehiculului, prin sistemul de urmărire al operatorului, printr-un releu și o memorie cache, apoi prin conexiunea ta la internet. Fiecare etapă adaugă latență. În practică, datele pe care le vezi sunt <strong>vechi de secunde până la minute</strong>, iar un vehicul poate apărea în urma sau înaintea poziției sale reale. De asemenea, vehiculele pot dispărea temporar de pe hartă sau pot să nu apară deloc, dacă nu transmit date.</p>
+        <p><strong>Timpii de sosire sunt estimări, nu garanții.</strong> Sunt predicții derivate din datele descrise mai sus și se pot schimba, pot fi greșite sau pot să nu ia în calcul traficul, perturbările, devierile, schimbările de șofer sau anulările.</p>
+        <p><strong>Când datele în timp real nu sunt disponibile, aplicația revine la orarul publicat.</strong> Orarele reflectă doar serviciul planificat — nu iau deloc în calcul întârzierile reale, iar diferența dintre orar și realitate poate fi semnificativă.</p>
+        <p>Datele de transport, orarele și geometria traseelor provin din surse publice terțe și pot fi învechite, incomplete, incorecte sau temporar indisponibile din cauza întreruperilor la sursă, a erorilor GPS, a perturbărilor de serviciu, a condițiilor de rețea sau a erorilor din datele furnizate.</p>
+        <p><strong>Nu te baza pe aplicație ca sursă unică de informare pentru decizii critice din punct de vedere al timpului.</strong> Lasă întotdeauna o marjă de siguranță și verifică informațiile oficiale ale operatorului atunci când contează.</p>
+    </section>
+
+    <section class="section" id="s4">
+        <div class="section-header"><div class="section-num">04</div><h2>Oferită „ca atare"</h2></div>
+        <p>Aplicația și toate informațiile pe care le prezintă sunt furnizate <strong>„ca atare" și „în măsura disponibilității"</strong>, fără garanții sau condiții de niciun fel, exprese, implicite sau statutare. În măsura maximă permisă de legislația aplicabilă, declinăm toate aceste garanții, inclusiv orice garanții implicite de vandabilitate, adecvare pentru un anumit scop, acuratețe, exhaustivitate, disponibilitate și neîncălcare a drepturilor.</p>
+        <p>Nu garantăm că aplicația va funcționa neîntrerupt, la timp, în siguranță sau fără erori, că defectele vor fi corectate sau că datele afișate vor fi exacte ori fiabile.</p>
+        <p>Nimic din această secțiune nu limitează drepturile pe care le ai în calitate de consumator și care nu pot fi excluse sau limitate conform legislației aplicabile.</p>
+    </section>
+
+    <section class="section" id="s5">
+        <div class="section-header"><div class="section-num">05</div><h2>Modificări, disponibilitate și întrerupere</h2></div>
+        <p><strong>Aplicația este oferită gratuit și poate fi modificată oricând.</strong> Putem modifica, suspenda, limita, retrage sau întrerupe aplicația, orice funcție, orice oraș acceptat sau serviciul în ansamblu, <strong>oricând, cu sau fără notificare prealabilă și fără răspundere față de tine</strong>.</p>
+        <p>Funcțiile pot fi adăugate, modificate sau eliminate de la o versiune la alta. Suportul pentru un anumit oraș sau mod de transport poate înceta. Nu avem nicio obligație de a menține, actualiza sau continua furnizarea aplicației sau a vreunei părți a acesteia.</p>
+        <p>Aplicația depinde de surse de date și servicii terțe pe care nu le controlăm. Dacă aceste surse își schimbă formatul, restricționează accesul, devin nefiabile sau își încetează activitatea, funcționalitatea aplicației se poate degrada sau poate înceta complet — inclusiv definitiv — fără nicio culpă din partea noastră.</p>
+        <p>Versiunile mai vechi ale aplicației pot înceta să funcționeze atunci când se schimbă o componentă de care depind. Nu garantăm disponibilitatea continuă a vreunei funcții, a vreunui oraș sau a vreunei versiuni anume.</p>
+    </section>
+
+    <section class="section" id="s6">
+        <div class="section-header"><div class="section-num">06</div><h2>Publicitate</h2></div>
+        <p>Aplicația este gratuită și susținută de publicitate livrată de Google AdMob, incluzând reclame native în listele de plecări și în panourile de detalii, precum și o reclamă interstițială la ieșirea din aplicație. Opțiunile tale privind consimțământul pentru reclame sunt guvernate de fluxul de consimțământ GDPR descris în <a href="privacy.html">Politica de confidențialitate</a>, care îți este prezentat după acceptarea acestor termeni.</p>
+    </section>
+
+    <section class="section" id="s7">
+        <div class="section-header"><div class="section-num">07</div><h2>TransitLive Pro (abonamente și achiziții)</h2></div>
+        <p>TransitLive oferă o versiune plătită opțională, „TransitLive Pro", sub forma unui abonament lunar cu reînnoire automată sau a unei achiziții unice pe viață, ambele facturate prin Google Play. Pro elimină reclamele și deblochează o pictogramă alternativă a aplicației.</p>
+        <p>Abonamentele se reînnoiesc automat până la anulare și sunt facturate în contul tău Google Play. Poți vizualiza, gestiona sau anula un abonament oricând din aplicația Magazin Google Play, la secțiunea Plăți și abonamente. Anularea oprește reînnoirile viitoare; nu rambursează retroactiv perioada curentă. Rambursările sunt gestionate conform politicii standard de rambursare Google Play; noi nu procesăm rambursări direct.</p>
+        <p>Beneficiile Pro sunt legate de funcțiile aplicației așa cum există ele la un moment dat. Dacă o funcție de bază se modifică sau este întreruptă conform secțiunii 05, beneficiul Pro corespunzător se poate modifica odată cu ea. O achiziție pe viață înseamnă pe durata de viață a aplicației — nu ne obligă să operăm aplicația pe termen nelimitat.</p>
+    </section>
+
+    <section class="section" id="s8">
+        <div class="section-header"><div class="section-num">08</div><h2>Utilizare acceptabilă</h2></div>
+        <p>Ești de acord să nu folosești aplicația în mod abuziv. În special, ești de acord să nu:</p>
+        <ul>
+            <li>faci inginerie inversă, să decompilezi sau să modifici aplicația în scopuri rău intenționate;</li>
+            <li>generezi o sarcină nerezonabilă asupra aplicației sau asupra surselor de date terțe pe care se bazează, inclusiv prin cereri automate sau în masă;</li>
+            <li>extragi, colectezi, revinzi sau redistribui datele de transport obținute prin aplicație;</li>
+            <li>eludezi, dezactivezi sau interferezi cu mecanismele de securitate, de consimțământ sau de facturare;</li>
+            <li>folosești aplicația în mod ilegal sau cu încălcarea vreunei reglementări aplicabile.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s9">
+        <div class="section-header"><div class="section-num">09</div><h2>Date și servicii terțe</h2></div>
+        <p>Datele cartografice sunt © contribuitorii OpenStreetMap, disponibile sub licența Open Database License. Orarele, traseele și datele despre vehicule aparțin operatorilor și autorităților respective (STB, TPBI și organismele conexe).</p>
+        <p><strong>TransitLive este o aplicație independentă. Nu este afiliată, aprobată, sponsorizată de și nu este un produs oficial al vreunui operator sau al vreunei autorități de transport.</strong> Numele operatorilor și denumirile traseelor sunt folosite exclusiv pentru a identifica serviciile afișate.</p>
+        <p>Aplicația se bazează de asemenea pe servicii terțe, printre care Google Play, Google AdMob și Firebase. Termenii și politicile lor de confidențialitate guvernează acele servicii; noi nu suntem responsabili pentru ele.</p>
+    </section>
+
+    <section class="section" id="s10">
+        <div class="section-header"><div class="section-num">10</div><h2>Proprietate intelectuală</h2></div>
+        <p>Codul sursă, designul, interfața și identitatea vizuală ale aplicației aparțin dezvoltatorului și sunt protejate de legislația aplicabilă privind proprietatea intelectuală. Acești termeni îți acordă o licență personală, neexclusivă, netransferabilă și revocabilă de a folosi aplicația în scopuri proprii, necomerciale. Nu se acordă alte drepturi.</p>
+    </section>
+
+    <section class="section" id="s11">
+        <div class="section-header"><div class="section-num">11</div><h2>Limitarea răspunderii</h2></div>
+        <p>În măsura maximă permisă de legislația aplicabilă, dezvoltatorul nu este răspunzător pentru nicio pierdere sau daună rezultată din sau în legătură cu utilizarea aplicației, imposibilitatea de a o utiliza sau încrederea acordată informațiilor pe care le prezintă — inclusiv, fără limitare, <strong>legături pierdute, întâlniri ratate, întârzieri, deplasări inutile, costuri suplimentare de transport sau pierderi cauzate de date de transport inexacte, întârziate, incomplete sau indisponibile</strong>.</p>
+        <p>În aceeași măsură, nu suntem răspunzători pentru daune indirecte, incidentale, speciale, subsecvente sau punitive, nici pentru pierderi de profit, venituri, date sau reputație, indiferent de cauză și de temeiul răspunderii.</p>
+        <p>Nimic din acești termeni nu exclude și nu limitează răspunderea pentru deces sau vătămare corporală cauzată din neglijență, pentru fraudă ori declarații frauduloase, sau pentru orice altă răspundere care nu poate fi exclusă sau limitată legal. Dacă ești consumator, drepturile tale legale nu sunt afectate.</p>
+    </section>
+
+    <section class="section" id="s12">
+        <div class="section-header"><div class="section-num">12</div><h2>Încetare</h2></div>
+        <p>Poți înceta oricând să folosești aplicația, dezinstalând-o. Putem suspenda sau înceta accesul tău la aplicație sau la orice funcție dacă încalci acești termeni sau dacă întrerupem serviciul conform secțiunii 05.</p>
+        <p>Prevederile care prin natura lor trebuie să supraviețuiască încetării — inclusiv declinările de răspundere din secțiunile 03 și 04, limitarea răspunderii din secțiunea 11 și prevederile privind proprietatea intelectuală din secțiunea 10 — rămân în vigoare după încetarea acestor termeni.</p>
+    </section>
+
+    <section class="section" id="s13">
+        <div class="section-header"><div class="section-num">13</div><h2>Legea aplicabilă și clauza de salvare</h2></div>
+        <p>Acești termeni sunt guvernați de legislația din România, fără a ține cont de normele privind conflictul de legi. Dacă ești consumator cu reședința în altă țară, beneficiezi în continuare de prevederile imperative de protecție a consumatorului din legislația țării tale de reședință.</p>
+        <p>Dacă vreo prevedere din acești termeni este considerată nulă sau inaplicabilă, acea prevedere va fi limitată sau eliminată în măsura minimă necesară, iar celelalte prevederi vor rămâne pe deplin în vigoare. Neaplicarea de către noi a vreunei prevederi nu constituie o renunțare la aceasta.</p>
+    </section>
+
+    <section class="section" id="s14">
+        <div class="section-header"><div class="section-num">14</div><h2>Modificări ale acestor termeni și contact</h2></div>
+        <p>Putem actualiza acești termeni din când în când; data „Ultima actualizare" de mai sus reflectă cea mai recentă revizuire. Atunci când o revizuire este semnificativă, aplicația îți va cere să citești și să accepți termenii actualizați înainte de a continua să o folosești.</p>
+        <p><strong>Contact:</strong> <a href="mailto:contact@lxtech.ro">contact@lxtech.ro</a></p>
+    </section>
+
+</div>
+
+<footer>© 2026 TransitLive · Transportul public din București, în timp real.</footer>
+</div>
+
+<script>
+(function () {
+    // Default to Romanian only when the browser's language is Romanian; anything
+    // else (including no preference) falls back to English. A previous explicit
+    // choice on any of these pages wins over detection.
+    var LANGS = ['en', 'ro'];
+    var KEY = 'transitlive-policy-lang';
+
+    function detect() {
+        var saved;
+        try { saved = localStorage.getItem(KEY); } catch (e) { /* private mode */ }
+        if (LANGS.indexOf(saved) !== -1) return saved;
+
+        var prefs = navigator.languages || [navigator.language || ''];
+        for (var i = 0; i < prefs.length; i++) {
+            var tag = String(prefs[i]).toLowerCase();
+            if (tag === 'ro' || tag.indexOf('ro-') === 0) return 'ro';
+        }
+        return 'en';
+    }
+
+    function apply(lang, persist) {
+        var blocks = document.querySelectorAll('[data-lang]');
+        for (var i = 0; i < blocks.length; i++) {
+            blocks[i].classList.toggle('is-active', blocks[i].getAttribute('data-lang') === lang);
+        }
+        var buttons = document.querySelectorAll('[data-set-lang]');
+        for (var j = 0; j < buttons.length; j++) {
+            buttons[j].setAttribute('aria-pressed',
+                buttons[j].getAttribute('data-set-lang') === lang ? 'true' : 'false');
+        }
+        document.documentElement.lang = lang;
+        var title = document.querySelector('[data-title-' + lang + ']');
+        if (title) document.title = title.getAttribute('data-title-' + lang);
+        if (persist) {
+            try { localStorage.setItem(KEY, lang); } catch (e) { /* private mode */ }
+        }
+    }
+
+    document.addEventListener('click', function (ev) {
+        var btn = ev.target.closest ? ev.target.closest('[data-set-lang]') : null;
+        if (!btn) return;
+        apply(btn.getAttribute('data-set-lang'), true);
+    });
+
+    apply(detect(), false);
+})();
+</script>
 
 </body>
 </html>

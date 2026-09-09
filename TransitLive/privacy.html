@@ -77,9 +77,31 @@
         footer { background: var(--navy); color: rgba(255,255,255,0.7); text-align: center; padding: 32px 24px; font-size: 0.85rem; }
         @media (max-width: 600px) { .container { padding: 32px 16px 60px; } .toc { padding: 20px; } .data-table { font-size: 0.82rem; } }
     </style>
+<style>
+    /* Language toggle — mirrors .nav-bar pill styling so it reads as part of the chrome. */
+    .lang-switch { display: flex; justify-content: center; gap: 0; padding: 10px 24px 0; background: var(--white); }
+    .lang-switch .lang-group { display: inline-flex; border: 1.5px solid var(--border); border-radius: 999px; overflow: hidden; }
+    .lang-switch button { appearance: none; border: 0; background: transparent; cursor: pointer;
+        font: inherit; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+        padding: 6px 16px; color: var(--text-muted); transition: background 0.2s, color 0.2s; }
+    .lang-switch button[aria-pressed="true"] { background: var(--navy); color: var(--white); }
+    .lang-switch button:focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
+    /* Only the active language is rendered. */
+    [data-lang] { display: none; }
+    [data-lang].is-active { display: block; }
+</style>
+<meta data-title-en="Privacy Policy — TransitLive" data-title-ro="Politica de confidențialitate — TransitLive">
 </head>
 <body>
 
+<div class="lang-switch">
+    <div class="lang-group" role="group" aria-label="Language / Limbă">
+        <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+        <button type="button" data-set-lang="ro" aria-pressed="false">Română</button>
+    </div>
+</div>
+
+<div data-lang="en">
 <div class="line-strip"></div>
 
 <header>
@@ -133,7 +155,7 @@
                 <tr><td>Favourite stops</td><td>Stops you star for quick access</td><td><span class="tag local">On-device only</span></td></tr>
                 <tr><td>Departure alerts</td><td>The lines you asked to be notified about</td><td><span class="tag local">On-device only</span></td></tr>
                 <tr><td>Cached transit schedule (GTFS)</td><td>Stops, routes and timetables, downloaded once</td><td><span class="tag local">On-device only</span></td></tr>
-                <tr><td>Map viewport &amp; requests</td><td>Loading OpenStreetMap map tiles</td><td><span class="tag third">OSM / CARTO servers</span></td></tr>
+                <tr><td>Map imagery</td><td>Built into the app; drawn on your device</td><td><span class="tag local">On-device only</span></td></tr>
                 <tr><td>Live vehicle / arrival requests</td><td>Real-time bus, tram &amp; trolley positions</td><td><span class="tag third">STB / TPBI servers</span></td></tr>
                 <tr><td>Crash logs &amp; diagnostics</td><td>Finding and fixing app crashes</td><td><span class="tag admob">Firebase Crashlytics</span></td></tr>
                 <tr><td>App usage / interaction events</td><td>Understanding feature usage, improving the app</td><td><span class="tag admob">Firebase Analytics</span></td></tr>
@@ -168,7 +190,7 @@
     <section class="section" id="s3">
         <div class="section-header"><div class="section-num">03</div><h2>Live transit data</h2></div>
         <p>To show real-time vehicles and arrivals, TransitLive makes standard HTTPS requests to public Bucharest public-transport data services (operated by <strong>STB</strong> and <strong>TPBI</strong>) and downloads the static GTFS schedule. As with any web request, those servers receive your device's IP address in order to respond. We send only what is needed to fetch transit data — no personal identifiers, no location coordinates.</p>
-        <p>Map imagery is loaded from <strong>OpenStreetMap</strong> / CARTO tile servers when you view the map; those servers likewise receive a standard HTTP request including your IP address.</p>
+        <p>Map imagery is <strong>not</strong> downloaded: it ships inside the app and is drawn on your device, so viewing, panning or zooming the map contacts no map server and discloses your IP address to no one.</p>
     </section>
 
     <section class="section" id="s4">
@@ -210,7 +232,7 @@
         <div class="section-header"><div class="section-num">05</div><h2>Permissions the app requests</h2></div>
         <ul>
             <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong> — optional; used to find nearby stops and center the map. Granted and revocable by you at any time in Android Settings.</li>
-            <li><strong>INTERNET</strong> — required to load OSM map tiles, fetch live transit data, and show AdMob ads.</li>
+            <li><strong>INTERNET</strong> — required to fetch live transit data and show AdMob ads. Not used for the map, which is built into the app.</li>
             <li><strong>AD_ID</strong> — required by Google Play policy when AdMob is present; used by AdMob only if you consent.</li>
             <li><strong>POST_NOTIFICATIONS</strong> (Android 13+) — optional; requested only for departure alerts you arm yourself.</li>
         </ul>
@@ -223,7 +245,7 @@
             <li><strong>Firebase Crashlytics &amp; Analytics</strong> — crash reporting and aggregate usage stats.</li>
             <li><strong>Google Play Billing</strong> — processing TransitLive Pro purchases and subscriptions.</li>
             <li><strong>STB / TPBI transit services</strong> — real-time vehicle positions, arrivals and the static GTFS schedule.</li>
-            <li><strong>OpenStreetMap / CARTO</strong> — map tile imagery, loaded when you view the map.</li>
+            <li><strong>OpenStreetMap / OpenMapTiles</strong> — the source of the map data bundled inside the app (attribution only; no requests are made to them).</li>
         </ul>
     </section>
 
@@ -234,7 +256,7 @@
             <li>Ad-related signals sent to Google AdMob (only after consent)</li>
             <li>Crash and usage data sent to Firebase Crashlytics / Analytics</li>
             <li>Purchase requests sent to Google Play Billing (if you choose to buy TransitLive Pro)</li>
-            <li>Standard HTTPS requests to STB / TPBI transit servers and OSM / CARTO tile servers (standard IP logging by those services)</li>
+            <li>Standard HTTPS requests to STB / TPBI transit servers (standard IP logging by those services)</li>
         </ul>
     </section>
 
@@ -265,6 +287,244 @@
 </div>
 
 <footer>© 2026 TransitLive · Bucharest public transit, live.</footer>
+</div>
+
+<div data-lang="ro">
+<div class="line-strip"></div>
+
+<header>
+    <div class="header-icon">🛡️</div>
+    <h1>Politica de confidențialitate</h1>
+    <p class="header-meta">TransitLive — Aplicație Android</p>
+    <div class="header-badge">🛡️ Ultima actualizare: septembrie 2026</div>
+</header>
+
+<nav class="nav-bar">
+    <a href="terms.html">Termeni și condiții</a>
+    <a href="privacy.html" class="active">Politica de confidențialitate</a>
+    <a href="data-usage.html">Utilizarea datelor</a>
+</nav>
+
+<div class="container">
+
+    <div class="callout good">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+            <strong>Pe scurt</strong>
+            Aproape totul rămâne pe dispozitivul tău. Nu îți vindem datele. Firebase (Crashlytics și Analytics) ne ajută să depistăm blocările și să înțelegem utilizarea de bază a aplicației, iar Google AdMob livrează reclamele care mențin TransitLive gratuită — colectarea de date pentru publicitate de către AdMob se activează doar <em>după</em> ce faci o alegere în formularul de consimțământ GDPR afișat la prima pornire. Dacă te abonezi sau cumperi TransitLive Pro, acea achiziție este gestionată integral de Google Play. Locația ta GPS este folosită pe dispozitiv pentru a găsi stațiile din apropiere și nu este trimisă niciodată către serverele noastre.
+        </div>
+    </div>
+
+    <div class="toc">
+        <p class="toc-title">Cuprins</p>
+        <ol>
+            <li><a href="#s1">Ce date folosește aplicația</a></li>
+            <li><a href="#s2">Stocare locală</a></li>
+            <li><a href="#s3">Date de transport în timp real</a></li>
+            <li><a href="#s4">Publicitate și AdMob</a></li>
+            <li><a href="#s4b">Analiză și raportarea erorilor</a></li>
+            <li><a href="#s4c">Achiziții și abonamente</a></li>
+            <li><a href="#s5">Permisiuni</a></li>
+            <li><a href="#s6">Integrări cu terți</a></li>
+            <li><a href="#s7">Partajarea datelor</a></li>
+            <li><a href="#s8">Drepturile și controalele tale</a></li>
+            <li><a href="#s9">Confidențialitatea copiilor</a></li>
+            <li><a href="#s10">Modificări și contact</a></li>
+        </ol>
+    </div>
+
+    <section class="section" id="s1">
+        <div class="section-header"><div class="section-num">01</div><h2>Ce date folosește aplicația</h2></div>
+        <p>Tabelul de mai jos rezumă fiecare categorie de date cu care interacționează TransitLive și unde ajung acestea.</p>
+        <table class="data-table">
+            <thead><tr><th>Tip de date</th><th>Scop</th><th>Unde ajung</th></tr></thead>
+            <tbody>
+                <tr><td>GPS / locație precisă</td><td>Stații din apropiere, centrarea hărții, proximitatea vehiculelor</td><td><span class="tag local">Doar pe dispozitiv</span></td></tr>
+                <tr><td>Stații favorite</td><td>Stațiile marcate pentru acces rapid</td><td><span class="tag local">Doar pe dispozitiv</span></td></tr>
+                <tr><td>Alerte de plecare</td><td>Liniile pentru care ai cerut notificări</td><td><span class="tag local">Doar pe dispozitiv</span></td></tr>
+                <tr><td>Orar de transport în cache (GTFS)</td><td>Stații, trasee și orare, descărcate o singură dată</td><td><span class="tag local">Doar pe dispozitiv</span></td></tr>
+                <tr><td>Imaginile hărții</td><td>Incluse în aplicație; desenate pe dispozitivul tău</td><td><span class="tag local">Doar pe dispozitiv</span></td></tr>
+                <tr><td>Cereri pentru vehicule / sosiri în timp real</td><td>Poziții în timp real ale autobuzelor, tramvaielor și troleibuzelor</td><td><span class="tag third">Servere STB / TPBI</span></td></tr>
+                <tr><td>Jurnale de erori și diagnostice</td><td>Depistarea și remedierea blocărilor aplicației</td><td><span class="tag admob">Firebase Crashlytics</span></td></tr>
+                <tr><td>Evenimente de utilizare / interacțiune</td><td>Înțelegerea utilizării funcțiilor, îmbunătățirea aplicației</td><td><span class="tag admob">Firebase Analytics</span></td></tr>
+                <tr><td>Istoricul achizițiilor</td><td>Activarea TransitLive Pro (abonament sau deblocare pe viață)</td><td><span class="tag third">Google Play Billing</span></td></tr>
+                <tr><td>ID de publicitate</td><td>Reclame personalizate (necesită consimțământ)</td><td><span class="tag admob">Google AdMob</span></td></tr>
+                <tr><td>Informații despre dispozitiv / sistem</td><td>Livrarea și targetarea reclamelor (necesită consimțământ)</td><td><span class="tag admob">Google AdMob</span></td></tr>
+                <tr><td>Locație aproximativă (pe bază de IP)</td><td>Context pentru reclame (necesită consimțământ)</td><td><span class="tag admob">Google AdMob</span></td></tr>
+                <tr><td>Nume, e-mail, contacte, mesaje, sănătate</td><td>—</td><td><span class="tag never">Niciodată colectate</span></td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section" id="s2">
+        <div class="section-header"><div class="section-num">02</div><h2>Stocare locală — ce rămâne pe dispozitivul tău</h2></div>
+        <p>Următoarele sunt create și stocate exclusiv pe dispozitivul tău Android (folosind o bază de date Room locală și SharedPreferences). Niciuna dintre ele nu este transmisă către vreun server operat de noi:</p>
+        <ul>
+            <li><strong>Stații favorite</strong> — stațiile pe care le marchezi pentru acces rapid</li>
+            <li><strong>Alerte de plecare</strong> — liniile pentru care ai cerut să fii alertat</li>
+            <li><strong>Date de transport în cache (GTFS)</strong> — stații, trasee, curse și orare pentru București, descărcate o dată și actualizate periodic</li>
+            <li><strong>Setări și starea aplicației</strong> — inclusiv un identificator anonim per instalare, folosit doar pentru comunicarea cu API-ul de transport în timp real, și un indicator că ai acceptat termenii și ți-ai dat consimțământul la prima pornire</li>
+            <li><strong>Statusul Pro</strong> — dacă ai deblocat TransitLive Pro, memorat local după ce Google Play îți confirmă achiziția</li>
+        </ul>
+        <div class="callout info">
+            <span class="callout-icon">ℹ️</span>
+            <div class="callout-body">
+                <strong>Locația GPS</strong>
+                Când acorzi permisiunea de locație, aplicația citește poziția ta GPS pentru a găsi stații aflate la distanță de mers pe jos și pentru a centra harta pe tine. Aceasta este folosită în timp real, pe dispozitivul tău, și nu este înregistrată sau transmisă nicăieri de către noi.
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="s3">
+        <div class="section-header"><div class="section-num">03</div><h2>Date de transport în timp real</h2></div>
+        <p>Pentru a afișa vehicule și sosiri în timp real, TransitLive face cereri HTTPS standard către servicii publice de date privind transportul din București (operate de <strong>STB</strong> și <strong>TPBI</strong>) și descarcă orarul static GTFS. Ca la orice cerere web, acele servere primesc adresa IP a dispozitivului tău pentru a putea răspunde. Trimitem doar ce este necesar pentru a prelua datele de transport — fără identificatori personali, fără coordonate de locație.</p>
+        <p>Imaginile hărții <strong>nu</strong> sunt descărcate: ele sunt incluse în aplicație și desenate pe dispozitivul tău, așa că vizualizarea, deplasarea sau mărirea hărții nu contactează niciun server de hărți și nu dezvăluie adresa ta IP nimănui.</p>
+    </section>
+
+    <section class="section" id="s4">
+        <div class="section-header"><div class="section-num">04</div><h2>Publicitate și AdMob</h2></div>
+        <p>TransitLive este gratuită și susținută de reclame livrate de <strong>Google AdMob</strong> — reclame native afișate în lista de plecări din apropiere și în panourile de detalii ale vehiculelor și stațiilor, plus o reclamă interstițială afișată la ieșirea din aplicație.</p>
+
+        <h3>Consimțământul GDPR</h3>
+        <p>La prima pornire (și ori de câte ori legea o cere), apare un formular de consimțământ GDPR — furnizat prin User Messaging Platform (UMP) de la Google. Poți:</p>
+        <ul>
+            <li><strong>Accepta reclame personalizate</strong> — AdMob poate folosi ID-ul tău de publicitate și informații despre dispozitiv pentru a afișa reclame mai relevante.</li>
+            <li><strong>Refuza / folosi reclame nepersonalizate</strong> — reclamele sunt afișate în continuare, dar fără personalizare. AdMob colectează totuși unele semnale contextuale (de exemplu locația aproximativă pe bază de IP, contextul aplicației).</li>
+        </ul>
+        <p>Acolo unde este necesar, formularul de consimțământ este afișat utilizatorilor din Spațiul Economic European, Regatul Unit și Elveția; este posibil ca utilizatorii din alte zone să nu îl vadă.</p>
+
+        <h3>Ce poate colecta AdMob (dacă ți-ai dat consimțământul)</h3>
+        <ul>
+            <li>ID-ul tău de publicitate Google</li>
+            <li>Modelul dispozitivului, versiunea sistemului de operare, rețeaua mobilă</li>
+            <li>Locația aproximativă (pe bază de IP)</li>
+            <li>Date privind interacțiunea cu reclamele (afișări, clicuri)</li>
+        </ul>
+        <p>Pentru detalii complete, consultă <a href="https://policies.google.com/privacy" target="_blank">Politica de confidențialitate Google</a> și <a href="https://support.google.com/admob/answer/6128543" target="_blank">practicile AdMob privind datele</a>.</p>
+    </section>
+
+    <section class="section" id="s4b">
+        <div class="section-header"><div class="section-num">4B</div><h2>Analiză și raportarea erorilor</h2></div>
+        <p>TransitLive folosește <strong>Firebase Crashlytics</strong> și <strong>Firebase Analytics</strong> (ambele servicii Google) pentru a depista blocările și a înțelege utilizarea de bază, agregată, a aplicației — de exemplu ce ecrane sunt deschise sau dacă aplicația s-a blocat pe dispozitivul tău. Acest lucru funcționează independent de alegerea privind consimțământul AdMob descrisă mai sus; nu este folosit pentru publicitate și nu este legat de identitatea ta.</p>
+        <p>Raportarea prin Crashlytics este dezactivată complet în versiunile de dezvoltare/debug și este activă doar în versiunea pe care o instalezi din Google Play. Datele colectate includ modelul dispozitivului, versiunea sistemului de operare, versiunea aplicației și urmele de stivă din momentul unei blocări — niciodată conținutul favoritelor, al alertelor sau al istoricului tău de locație.</p>
+        <p>Pentru detalii complete, consultă <a href="https://firebase.google.com/support/privacy" target="_blank">politica Firebase privind confidențialitatea și securitatea</a>.</p>
+    </section>
+
+    <section class="section" id="s4c">
+        <div class="section-header"><div class="section-num">4C</div><h2>Achiziții și abonamente</h2></div>
+        <p>TransitLive oferă o versiune opțională <strong>TransitLive Pro</strong> (un abonament lunar sau o achiziție unică pe viață) care elimină reclamele și deblochează o pictogramă Pro a aplicației. Toate achizițiile sunt procesate integral de <strong>Google Play Billing</strong> — noi nu vedem și nu stocăm niciodată datele tale de plată (numere de card, adresă de facturare etc.). Primim doar confirmarea dreptului tău de acces (adică faptul că deții „Pro"), care este folosită pe dispozitiv pentru a dezactiva reclamele și a schimba pictograma aplicației.</p>
+        <p>Abonamentele pot fi gestionate sau anulate oricând din aplicația Magazin Google Play, la secțiunea Plăți și abonamente.</p>
+    </section>
+
+    <section class="section" id="s5">
+        <div class="section-header"><div class="section-num">05</div><h2>Permisiunile solicitate de aplicație</h2></div>
+        <ul>
+            <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong> — opționale; folosite pentru a găsi stațiile din apropiere și a centra harta. Acordate și revocabile de tine oricând din Setările Android.</li>
+            <li><strong>INTERNET</strong> — necesară pentru a prelua datele de transport în timp real și pentru a afișa reclamele AdMob. Nu este folosită pentru hartă, care este inclusă în aplicație.</li>
+            <li><strong>AD_ID</strong> — necesară conform politicii Google Play atunci când AdMob este prezent; folosită de AdMob doar dacă îți dai consimțământul.</li>
+            <li><strong>POST_NOTIFICATIONS</strong> (Android 13+) — opțională; solicitată doar pentru alertele de plecare pe care le activezi tu.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s6">
+        <div class="section-header"><div class="section-num">06</div><h2>Integrări cu terți</h2></div>
+        <ul>
+            <li><strong>Google AdMob</strong> — livrarea reclamelor și gestionarea consimțământului GDPR (după consimțământ).</li>
+            <li><strong>Firebase Crashlytics și Analytics</strong> — raportarea erorilor și statistici agregate de utilizare.</li>
+            <li><strong>Google Play Billing</strong> — procesarea achizițiilor și abonamentelor TransitLive Pro.</li>
+            <li><strong>Serviciile de transport STB / TPBI</strong> — poziții ale vehiculelor în timp real, sosiri și orarul static GTFS.</li>
+            <li><strong>OpenStreetMap / OpenMapTiles</strong> — sursa datelor cartografice incluse în aplicație (doar atribuire; nu se fac cereri către ele).</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s7">
+        <div class="section-header"><div class="section-num">07</div><h2>Partajarea datelor</h2></div>
+        <p>Nu vindem, nu comercializăm și nu închiriem informațiile tale personale nimănui. Singurele date care părăsesc dispozitivul tău sunt:</p>
+        <ul>
+            <li>Semnale legate de publicitate trimise către Google AdMob (doar după consimțământ)</li>
+            <li>Date despre erori și utilizare trimise către Firebase Crashlytics / Analytics</li>
+            <li>Cereri de achiziție trimise către Google Play Billing (dacă alegi să cumperi TransitLive Pro)</li>
+            <li>Cereri HTTPS standard către serverele de transport STB / TPBI (înregistrare standard a adresei IP de către acele servicii)</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s8">
+        <div class="section-header"><div class="section-num">08</div><h2>Drepturile și controalele tale</h2></div>
+        <ul>
+            <li><strong>Acces și ștergere</strong> — toate datele stocate local se află pe dispozitivul tău; le poți șterge din Setări Android → Aplicații → TransitLive → Ștergere date sau dezinstalând aplicația.</li>
+            <li><strong>Locație</strong> — o poți revoca oricând din Setări Android → Aplicații → TransitLive → Permisiuni.</li>
+            <li><strong>Consimțământul pentru reclame</strong> — poți reseta sau modifica alegerea privind consimțământul din aplicație; refuzul oprește reclamele personalizate.</li>
+            <li><strong>Cerere de ștergere Analytics/Crashlytics</strong> — scrie-ne (mai jos) menționând data aproximativă a instalării și modelul dispozitivului, iar noi vom depune o cerere de ștergere către Firebase pentru datele asociate de erori/utilizare.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s9">
+        <div class="section-header"><div class="section-num">09</div><h2>Confidențialitatea copiilor</h2></div>
+        <p>TransitLive nu se adresează copiilor sub 13 ani. Nu colectăm cu bună știință date personale de la copii. Dacă bănuiești că un copil a furnizat date personale prin intermediul aplicației, contactează-ne și vom lua măsurile necesare.</p>
+    </section>
+
+    <section class="section" id="s10">
+        <div class="section-header"><div class="section-num">10</div><h2>Modificări și contact</h2></div>
+        <p>Putem actualiza această Politică de confidențialitate din când în când. Când o facem, vom actualiza data „Ultima actualizare" din partea de sus a acestei pagini. Utilizarea în continuare a aplicației după intrarea în vigoare a modificărilor constituie acceptarea politicii actualizate.</p>
+        <p>Pentru orice întrebări sau solicitări privind confidențialitatea:</p>
+        <ul>
+            <li><strong>E-mail:</strong> <a href="mailto:contact@lxtech.ro">contact@lxtech.ro</a></li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>© 2026 TransitLive · Transportul public din București, în timp real.</footer>
+</div>
+
+<script>
+(function () {
+    // Default to Romanian only when the browser's language is Romanian; anything
+    // else (including no preference) falls back to English. A previous explicit
+    // choice on any of these pages wins over detection.
+    var LANGS = ['en', 'ro'];
+    var KEY = 'transitlive-policy-lang';
+
+    function detect() {
+        var saved;
+        try { saved = localStorage.getItem(KEY); } catch (e) { /* private mode */ }
+        if (LANGS.indexOf(saved) !== -1) return saved;
+
+        var prefs = navigator.languages || [navigator.language || ''];
+        for (var i = 0; i < prefs.length; i++) {
+            var tag = String(prefs[i]).toLowerCase();
+            if (tag === 'ro' || tag.indexOf('ro-') === 0) return 'ro';
+        }
+        return 'en';
+    }
+
+    function apply(lang, persist) {
+        var blocks = document.querySelectorAll('[data-lang]');
+        for (var i = 0; i < blocks.length; i++) {
+            blocks[i].classList.toggle('is-active', blocks[i].getAttribute('data-lang') === lang);
+        }
+        var buttons = document.querySelectorAll('[data-set-lang]');
+        for (var j = 0; j < buttons.length; j++) {
+            buttons[j].setAttribute('aria-pressed',
+                buttons[j].getAttribute('data-set-lang') === lang ? 'true' : 'false');
+        }
+        document.documentElement.lang = lang;
+        var title = document.querySelector('[data-title-' + lang + ']');
+        if (title) document.title = title.getAttribute('data-title-' + lang);
+        if (persist) {
+            try { localStorage.setItem(KEY, lang); } catch (e) { /* private mode */ }
+        }
+    }
+
+    document.addEventListener('click', function (ev) {
+        var btn = ev.target.closest ? ev.target.closest('[data-set-lang]') : null;
+        if (!btn) return;
+        apply(btn.getAttribute('data-set-lang'), true);
+    });
+
+    apply(detect(), false);
+})();
+</script>
 
 </body>
 </html>

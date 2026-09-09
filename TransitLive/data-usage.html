@@ -47,9 +47,31 @@
         footer{background:var(--navy);color:rgba(255,255,255,0.7);text-align:center;padding:32px 24px;font-size:0.85rem;}
         @media (max-width:600px){.container{padding:32px 16px 60px;}.data-table{font-size:0.82rem;}}
     </style>
+<style>
+    /* Language toggle — mirrors .nav-bar pill styling so it reads as part of the chrome. */
+    .lang-switch { display: flex; justify-content: center; gap: 0; padding: 10px 24px 0; background: var(--white); }
+    .lang-switch .lang-group { display: inline-flex; border: 1.5px solid var(--border); border-radius: 999px; overflow: hidden; }
+    .lang-switch button { appearance: none; border: 0; background: transparent; cursor: pointer;
+        font: inherit; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+        padding: 6px 16px; color: var(--text-muted); transition: background 0.2s, color 0.2s; }
+    .lang-switch button[aria-pressed="true"] { background: var(--navy); color: var(--white); }
+    .lang-switch button:focus-visible { outline: 2px solid var(--teal-dark); outline-offset: 2px; }
+    /* Only the active language is rendered. */
+    [data-lang] { display: none; }
+    [data-lang].is-active { display: block; }
+</style>
+<meta data-title-en="Data Usage — TransitLive" data-title-ro="Utilizarea datelor — TransitLive">
 </head>
 <body>
 
+<div class="lang-switch">
+    <div class="lang-group" role="group" aria-label="Language / Limbă">
+        <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+        <button type="button" data-set-lang="ro" aria-pressed="false">Română</button>
+    </div>
+</div>
+
+<div data-lang="en">
 <div class="line-strip"></div>
 
 <header>
@@ -79,14 +101,14 @@
         <div class="section-header"><div class="section-num">01</div><h2>Network &amp; data consumption</h2></div>
         <p>The app uses your internet connection for:</p>
         <ul>
-            <li><strong>Map tiles</strong> — downloaded from OpenStreetMap / CARTO as you pan and zoom. This is the largest data user; cached by the OS where possible.</li>
+            <li><strong>Map</strong> — none. The map is built into the app and uses <em>no</em> data as you pan and zoom.</li>
             <li><strong>Live transit data</strong> — small, frequent requests (roughly every 10 seconds while the app is open) for vehicle positions and arrivals.</li>
             <li><strong>GTFS schedule download</strong> — a one-time download (~8 MB) of the Bucharest schedule, refreshed periodically.</li>
             <li><strong>Ads</strong> — AdMob loads ad creatives over the network.</li>
             <li><strong>Crash &amp; usage reporting</strong> — Firebase Crashlytics/Analytics send small diagnostic payloads in the background.</li>
             <li><strong>Purchases</strong> — Google Play Billing calls when you buy or restore TransitLive Pro.</li>
         </ul>
-        <p>If you are on a limited data plan, most usage comes from map tiles; staying zoomed on one area reduces it.</p>
+        <p>If you are on a limited data plan, the map itself costs you nothing — most remaining usage comes from live vehicle positions while the app is open, and from ads.</p>
     </section>
 
     <section class="section" id="s2">
@@ -123,6 +145,132 @@
 </div>
 
 <footer>© 2026 TransitLive · Bucharest public transit, live.</footer>
+</div>
+
+<div data-lang="ro">
+<div class="line-strip"></div>
+
+<header>
+    <div class="header-icon">📊</div>
+    <h1>Utilizarea datelor</h1>
+    <p class="header-meta">TransitLive — Aplicație Android</p>
+    <div class="header-badge">📊 Ultima actualizare: septembrie 2026</div>
+</header>
+
+<nav class="nav-bar">
+    <a href="terms.html">Termeni și condiții</a>
+    <a href="privacy.html">Politica de confidențialitate</a>
+    <a href="data-usage.html" class="active">Utilizarea datelor</a>
+</nav>
+
+<div class="container">
+
+    <div class="callout">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+            <strong>Esențialul</strong>
+            TransitLive păstrează favoritele, alertele și locația ta pe dispozitiv. Folosește date mobile/Wi-Fi pentru a încărca harta, a prelua pozițiile în timp real, a afișa reclame și a raporta erorile. Nu se vinde nimic din datele tale personale — prelucrarea externă a datelor este realizată de Google AdMob (după ce îți dai consimțământul), Firebase Crashlytics/Analytics și Google Play Billing (doar dacă achiziționezi TransitLive Pro).
+        </div>
+    </div>
+
+    <section class="section" id="s1">
+        <div class="section-header"><div class="section-num">01</div><h2>Rețea și consum de date</h2></div>
+        <p>Aplicația îți folosește conexiunea la internet pentru:</p>
+        <ul>
+            <li><strong>Hartă</strong> — deloc. Harta este inclusă în aplicație și <em>nu</em> consumă date când o deplasezi sau o mărești.</li>
+            <li><strong>Date de transport în timp real</strong> — cereri mici și frecvente (aproximativ la fiecare 10 secunde cât timp aplicația este deschisă) pentru pozițiile vehiculelor și sosiri.</li>
+            <li><strong>Descărcarea orarului GTFS</strong> — o descărcare unică (~8 MB) a orarului Bucureștiului, actualizată periodic.</li>
+            <li><strong>Reclame</strong> — AdMob încarcă materialele publicitare prin rețea.</li>
+            <li><strong>Raportarea erorilor și a utilizării</strong> — Firebase Crashlytics/Analytics trimit în fundal pachete mici de date de diagnostic.</li>
+            <li><strong>Achiziții</strong> — apeluri către Google Play Billing atunci când cumperi sau restaurezi TransitLive Pro.</li>
+        </ul>
+        <p>Dacă ai un abonament de date limitat, harta în sine nu te costă nimic — cea mai mare parte a consumului rămas provine din pozițiile vehiculelor în timp real, cât timp aplicația este deschisă, și din reclame.</p>
+    </section>
+
+    <section class="section" id="s2">
+        <div class="section-header"><div class="section-num">02</div><h2>Corespondența cu secțiunea „Siguranța datelor" din Google Play</h2></div>
+        <p>Acest tabel arată cum se raportează comportamentul aplicației la categoriile „Siguranța datelor" din Google Play.</p>
+        <table class="data-table">
+            <thead><tr><th>Tip de date</th><th>Colectate / partajate</th><th>Observații</th></tr></thead>
+            <tbody>
+                <tr><td>Locație precisă / aproximativă</td><td><span class="tag yes">Colectate</span></td><td>Folosite pentru stațiile din apropiere și centrarea hărții; partajate cu AdMob doar pentru contextul reclamelor și numai după consimțământ.</td></tr>
+                <tr><td>ID de publicitate / ID-uri de dispozitiv</td><td><span class="tag yes">Colectate și partajate</span></td><td>De către Google AdMob, doar după consimțământ, pentru reclame.</td></tr>
+                <tr><td>Activitate în aplicație / interacțiuni</td><td><span class="tag yes">Colectate și partajate</span></td><td>Afișări/clicuri pe reclame (AdMob, după consimțământ) și evenimente generale de utilizare a aplicației (Firebase Analytics).</td></tr>
+                <tr><td>Jurnale de erori și diagnostice</td><td><span class="tag yes">Colectate și partajate</span></td><td>Firebase Crashlytics, activ doar în versiunile instalate din Play.</td></tr>
+                <tr><td>Istoricul achizițiilor</td><td><span class="tag yes">Colectate</span></td><td>Google Play Billing procesează achizițiile TransitLive Pro; noi primim doar statusul dreptului de acces, nu și datele de plată.</td></tr>
+                <tr><td>Fișiere, contacte, mesaje, sănătate</td><td><span class="tag no">Necolectate</span></td><td>Aplicația nu solicită și nu accesează niciodată aceste date.</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section" id="s3">
+        <div class="section-header"><div class="section-num">03</div><h2>Păstrarea datelor</h2></div>
+        <p>Datele stocate local (favorite, alerte, orar în cache, setări) rămân până când ștergi datele aplicației sau o dezinstalezi. Nu păstrăm nicio copie a datelor tale pe server. Datele prelucrate de Google AdMob, Firebase Crashlytics/Analytics și Google Play Billing sunt păstrate conform <a href="https://policies.google.com/privacy" target="_blank">politicilor Google</a>.</p>
+    </section>
+
+    <section class="section" id="s4">
+        <div class="section-header"><div class="section-num">04</div><h2>Securitate</h2></div>
+        <p>Toate cererile de rețea folosesc HTTPS. Datele stocate pe dispozitivul tău sunt protejate de mediul izolat (sandbox) al aplicațiilor Android. Deoarece nu operăm niciun server care să stocheze datele tale personale, nu există o bază de date centrală a utilizatorilor care ar putea fi compromisă.</p>
+    </section>
+
+    <section class="section" id="s5">
+        <div class="section-header"><div class="section-num">05</div><h2>Contact</h2></div>
+        <p>Întrebări despre utilizarea datelor: <a href="mailto:contact@lxtech.ro">contact@lxtech.ro</a></p>
+    </section>
+
+</div>
+
+<footer>© 2026 TransitLive · Transportul public din București, în timp real.</footer>
+</div>
+
+<script>
+(function () {
+    // Default to Romanian only when the browser's language is Romanian; anything
+    // else (including no preference) falls back to English. A previous explicit
+    // choice on any of these pages wins over detection.
+    var LANGS = ['en', 'ro'];
+    var KEY = 'transitlive-policy-lang';
+
+    function detect() {
+        var saved;
+        try { saved = localStorage.getItem(KEY); } catch (e) { /* private mode */ }
+        if (LANGS.indexOf(saved) !== -1) return saved;
+
+        var prefs = navigator.languages || [navigator.language || ''];
+        for (var i = 0; i < prefs.length; i++) {
+            var tag = String(prefs[i]).toLowerCase();
+            if (tag === 'ro' || tag.indexOf('ro-') === 0) return 'ro';
+        }
+        return 'en';
+    }
+
+    function apply(lang, persist) {
+        var blocks = document.querySelectorAll('[data-lang]');
+        for (var i = 0; i < blocks.length; i++) {
+            blocks[i].classList.toggle('is-active', blocks[i].getAttribute('data-lang') === lang);
+        }
+        var buttons = document.querySelectorAll('[data-set-lang]');
+        for (var j = 0; j < buttons.length; j++) {
+            buttons[j].setAttribute('aria-pressed',
+                buttons[j].getAttribute('data-set-lang') === lang ? 'true' : 'false');
+        }
+        document.documentElement.lang = lang;
+        var title = document.querySelector('[data-title-' + lang + ']');
+        if (title) document.title = title.getAttribute('data-title-' + lang);
+        if (persist) {
+            try { localStorage.setItem(KEY, lang); } catch (e) { /* private mode */ }
+        }
+    }
+
+    document.addEventListener('click', function (ev) {
+        var btn = ev.target.closest ? ev.target.closest('[data-set-lang]') : null;
+        if (!btn) return;
+        apply(btn.getAttribute('data-set-lang'), true);
+    });
+
+    apply(detect(), false);
+})();
+</script>
 
 </body>
 </html>
