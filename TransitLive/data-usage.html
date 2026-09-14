@@ -102,8 +102,8 @@
         <p>The app uses your internet connection for:</p>
         <ul>
             <li><strong>Map</strong>: none. The map is built into the app and uses <em>no</em> data as you pan and zoom.</li>
-            <li><strong>Live transit data</strong>: small, frequent requests (roughly every 10 seconds while the app is open) to our relay service for vehicle positions and arrivals.</li>
-            <li><strong>GTFS schedule download</strong>: a one-time download (~8 MB) of the Bucharest schedule, refreshed periodically.</li>
+            <li><strong>Live transit data</strong>: small, frequent requests to our dedicated infrastructure for vehicle positions and arrivals while the app is open.</li>
+            <li><strong>GTFS schedule download</strong>: the Bucharest schedule, downloaded and refreshed periodically.</li>
             <li><strong>Ads</strong>: AdMob loads ad creatives over the network.</li>
             <li><strong>Crash &amp; usage reporting</strong>: Firebase Crashlytics/Analytics send small diagnostic payloads in the background.</li>
             <li><strong>Purchases</strong>: Google Play Billing calls when you buy or restore TransitLive Pro.</li>
@@ -120,7 +120,7 @@
                 <tr><td>Precise / approximate location</td><td><span class="tag yes">Collected</span></td><td>Used on-device for nearby stops and map centering; never sent to our servers. Shared with AdMob only for ad context, and only after consent.</td></tr>
                 <tr><td>Advertising ID / device IDs</td><td><span class="tag yes">Collected &amp; shared</span></td><td>By Google AdMob, only after consent, for ads.</td></tr>
                 <tr><td>App activity / interactions</td><td><span class="tag yes">Collected &amp; shared</span></td><td>Ad impressions/clicks (AdMob, after consent) and general app-usage events (Firebase Analytics).</td></tr>
-                <tr><td>Crash logs &amp; diagnostics</td><td><span class="tag yes">Collected &amp; shared</span></td><td>Firebase Crashlytics, active on Play-installed builds only.</td></tr>
+                <tr><td>Crash logs &amp; diagnostics</td><td><span class="tag yes">Collected &amp; shared</span></td><td>Firebase Crashlytics.</td></tr>
                 <tr><td>Purchase history</td><td><span class="tag yes">Collected</span></td><td>Google Play Billing processes TransitLive Pro purchases; we only receive entitlement status, not payment details.</td></tr>
                 <tr><td>Files, contacts, messages, health</td><td><span class="tag no">Not collected</span></td><td>The app never requests or accesses these.</td></tr>
             </tbody>
@@ -178,8 +178,8 @@
         <p>Aplicația îți folosește conexiunea la internet pentru:</p>
         <ul>
             <li><strong>Hartă</strong>: deloc. Harta este inclusă în aplicație și <em>nu</em> consumă date când o deplasezi sau o mărești.</li>
-            <li><strong>Date de transport în timp real</strong>: cereri mici și frecvente (aproximativ la fiecare 10 secunde cât timp aplicația este deschisă) către serviciul nostru releu, pentru pozițiile vehiculelor și sosiri.</li>
-            <li><strong>Descărcarea orarului GTFS</strong>: o descărcare unică (~8 MB) a orarului Bucureștiului, actualizată periodic.</li>
+            <li><strong>Date de transport în timp real</strong>: cereri mici și frecvente către infrastructura noastră dedicată, pentru pozițiile vehiculelor și sosiri, cât timp aplicația este deschisă.</li>
+            <li><strong>Descărcarea orarului GTFS</strong>: orarul Bucureștiului, descărcat și actualizat periodic.</li>
             <li><strong>Reclame</strong>: AdMob încarcă materialele publicitare prin rețea.</li>
             <li><strong>Raportarea erorilor și a utilizării</strong>: Firebase Crashlytics/Analytics trimit în fundal pachete mici de date de diagnostic.</li>
             <li><strong>Achiziții</strong>: apeluri către Google Play Billing atunci când cumperi sau restaurezi TransitLive Pro.</li>
@@ -196,7 +196,7 @@
                 <tr><td>Locație precisă / aproximativă</td><td><span class="tag yes">Colectate</span></td><td>Folosite pe dispozitiv pentru stațiile din apropiere și centrarea hărții; nu sunt trimise niciodată către serverele noastre. Partajate cu AdMob doar pentru contextul reclamelor și numai după consimțământ.</td></tr>
                 <tr><td>ID de publicitate / ID-uri de dispozitiv</td><td><span class="tag yes">Colectate și partajate</span></td><td>De către Google AdMob, doar după consimțământ, pentru reclame.</td></tr>
                 <tr><td>Activitate în aplicație / interacțiuni</td><td><span class="tag yes">Colectate și partajate</span></td><td>Afișări/clicuri pe reclame (AdMob, după consimțământ) și evenimente generale de utilizare a aplicației (Firebase Analytics).</td></tr>
-                <tr><td>Jurnale de erori și diagnostice</td><td><span class="tag yes">Colectate și partajate</span></td><td>Firebase Crashlytics, activ doar în versiunile instalate din Play.</td></tr>
+                <tr><td>Jurnale de erori și diagnostice</td><td><span class="tag yes">Colectate și partajate</span></td><td>Firebase Crashlytics.</td></tr>
                 <tr><td>Istoricul achizițiilor</td><td><span class="tag yes">Colectate</span></td><td>Google Play Billing procesează achizițiile TransitLive Pro; noi primim doar statusul dreptului de acces, nu și datele de plată.</td></tr>
                 <tr><td>Fișiere, contacte, mesaje, sănătate</td><td><span class="tag no">Necolectate</span></td><td>Aplicația nu solicită și nu accesează niciodată aceste date.</td></tr>
             </tbody>
