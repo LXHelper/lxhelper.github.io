@@ -40,8 +40,8 @@ section,footer,.marquee{position:relative;z-index:2}
 /* atmosphere */
 #gl{position:fixed;inset:0;z-index:0;pointer-events:none;background:
   radial-gradient(120% 90% at 78% 8%,rgba(142,123,255,.30),transparent 55%),
-  radial-gradient(110% 80% at 12% 95%,rgba(227,178,107,.18),transparent 55%),
-  radial-gradient(120% 90% at 50% 40%,rgba(91,140,255,.18),transparent 60%),var(--bg)}
+            radial-gradient(110% 80% at 12% 95%,rgba(227,178,107,.18),transparent 55%),
+            radial-gradient(120% 90% at 50% 40%,rgba(91,140,255,.18),transparent 60%),var(--bg)}
 #gl canvas{width:100%!important;height:100%!important;display:block}
 .veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,8,15,.35) 0%,rgba(6,8,15,.64) 45%,rgba(6,8,15,.88) 100%)}
 .grain{position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.05;
@@ -204,7 +204,7 @@ footer{border-top:1px solid var(--line);padding-block:3rem calc(3rem + env(safe-
 
 <header>
   <div class="wrap nav">
-    <a href="#home" class="brand"><b>LUXTECH<i>.</i>INNOVATION</b></a>
+    <a href="/" class="brand" aria-label="LUXTECH Innovation home"><b>LUXTECH<i>.</i>INNOVATION</b></a>
     <div class="links">
       <a href="#why" data-i18n="nav_why"></a>
       <a href="#apps" data-i18n="nav_apps"></a>
@@ -478,7 +478,7 @@ document.addEventListener('DOMContentLoaded', function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) { const s = document.querySelector('.cut svg'); if (s && s.pauseAnimations) { s.pauseAnimations(); s.setCurrentTime(3.2); } }
 
-  /* WebGL aurora, same shader family as the LUXTECH site, retuned to the two apps */
+  /* WebGL aurora, same shader and colours as the LUXTECH site */
   (function(){
     if (reduce || !window.THREE) return;
     try {
