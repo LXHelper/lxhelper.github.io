@@ -146,6 +146,11 @@ header.scrolled{background:rgba(6,8,15,.6);backdrop-filter:blur(14px) saturate(1
 .live .feats li::before{border-radius:50%;background:var(--live);box-shadow:0 0 10px var(--live)}
 .app .cta-row{margin-top:auto;padding-top:.4rem;gap:.8rem}
 .app .btn{padding:.9rem 1.35rem;font-size:.96rem}
+.app .btn.play-badge{gap:.8rem;padding:.7rem 1.5rem .7rem 1.15rem}
+.play-badge svg.gp{width:23px;height:25px}
+.pb-sub{display:block;font-family:var(--m);font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#5A6272;line-height:1.5}
+.pb-main{display:block;font-size:1.05rem;line-height:1.15;letter-spacing:-.01em}
+
 
 /* side by side */
 .cmp{margin-top:3.5rem;border-top:1px solid var(--line)}
@@ -323,11 +328,11 @@ footer{border-top:1px solid var(--line);padding-block:3rem calc(3rem + env(safe-
           <li data-i18n="mf1"></li><li data-i18n="mf2"></li><li data-i18n="mf3"></li><li data-i18n="mf4"></li><li data-i18n="mf5"></li>
         </ul>
         <div class="cta-row">
-          <a class="btn btn-primary magnetic" href="#" data-link="metrobuc-play" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.8v18.4c0 .5.5.8.9.6l16-9.2c.4-.2.4-.9 0-1.1l-16-9.2c-.4-.3-.9 0-.9.5z"/></svg>
-            <span data-i18n="play"></span>
+          <a class="btn btn-primary magnetic play-badge" href="https://play.google.com/store/apps/details?id=com.MetroBuc" data-link="metrobuc-play" target="_blank" rel="noopener">
+            <svg class="gp" viewBox="0 0 24 26" aria-hidden="true" focusable="false"><path fill="#00A0FF" d="M1.2.7A2 2 0 0 0 .7 2.1v21.8c0 .6.2 1.1.6 1.4l.1.1 12.2-12.2v-.3L1.2.7z"/><path fill="#FFBC00" d="M18 17.3l-4.1-4.1v-.3l4.1-4.1.1.1 4.8 2.8c1.4.8 1.4 2.1 0 2.9l-4.9 2.7z"/><path fill="#FF3A44" d="M18.1 17.2L13.9 13 1.2 25.7c.5.5 1.2.5 2 .1l14.9-8.6"/><path fill="#00C853" d="M18.1 8.8L3.2.2c-.8-.5-1.5-.4-2 .1L13.9 13l4.2-4.2z"/></svg>
+            <span><span class="pb-sub" data-i18n="play_sub"></span><span class="pb-main">Google Play</span></span>
           </a>
-          <a class="btn btn-ghost magnetic" href="#" data-link="metrobuc-web" rel="noopener"><span data-i18n="web"></span><span class="arr">&nearr;</span></a>
+          <a class="btn btn-ghost magnetic" href="https://www.metroubucuresti.ro" data-link="metrobuc-web" target="_blank" rel="noopener"><span data-i18n="web"></span><span class="arr">&nearr;</span></a>
         </div>
       </article>
 
@@ -345,11 +350,11 @@ footer{border-top:1px solid var(--line);padding-block:3rem calc(3rem + env(safe-
           <li data-i18n="lf1"></li><li data-i18n="lf2"></li><li data-i18n="lf3"></li>
         </ul>
         <div class="cta-row">
-          <a class="btn btn-primary magnetic" href="#" data-link="transitlive-play" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.8v18.4c0 .5.5.8.9.6l16-9.2c.4-.2.4-.9 0-1.1l-16-9.2c-.4-.3-.9 0-.9.5z"/></svg>
-            <span data-i18n="play"></span>
+          <a class="btn btn-primary magnetic play-badge" href="https://play.google.com/store/apps/details?id=com.transportradar" data-link="transitlive-play" target="_blank" rel="noopener">
+            <svg class="gp" viewBox="0 0 24 26" aria-hidden="true" focusable="false"><path fill="#00A0FF" d="M1.2.7A2 2 0 0 0 .7 2.1v21.8c0 .6.2 1.1.6 1.4l.1.1 12.2-12.2v-.3L1.2.7z"/><path fill="#FFBC00" d="M18 17.3l-4.1-4.1v-.3l4.1-4.1.1.1 4.8 2.8c1.4.8 1.4 2.1 0 2.9l-4.9 2.7z"/><path fill="#FF3A44" d="M18.1 17.2L13.9 13 1.2 25.7c.5.5 1.2.5 2 .1l14.9-8.6"/><path fill="#00C853" d="M18.1 8.8L3.2.2c-.8-.5-1.5-.4-2 .1L13.9 13l4.2-4.2z"/></svg>
+            <span><span class="pb-sub" data-i18n="play_sub"></span><span class="pb-main">Google Play</span></span>
           </a>
-          <a class="btn btn-ghost magnetic" href="#" data-link="transitlive-web" rel="noopener"><span data-i18n="web"></span><span class="arr">&nearr;</span></a>
+          <a class="btn btn-ghost magnetic" href="https://luxtechinnovation.com/TransitLive/index.html" data-link="transitlive-web" target="_blank" rel="noopener"><span data-i18n="web"></span><span class="arr">&nearr;</span></a>
         </div>
       </article>
     </div>
@@ -411,7 +416,7 @@ const T = {
     live_priority:'Our priority: accuracy, live information and what is happening right now.',
     live_desc:'Surface transport is far more dynamic. Routes can change, vehicles get delayed by traffic, incidents happen, diversions appear, and conditions can be completely different from one hour to the next.',
     lf1:'Where your vehicle is', lf2:'What is affecting your journey', lf3:'How to get where you need to go, in the way that works best for you',
-    play:'Get it on Google Play', web:'Visit website',
+    play_sub:'Get it on', web:'Visit website',
     cmp_eyebrow:'Side by side', cmp_title:'Two different environments.',
     r1:'Covers', r1m:'The subway', r1l:'Surface transport',
     r2:'Environment', r2m:'Controlled and predictable', r2l:'Dynamic, shaped by traffic and incidents',
@@ -444,7 +449,7 @@ const T = {
     live_priority:'Prioritatea noastră: precizie, informații în timp real și ce se întâmplă chiar acum.',
     live_desc:'Transportul de suprafață este mult mai dinamic. Traseele se pot schimba, vehiculele întârzie din cauza traficului, au loc incidente, apar devieri, iar condițiile pot fi complet diferite de la o oră la alta.',
     lf1:'Unde este vehiculul tău', lf2:'Ce îți afectează călătoria', lf3:'Cum ajungi unde ai nevoie, în modul care ți se potrivește cel mai bine',
-    play:'Descarcă de pe Google Play', web:'Vezi site-ul',
+    play_sub:'Descarcă din', web:'Vezi site-ul',
     cmp_eyebrow:'Comparație', cmp_title:'Două medii diferite.',
     r1:'Acoperă', r1m:'Metroul', r1l:'Transportul de suprafață',
     r2:'Mediu', r2m:'Controlat și previzibil', r2l:'Dinamic, influențat de trafic și incidente',
