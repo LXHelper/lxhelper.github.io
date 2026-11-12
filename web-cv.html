@@ -1057,6 +1057,9 @@ a.dc-status:hover,a.dc-status:focus-visible{border-color:rgba(74,222,128,0.6);ba
 }
 
 /* ---------- 6) Touch controls + desktop purge ---------- */
+.inv-purge,.inv-purge-desktop{white-space:nowrap;}
+.inv-purge svg,.inv-purge-desktop svg{display:inline-block;flex:none;}
+.inv-purge,.inv-purge-desktop{color:var(--text) !important;font-weight:600;}
 .inv-touch{display:none;}
 .inv-fire,.inv-purge,.inv-purge-desktop{
   pointer-events:auto;cursor:pointer;font-family:var(--font-mono);
@@ -2151,7 +2154,7 @@ body.inv-active .egg-toast-wrap{visibility:hidden;}
       <span class="inv-boss-hp" id="invBossHp">150/150</span>
     </div>
     <p class="inv-alert" id="invAlert" role="status" hidden></p>
-    <p class="inv-esc-hint">[ESC] quit · WASD / arrows move · SPACE or click fire · mouse aims · M sound · idle = auto-pilot</p>
+    <p class="inv-esc-hint">[ESC] or EXIT quit · WASD / arrows move · SPACE or click fire · mouse aims · M sound · idle = auto-pilot</p>
   </div>
 
   <!-- level banner -->
@@ -2191,10 +2194,10 @@ body.inv-active .egg-toast-wrap{visibility:hidden;}
   <!-- touch controls (shown only on coarse pointers via CSS) -->
   <div class="inv-touch" id="invTouch" aria-hidden="true">
     <button type="button" class="inv-fire" id="invFire">FIRE</button>
-    <button type="button" class="inv-purge" id="invPurge">PURGE ALL</button>
+    <button type="button" class="inv-purge" id="invPurge" aria-label="Exit the game and restore the CV"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:6px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>EXIT</button>
   </div>
-  <!-- non-touch PURGE control (debug/skip-to-end); CSS can hide on touch where the touch one shows -->
-  <button type="button" class="inv-purge inv-purge-desktop" id="invPurgeDesktop">PURGE ALL ⏭</button>
+  <!-- non-touch EXIT control: quit the run any time and restore the CV (touch devices use #invPurge) -->
+  <button type="button" class="inv-purge inv-purge-desktop" id="invPurgeDesktop" aria-label="Exit the game and restore the CV"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;margin-right:6px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>EXIT</button>
 
   <!-- floating virtual joystick (touch only) — appears under the thumb on the left half -->
   <div class="inv-joy" id="invJoy" aria-hidden="true">
@@ -3386,9 +3389,9 @@ setTimeout(()=>{
 
   // sweep / scroll control
   let screenStartT = 0;
-  const SCREEN_TIMEOUT = 20000;   // ms (game clock) before auto-advancing a band
-  const SWEEP_MS = 1500;          // eased duration of one page-sweep step (was 520 ms ease-out)
-  const SWEEP_DWELL = 2600;       // ms (game clock) a band stays on screen before the next sweep, so it can be read
+  const SCREEN_TIMEOUT = 12000;   // ms (game clock) before auto-advancing a band
+  const SWEEP_MS = 900;           // eased duration of one page-sweep step (was 520 ms ease-out)
+  const SWEEP_DWELL = 250;        // ms (game clock) a band stays on screen before the next sweep, so it can be read
   let advancing = false;
   let maxDocBottom = 0;           // doc Y of the lowest captured target's bottom
   let safetyTimer = null;
@@ -3446,7 +3449,12 @@ setTimeout(()=>{
     { sel:'.strip-card',   pts:80  },
     { sel:'.cert',         pts:50  },
     { sel:'.dc-metric',    pts:70  },
-    { sel:'.dc-tags .t',   pts:40  }
+    { sel:'.dc-tags .t',   pts:40  },
+    // run all the way to the end of the CV: hobbies + contact section
+    { sel:'.offclock-list li', pts:60 },
+    { sel:'.uplink-title', pts:150 },
+    { sel:'.uplink-sub',   pts:80  },
+    { sel:'#uplink .coords span', pts:40 }
   ];
   const LARGE_SEL = '.cap-card,.deploy-card,.tl-entry,.strip-card';
   const AMBER_SEL = '.is-value,.dc-metric.v,.v';
@@ -4058,8 +4066,6 @@ setTimeout(()=>{
     invulnUntil = gameT + 1500;
     Sound.play('alarm');
     addShake(6);
-    if(purgeDesktopBtn) purgeDesktopBtn.hidden = true;
-    if(purgeBtn) purgeBtn.hidden = true;
     return true;
   }
   function bossDefeated(){
@@ -4243,21 +4249,17 @@ setTimeout(()=>{
     safe = { top: Math.round(top), bottom: Math.round(bottom) };
   }
   function inSafe(vr){
-    const zone = safe.bottom - safe.top;
-    if(vr.h > zone) return Math.abs(vr.y - safe.top) <= 3 && vr.y + 8 < safe.bottom;      // taller than the zone: top aligned
-    return vr.y >= safe.top - 3 && vr.y + vr.h <= safe.bottom + 3;
+    // required = touching the play area (below the HUD, above the viewport bottom), as in the original flow
+    return vr.y + vr.h > safe.top + 4 && vr.y < VH - 4;
   }
+
   // targets required to clear the current band: alive AND fully inside the safe zone
   function aliveInViewport(){
     let n = 0;
     for(const inv of invaders){ if(inv.alive && inSafe(viewRect(inv))) n++; }
     return n;
   }
-  function ensureSpacer(){
-    let sp = document.getElementById('invSpacer');
-    if(!sp){ sp = document.createElement('div'); sp.id = 'invSpacer'; sp.setAttribute('aria-hidden','true'); document.body.appendChild(sp); }
-    sp.style.cssText = 'height:' + Math.round(VH) + 'px;width:1px;pointer-events:none;';
-  }
+  function ensureSpacer(){ /* no longer needed: the sweep scrolls in fixed, snapped steps */ }
   function removeSpacer(){ const sp = document.getElementById('invSpacer'); if(sp) sp.remove(); }
   function allClearedOutcome(){
     // all targets gone (or passed): runs 1-2 finish; run 3 is won only by defeating Scope Creeper
@@ -4266,26 +4268,55 @@ setTimeout(()=>{
     if(phase === 'won') return;
     finish(true);
   }
+  function lastTargetPassed(){
+    const sy = window.scrollY || window.pageYOffset;
+    const maxY = Math.max(0, document.documentElement.scrollHeight - VH);
+    // the run only ends at the real bottom of the page (contact section), never before it
+    return sy >= maxY - 2;
+  }
   function advanceSweep(forced){
     if(advancing) return;
     if(aliveCount() === 0){ allClearedOutcome(); return; }
     computeSafe();
     const sy = window.scrollY || window.pageYOffset;
-    // next band: align the highest remaining target with the top of the safe zone
-    let T = null;
-    for(const inv of invaders){
-      if(!inv.alive) continue;
-      if(forced && inv.docTop <= sy + safe.top + 6) continue;      // timeout: skip what the current band still holds
-      if(!T || inv.docTop < T.docTop) T = inv;
-    }
-    if(!T){ screenStartT = gameT; return; }
     const maxY = Math.max(0, document.documentElement.scrollHeight - VH);
-    const target = Math.max(0, Math.min(maxY, Math.round(T.docTop - safe.top)));
+    if(lastTargetPassed() && aliveInViewport() === 0){ allClearedOutcome(); return; }
+    // original flow: step ~80% of a screen, then snap so no target is cut by the bottom edge
+    // refresh doc positions from the live layout (reveal animations / late layout shifts make captured values stale)
+    for(const inv of invaders){
+      if(!inv.alive || !inv.el) continue;
+      try{
+        const r = inv.el.getBoundingClientRect();
+        if(r.height > 0){ inv.docTop = r.top + sy - (inv.oy||0); inv.h = r.height; maxDocBottom = Math.max(maxDocBottom, r.bottom + sy); }
+      }catch(_){}
+    }
+    const EDGE = 24;                                  // keep targets this far above the viewport bottom
+    const playH = VH - EDGE - safe.top;
+    const minC = Math.min(maxY, sy + Math.round(VH * 0.4));
+    let cand = Math.min(maxY, sy + Math.round(VH * 0.8));
+    for(let k = 0; k < 10; k++){
+      const bottomY = cand + VH;                      // doc Y of the real viewport bottom
+      let st = null;
+      for(const inv of invaders){
+        if(!inv.alive) continue;
+        // "cut" = part of it is on screen and part of it is below the viewport bottom
+        if(inv.docTop < bottomY - 2 && inv.docTop + inv.h > bottomY + 0.5 && (!st || inv.docTop < st.docTop)) st = inv;
+      }
+      if(!st) break;
+      let next;
+      if(st.h <= playH){ next = st.docTop + st.h - (VH - EDGE); }      // fits: bring it fully into view
+      else { next = st.docTop - VH; }                                  // too tall: keep it entirely below the fold
+      next = Math.max(minC, Math.min(maxY, Math.round(next)));
+      if(next === cand) break;
+      cand = next;
+    }
+    if(cand <= sy + 1){ screenStartT = gameT; if(sy >= maxY - 2) allClearedOutcome(); return; }
     advancing = true;
-    const dur = Math.min(2600, SWEEP_MS + Math.abs(target - sy) * 0.22);
-    smoothScrollTo(target, dur, ()=>{
+    const dur = Math.min(1200, SWEEP_MS + Math.abs(cand - sy) * 0.15);
+    smoothScrollTo(cand, dur, ()=>{
       advancing = false;
       screenStartT = gameT;
+      if(cand >= maxY - 2 && aliveInViewport() === 0 && lastTargetPassed()) allClearedOutcome();
     });
   }
   function smoothScrollTo(toY, dur, done){
@@ -4335,7 +4366,7 @@ setTimeout(()=>{
     }
     Sound.play('level');
     computeSafe();
-    screenStartT = gameT - SWEEP_DWELL;   // first band is aligned to the safe zone right away
+    screenStartT = gameT;
     lastInputT = performance.now();
     if(safetyTimer) clearTimeout(safetyTimer);
     safetyTimer = setTimeout(()=>{ if(isRunning && !dialogOpen()) finish(currentStage < 3); }, SAFETY_MS);
@@ -4365,6 +4396,9 @@ setTimeout(()=>{
     if(player) updateDrones(dt * eS);
 
     // resume auto-pilot after a stretch with no manual input
+    if(keys.left || keys.right || keys.up || keys.down || keys.fire || mouseLeft || mouseRight || touchFiring || joy.active){
+      lastInputT = now; autopilot = false;       // holding any control = the player is flying
+    }
     if(!autopilot && (now - lastInputT) > AUTO_RESUME_MS) autopilot = true;
     updatePlayer(dt, now, false);
 
@@ -4451,7 +4485,8 @@ setTimeout(()=>{
     // sweep: when the current band is clear (or its timeout elapses), reveal the next band
     if(!advancing){
       if(aliveInViewport() === 0){
-        if(gameT - screenStartT > SWEEP_DWELL) advanceSweep(false);
+        if(lastTargetPassed()) allClearedOutcome();
+        else if(gameT - screenStartT > SWEEP_DWELL) advanceSweep(false);
       }else if(gameT - screenStartT > SCREEN_TIMEOUT){
         advanceSweep(true);
       }
@@ -5205,8 +5240,14 @@ setTimeout(()=>{
 
     // ---- MOUSE: move to aim, left-click = fire (hold), right-click = fly toward the cursor ----
     canvas.addEventListener('contextmenu',(e)=>{ e.preventDefault(); }, { signal: sig });
+    const syncMouseButtons = (e)=>{
+      const was = mouseLeft || mouseRight;
+      mouseLeft = !!(e.buttons & 1); mouseRight = !!(e.buttons & 2);
+      if(mouseLeft || mouseRight || was) userTookOver();
+    };
     canvas.addEventListener('pointermove',(e)=>{
       if(e.pointerType !== 'mouse') return;
+      syncMouseButtons(e);                       // chorded presses/releases arrive as pointermove
       if(Math.abs(e.movementX||0) + Math.abs(e.movementY||0) < 1 && pointerAim.active) return;
       pointerAim.x = e.clientX; pointerAim.y = e.clientY; pointerAim.active = true;
       userTookOver();
@@ -5216,8 +5257,8 @@ setTimeout(()=>{
       if(e.pointerType === 'mouse'){
         userTookOver();
         pointerAim.x = e.clientX; pointerAim.y = e.clientY; pointerAim.active = true;
-        if(e.button === 0){ mouseLeft = true; fire(); }
-        else if(e.button === 2){ mouseRight = true; }
+        syncMouseButtons(e);
+        if(mouseLeft) fire();
         e.preventDefault();
         return;
       }
@@ -5244,7 +5285,7 @@ setTimeout(()=>{
     canvas.addEventListener('pointerup', endJoy, { signal: sig });
     canvas.addEventListener('pointercancel', endJoy, { signal: sig });
     window.addEventListener('pointerup',(e)=>{
-      if(e.pointerType === 'mouse'){ if(e.button === 0) mouseLeft = false; else if(e.button === 2) mouseRight = false; }
+      if(e.pointerType === 'mouse'){ mouseLeft = !!(e.buttons & 1); mouseRight = !!(e.buttons & 2); }
     }, { signal: sig });
     if(splashEl) splashEl.addEventListener('pointerdown', (e)=>{ e.preventDefault(); endSplash(); }, { signal: sig });
 
@@ -5255,7 +5296,7 @@ setTimeout(()=>{
       fireBtn.addEventListener('pointercancel', stopFire, { signal: sig });
       fireBtn.addEventListener('pointerleave', stopFire, { signal: sig });
     }
-    const onPurge = (e)=>{ if(e) e.preventDefault(); purgeAll(); };
+    const onPurge = (e)=>{ if(e) e.preventDefault(); abort(); };   // EXIT: quit any time, CV restored in place
     if(purgeBtn) purgeBtn.addEventListener('click', onPurge, { signal: sig });
     if(purgeDesktopBtn) purgeDesktopBtn.addEventListener('click', onPurge, { signal: sig });
     if(soundBtn) soundBtn.addEventListener('click', (e)=>{ e.preventDefault(); toggleSound(); }, { signal: sig });
