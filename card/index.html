@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#07111A" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Tudor | LUXTECH" />
+<meta name="application-name" content="Tudor | LUXTECH" />
+<link rel="manifest" href="./manifest.json" />
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+<meta name="description" content="Digital contact card for Tudor Neamțu — Senior ICT Project Manager at LUXTECH Innovation." />
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="Tudor Neamțu | Digital Business Card" />
+<meta property="og:description" content="Senior ICT Project Manager · LUXTECH Innovation. Scan to save my contact." />
+<meta property="og:url" content="https://lxtech.ro/card/" />
+<meta property="og:image" content="https://lxtech.ro/card/share-preview.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<title>Tudor Neamțu | Digital Business Card</title>
+<style>
+:root { --night:#07111a; --deep:#0d1c27; --teal:#80dbe0; --teal-bright:#a0f5ee; --frost:#e9f5f5; --muted:#96adb6; --rule:rgba(162,220,224,.18); --btn:#c6f4ed; }
+*{box-sizing:border-box}
+html { min-height:100%; background:var(--night); }
+body { margin:0; min-height:100vh; min-height:100dvh; font-family:'Avenir Next','Segoe UI',system-ui,-apple-system,sans-serif; color:var(--frost); -webkit-font-smoothing:antialiased; background: radial-gradient(ellipse 70% 40% at 50% 0%,#174052 0%,transparent 80%), radial-gradient(ellipse 65% 25% at 100% 80%,#0b2b38,transparent),var(--night); }
+button,a { -webkit-tap-highlight-color:transparent; }
+button { font:inherit; }
+a:focus-visible, button:focus-visible{outline:3px solid #bffcff;outline-offset:4px}
+.shell { min-height:100dvh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:22px 16px 18px; gap:15px; }
+.card { width:100%; max-width:410px; position:relative; isolation:isolate; overflow:hidden; border:1px solid rgba(177,231,232,.34); border-radius:27px; background:linear-gradient(160deg,#102937 0%,#0a1722 40%,#091923 100%); box-shadow:0 18px 75px rgba(0,0,0,.46),inset 0 1px rgba(249,255,255,.17); }
+.card:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(110deg, transparent 20%,rgba(150,244,238,.05) 40%,transparent 55%);background-size:260% 100%;animation:sheen 9s ease-in-out infinite;}
+.card:after{content:'';position:absolute;inset:1px;border-radius:26px;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(155,223,234,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(155,223,234,.045) 1px,transparent 1px);background-size:38px 38px; mask-image:linear-gradient(to bottom, #000,transparent 50%);}
+.halo{position:absolute;width:330px;height:330px;right:-125px;top:38px;border:1px solid rgba(129,216,223,.25);border-radius:50%;pointer-events:none;opacity:.95;animation:float 10s ease-in-out infinite}
+.halo:before,.halo:after{content:'';position:absolute;inset:34px;border:1px solid rgba(129,216,223,.19);border-radius:50%}.halo:after{inset:82px;border-style:dashed;border-color:rgba(129,216,223,.15);animation:spin 25s linear infinite}
+.halo-dot{width:9px;height:9px;background:var(--teal-bright);border-radius:50%;position:absolute;left:42px;top:38px;box-shadow:0 0 20px #80e0e0;animation:twinkle 3s ease-in-out infinite}
+.card-in{padding:26px 28px 20px; position:relative;}
+.brand-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;gap:10px;align-items:center;min-width:0;text-decoration:none;color:inherit}
+.symbol{height:36px;width:36px;display:grid;place-items:center;border:1px solid rgba(154,235,233,.7);border-radius:9px;background:linear-gradient(150deg,rgba(163,236,237,.2),rgba(72,159,179,.03));flex:none}
+.wordmark{font-weight:800;font-size:15px;letter-spacing:.19em;line-height:1.02;white-space:nowrap}
+.wordmark span{display:block;color:#80b8be;font-size:8px;letter-spacing:.33em;margin-top:5px;font-weight:700}
+.live{font-size:9px;font-weight:800;letter-spacing:.17em;color:#b7dfe0;white-space:nowrap}
+.live:before{display:inline-block;content:'';width:6px;height:6px;border-radius:50%;margin-right:7px;vertical-align:1px;background:#8fe7cb;box-shadow:0 0 9px #61cba6;animation:twinkle 2.2s infinite}
+.overline{display:flex;gap:9px;align-items:center;color:var(--teal);font-size:10px;letter-spacing:.25em;font-weight:800;margin-top:38px;margin-bottom:12px;}
+.overline:before{content:'';display:block;width:26px;height:1px;background:#8ce4e5}
+h1{font-size:clamp(42px,11.8vw,57px);font-weight:780;letter-spacing:-.071em;line-height:.96;margin:0;position:relative;z-index:1}
+h1 span{display:block;color:#c3f0ec}
+h1 .surname{color:#fff;margin-top:6px}
+.headline-mark{height:4px;width:48px;background:var(--teal);margin:20px 0 17px;border-radius:5px;box-shadow:0 0 17px rgba(122,244,231,.4)}
+.role{font-size:17px;line-height:1.3;letter-spacing:-.012em;font-weight:660;margin:0}
+.role-sub{font-size:12px;color:var(--muted);font-weight:500;margin-top:5px;line-height:1.5}
+.meta{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--rule);margin-top:27px;padding-top:14px;color:#94b5bd;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.meta strong{color:#d5e7e9;font-weight:700}
+.qr-block{position:relative;display:flex;align-items:center;gap:8px;background:linear-gradient(145deg,#fff 0%,#f1f9f8 100%);color:#172d39;border-radius:18px;padding:13px 14px 13px 12px;margin-top:20px;box-shadow:0 14px 40px rgba(0,0,0,.13)}
+.qr-trigger{flex:0 0 auto;display:block;cursor:pointer;background:#fff;border:0;border-radius:10px;padding:4px;box-shadow:0 0 0 1px #d6e7e6;line-height:0;transition:transform .2s ease,box-shadow .2s ease}
+.qr-trigger:hover{transform:scale(1.026);box-shadow:0 0 0 2px #7bbcc2}.qr-trigger:active{transform:scale(.98)}
+.qr-trigger img{display:block;width:194px;height:194px;image-rendering:pixelated}
+.qr-details{min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:7px}
+.scan-label{font-size:10px;letter-spacing:.20em;font-weight:800;color:#467b84}
+.scan-title{font-size:19px;line-height:1.02;letter-spacing:-.055em;font-weight:800}
+.scan-note{font-size:10px;color:#5a6c73;line-height:1.45}
+.tap-chip{display:inline-flex;align-items:center;gap:5px;align-self:flex-start;font-size:8px;font-weight:800;letter-spacing:.04em;padding:6px 8px;background:#e1f4f2;border:1px solid #a7dcd6;color:#1b5f65;border-radius:6px;white-space:nowrap}
+.cta{border:0;display:flex;justify-content:space-between;align-items:center;width:100%;min-height:58px;margin-top:16px;padding:0 19px;border-radius:12px;background:var(--btn);color:#092531;font-size:15px;font-weight:780;letter-spacing:-.015em;cursor:pointer;transition:background .2s ease,transform .2s ease}
+.cta:hover{background:#e2fffb;transform:translateY(-1px)}.cta:active{transform:translateY(1px)}
+.cta-icon{width:29px;height:29px;display:grid;place-items:center;border:1px solid #79b1b5;border-radius:8px}
+.quick-links{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.small-link{min-height:46px;display:flex;justify-content:center;align-items:center;gap:7px;color:#d6eaeb;text-decoration:none;border:1px solid rgba(159,224,222,.21);border-radius:10px;background:rgba(192,238,237,.035);font-size:11px;font-weight:700;cursor:pointer;transition:background .2s ease}
+.small-link:hover{background:rgba(174,238,231,.13)}.small-link svg{flex-shrink:0}
+.card-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#6e929f;margin-top:19px;font-size:9px;letter-spacing:.13em;font-weight:800}
+.card-footer .serial{font-variant-numeric:tabular-nums}
+.end-line{height:3px;background:linear-gradient(90deg,#4b939d, #adf5ee 40%,#29546b);opacity:.7}
+.below{display:flex;align-items:center;justify-content:space-between;gap:15px;max-width:410px;width:100%;color:#82a4b0}
+.below span{font-size:10px;letter-spacing:.065em;line-height:1.5}
+.share-btn{min-height:44px;flex:none;display:flex;gap:8px;align-items:center;background:rgba(190,244,239,.06);border:1px solid rgba(182,230,230,.26);padding:0 16px;color:#deeeee;border-radius:13px;font-size:12px;font-weight:800;cursor:pointer}
+.share-btn:hover{background:rgba(190,244,239,.14)}
+.toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translate(-50%,35px);opacity:0;pointer-events:none;z-index:100;color:#0e2934;background:#e8faf6;border:1px solid #b4e9e6;border-radius:12px;padding:11px 16px;font-size:12px;font-weight:750;box-shadow:0 12px 35px #0008;transition:opacity .25s ease,transform .25s ease;max-width:calc(100vw - 32px);text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1}
+svg.icon{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@keyframes sheen{0%,35%{background-position:120% 0}60%,100%{background-position:-150% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.43}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+@keyframes reveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:reveal .75s cubic-bezier(.2,.75,.25,1) both}.below{animation:reveal .7s .3s both}
+@media(max-width:380px){.shell{padding:12px 10px;gap:10px}.card-in{padding:22px 20px 17px}.overline{margin-top:27px}.meta{margin-top:21px}.qr-block{gap:8px;padding:10px}.qr-trigger img{width:176px;height:176px}.scan-title{font-size:17px}.scan-note{font-size:10px}}
+@media(max-width:340px){.qr-trigger img{width:159px;height:159px}.scan-title{font-size:17px}.wordmark{font-size:13px}.card-in{padding-left:16px;padding-right:16px}}
+@media(min-width:405px){.qr-trigger img{width:208px;height:208px}.scan-title{font-size:20px}}
+@media(min-width:600px){.shell{padding:34px}.card{transform-origin:center}.card-in{padding:30px 32px 22px}.overline{margin-top:43px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{body{background:white}.shell{padding:0;display:block}.card{box-shadow:none;max-width:410px;print-color-adjust:exact;-webkit-print-color-adjust:exact}.below{display:none}.toast{display:none}}
+
+/* Installable home-screen app additions */
+.below{gap:10px}
+.below-actions{display:flex;gap:8px;align-items:center;margin-left:auto}
+.below-actions .share-btn{padding:0 12px;gap:7px;white-space:nowrap}
+.install-btn{background:#c6f4ed;color:#092531;border-color:#b7fff5;box-shadow:0 5px 25px rgba(88,205,199,.14)}
+.install-btn:hover{background:#e4fffa}
+.install-btn[hidden]{display:none!important}
+.install-backdrop{position:fixed;inset:0;z-index:500;background:rgba(3,12,19,.77);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(7px)}
+.install-backdrop[hidden]{display:none!important}
+.install-guide{position:relative;width:min(100%,370px);padding:25px 22px 24px;color:var(--frost);border:1px solid rgba(174,244,236,.3);border-radius:20px;background:linear-gradient(160deg,#13313e,#091b26);box-shadow:0 24px 85px #000b}
+.install-guide .guide-kicker{color:var(--teal);font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.install-guide h2{font-size:24px;letter-spacing:-.035em;line-height:1.12;margin:8px 30px 12px 0}
+.install-guide p{font-size:14px;line-height:1.6;color:#c1d6db;margin:0 0 12px}
+.install-guide strong{color:#e9fffc}
+.close-guide{position:absolute;right:16px;top:16px;border:1px solid rgba(191,231,230,.28);border-radius:9px;width:36px;height:36px;background:#183746;color:#d9eeed;font-size:22px;cursor:pointer}
+.guide-foot{margin-top:16px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px!important;color:#92b5ba!important}
+@media(max-width:380px){.below span{font-size:9px}.below-actions .share-btn{padding:0 9px;font-size:11px}.below{gap:7px}}
+@media(max-width:345px){.below>span{display:none}.below-actions{width:100%}.below-actions .share-btn{flex:1;justify-content:center}}
+@media(display-mode:fullscreen),(display-mode:standalone){.shell{padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}.below{justify-content:center}.below>span{display:none}.below-actions{width:100%;justify-content:center}.below-actions .share-btn{flex:1;max-width:200px;justify-content:center}}
+</style>
+</head>
+<body>
+<main class="shell">
+<article class="card" aria-label="Tudor Neamțu digital business card">
+<div class="halo" aria-hidden="true"><div class="halo-dot"></div></div>
+<div class="card-in">
+<header class="brand-row">
+<a class="brand" href="https://lxtech.ro/" target="_blank" rel="noopener noreferrer" aria-label="LUXTECH Innovation website">
+<span class="symbol" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M5.5 4.5H10V15H20V20H5.5V4.5Z" stroke="#D6FFF8" stroke-width="2"/><path d="M13 5H20V12" stroke="#6DCECF" stroke-width="2"/></svg></span>
+<span class="wordmark">LUXTECH<span>INNOVATION</span></span></a>
+<span class="live">DIGITAL CARD</span>
+</header>
+<div class="overline">LET'S CONNECT</div>
+<h1><span>TUDOR</span><span class="surname">NEAMȚU<span style="display:inline;color:var(--teal-bright)">.</span></span></h1>
+<div class="headline-mark" aria-hidden="true"></div>
+<p class="role">Senior ICT Project Manager</p>
+<div class="role-sub">Infrastructure &nbsp;/&nbsp; Agile Delivery &nbsp;/&nbsp; AI</div>
+<div class="meta"><span>BUCHAREST, <strong>RO</strong></span><span>PROJECT DELIVERY <strong>↗</strong></span></div>
+<section class="qr-block" aria-label="Scan or tap the QR code to save my contact information">
+<button class="qr-trigger" id="qrButton" type="button" aria-label="Tap QR code to download my contact card"><img alt="QR code containing Tudor Neamțu's digital contact file" width="168" height="168" src="data:image/png;base64,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" /></button>
+<div class="qr-details"><div class="scan-label">SCAN ME</div><div class="scan-title">Save my<br />contact.</div><div class="scan-note">Point your camera here or tap the code.</div><span class="tap-chip">↗ QR / vCard</span></div>
+</section>
+<button class="cta" type="button" id="saveContact"><span>+ &nbsp;Add to contacts</span><span class="cta-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg></span></button>
+<nav class="quick-links" aria-label="Contact links">
+<a class="small-link" href="mailto:Tudor.Neamtu@lxtech.ro" aria-label="Email Tudor"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>Email</a>
+<a class="small-link" href="https://www.linkedin.com/in/tudor-neamtu/" target="_blank" rel="noopener noreferrer" aria-label="Open Tudor's LinkedIn"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7.5v.1M12 17v-7h0v1.5a3 3 0 0 1 6 1.5V17"/></svg>LinkedIn</a>
+<a class="small-link" href="https://lxtech.ro/web-cv.html" target="_blank" rel="noopener noreferrer" aria-label="Visit Tudor's online profile"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c6 6 6 12 0 18M12 3c-6 6-6 12 0 18"/></svg>Portfolio</a>
+</nav>
+<footer class="card-footer"><span>CONNECTED BY DESIGN</span><span class="serial">LTX / TN — 2026</span></footer>
+</div><div class="end-line" aria-hidden="true"></div>
+</article>
+<div class="below"><span>ONE SCAN.<br/>A NEW CONNECTION.</span><div class="below-actions"><button class="share-btn install-btn" id="installCard" type="button" aria-label="Install this business card on your home screen"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 17v3h14v-3"/></svg>Install</button><button class="share-btn" id="shareCard" type="button" aria-label="Share this digital business card"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.2M8.7 13.3l6.6 4.2"/></svg>Share</button></div></div>
+</main>
+<div class="install-backdrop" id="installGuide" hidden>
+  <section class="install-guide" role="dialog" aria-modal="true" aria-labelledby="installTitle">
+    <button type="button" class="close-guide" id="closeInstallGuide" aria-label="Close install instructions">×</button>
+    <div class="guide-kicker">Home screen app</div>
+    <h2 id="installTitle">Keep my card one tap away.</h2>
+    <p id="installInstruction">Open your browser menu and select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p>
+    <p class="guide-foot" id="installFoot">Once installed, the card opens in its own app window, without browser tabs or the address bar.</p>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(() => {
+  'use strict';
+  const VCF64 = 'QkVHSU46VkNBUkQNClZFUlNJT046My4wDQpOOk5lYW3Im3U7VHVkb3I7OzsNCkZOOlR1ZG9yIE5lYW3Im3UNCk9SRzpMVVhURUNIDQpUSVRMRTpTZW5pb3IgSUNUIFByb2plY3QgTWFuYWdlcg0KRU1BSUw6VHVkb3IuTmVhbXR1QGx4dGVjaC5ybw0KVVJMOmh0dHBzOi8vbHh0ZWNoLnJvDQpFTkQ6VkNBUkQNCg==';
+  const vcardBytes = Uint8Array.from(atob(VCF64), c => c.charCodeAt(0));
+  const contact = new File([vcardBytes], 'Tudor_Neamtu_Contact.vcf', {type:'text/vcard'});
+  const toastEl = document.getElementById('toast');
+  let toastTimer;
+  function showToast(message) {
+    toastEl.textContent = message;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3100);
+  }
+  function saveContact() {
+    const url = URL.createObjectURL(contact);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = contact.name;
+    anchor.style.display = 'none';
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 15000);
+    showToast('Contact file ready — open it to add me.');
+  }
+  async function shareCard() {
+    const isHosted = location.protocol === 'https:' || location.protocol === 'http:';
+    const title = 'Tudor Neamțu | LUXTECH';
+    const text = 'Tudor Neamțu — Senior ICT Project Manager · LUXTECH Innovation';
+    try {
+      if (navigator.share) {
+        if (isHosted) {
+          await navigator.share({title,text,url:location.href});
+          return;
+        }
+        if (navigator.canShare && navigator.canShare({files:[contact]})) {
+          await navigator.share({title,text,files:[contact]});
+          return;
+        }
+        await navigator.share({title,text,url:'https://lxtech.ro/web-cv.html'});
+        return;
+      }
+      const copyValue = isHosted ? location.href : 'https://lxtech.ro/web-cv.html';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(copyValue);
+      } else {
+        const input = document.createElement('textarea');
+        input.value=copyValue; input.style.position='fixed'; input.style.opacity='0';
+        document.body.appendChild(input);input.select();
+        if(!document.execCommand('copy')) throw new Error('copy failed');
+        input.remove();
+      }
+      showToast(isHosted ? 'Card link copied.' : 'Portfolio link copied.');
+    } catch(err) {
+      if(err && err.name === 'AbortError') return;
+      showToast('Use your phone’s Share menu to send this file.');
+    }
+  }
+  document.getElementById('qrButton').addEventListener('click',saveContact);
+  document.getElementById('saveContact').addEventListener('click',saveContact);
+  document.getElementById('shareCard').addEventListener('click',shareCard);
+
+  // PWA install flow; non-Chromium devices get simple platform instructions.
+  const installButton = document.getElementById('installCard');
+  const installGuide = document.getElementById('installGuide');
+  const installInstruction = document.getElementById('installInstruction');
+  const installFoot = document.getElementById('installFoot');
+  const closeGuide = document.getElementById('closeInstallGuide');
+  let installPrompt = null;
+  const isInstalled = () => window.matchMedia('(display-mode: fullscreen)').matches ||
+        window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  function updateInstallButton() { installButton.hidden = isInstalled(); }
+  updateInstallButton();
+  window.addEventListener('appinstalled', () => {
+    installPrompt = null;
+    installButton.hidden = true;
+    showToast('Card installed — open it from your home screen.');
+  });
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault();
+    installPrompt = event;
+    updateInstallButton();
+  });
+  function closeInstallGuide() {
+    installGuide.hidden = true;
+    installButton.focus();
+  }
+  closeGuide.addEventListener('click',closeInstallGuide);
+  installGuide.addEventListener('click',event => {
+    if(event.target === installGuide) closeInstallGuide();
+  });
+  window.addEventListener('keydown',event => {
+    if(event.key === 'Escape' && !installGuide.hidden) closeInstallGuide();
+  });
+  installButton.addEventListener('click', async () => {
+    if(installPrompt) {
+      const prompt = installPrompt;
+      installPrompt = null;
+      try {
+        await prompt.prompt();
+        const result = await prompt.userChoice;
+        if(result.outcome === 'accepted') showToast('Check your home screen for the card.');
+      } catch(e) { /* Browser did not allow the native prompt; show guidance instead. */ }
+      return;
+    }
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if(location.protocol === 'file:') {
+      installInstruction.innerHTML = 'To install the card as an app, first upload the complete PWA folder to <strong>https://lxtech.ro/card/</strong> (HTTPS is required). Then open that link in your phone browser.';
+      installFoot.textContent = 'You can still view this HTML file and save the contact without hosting it.';
+    } else if(ios) {
+      installInstruction.innerHTML = 'In <strong>Safari</strong>, tap <strong>Share</strong>, select <strong>Add to Home Screen</strong>, enable <strong>Open as Web App</strong>, then tap <strong>Add</strong>.';
+      installFoot.textContent = 'The shortcut opens like an app, without the usual browser toolbar.';
+    } else {
+      installInstruction.innerHTML = 'In <strong>Chrome</strong>, tap the <strong>⋮ menu</strong>, then <strong>Add to Home screen</strong> or <strong>Install app</strong>. Confirm installation when prompted.';
+      installFoot.textContent = 'The installed card has its own icon and launches without the browser address bar.';
+    }
+    installGuide.hidden = false;
+    closeGuide.focus();
+  });
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js', { scope: './' })
+        .catch(err => console.warn('Offline card unavailable:', err));
+    });
+  }
+})();
+</script>
+</body>
+</html>
