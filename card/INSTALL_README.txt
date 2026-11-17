@@ -1,39 +1,23 @@
-LUXTECH CONTACT CARD V5.5 — INSTALLATION
+LUXTECH CONTACT CARD V5.6 — INSTALL COMPATIBILITY FIX
 
-INSTALL AS A FULLSCREEN HOME-SCREEN APP (RECOMMENDED)
-1. Unzip this package.
-2. On your website, create the folder /card/ at the web root of lxtech.ro.
-3. Upload EVERYTHING INSIDE the LUXTECH_Contact_Card_V5_5_PWA folder into /card/,
-   keeping index.html, manifest.webmanifest, sw.js, Tudor_Neamtu_Contact.vcf and icons/ together.
-4. On your Android phone, open https://lxtech.ro/card/ in Google Chrome.
-5. In Chrome ⋮ menu, choose "Install app" or "Add to Home screen".
-   You can also tap Connections > Settings > Add to home screen.
-6. Tap the new LUXTECH Card icon on your home screen. The PWA requests fullscreen
-   (no Chrome address bar), falling back to standalone if the device requires it.
-7. After the first successful online opening, the card is cached for offline use.
+Issue: Chrome displayed "This app cannot be installed" on https://lxtech.ro/card/.
+The precise root cause could not be confirmed remotely. This update uses a standard JSON manifest, explicit launch and scope paths, and robust offline caching. It includes an on-device diagnostic checker.
+
+DEPLOYMENT
+1. Unzip the package.
+2. Upload the CONTENTS of this folder, not the folder itself, into the web root folder /card/ on lxtech.ro.
+3. Replace existing index.html and sw.js, upload manifest.json and check.html, plus all icons/ PNGs and Tudor_Neamtu_Contact.vcf. Do not upload the ZIP as the website.
+4. Ensure your webserver serves manifest.json as application/json and icons/*.png as image/png. The alternative manifest.webmanifest is retained but not linked.
+5. Open https://lxtech.ro/card/check.html in Android Chrome. ALL files should show green check marks; browser-mode is expected until installed.
+6. Visit https://lxtech.ro/card/ in Chrome, reload it, and choose the three-dot menu > Install and create shortcut > Install.
+7. Launch LUXTECH Card from your home screen. The manifest asks for fullscreen mode. Android may leave system navigation overlays depending on the OS version.
+
+IF STILL DISABLED
+1. Check results at /card/check.html, especially icons and manifest.json MIME.
+2. Try Chrome Settings > Site settings > All sites > lxtech.ro > Clear & reset *only if you are comfortable clearing site data for this domain*, then revisit /card/.
+3. Try closing all Chrome tabs for /card/ and reopening in a new tab. The browser can cache PWA installation metadata.
+4. If there is still a problem with all diagnostic checks passing, the exact installability failure needs Chrome DevTools (Application > Manifest) or Android Remote Debugging. The diagnostic page checks file delivery, not Android WebAPK server errors.
 
 SHARING
-- Share contact: sends a dedicated large QR PNG through Android's native share chooser.
-  The recipient opens the image with Google Lens / compatible QR scanner, then
-  chooses Add contact. Their phone controls the import confirmation.
-- Share card: sends a branded PNG with embedded QR. It optionally includes the
-  public VCF link if the contact information matches the hosted contact file.
-- Share VCF file / link: secondary method; tries a .vcf attachment where allowed,
-  otherwise shares a hosted link. Android Chrome may block direct .vcf attachments.
-- Save QR image: keeps a PNG that can be sent from Gallery if a browser blocks sharing.
-
-ALTERNATIVE: STANDALONE HTML
-LUXTECH_Liquid_Brush_Card_V5_5_QR_Share.html can be opened as a local file and
-can display its QR without internet. However, Android Chrome cannot install
-file:// documents as a standalone fullscreen PWA. For a true app-like shortcut,
-use the hosted PWA folder. Sharing from local files also depends on Android's browser.
-
-TECHNICAL NOTES
-- Use HTTPS; PWA installation and service workers do not work from file://.
-- PWA scope is /card/; if you deploy elsewhere, update manifest.webmanifest id.
-- Do not remove sw.js or the icons folder; offline and app install need them.
-- The uploaded VCF uses the original number 0752 186 436. If you change the phone
-  inside the card, the QR image updates, but the hosted VCF file does not update.
-  Update the VCF file on the server before sharing its link with the new number.
-- Browser and Android versions vary in whether fullscreen hides system bars.
-  The app retains the existing fullscreen control where supported.
+- Share contact: native Android chooser with scannable vCard QR PNG, recipient uses Google Lens / compatible QR app > Add contact.
+- Share card: branded PNG with QR; VCF attachment/link remains an optional secondary method.

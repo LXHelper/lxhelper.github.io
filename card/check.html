@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#030507"><title>LUXTECH - PWA Install Check</title><style>
+*{box-sizing:border-box}html,body{background:#030507;color:#f6fbfd;font:16px/1.6 system-ui,sans-serif;margin:0}main{max-width:660px;margin:auto;padding:30px 18px 70px}h1{font-size:27px;letter-spacing:-.025em}p{color:#bdcbd0}.test{padding:14px;margin:10px 0;background:#10191e;border-radius:14px;border:1px solid #273a43}.test strong{display:inline-block;margin-left:9px}.pass{color:#89eacc}.fail{color:#ff9ba3}.warn{color:#fcd18a}.details{font-size:13px;margin-top:6px;color:#c7d9de;word-break:break-word}a{color:#9aecf7}button{font:inherit;background:#d6f9fd;color:#061014;border:0;border-radius:12px;padding:12px 18px;font-weight:750}code{font-size:12px;color:#eee;background:#13232a;padding:2px 5px;border-radius:4px}</style></head>
+<body><main><h1>LUXTECH installation check</h1><p>This page checks the files that Android Chrome needs to install the card. Open it from <code>https://lxtech.ro/card/check.html</code> in Chrome.</p><div id="out">Running checks…</div><p>After the checks pass, return to <a href="./">the card</a>, reload the page, then choose Chrome ⋮ → Install and create shortcut → Install. You may have to close/reopen Chrome if an old manifest is cached.</p><button onclick="location.reload()">Check again</button></main><script>
+(async function(){
+const out=document.getElementById('out');out.textContent='';
+function line(title,state,details){let e=document.createElement('div');e.className='test';let s=document.createElement('span');s.className=state;s.textContent=state==='pass'?'✓':state==='fail'?'✕':'!';let b=document.createElement('strong');b.textContent=title;let d=document.createElement('div');d.className='details';d.textContent=details;e.append(s,b,d);out.append(e);}
+line('Secure HTTPS',location.protocol==='https:'?'pass':'fail',location.href);
+const paths=['./','./index.html','./manifest.json','./sw.js','./Tudor_Neamtu_Contact.vcf','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable-512.png'];
+const responses={};
+for(const path of paths){
+try{let r=await fetch(new URL(path,location.href),{cache:'no-store'});responses[path]=r;let ctype=r.headers.get('content-type')||'(none)';
+let valid=r.ok;
+if(path.endsWith('.json')){try{let m=await r.clone().json();let urls=m.icons||[];valid=valid && m.start_url==='/card/'&&m.scope==='/card/'&&['fullscreen','standalone'].includes(m.display)&&urls.some(x=>x.sizes?.includes('192x192'))&&urls.some(x=>x.sizes?.includes('512x512'));}catch(e){valid=false}}
+if(path.endsWith('.png')){let bytes=await r.clone().arrayBuffer();valid=valid&&bytes.byteLength>1000&&ctype.startsWith('image/');}
+if(path.endsWith('index.html')||path==='./'){let t=await r.clone().text();valid=valid&&t.includes('rel="manifest" href="./manifest.json"');}
+line(path,valid?'pass':'fail',`HTTP ${r.status}; ${ctype}${path.endsWith('.json')?' — valid /card/ manifest expected':''}`);
+}catch(e){line(path,'fail',e.message||String(e));}}
+const manifestType=responses['./manifest.json']?.headers.get('content-type')||'';
+line('Manifest MIME type',/application\/(json|manifest\+json)/i.test(manifestType)?'pass':'warn',manifestType+' (Chrome should receive JSON, not HTML or a download)');
+if('serviceWorker' in navigator){try{let reg=await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;line('Service worker', 'pass','Registered scope: '+reg.scope)}catch(e){line('Service worker','fail',String(e));}}
+else line('Service worker','warn','Not available in this browser / context');
+line('Installed / fullscreen mode',matchMedia('(display-mode: fullscreen)').matches||matchMedia('(display-mode: standalone)').matches?'pass':'warn','Current display mode: '+(matchMedia('(display-mode: fullscreen)').matches?'fullscreen':matchMedia('(display-mode: standalone)').matches?'standalone':'browser (normal until installed)'));
+})();
+</script></body></html>

@@ -1,42 +1,41 @@
 {
-  "id": "./",
-  "name": "Tudor Neamțu | LUXTECH Digital Card",
-  "short_name": "Tudor Card",
-  "description": "A one-tap digital business card for Tudor Neamțu. Scan or tap to save contact details.",
-  "start_url": "./",
-  "scope": "./",
+  "name": "LUXTECH | Tudor Neamțu Contact Card",
+  "short_name": "LUXTECH Card",
+  "description": "Tudor Neamțu’s animated LUXTECH digital business card with QR contact sharing.",
+  "id": "/card/",
+  "start_url": "/card/",
+  "scope": "/card/",
   "display": "fullscreen",
   "display_override": [
     "fullscreen",
     "standalone"
   ],
-  "orientation": "portrait-primary",
-  "background_color": "#07111a",
-  "theme_color": "#07111a",
-  "lang": "en",
-  "dir": "ltr",
+  "orientation": "any",
+  "background_color": "#030507",
+  "theme_color": "#030507",
   "categories": [
     "business",
     "productivity"
   ],
   "icons": [
     {
-      "src": "./icon-192.png",
+      "src": "/card/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-512.png",
+      "src": "/card/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-maskable-512.png",
+      "src": "/card/icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "prefer_related_applications": false
 }
