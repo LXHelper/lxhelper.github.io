@@ -2,8 +2,10 @@ BEGIN:VCARD
 VERSION:3.0
 N:Neamțu;Tudor;;;
 FN:Tudor Neamțu
-ORG:LUXTECH
+ORG:LUXTECH Innovation
 TITLE:Senior ICT Project Manager
-EMAIL:Tudor.Neamtu@lxtech.ro
+TEL;TYPE=CELL:+40 752 186 436
+EMAIL;TYPE=WORK:Tudor.Neamtu@lxtech.ro
 URL:https://lxtech.ro
+URL:https://www.linkedin.com/in/tudor-neamtu/
 END:VCARD

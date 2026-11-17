@@ -1,28 +1,25 @@
-/* LUXTECH digital card offline cache. No tracking, network analytics, or third-party code. */
-const CACHE_NAME = 'luxtech-tudor-card-v1';
-const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png', './Tudor_Neamtu_Contact.vcf'];
-self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting()));
+const CACHE='luxtech-card-v5-5-1';
+const ASSETS=['./','./index.html','./manifest.webmanifest','./Tudor_Neamtu_Contact.vcf',
+  './icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable-512.png','./icons/apple-touch-icon.png'];
+self.addEventListener('install', event=>{
+  event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));
 });
-self.addEventListener('activate', event => {
+self.addEventListener('activate',event=>{
   event.waitUntil(Promise.all([
-    caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('luxtech-tudor-card-') && k !== CACHE_NAME).map(k => caches.delete(k)))),
+    caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('luxtech-card-')&&k!==CACHE).map(k=>caches.delete(k)))),
     self.clients.claim()
   ]));
 });
-self.addEventListener('fetch', event => {
-  if(event.request.method !== 'GET') return;
-  const url = new URL(event.request.url);
-  if(url.origin !== self.location.origin) return;
-  if(event.request.mode === 'navigate') {
-    event.respondWith(fetch(event.request).then(response => {
-      if(response.ok) { const copy = response.clone(); caches.open(CACHE_NAME).then(cache => cache.put('./index.html', copy)); }
-      return response;
-    }).catch(async () => (await caches.match('./index.html')) || (await caches.match('./'))));
-    return;
-  }
-  event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-    if(response.ok) { const copy = response.clone(); caches.open(CACHE_NAME).then(cache => cache.put(event.request,copy)); }
-    return response;
-  })));
+self.addEventListener('fetch',event=>{
+ const r=event.request;
+ if(r.method!=='GET'||new URL(r.url).origin!==self.location.origin)return;
+ event.respondWith(fetch(r).then(response=>{
+   if(response.ok){const copy=response.clone();caches.open(CACHE).then(c=>c.put(r,copy)).catch(()=>{});}
+   return response;
+ }).catch(async()=>{
+   const cached=await caches.match(r);
+   if(cached)return cached;
+   if(r.mode==='navigate')return caches.match('./index.html');
+   return Response.error();
+ }));
 });
